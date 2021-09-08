@@ -1,6 +1,7 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
+    //"rootDir": ".",
     "baseUrl": "./src",
     "outDir": "./dist/",
     "module": "esnext",
@@ -30,25 +31,46 @@
     "downlevelIteration": true,
     "paths": {
       "~/*": [
-        "../../melt-cover-colud/src/*"
+        "../../melt-cover-cloud/src/*"
       ],
       "~framework/*": [
-        "../../melt-cover-colud/src/framework/*"
+        "../../melt-cover-cloud/src/framework/*"
       ],
       "~components/*": [
-        "../../melt-cover-colud/src/solution/components/*"
+        "../../melt-cover-cloud/src/solution/components/*"
       ],
       "~model/*": [
-        "../../melt-cover-colud/src/solution/model/*"
+        "../../melt-cover-cloud/src/solution/model/*"
       ],
       "~assets/*": [
-        "../../melt-cover-colud/src/solution/assets/*"
+        "../../melt-cover-cloud/src/solution/assets/*"
       ],
       "~pages/*": [
-        "../../melt-cover-colud/src/solution/pages/*"
+        "../../melt-cover-cloud/src/solution/pages/*"
       ],
       "~shared/*": [
-        "../../melt-cover-colud/src/solution/shared/*"
+        "../../melt-cover-cloud/src/solution/shared/*"
+      ],
+      "@/*": [
+        "*"
+      ],
+      "@framework/*": [
+        "framework/*"
+      ],
+      "@components/*": [
+        "solution/components/*"
+      ],
+      "@model/*": [
+        "solution/model/*"
+      ],
+      "@assets/*": [
+        "solution/assets/*"
+      ],
+      "@pages/*": [
+        "solution/pages/*"
+      ],
+      "@shared/*": [
+        "solution/shared/*"
       ]
     }
   },

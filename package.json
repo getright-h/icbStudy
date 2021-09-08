@@ -4,12 +4,12 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start:colud": "lerna run start --scope=melt-cover-colud --stream",
-    "start:shop": "lerna run start --scope=melt-cover-colud-shop --stream",
-    "build-dev:colud": "lerna run build:dev -d -s --scope=melt-cover-colud --stream",
-    "build-dev:shop": "lerna run build:dev -d -s --scope=melt-cover-colud-shop --stream",
-    "build:colud": "lerna run build --scope=melt-cover-colud --stream",
-    "build:shop": "lerna run build --scope=melt-cover-colud-shop --stream"
+    "start:cloud": "lerna run start --scope=melt-cover-cloud --stream",
+    "start:shop": "lerna run start --scope=melt-cover-cloud-shop --stream",
+    "build-dev:cloud": "lerna run build:dev -d -s --scope=melt-cover-cloud --stream",
+    "build-dev:shop": "lerna run build:dev -d -s --scope=melt-cover-cloud-shop --stream",
+    "build:cloud": "lerna run build --scope=melt-cover-cloud --stream",
+    "build:shop": "lerna run build --scope=melt-cover-cloud-shop --stream"
   },
   "workspaces": [
     "packages/*"
