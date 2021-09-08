@@ -8,8 +8,8 @@ import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { FchMessage, FchModal, FchNotification, FchProvider } from '@fch/fch-shop-web';
-import { useGlobalContext } from '../context/global/global.provider';
-import MainReducer from '../context/redux/reducer/index';
+import { useGlobalContext } from '~/solution/context/global/global.provider';
+import MainReducer from '~/solution/context/redux/reducer/index';
 import { RoutesService } from '~/framework/util/routes/routes.service';
 import { ChildrenObject } from '~/framework/microAPP/microAppModal';
 
