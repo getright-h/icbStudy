@@ -1,0 +1,63 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "./src",
+    "outDir": "./dist/",
+    "module": "esnext",
+    "target": "es2015",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "ES6",
+      "es2017",
+      "es2015"
+    ],
+    "sourceMap": true,
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "paths": {
+      "~/*": [
+        "../../melt-cover-colud/src/*"
+      ],
+      "~framework/*": [
+        "../../melt-cover-colud/src/framework/*"
+      ],
+      "~components/*": [
+        "../../melt-cover-colud/src/solution/components/*"
+      ],
+      "~model/*": [
+        "../../melt-cover-colud/src/solution/model/*"
+      ],
+      "~assets/*": [
+        "../../melt-cover-colud/src/solution/assets/*"
+      ],
+      "~pages/*": [
+        "../../melt-cover-colud/src/solution/pages/*"
+      ],
+      "~shared/*": [
+        "../../melt-cover-colud/src/solution/shared/*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "bundle",
+    "webpack.*",
+    "acceptance-tests",
+    "jest"
+  ]
+}

@@ -1,0 +1,23 @@
+.time-period {
+    display: flex;
+    flex-wrap: wrap;
+  
+    &-day {
+      width: 45%;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      &-button {
+        margin-top: 10px;
+        >*+*{
+            margin-left: 5px;
+        }
+        .item{
+          width: 80px;
+        }
+        .type{
+          width: 90px;
+        }
+      }
+    }
+  }

@@ -1,0 +1,22 @@
+{
+  "name": "lerna-melt-cover-cloud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "start:colud": "lerna run start --scope=melt-cover-colud --stream",
+    "start:shop": "lerna run start --scope=melt-cover-colud-shop --stream",
+    "build-dev:colud": "lerna run build:dev -d -s --scope=melt-cover-colud --stream",
+    "build-dev:shop": "lerna run build:dev -d -s --scope=melt-cover-colud-shop --stream",
+    "build:colud": "lerna run build --scope=melt-cover-colud --stream",
+    "build:shop": "lerna run build --scope=melt-cover-colud-shop --stream"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
