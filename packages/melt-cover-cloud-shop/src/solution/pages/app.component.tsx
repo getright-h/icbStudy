@@ -24,6 +24,7 @@ const App = (props: { routers: Array<ChildrenObject> }) => {
   // ConfigProvider.config({
   //   prefixCls: 'RongBaoYun'
   // });
+  //
   message.config({
     prefixCls: 'RongBaoYun-message'
   });
