@@ -21,11 +21,11 @@ export const ROUTERS = {
   orderDetail: () => import('~/solution/pages/home/order-management/order-detail-component/order-detail.component'),
   equityPackageManage: () =>
     import('~/solution/pages/home/equity-management/equity-package-manage-component/equity-package-manage.component'),
-  maintainModule: () => import('~/solution/pages/home/maintain-manage/maintain.module'),
+  maintainModule: () => import('@/solution/pages/home/maintain-manage/maintain.module'),
   maintainNotifyList: () =>
-    import('~/solution/pages/home/maintain-manage/maintain-notify-list-component/maintain-notify-list.component'),
+    import('@/solution/pages/home/maintain-manage/maintain-notify-list-component/maintain-notify-list.component'),
   maintainSetting: () =>
-    import('~/solution/pages/home/maintain-manage/maintain-setting-component/maintain-setting.component'),
+    import('@/solution/pages/home/maintain-manage/maintain-setting-component/maintain-setting.component'),
   maintainLogsList: () =>
-    import('~/solution/pages/home/maintain-manage/maintain-logs-list-component/maintain-logs-list.component')
+    import('@/solution/pages/home/maintain-manage/maintain-logs-list-component/maintain-logs-list.component')
 };

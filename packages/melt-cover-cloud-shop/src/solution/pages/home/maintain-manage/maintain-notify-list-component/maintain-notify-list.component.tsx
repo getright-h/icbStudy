@@ -2,7 +2,6 @@ import { Button } from 'antd';
 import * as React from 'react';
 import { ITableComponent, ITablePageComponent, IFormComponent } from '@fch/fch-shop-web';
 import { demoColumns } from './demo-columns';
-import style from './maintain-notify-list.component.less';
 import { useMaintainNotifyListStore } from './maintain-notify-list.component.store';
 import { schema } from './maintain-notify-list.interface';
 import CalibrationComponent from './widget/calibration.component';
@@ -11,7 +10,7 @@ import MaintainFollowComponent from './widget/maintain.follow.component';
 import MaintainRegistrationComponent from './widget/maintain.registration.component';
 import NotifyComponent from './widget/notify.component';
 import NotifyListComponent from './widget/notifyList.component';
-import CheckBoxButtonComponent from '~/framework/components/form-base-components/check-box-button-component/check-box-button.component';
+import style from './maintain-notify-list.component.less';
 
 export default function MaintainNotifyListComponent() {
   const {
@@ -162,6 +161,7 @@ export default function MaintainNotifyListComponent() {
         form={formMaintainFollow}
         stateParent={state}
       />
+      1111
       <MaintainRegistrationComponent
         title={'新增保养记录'}
         visible={state.isVisibleModalMaintainRegistration}

@@ -15,7 +15,7 @@ export function useCheckBoxButtonStore(props: CheckboxGroupProps) {
   useEffect(() => {
     const map = new Map();
     props.value?.map((item: any) => {
-      map.set(item.value, item);
+      map.set(item.value ?? item, item);
     });
     setStateWrap({
       values: map
@@ -34,9 +34,6 @@ export function useCheckBoxButtonStore(props: CheckboxGroupProps) {
       newState.set((item as CheckboxOptionType).value ?? (item as string), item);
     }
 
-    setStateWrap({
-      values: newState
-    });
     Array.from(newState).map(item => {
       changeValues.push(item[1]);
     });
