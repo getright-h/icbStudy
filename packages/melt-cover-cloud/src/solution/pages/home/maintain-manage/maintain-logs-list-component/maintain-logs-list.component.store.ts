@@ -1,21 +1,24 @@
-import { IMaintainLogsListState } from './maintain-logs-list.interface';
 import { useStateStore, getQueryString, CommonUtil } from '@fch/fch-tool';
 import { useForm, ISelectType, ShowNotification } from '@fch/fch-shop-web';
-import { MaintainLogsService } from '~/solution/model/services/maintain-logs.service';
 import { useEffect } from 'react';
 import moment from 'moment';
+import { IMaintainLogsListState } from './maintain-logs-list.interface';
 import { RecordReqType } from '~/solution/model/dto/maintain-notify.dto';
+import { MaintainLogsService } from '~/solution/model/services/maintain-logs.service';
 import { MaintainNotifyService } from '~/solution/model/services/maintain-notify.service';
 import { CommonUtilService } from '~/solution/model/services/common-util.service';
+import { useInsertCustomItem } from '~/solution/model/services/maintain-logs.service';
 import { Store } from 'antd/lib/form/interface';
 
 export function useMaintainLogsListStore() {
   const { state, setStateWrap } = useStateStore(new IMaintainLogsListState());
   const form = useForm();
   const formMaintainRegistration = useForm();
+  const formCalibration = useForm();
   const maintainLogsService: MaintainLogsService = new MaintainLogsService();
   const maintainNotifyService: MaintainNotifyService = new MaintainNotifyService();
   const commonUtilService: CommonUtilService = new CommonUtilService();
+  const { refetch: insertCustomItem, isLoading: insertLoading } = useInsertCustomItem();
   const vehicleId = getQueryString('vehicleId');
   let ST: any = null;
   useEffect(() => {
@@ -43,18 +46,26 @@ export function useMaintainLogsListStore() {
     // }
   };
 
-  function initBind() {}
+  function initBind() {
+    formMaintainRegistration.setSchemas({
+      addCheckBox: schema => {
+        schema.props.onClick = handleCancelCalibration;
+      }
+    });
+  }
 
   function handleGet(params: { distributorId: string; ownerMobile: string }) {
     maintainLogsService.backGround({ ...params, index: 1, size: 1000 }).subscribe(res => {
-      formMaintainRegistration.setSchema('vehicleId', schema => {
-        const orgOptions = res?.dataList?.map(org => {
-          return {
-            label: org.vehiclePlateNumber,
-            value: org.vehicleId
-          };
-        });
-        schema.props.options = orgOptions;
+      formMaintainRegistration.setSchemas({
+        vehicleId: schema => {
+          const orgOptions = res?.dataList?.map(org => {
+            return {
+              label: org.vehiclePlateNumber,
+              value: org.vehicleId
+            };
+          });
+          schema.props.options = orgOptions;
+        }
       });
     });
   }
@@ -182,6 +193,9 @@ export function useMaintainLogsListStore() {
   function handleCancelMaintainRegistration() {
     toggleModal('isVisibleModalMaintainRegistration');
   }
+  function handleCancelCalibration() {
+    toggleModal('isVisibleModalCalibration');
+  }
 
   function handleAdd() {
     handleSearchProjectList();
@@ -197,6 +211,30 @@ export function useMaintainLogsListStore() {
       });
     });
   }
+  // 新增自定义保养项目
+  function insertItem() {
+    if (!formMaintainRegistration.getFieldValue('distributorId')) {
+      ShowNotification.error('请先选择机构');
+    } else if (formCalibration.getFieldValue('item')?.trim() === '') {
+      ShowNotification.warning('项目名不可为空');
+    } else {
+      formCalibration.validateFields().then(() => {
+        insertCustomItem(
+          {
+            item: formCalibration.getFieldValue('item'),
+            distributorId: formMaintainRegistration.getFieldValue('distributorId')
+          },
+          {
+            successFn: () => {
+              handleSearchProjectList(formMaintainRegistration.getFieldValue('distributorId'));
+              handleCancelCalibration();
+            }
+          }
+        );
+      });
+    }
+  }
+
   // 处理弹框的显示隐藏
   function toggleModal(key: string) {
     setStateWrap({
@@ -206,6 +244,7 @@ export function useMaintainLogsListStore() {
   return {
     state,
     form,
+    formCalibration,
     tableAction,
     changeTablePageIndex,
     handleSearch,
@@ -214,6 +253,9 @@ export function useMaintainLogsListStore() {
     handleCancelMaintainRegistration,
     formMaintainRegistration,
     handleAdd,
-    watch
+    watch,
+    insertLoading,
+    handleCancelCalibration,
+    insertItem
   };
 }

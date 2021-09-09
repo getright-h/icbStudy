@@ -16,6 +16,7 @@ export class IMaintainLogsListState {
   isLoadingModalNotify = false;
   isVisibleModalMaintainRegistration = false;
   isLoadingModalMaintainRegistration = false;
+  isVisibleModalCalibration = false;
 }
 export interface IModalComponentProps {
   title: string;
@@ -23,7 +24,8 @@ export interface IModalComponentProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IMaintainLogsListState;
+  stateParent?: IMaintainLogsListState;
+  isLoading?: boolean;
 }
 export const schema: IFormBaseComponentsUnion[] = [
   {
@@ -239,6 +241,46 @@ export const schemaMaintainRegistration: IFormBaseComponentsUnion[] = [
     props: {
       placeholder: '请输入保养备注',
       rows: 10
+    }
+  }
+];
+
+export const schemaCalibration: IFormBaseComponentsUnion[] = [
+  {
+    key: 'mileage',
+    type: 'Input',
+    formItemProps: {
+      label: '当前里程',
+      rules: [
+        {
+          required: true,
+          message: '请输入当前里程'
+        }
+      ]
+    },
+    props: {
+      placeholder: '请输入当前里程',
+      addonAfter: 'km',
+      type: 'number'
+    }
+  }
+];
+
+export const schemaProject: IFormBaseComponentsUnion[] = [
+  {
+    key: 'item',
+    type: 'Input',
+    formItemProps: {
+      label: '项目名',
+      rules: [
+        {
+          required: true,
+          message: '请输入项目名'
+        }
+      ]
+    },
+    props: {
+      placeholder: '请输入项目名'
     }
   }
 ];

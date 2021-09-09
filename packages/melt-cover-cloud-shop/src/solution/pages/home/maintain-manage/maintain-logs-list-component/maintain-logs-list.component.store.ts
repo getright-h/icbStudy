@@ -167,7 +167,12 @@ export function useMaintainLogsListStore() {
       ShowNotification.warning('项目名不可为空');
     } else {
       formCalibration.validateFields().then(() => {
-        insertCustomItem(formCalibration.getFieldsValue(), { successFn: () => handleCancelCalibration });
+        insertCustomItem(formCalibration.getFieldsValue(), {
+          successFn: () => {
+            handleSearchProjectList(formMaintainRegistration.getFieldValue('distributorId'));
+            handleCancelCalibration();
+          }
+        });
       });
     }
   }

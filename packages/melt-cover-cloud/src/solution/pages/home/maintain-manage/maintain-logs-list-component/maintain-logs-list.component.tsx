@@ -6,11 +6,13 @@ import style from './maintain-logs-list.component.less';
 import { useMaintainLogsListStore } from './maintain-logs-list.component.store';
 import { schema } from './maintain-logs-list.interface';
 import MaintainRegistrationComponent from './widget/maintain.registration.component';
+import CalibrationComponent from './widget/calibration.component';
 
 export default function MaintainLogsListComponent() {
   const {
     state,
     form,
+    formCalibration,
     tableAction,
     changeTablePageIndex,
     handleSearch,
@@ -19,7 +21,10 @@ export default function MaintainLogsListComponent() {
     handleCancelMaintainRegistration,
     formMaintainRegistration,
     handleAdd,
-    watch
+    watch,
+    insertLoading,
+    handleCancelCalibration,
+    insertItem
   } = useMaintainLogsListStore();
   const { searchForm, tableData, total, isLoading, isExportLoading } = state;
   function renderSelectItems() {
@@ -93,6 +98,14 @@ export default function MaintainLogsListComponent() {
         handleCancel={handleCancelMaintainRegistration}
         form={formMaintainRegistration}
         stateParent={state}
+      />
+      <CalibrationComponent
+        title={'新增保养项目'}
+        visible={state.isVisibleModalCalibration}
+        handleOk={insertItem}
+        handleCancel={handleCancelCalibration}
+        form={formCalibration}
+        isLoading={insertLoading}
       />
     </div>
   );
