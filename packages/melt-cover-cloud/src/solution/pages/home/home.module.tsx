@@ -48,9 +48,6 @@ function HomeModule(props: any) {
   function renderLayoutContainer() {
     return <Layout.Content>{RouterInfo}</Layout.Content>;
   }
-  // function renderLayoutContainer() {
-  //   return <Layout.Content>{RoutesService.renderRoutes(homeRoutes)}</Layout.Content>;
-  // }
 
   return (
     <Spin spinning={state.loading} wrapperClassName="custom-layout-spin">
