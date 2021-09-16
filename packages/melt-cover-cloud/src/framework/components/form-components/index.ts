@@ -3,7 +3,6 @@ import { CheckBoxFactory } from './checkbox';
 import { DatePickerFactory } from './date-picker';
 import { InputFactory } from './input';
 import { RadioFactory } from './radio';
-import { SelectFactory } from './select';
 import { UploadFactory } from './upload';
 
 export default class FromComponents {
@@ -16,9 +15,6 @@ export default class FromComponents {
   }
   getInputComponents(type?: number) {
     return InputFactory.getInput(type);
-  }
-  getSelectComponents(type?: number) {
-    return SelectFactory.getSelect(type);
   }
   getDatePickerComponents(type?: number) {
     return DatePickerFactory.getDatePicker(type);
