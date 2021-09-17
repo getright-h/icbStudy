@@ -1,18 +1,19 @@
 import { useEffect } from 'react';
 import { Store } from 'antd/lib/form/interface';
-import { getQueryString, useStateStore, CommonUtil, useService } from '@fch/fch-tool';
+import { getQueryString, useStateStore, CommonUtil } from '@fch/fch-tool';
 import { ShowNotification, useForm } from '@fch/fch-shop-web';
 import moment from 'moment';
 import { debounce } from 'lodash';
 import { IMaintainLogsListState } from './maintain-logs-list.interface';
-import { RecordReqType } from '~/solution/model/dto/maintain-notify.dto';
-import { MaintainNotifyService } from '@/solution/model/services/maintain-notify.service';
+import { RecordReqType } from '@/solution/model/dto/maintain-logs.dto';
 import { useGetDistributor } from '@/solution/model/services/common-hooks.service';
 import {
   usePostDistributor,
   useExportLog,
   useGetVehicle,
-  useInsertCustomItem
+  useInsertCustomItem,
+  useDistributorCustomItem,
+  useRecord
 } from '@/solution/model/services/maintain-logs.service';
 
 export function useMaintainLogsListStore() {
@@ -20,12 +21,13 @@ export function useMaintainLogsListStore() {
   const form = useForm();
   const formMaintainRegistration = useForm();
   const formCalibration = useForm();
-  const maintainNotifyService: MaintainNotifyService = useService(MaintainNotifyService);
   const { data: distributorList, refetch: getDistributor } = useGetDistributor();
   const { maintainLogData, refetch: getMaintainLog, isLoading, currParams: preParams } = usePostDistributor();
   const { refetch: exportLog, isLoading: exportLoading } = useExportLog();
   const { refetch: getVehicleList, options: VehicleList } = useGetVehicle();
   const { refetch: insertCustomItem, isLoading: insertLoading } = useInsertCustomItem();
+  const { refetch: getCustomItem, data: customItems } = useDistributorCustomItem();
+  const { refetch: addRecord, isLoading: recordLoading } = useRecord();
   const vehicleId = getQueryString('vehicleId');
   useEffect(() => {
     initBind();
@@ -43,6 +45,11 @@ export function useMaintainLogsListStore() {
       schema.props.options = VehicleList;
     });
   }, [VehicleList]);
+  useEffect(() => {
+    formMaintainRegistration.setSchema('contentRange', schema => {
+      schema.props.options = customItems;
+    });
+  }, [customItems]);
 
   const watch = {
     distributorId: (value: Store, values: Store) => {
@@ -129,10 +136,11 @@ export function useMaintainLogsListStore() {
         nextMaintenanceTime: moment(values.nextMaintenanceTime).format('YYYY-MM-DD HH:mm:ss')
       }) as RecordReqType;
       console.log('values===>', req);
-      maintainNotifyService.record(req).subscribe(res => {
-        ShowNotification.success('操作成功');
-        handleSearch();
-        handleCancelMaintainRegistration();
+      addRecord(req, {
+        successFn: () => {
+          handleSearch();
+          handleCancelMaintainRegistration();
+        }
       });
     });
   }
@@ -150,16 +158,9 @@ export function useMaintainLogsListStore() {
     formMaintainRegistration.resetFields();
     handleCancelMaintainRegistration();
   }
-  function handleSearchProjectList(distributorId?: string) {
+  function handleSearchProjectList(distributorId?: string, successFn?: () => void) {
     const formValues = formMaintainRegistration.getFieldsValue();
-    maintainNotifyService
-      .maintainGetProjectListDistributor(distributorId || formValues.distributorId)
-      .subscribe((res: any) => {
-        formMaintainRegistration.setSchema('contentRange', schema => {
-          schema.props.options = res;
-          return schema;
-        });
-      });
+    getCustomItem({ distributorId: distributorId || formValues.distributorId }, { successFn });
   }
 
   // 新增自定义保养项目
@@ -170,8 +171,7 @@ export function useMaintainLogsListStore() {
       formCalibration.validateFields().then(() => {
         insertCustomItem(formCalibration.getFieldsValue(), {
           successFn: () => {
-            handleSearchProjectList(formMaintainRegistration.getFieldValue('distributorId'));
-            handleCancelCalibration();
+            handleSearchProjectList(formMaintainRegistration.getFieldValue('distributorId'), handleCancelCalibration);
           }
         });
       });
@@ -190,6 +190,7 @@ export function useMaintainLogsListStore() {
     maintainLogData,
     isLoading,
     exportLoading,
+    recordLoading,
     changeTablePageIndex,
     handleSearch,
     handleExportExcel,

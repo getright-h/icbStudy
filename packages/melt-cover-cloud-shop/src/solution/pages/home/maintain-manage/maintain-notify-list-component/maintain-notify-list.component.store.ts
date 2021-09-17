@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import { debounce } from 'lodash';
-import { useService, useStateStore, CommonUtil } from '@fch/fch-tool';
+import moment from 'moment';
+import { useHistory } from 'react-router-dom';
 import { useForm, ShowNotification } from '@fch/fch-shop-web';
+import { useService, useStateStore, CommonUtil } from '@fch/fch-tool';
 import { IMaintainNotifyListState } from './maintain-notify-list.interface';
 import { useGetDistributor } from '@/solution/model/services/common-hooks.service';
 import { MaintainNotifyService } from '@/solution/model/services/maintain-notify.service';
@@ -11,9 +13,7 @@ import {
   FollowReqType,
   RecordReqType,
   RemindReqType
-} from '~/solution/model/dto/maintain-notify.dto';
-import moment from 'moment';
-import { useHistory } from 'react-router-dom';
+} from '@/solution/model/dto/maintain-notify.dto';
 let currentRow: BackgroundResType = null;
 export function useMaintainNotifyListStore() {
   const { state, setStateWrap } = useStateStore(new IMaintainNotifyListState());

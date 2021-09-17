@@ -103,3 +103,26 @@ export interface BackGroundResType {
   distributorId: string;
   distributorName: string;
 }
+
+export interface RecordReqType {
+  vehicleId: string;
+  currentMaintenanceMileage: number;
+  nextMaintenanceMileage: number;
+  currentMaintenanceTime: string;
+  nextMaintenanceTime: string;
+  contentRange: string[];
+  remark: string;
+  fee: number;
+}
+
+export interface DistributorReqType {
+  index: number;
+  size: number;
+  distributorId: string;
+  vehicleModel: string;
+  startMileage: number;
+  endMileage: number;
+  ownerKeyWord: string;
+  vehicleKeyWord: string;
+  maintainStatus: number[];
+}

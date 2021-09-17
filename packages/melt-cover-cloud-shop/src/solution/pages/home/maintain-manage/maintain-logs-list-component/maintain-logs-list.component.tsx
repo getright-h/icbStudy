@@ -15,6 +15,7 @@ export default function MaintainLogsListComponent() {
     maintainLogData,
     isLoading,
     exportLoading,
+    recordLoading,
     changeTablePageIndex,
     handleSearch,
     handleExportExcel,
@@ -98,7 +99,7 @@ export default function MaintainLogsListComponent() {
         handleOk={handleOkMaintainRegistration}
         handleCancel={handleCancelMaintainRegistration}
         form={formMaintainRegistration}
-        stateParent={state}
+        isLoading={recordLoading}
       />
       <CalibrationComponent
         title={'新增保养项目'}
