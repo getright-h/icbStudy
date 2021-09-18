@@ -24,7 +24,9 @@ const App = (props: { routers: Array<ChildrenObject> }) => {
   // ConfigProvider.config({
   //   prefixCls: 'RongBaoYun'
   // });
-  //
+  FchProvider.config({
+    prefixCls: 'RongBaoYun'
+  });
   message.config({
     prefixCls: 'RongBaoYun-message'
   });
@@ -37,9 +39,9 @@ const App = (props: { routers: Array<ChildrenObject> }) => {
   FchMessage.config({
     prefixCls: 'RongBaoYun-message'
   });
-  FchModal.config({
-    rootPrefixCls: 'RongBaoYun'
-  });
+  // FchModal.config({
+  //   rootPrefixCls: 'RongBaoYun'
+  // });
   FchNotification.config({
     prefixCls: 'RongBaoYun-notification'
   });
@@ -57,4 +59,5 @@ const App = (props: { routers: Array<ChildrenObject> }) => {
   );
 };
 
-export default hot(module)(App);
+// export default hot(module)(App);
+export default App;

@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import * as React from 'react';
-import style from './maintain-setting.component.less';
+import style from './maintain-setting.module.less';
 import { useMaintainSettingStore } from './maintain-setting.component.store';
 import { ITableComponent, ITablePageComponent, IFormComponent } from '@fch/fch-shop-web';
 import { schema } from './maintain-setting.interface';

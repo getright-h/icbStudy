@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import * as React from 'react';
 import { IFormComponent } from '@fch/fch-shop-web';
 import { schemaMaintainRegistration, IModalComponentProps } from '../maintain-logs-list.interface';
-import style from '../maintain-logs-list.component.less';
+import style from '../maintain-logs-list.module.less';
 
 export default function MaintainRegistrationComponent(props: IModalComponentProps & { watch: any }) {
   const { title, visible, handleCancel, handleOk, stateParent, form, watch } = props;

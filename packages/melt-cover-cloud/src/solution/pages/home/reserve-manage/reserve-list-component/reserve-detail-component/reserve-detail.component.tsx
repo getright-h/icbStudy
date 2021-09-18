@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 import * as React from 'react';
-import style from './reserve-detail.component.less';
+import style from './reserve-detail.module.less';
 import { useReserveDetailStore } from './reserve-detail.component.store';
 import { DetailKeys, IReserveDetailProps } from './reserve-detail.interface';
 

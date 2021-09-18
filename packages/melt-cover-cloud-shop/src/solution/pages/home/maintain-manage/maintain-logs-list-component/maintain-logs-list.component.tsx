@@ -6,7 +6,7 @@ import { useMaintainLogsListStore } from './maintain-logs-list.component.store';
 import { schema } from './maintain-logs-list.interface';
 import MaintainRegistrationComponent from './widget/maintain.registration.component';
 import CalibrationComponent from './widget/calibration.component';
-import style from './maintain-logs-list.component.less';
+import style from './maintain-logs-list.module.less';
 
 export default function MaintainLogsListComponent() {
   const {

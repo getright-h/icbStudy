@@ -8,6 +8,7 @@ export function useCodeInputStore() {
   const commonUtilService: CommonUtilService = new CommonUtilService();
   const clickFlag = useRef(false);
   useEffect(() => {
+    console.log('3333,444,555===>', 3333, 444, 555);
     clickFlag.current = false;
   }, []);
 

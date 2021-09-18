@@ -1,6 +1,6 @@
 import { Button, Checkbox, Input, Select } from 'antd';
 import * as React from 'react';
-import style from './choose-time-period.component.less';
+import style from './choose-time-period.module.less';
 import { useChooseTimePeriodStore } from './choose-time-period.component.store';
 import { IChooseTimePeriodProps, timeList } from './choose-time-period.interface';
 const { Option } = Select;

@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "start": "fch start",
+    "start:vite": "vite",
     "build": "rimraf dist && fch build",
     "build:dev": "rimraf dist && fch build -d -s",
     "build-ana": "rimraf dist && cross-env NODE_ENV=production IS_ANA=analyse webpack",
@@ -21,7 +22,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
-    "@fch/fch-shop-web": "0.0.25",
+    "@fch/fch-shop-web": "0.0.28",
     "@fch/fch-tool": "0.0.8",
     "@sentry/browser": "^5.7.1",
     "@types/js-cookie": "^2.2.2",
@@ -47,7 +48,9 @@
     "react-router-dom": "^5.2.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.3",
-    "viewerjs": "^1.10.0"
+    "shelljs": "^0.8.4",
+    "viewerjs": "^1.10.0",
+    "vite-plugin-style-import": "^1.2.1"
   },
   "devDependencies": {
     "@hot-loader/react-dom": "^16.11.0",
@@ -77,7 +80,9 @@
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "lint-staged": "^9.3.0",
+    "postcss": "^8.3.6",
     "postcss-loader": "^3.0.0",
+    "postcss-modules": "^4.2.2",
     "prettier": "^1.18.2",
     "react-hot-loader": "^4.12.13",
     "rimraf": "^3.0.0",

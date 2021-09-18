@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { LayoutType } from './index.type';
-import style from './layout.component.less';
+import style from './layout.module.less';
 
 export function LayoutComponent(props?: LayoutType['props']): JSX.Element {
   return (

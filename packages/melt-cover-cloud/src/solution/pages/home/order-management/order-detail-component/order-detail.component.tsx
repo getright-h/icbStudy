@@ -2,10 +2,11 @@ import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Col, Form, Row } from 'antd';
 import * as React from 'react';
 import { IPreviewImgComponent } from '@fch/fch-shop-web';
+// import ImageShowPreviewComponent from '~framework/components/image-show-preview-component/image-show-preview.component';
 import { TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
-import style from './order-detail.component.less';
+import style from './order-detail.module.less';
 import { useOrderDetailStore } from './order-detail.component.store';
-
+// const IPreviewImgComponent = ImageShowPreviewComponent;
 export default function OrderDetailComponent() {
   const { state, goback } = useOrderDetailStore();
   const { info } = state;

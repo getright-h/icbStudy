@@ -1,11 +1,12 @@
 import * as React from 'react';
-import style from './i-upload-img.component.less';
+import style from './i-upload-img.module.less';
 import { Modal, Upload } from 'antd';
 import { useIUploadImgStore } from './i-upload-img.component.store';
 import { UploadListType } from 'antd/lib/upload/interface';
 import { IIUploadImgProps } from './i-upload-img.interface';
 import { PlusOutlined } from '@ant-design/icons';
 import 'viewerjs/dist/viewer.css';
+
 IUploadImgComponent.defaultProps = {
   maxImgNumber: 1,
   remarkText: '',

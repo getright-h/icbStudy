@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import * as React from 'react';
 import { IFormComponent, ITablePageComponent, ITableComponent } from '@fch/fch-shop-web';
-import style from './customer-management.component.less';
+import style from './customer-management.module.less';
 import { useCustomerManagementStore } from './customer-management.component.store';
 import { CustomerManageColumns } from './customer-manage.columns';
 import { schema } from './customer-management.interface';

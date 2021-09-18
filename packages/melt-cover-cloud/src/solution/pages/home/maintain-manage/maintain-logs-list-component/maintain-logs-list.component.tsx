@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import * as React from 'react';
 import { ITableComponent, ITablePageComponent, IFormComponent } from '@fch/fch-shop-web';
 import { demoColumns } from './demo-columns';
-import style from './maintain-logs-list.component.less';
+import style from './maintain-logs-list.module.less';
 import { useMaintainLogsListStore } from './maintain-logs-list.component.store';
 import { schema } from './maintain-logs-list.interface';
 import MaintainRegistrationComponent from './widget/maintain.registration.component';

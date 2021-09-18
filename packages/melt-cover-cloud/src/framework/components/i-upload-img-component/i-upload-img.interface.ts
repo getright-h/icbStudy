@@ -22,6 +22,7 @@ export class IIUploadImgProps {
   fileList?: Array<UploadFile> = [];
   defaultFileList?: Array<UploadFile> = [];
   templateUrl?: string;
+  templatePriviewVideoUrl?: string;
   getFileList?: (url: string | Array<string>) => void;
   describe?: string;
   type?: string;

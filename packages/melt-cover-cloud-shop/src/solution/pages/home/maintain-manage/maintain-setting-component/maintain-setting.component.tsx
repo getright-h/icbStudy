@@ -5,7 +5,7 @@ import { useMaintainSettingStore } from './maintain-setting.component.store';
 import { schema } from './maintain-setting.interface';
 import { demoColumns } from './demo-columns';
 import DetailComponent from './widget/detail.component';
-import style from './maintain-setting.component.less';
+import style from './maintain-setting.module.less';
 
 export default function MaintainSettingComponent() {
   const {

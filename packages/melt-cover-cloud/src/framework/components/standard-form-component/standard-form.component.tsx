@@ -1,6 +1,6 @@
 import { Col, Form, Input, Row } from 'antd';
 import * as React from 'react';
-import style from './standard-form.component.less';
+import style from './standard-form.module.less';
 import { useStandardFormStore } from './standard-form.component.store';
 import {
   defaultFromItemLayout,

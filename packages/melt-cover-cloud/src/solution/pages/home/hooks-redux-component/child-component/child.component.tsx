@@ -1,5 +1,5 @@
 import * as React from 'react';
-import style from './child.component.less';
+import style from './child.module.less';
 import { HooksReduxManageContext } from '../hooks-redux.component';
 import { Button } from 'antd';
 import { onClickAction } from '../hooks-redux/hooks-redux-action';

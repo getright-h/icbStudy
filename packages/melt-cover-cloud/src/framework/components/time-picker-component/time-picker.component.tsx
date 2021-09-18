@@ -4,7 +4,7 @@ import { TimePickerStore } from './time-picker.component.store';
 import { IProps } from './time-picker.interface';
 import { DatePicker, TimePicker } from 'antd';
 import moment from 'moment';
-import style from './time-picker.component.less';
+import style from './time-picker.module.less';
 
 const { RangePicker } = DatePicker;
 

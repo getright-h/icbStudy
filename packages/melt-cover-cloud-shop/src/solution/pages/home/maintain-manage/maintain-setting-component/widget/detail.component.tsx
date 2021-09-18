@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import * as React from 'react';
 import { IFormComponent } from '@fch/fch-shop-web';
 import { IModalComponentProps, schemaDetail } from '../maintain-setting.interface';
-import style from '../maintain-setting.component.less';
+import style from '../maintain-setting.module.less';
 
 export default function DetailComponent(props: IModalComponentProps) {
   const { title, visible, handleCancel, handleOk, isLoading, form } = props;

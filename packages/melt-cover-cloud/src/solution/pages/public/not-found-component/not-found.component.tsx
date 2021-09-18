@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IProps } from './not-found.interface';
-import style from './not-found.component.less';
+import style from './not-found.module.less';
 
 export default class NotFoundComponent extends React.Component<IProps> {
   render() {

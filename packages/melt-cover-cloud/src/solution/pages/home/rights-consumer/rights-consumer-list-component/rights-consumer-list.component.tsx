@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IFormComponent, ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
-import style from './rights-consumer-list.component.less';
+import style from './rights-consumer-list.module.less';
 import { useRightsConsumerListStore } from './rights-consumer-list.component.store';
 import { Button } from 'antd';
 import { demoColumns } from './rights-consumer-colomns';

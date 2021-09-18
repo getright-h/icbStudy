@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd';
 import * as React from 'react';
 import { IFormComponent } from '@fch/fch-shop-web';
 import { IModalComponentProps, schemaCalibration, schemaProject } from '../maintain-notify-list.interface';
-import style from '../maintain-notify-list.component.less';
+import style from '../maintain-notify-list.module.less';
 
 export default function CalibrationComponent(props: IModalComponentProps) {
   const { title, visible, handleCancel, handleOk, stateParent, form } = props;

@@ -132,12 +132,14 @@ export function useAddOrderStore() {
       setStateWrap({
         isNew: val
       });
+      return false;
     },
     certificateType: (val: number) => {
       formRef.setSchema('certificateNumber', schema => {
         schema.formItemProps.rules = val == 1 ? [RegExpRuleArray[0]] : [RegExpRuleArray[1]];
         return schema;
       });
+      return false;
     },
     certificateFront: (val: string[]) => {
       const formValue = formRef.getFieldsValue();

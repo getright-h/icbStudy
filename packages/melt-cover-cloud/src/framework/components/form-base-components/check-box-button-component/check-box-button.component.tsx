@@ -1,6 +1,6 @@
 import { CheckboxGroupProps, CheckboxOptionType } from 'antd/lib/checkbox';
 import * as React from 'react';
-import style from './check-box-button.component.less';
+import style from './check-box-button.module.less';
 import { useCheckBoxButtonStore } from './check-box-button.component.store';
 
 export default function CheckBoxButtonComponent(props: CheckboxGroupProps) {

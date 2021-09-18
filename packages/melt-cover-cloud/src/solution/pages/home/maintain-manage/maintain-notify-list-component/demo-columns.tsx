@@ -3,7 +3,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { Divider } from 'antd';
 import { BackgroundResType } from '~/solution/model/dto/maintain-notify.dto';
 import moment from 'moment';
-import style from './maintain-notify-list.component.less';
+import style from './maintain-notify-list.module.less';
 export function demoColumns(action: Function): ColumnsType<any> {
   return [
     {
@@ -21,7 +21,7 @@ export function demoColumns(action: Function): ColumnsType<any> {
     {
       title: '车主/电话',
       render: (record: BackgroundResType) => {
-        return `${record.ownerName}  ${record.ownerMobile && '/ ' + record.ownerMobile}}`;
+        return `${record.ownerName}  ${record.ownerMobile && '/ ' + record.ownerMobile}`;
       }
     },
     {

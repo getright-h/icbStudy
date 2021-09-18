@@ -2,7 +2,7 @@ import { Button } from 'antd';
 import * as React from 'react';
 import { ITableComponent, IFormComponent, ITablePageComponent } from '@fch/fch-shop-web';
 import { demoColumns } from './demo-columns';
-import style from './order-management-list.component.less';
+import style from './order-management-list.module.less';
 import { useOrderManagementListStore } from './order-management-list.component.store';
 import { schema } from './order-management-list.interface';
 

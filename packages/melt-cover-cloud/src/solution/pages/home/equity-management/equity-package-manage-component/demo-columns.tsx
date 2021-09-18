@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import { Divider } from 'antd';
 import { EquityList } from '~/solution/model/dto/equity-package-manage.dto';
-import style from './equity-package-manage.component.less';
+import style from './equity-package-manage.module.less';
 
 export function demoColumns(action: Function): ColumnsType<any> {
   return [

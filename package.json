@@ -4,8 +4,8 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start:cloud": "lerna run start --scope=melt-cover-cloud --stream",
-    "start:shop": "lerna run start --scope=melt-cover-cloud-shop --stream",
+    "start:cloud": "lerna run start:vite --scope=melt-cover-cloud --stream",
+    "start:shop": "lerna run start:vite --scope=melt-cover-cloud-shop --stream",
     "build-dev:cloud": "lerna run build:dev -d -s --scope=melt-cover-cloud --stream",
     "build-dev:shop": "lerna run build:dev -d -s --scope=melt-cover-cloud-shop --stream",
     "build:cloud": "lerna run build --scope=melt-cover-cloud --stream",

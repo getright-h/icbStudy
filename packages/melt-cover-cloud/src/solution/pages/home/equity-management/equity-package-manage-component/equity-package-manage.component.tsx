@@ -4,7 +4,7 @@ import { IFormComponent, ITableComponent, ITablePageComponent } from '@fch/fch-s
 import { StorageUtil } from '@fch/fch-tool';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { demoColumns, equityColumns } from './demo-columns';
-import style from './equity-package-manage.component.less';
+import style from './equity-package-manage.module.less';
 import { useEquityPackageManageStore } from './equity-package-manage.component.store';
 import { schema } from './equity-package-manage.interface';
 import { Menu, Item, MenuProvider } from 'react-contexify';

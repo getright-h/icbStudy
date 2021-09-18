@@ -54,7 +54,7 @@ export function useIUploadImgStore(props: IIUploadImgProps) {
     console.log('previewFile===>', file);
     if (props.type == 'video') {
       setStateWrap({
-        previewVideo: file.response,
+        previewVideo: file.response || file.url,
         previewVisible: !state.previewVisible
       });
       return;
@@ -70,10 +70,10 @@ export function useIUploadImgStore(props: IIUploadImgProps) {
     refImg.current?.show();
   }
 
-  function handlePreviewFile(file: UploadFile) {
+  function handlePreviewFile(file?: UploadFile) {
     if (props.type == 'video') {
       return new Promise(resolve => {
-        resolve(props.templateUrl);
+        resolve(props.templateUrl || props.templatePriviewVideoUrl);
       });
     }
     return null;

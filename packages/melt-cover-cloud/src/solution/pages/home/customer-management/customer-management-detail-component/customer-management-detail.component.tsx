@@ -3,7 +3,7 @@ import { Col, Form, Radio, Row } from 'antd';
 import * as React from 'react';
 import { ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
 import ModalImgShowComponent from '~/framework/components/modal-img-show-component/modal-img-show.component';
-import style from './customer-management-detail.component.less';
+import style from './customer-management-detail.module.less';
 import { useCustomerManagementDetailStore } from './customer-management-detail.component.store';
 import { ConsumeRecordColumns, FollowRecordColumns, RemainEquityColumns } from './customer-detail.columns';
 import { TableType } from './customer-management-detail.interface';
@@ -170,6 +170,7 @@ export default function CustomerManagementDetailComponent() {
             data={chargeTableData}
             total={chargeTotal}
             isPagination={true}
+            rowKey={'equityName'}
             changeTablePageIndex={(index: number, pageSize: number) =>
               changeTablePageIndex(index, pageSize, TableType.CHARGE)
             }

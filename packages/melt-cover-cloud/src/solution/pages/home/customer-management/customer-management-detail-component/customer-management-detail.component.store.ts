@@ -51,13 +51,14 @@ export function useCustomerManagementDetailStore() {
 
   function getUserDetails() {
     customerManageService.getUserDetails(orderId.current).subscribe(res => {
-      const idCardImages = [
-        { url: res.certificateFront, name: '身份证正面' },
-        { url: res.reverseSideOfCertificate, name: '身份证反面' }
-      ];
-      const vehicleImages = res.vehicleImages.map(img => {
-        return { url: img.imageUrl, name: img.title };
-      });
+      const idCardImages = [];
+      res.certificateFront && idCardImages.push({ url: res.certificateFront, name: '身份证正面' });
+      res.reverseSideOfCertificate && idCardImages.push({ url: res.reverseSideOfCertificate, name: '身份证反面' });
+      const vehicleImages = res.vehicleImages
+        .filter(img => img.status == 0)
+        .map(img => {
+          return { url: img.imageUrl, name: img.title, subType: img.subType };
+        });
       setStateWrap({ detail: res, idCardImages, vehicleImages });
     });
   }

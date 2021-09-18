@@ -31,6 +31,7 @@ export function useRightsConsumerListStore() {
     const { searchForm } = state;
     searchForm.index = 1;
     const formData = formRef.getFieldsValue();
+    console.log('===>', formRef.getFieldsValue());
     const params = {
       ...formData,
       beginTime:

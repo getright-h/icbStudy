@@ -10,7 +10,7 @@ import MaintainFollowComponent from './widget/maintain.follow.component';
 import MaintainRegistrationComponent from './widget/maintain.registration.component';
 import NotifyComponent from './widget/notify.component';
 import NotifyListComponent from './widget/notifyList.component';
-import style from './maintain-notify-list.component.less';
+import style from './maintain-notify-list.module.less';
 
 export default function MaintainNotifyListComponent() {
   const {

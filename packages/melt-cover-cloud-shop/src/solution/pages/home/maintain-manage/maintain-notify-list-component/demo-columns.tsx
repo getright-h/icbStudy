@@ -3,7 +3,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { Divider } from 'antd';
 import moment from 'moment';
 import { BackgroundResType } from '~/solution/model/dto/maintain-notify.dto';
-import style from './maintain-notify-list.component.less';
+import style from './maintain-notify-list.module.less';
 export function demoColumns(action: Function): ColumnsType<any> {
   return [
     {

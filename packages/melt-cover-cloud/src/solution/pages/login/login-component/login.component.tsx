@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { LoginStore } from './login.component.store';
 import { IProps, IState } from './login.interface';
-import style from './login.component.less';
+import style from './login.module.less';
 import { LockOutlined, SafetyCertificateOutlined, UserOutlined } from '@ant-design/icons';
 import { Input, Checkbox, Button, Form } from 'antd';
 import { useStore } from '~/framework/aop/hooks/use-base-store';

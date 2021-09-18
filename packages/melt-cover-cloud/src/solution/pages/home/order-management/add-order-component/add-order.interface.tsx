@@ -1,14 +1,14 @@
+import * as React from 'react';
 import { IFormBaseComponentsUnion, TypeUseForm } from '@fch/fch-shop-web';
 import { FormLayout } from 'antd/lib/form/Form';
 import moment from 'moment';
-import React from 'react';
 import { IRenderFormItem } from '~/framework/components/standard-form-component/standard-form.interface';
 import { uuid } from '~/framework/util/common/tool';
 import { RegExpRuleArray } from '~/framework/util/rules';
 import { GetUpLoadImageTemplateReturnDatum } from '~/solution/model/dto/common-util.dto';
 import { DataList } from '~/solution/model/dto/equity-package-manage.dto';
 import { certificateList } from '~/solution/shared/constant/select.const';
-import { renderToolTip } from './add-order.component';
+import RenderToolTip from './widget/render-tool-tip-title';
 
 /**
  * @export state变量定义和初始化
@@ -331,7 +331,7 @@ export const schema: IFormBaseComponentsUnion[] = [
             formItemProps: {
               initialValue: false,
               required: true,
-              label: renderToolTip()
+              label: <RenderToolTip />
             },
             props: {
               optionType: 'button',
@@ -438,7 +438,7 @@ export const schema: IFormBaseComponentsUnion[] = [
                 gridColumn: '1 / 5',
                 display: 'grid',
                 gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                gridTemplateRows: 'repeat(2, minmax(0, 170px))'
+                gridTemplateRows: 'repeat(2, minmax(0, 200px))'
               }
             }
           }

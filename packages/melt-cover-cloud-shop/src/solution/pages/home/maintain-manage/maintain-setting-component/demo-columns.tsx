@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import { Divider, Popconfirm } from 'antd';
-import style from './maintain-setting.component.less';
+import style from './maintain-setting.module.less';
 
 export function demoColumns(
   isEnablePage: boolean,

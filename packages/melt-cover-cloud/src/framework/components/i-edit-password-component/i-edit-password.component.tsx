@@ -1,5 +1,5 @@
 import * as React from 'react';
-import style from './i-edit-password.component.less';
+import style from './i-edit-password.module.less';
 import { IIEditPasswordProps } from './i-edit-password.interface';
 import { Modal, Form, Input } from 'antd';
 import { useIEditPasswordStore } from './i-edit-password.component.store';

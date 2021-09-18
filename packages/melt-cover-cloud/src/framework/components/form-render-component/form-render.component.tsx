@@ -17,20 +17,23 @@ const FormRenderComponent = React.memo((props: IFormRenderProps) => {
       return null;
     });
   }
+  console.log('slot===>', slot);
 
   if (slot) {
     return (
       <Form form={form} className={className} {...props.props} onValuesChange={handleFormChange}>
-        {console.log('renderslot===>', state.schema)}
+        {console.log('renderslot===>', useRefRender.current)}
         {slot({ renderItem: deepSoltClone })}
       </Form>
     );
   }
   return (
-    <Form form={form} className={className} {...props.props} onValuesChange={handleFormChange}>
-      {console.log('render===>', state.schema)}
-      {useRefSchema.current?.map(useRefRender.current.handleCreateElement)}
-    </Form>
+    <div>
+      <Form form={form} className={className} {...props.props} onValuesChange={handleFormChange}>
+        {console.log('render===>', useRefRender?.current)}
+        {useRefRender.current && useRefSchema.current?.map(useRefRender.current.handleCreateElement)}
+      </Form>
+    </div>
   );
 });
 

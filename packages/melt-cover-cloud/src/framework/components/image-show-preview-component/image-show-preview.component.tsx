@@ -1,5 +1,5 @@
 import * as React from 'react';
-import style from './image-show-preview.component.less';
+import style from './image-show-preview.module.less';
 import { useImageShowPreviewStore } from './image-show-preview.component.store';
 import 'viewerjs/dist/viewer.css';
 import { IImageShowPreviewComponentProps } from './image-show-preview.interface';

@@ -11,8 +11,8 @@ export function useFormRenderStore(props: IFormRenderProps) {
   const { state, setStateWrap } = useStateStore(new IFormRenderState());
   const { form, watch, schema, widget } = props;
   const useRefSchema = useRef<IFormBaseComponentsUnion[]>(schema);
-  const useRefRender = useRef<HandleTypesFactory>(new HandleTypesFactory(form));
-  useRefRender.current.setComponent(widget);
+  const useRefRender = useRef<HandleTypesFactory>(null);
+  useRefRender.current?.setComponent(widget);
   useEffect(() => {
     useRefSchema.current = schema;
     form.getSchema().map(item => {
@@ -25,12 +25,12 @@ export function useFormRenderStore(props: IFormRenderProps) {
   }, [JSON.stringify(schema)]);
 
   useEffect(() => {
+    useRefRender.current = new HandleTypesFactory(form);
+
     setStateWrap({
       schema: useRefSchema.current
     });
-  }, []);
 
-  useEffect(() => {
     handleDepSchma();
   }, []);
 

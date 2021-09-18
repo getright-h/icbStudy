@@ -1,6 +1,6 @@
 import { Cascader } from 'antd';
 import * as React from 'react';
-import style from './lazy-optionos-cascader.component.less';
+import style from './lazy-optionos-cascader.module.less';
 import { ILazyOptionosCascaderProps, useLazyOptionosCascaderStore } from './lazy-optionos-cascader.component.store';
 
 const LazyOptionosCascaderComponent = React.memo((props: ILazyOptionosCascaderProps) => {

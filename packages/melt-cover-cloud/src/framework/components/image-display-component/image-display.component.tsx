@@ -1,5 +1,5 @@
 import * as React from 'react';
-import style from './image-display.component.less';
+import style from './image-display.module.less';
 import { IImageDisplayProps } from './image-display.interface';
 import { useImageDisplayStore } from './image-display.component.store';
 import Carousel, { Modal, ModalGateway } from 'react-images';

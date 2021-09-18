@@ -28,6 +28,7 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": "off",
     "react/prop-types": "off",
     "react/display-name": "off",
+    '@typescript-eslint/no-var-requires': 0,
     "no-extra-semi": 0, // 禁止不必要的分号
     "quotes": [
       "error",

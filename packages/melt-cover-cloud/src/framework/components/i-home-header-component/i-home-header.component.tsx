@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useHomeHeaderStore } from './i-home-header.component.store';
 import { HomeOutlined, MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { Popover, Select } from 'antd';
-import style from './i-home-header.component.less';
+import style from './i-home-header.module.less';
 import { GlobalContext } from '~/solution/context/global/global.provider';
 import { TYPES } from '~/solution/context/global/store/global.type';
 import { IGlobalState } from '~/solution/context/global/global.interface';

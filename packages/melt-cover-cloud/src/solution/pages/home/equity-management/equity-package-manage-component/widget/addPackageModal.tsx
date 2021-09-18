@@ -4,7 +4,7 @@ import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem }
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manage.dto';
 import { IEquityPackageManageState } from '../equity-package-manage.interface';
-import style from '../equity-package-manage.component.less';
+import style from '../equity-package-manage.module.less';
 import { EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
 
 interface IAddEquityProps {

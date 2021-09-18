@@ -1,5 +1,5 @@
 import * as React from 'react';
-import style from './i-select-loading.component.less';
+import style from './i-select-loading.module.less';
 import { Select } from 'antd';
 import { IISelectLoadingProps } from './i-select-loading.interface';
 import { useISelectLoadingStore } from './i-select-loading.component.store';
