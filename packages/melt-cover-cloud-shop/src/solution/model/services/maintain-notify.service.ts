@@ -5,7 +5,6 @@ import {
   BackgroundReqType,
   BackgroundResType,
   AdjustReqType,
-  ExportReqType,
   RemindReqType,
   BatchRemindReqType,
   FollowReqType,
@@ -22,6 +21,8 @@ import {
 import { RequestService } from '~/framework/util/base-http/request.service';
 import { Observable } from 'rxjs';
 import { DepUtil } from '~/framework/aop/inject';
+import useFetch from '~/framework/hooks/useFetch';
+import useMutation from '~/framework/hooks/useMutation';
 
 /**
  * 真实开发中，请将示例代码移除
@@ -43,6 +44,7 @@ const DISTRIBUTOR = 'maintain/Maintain/Query/Distributor'; //经销商获取保�
 const EXPORTDISTRIBUTOR = 'maintain/Maintain/Query/Distributor/Export'; //导出经销商获取保养列表
 const MAINTAIN_PROJECT_LIST_DISTRIBUTOR = 'maintain/Record/Content/Query/Distributor'; //经销商获取自定义保养项目
 const DISTRIBUTORINSERT = 'maintain/Record/Content/Insert/Distributor'; //经销商新增自定义记录项
+
 @DepUtil.Injectable()
 export class MaintainNotifyService extends MaintainNotifyDTO {
   @DepUtil.Inject(RequestService)

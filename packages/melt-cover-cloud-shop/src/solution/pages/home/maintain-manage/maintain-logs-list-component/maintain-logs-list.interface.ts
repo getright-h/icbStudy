@@ -5,17 +5,7 @@ import { IFormBaseComponentsUnion, TypeUseForm } from '@fch/fch-shop-web';
  * @class IMaintainLogsListState
  */
 export class IMaintainLogsListState {
-  searchForm = {
-    index: 1,
-    size: 10
-  };
-  total: number;
-  tableData: any = [];
-  isLoading = false;
-  isExportLoading = false;
-  isLoadingModalNotify = false;
   isVisibleModalMaintainRegistration = false;
-  isLoadingModalMaintainRegistration = false;
   isVisibleModalCalibration = false;
 }
 export interface IModalComponentProps {

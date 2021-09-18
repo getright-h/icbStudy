@@ -5,7 +5,7 @@ import { schemaMaintainRegistration, IModalComponentProps } from '../maintain-lo
 import style from '../maintain-logs-list.module.less';
 
 export default function MaintainRegistrationComponent(props: IModalComponentProps & { watch: any }) {
-  const { title, visible, handleCancel, handleOk, stateParent, form, watch } = props;
+  const { title, visible, handleCancel, handleOk, isLoading, form, watch } = props;
   function renderForm() {
     return (
       <>
@@ -33,7 +33,7 @@ export default function MaintainRegistrationComponent(props: IModalComponentProp
             <Button type="primary" onClick={handleCancel}>
               取消
             </Button>
-            <Button loading={stateParent.isLoadingModalNotify} type="primary" onClick={handleOk}>
+            <Button loading={isLoading} type="primary" onClick={handleOk}>
               确定
             </Button>
           </>
