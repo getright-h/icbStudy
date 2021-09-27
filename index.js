@@ -7,6 +7,7 @@ function changeAllFiles(names) {
         console.log('name===>', item);
     });
 }
+
 function findAllFiles() {
     var fileList = shell.find('.').filter(function (file) {
         return file.match(/(.component.less)$/);
