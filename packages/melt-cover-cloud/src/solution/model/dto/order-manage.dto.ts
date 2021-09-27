@@ -119,6 +119,7 @@ export interface DataDetail {
   salesmenName: string;
   salesmenId: string;
   ownerType: number;
+  xiaoXiuActivationCheckRemark: string;
 }
 interface ImagesData {
   id: string;

@@ -136,6 +136,11 @@ export default function OrderDetailComponent() {
                 <span>{info?.remark || '-'}</span>
               </Form.Item>
             </Col>
+            <Col className="" span={24}>
+              <Form.Item label={'助修宝审核备注'}>
+                <span>{info?.xiaoXiuActivationCheckRemark || '-'}</span>
+              </Form.Item>
+            </Col>
           </Row>
         </div>
       </div>
