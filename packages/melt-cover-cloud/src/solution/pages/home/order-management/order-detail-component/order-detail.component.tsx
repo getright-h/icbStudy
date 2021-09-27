@@ -7,6 +7,7 @@ import { TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
 import style from './order-detail.module.less';
 import { useOrderDetailStore } from './order-detail.component.store';
 // const IPreviewImgComponent = ImageShowPreviewComponent;
+
 export default function OrderDetailComponent() {
   const { state, goback } = useOrderDetailStore();
   const { info } = state;
