@@ -57,25 +57,25 @@ export const PAGES_MENU = {
           title: '预约设置'
         }
       ]
-    },
-    {
-      path: 'home/maintain',
-      title: '保养管理',
-      icon: 'tool',
-      children: [
-        {
-          path: 'maintainNotifyList',
-          title: '保养提醒'
-        },
-        {
-          path: 'maintainLogsList',
-          title: '保养记录'
-        },
-        {
-          path: 'maintainSetting',
-          title: '保养设置'
-        }
-      ]
     }
+    // {
+    //   path: 'home/maintain',
+    //   title: '保养管理',
+    //   icon: 'tool',
+    //   children: [
+    //     {
+    //       path: 'maintainNotifyList',
+    //       title: '保养提醒'
+    //     },
+    //     {
+    //       path: 'maintainLogsList',
+    //       title: '保养记录'
+    //     },
+    //     {
+    //       path: 'maintainSetting',
+    //       title: '保养设置'
+    //     }
+    //   ]
+    // }
   ]
 };
