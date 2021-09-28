@@ -27,5 +27,7 @@ export const ROUTERS = {
   maintainSetting: () =>
     import('~/solution/pages/home/maintain-manage/maintain-setting-component/maintain-setting.component'),
   maintainLogsList: () =>
-    import('~/solution/pages/home/maintain-manage/maintain-logs-list-component/maintain-logs-list.component')
+    import('~/solution/pages/home/maintain-manage/maintain-logs-list-component/maintain-logs-list.component'),
+  preOrderList: () =>
+    import('~/solution/pages/home/pre-order-management/pre-order-list-component/pre-order-list.component')
 };

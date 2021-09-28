@@ -57,7 +57,7 @@ export const PAGES_MENU = {
           title: '预约设置'
         }
       ]
-    }
+    },
     // {
     //   path: 'home/maintain',
     //   title: '保养管理',
@@ -77,5 +77,16 @@ export const PAGES_MENU = {
     //     }
     //   ]
     // }
+    {
+      path: 'home/preOrderManagement',
+      title: '预创单管理',
+      icon: 'tool',
+      children: [
+        {
+          path: 'preOrderList',
+          title: '预创单列表'
+        }
+      ]
+    }
   ]
 };
