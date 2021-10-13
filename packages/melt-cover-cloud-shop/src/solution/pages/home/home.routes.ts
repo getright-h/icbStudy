@@ -73,5 +73,11 @@ export const homeRoutes: IRoute[] = [
     path: `${MODULE_PATH}maintain`,
     component: ROUTERS.maintainModule,
     lazyload: true
+  },
+  {
+    path: `${MODULE_PATH}preOrderManagement/preOrderList`,
+    component: ROUTERS.preOrderList,
+    lazyload: true,
+    exact: true
   }
 ];

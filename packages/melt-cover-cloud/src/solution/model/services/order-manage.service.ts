@@ -20,7 +20,7 @@ const EXAMPLE_API_PATH = 'your-http-request-path';
 const GET_ORDER_LIST_PATH = 'order/manager/queryPaginOrder'; //查询订单列表
 const ADD_ORDER_PATH = 'order/manager/inputOrder'; //新增订单
 const GET_ORDER_DETAIL_PATH = 'order/manager/GetOrderById'; //订单详情
-
+const GET_QUICK_ORDER_LIST_PATH = 'order/QueryQuickOrder'; //预创单订单列表
 @DepUtil.Injectable()
 export class OrderManageService extends OrderManageDTO {
   @DepUtil.Inject(RequestService)
@@ -40,5 +40,8 @@ export class OrderManageService extends OrderManageDTO {
   }
   getOrderDetail(orderId: string): Observable<DataDetail> {
     return this.requestService.get(GET_ORDER_DETAIL_PATH, { orderId });
+  }
+  getQuickOrderList(params: QueryPaginOrderParams): Observable<QueryPaginOrderReturn> {
+    return this.requestService.post(GET_QUICK_ORDER_LIST_PATH, params);
   }
 }

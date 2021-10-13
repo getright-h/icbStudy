@@ -34,7 +34,7 @@ export function useOrderManagementListStore() {
     setStateWrap({
       isLoading: true
     });
-    orderManageService.getOrderList(params).subscribe(
+    orderManageService.getQuickOrderList(params).subscribe(
       (res: QueryPaginOrderReturn) => {
         setStateWrap({
           tableData: res.dataList,
@@ -53,7 +53,7 @@ export function useOrderManagementListStore() {
   }
   function tableAction(row: any, actionName: string) {
     if (actionName == '详情') {
-      history.push('orderDetail?id=' + row.id);
+      history.push('/home/orderManagement/orderDetail?id=' + row.id);
     }
   }
   function changeTablePageIndex(index: number, pageSize: number) {
@@ -101,5 +101,10 @@ export function useOrderManagementListStore() {
     });
   }
 
-  return { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder };
+  function handleSearchReset() {
+    formRef.resetFields();
+    handleSearch();
+  }
+
+  return { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder, handleSearchReset };
 }

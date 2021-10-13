@@ -21,7 +21,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '车主类型',
-      dataIndex: 'ownerName'
+      dataIndex: 'ownerType',
+      render: (render: any, data: any, index: number) => {
+        return render == 1 ? '个人' : '企业';
+      }
     },
     {
       title: '所属机构',
@@ -29,7 +32,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '是否散户',
-      dataIndex: 'ownerPlateNo'
+      dataIndex: 'isScatteredUser',
+      render: (render: any, data: any, index: number) => {
+        return render ? '是' : '否';
+      }
     },
     {
       title: '购买套餐包',
@@ -41,7 +47,11 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '状态',
-      dataIndex: 'xiaoXiuStatusStr'
+      dataIndex: 'statusDesc'
+    },
+    {
+      title: '所属经销商',
+      dataIndex: 'distributorName'
     },
     {
       title: '操作',
@@ -51,7 +61,7 @@ export function demoColumns(action: Function): ColumnsType<any> {
       render: (text, row) => {
         return (
           <React.Fragment>
-            <a onClick={() => action(row, '详情')}>详情</a>
+            {row.status != -99 && <a onClick={() => action(row, '详情')}>详情</a>}
             {/* <Divider type="vertical" />
             <a onClick={() => action(row, '编辑')}>编辑</a>
             <Divider type="vertical" />

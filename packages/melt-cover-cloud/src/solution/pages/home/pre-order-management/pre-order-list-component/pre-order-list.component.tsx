@@ -7,7 +7,14 @@ import { useOrderManagementListStore } from './pre-order-list.component.store';
 import { schema } from './pre-order-list.interface';
 
 export default function OrderManagementListComponent() {
-  const { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder } = useOrderManagementListStore();
+  const {
+    state,
+    handleSearch,
+    formRef,
+    tableAction,
+    changeTablePageIndex,
+    handleSearchReset
+  } = useOrderManagementListStore();
   const { searchForm, tableData, total, isLoading } = state;
   function renderSelectItems() {
     return (
@@ -19,6 +26,9 @@ export default function OrderManagementListComponent() {
       <>
         <Button type="primary" className="ml20" onClick={() => handleSearch()}>
           查询
+        </Button>
+        <Button type="primary" className="ml20" onClick={() => handleSearchReset()}>
+          重置
         </Button>
         {/* <Button type="primary" className="ml20" onClick={addOrder}>
           创建订单

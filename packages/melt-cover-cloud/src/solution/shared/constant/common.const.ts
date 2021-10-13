@@ -90,3 +90,29 @@ export const PAGES_MENU = {
     }
   ]
 };
+export const STATUS = [
+  {
+    label: '全部',
+    value: ''
+  },
+  {
+    label: '未完善',
+    value: -99
+  },
+  {
+    label: '待激活',
+    value: 0
+  },
+  {
+    label: '静默期',
+    value: 4
+  },
+  {
+    label: '激活拒绝',
+    value: 5
+  },
+  {
+    label: '完成',
+    value: 1
+  }
+];
