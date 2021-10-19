@@ -50,13 +50,13 @@ export function useAddOrderStore() {
   useEffect(() => {
     formRef.setSchemas({
       code: schema => {
-        schema.hidden = !state.isXiaoXiu;
+        schema.hidden = state.containsXiaoxiu;
       },
       equityGroupId: schema => {
         schema.props.options = state.equityDropList;
       }
     });
-  }, [JSON.stringify(state.isXiaoXiu), JSON.stringify(state.equityDropList)]);
+  }, [JSON.stringify(state.isXiaoXiu), JSON.stringify(state.equityDropList), JSON.stringify(state.containsXiaoxiu)]);
 
   useEffect(() => {
     if (state.isXiaoXiu) {
@@ -121,6 +121,10 @@ export function useAddOrderStore() {
     },
     equityGroupId: (val: string) => {
       const equityContainsXiaoxiu = equityOptions.find(item => item.id == val);
+      equityContainsXiaoxiu.equityList.find(it => it.type == 1);
+      setStateWrap({
+        containsXiaoxiu: !!equityContainsXiaoxiu
+      })
       formRef.setFieldsValue({
         amount: equityContainsXiaoxiu?.price || 0
       });

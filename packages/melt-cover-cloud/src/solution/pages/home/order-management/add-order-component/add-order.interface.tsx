@@ -23,6 +23,7 @@ export class IAddOrderState {
   equityDropList: DataList[] = [];
   isXiaoXiu = false;
   isNew = true;
+  containsXiaoxiu = false;
 }
 
 export interface IProps {
