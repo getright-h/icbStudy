@@ -50,7 +50,7 @@ export function useAddOrderStore() {
   useEffect(() => {
     formRef.setSchemas({
       code: schema => {
-        schema.hidden = state.containsXiaoxiu;
+        schema.hidden = !state.containsXiaoxiu;
       },
       equityGroupId: schema => {
         schema.props.options = state.equityDropList;
@@ -121,9 +121,10 @@ export function useAddOrderStore() {
     },
     equityGroupId: (val: string) => {
       const equityContainsXiaoxiu = equityOptions.find(item => item.id == val);
-      equityContainsXiaoxiu.equityList.find(it => it.type == 1);
+      const contains = equityContainsXiaoxiu.equityList.find(it => it.type == 1);
+      console.log('===>contains',contains, !!contains);
       setStateWrap({
-        containsXiaoxiu: !!equityContainsXiaoxiu
+        containsXiaoxiu: !!contains
       })
       formRef.setFieldsValue({
         amount: equityContainsXiaoxiu?.price || 0
@@ -163,14 +164,16 @@ export function useAddOrderStore() {
     equityPackageManageService
       .getEquityNoPageChildList({ distributorId: id, status: 1, isTest: false })
       .subscribe(res => {
-        setStateWrap({
-          equityDropList: res?.map(item => {
-            const obj: any = {};
-            obj.label = item.name;
-            obj.value = item.id;
-            return obj;
-          })
+        const list = res?.map(item => {
+          const obj: any = {};
+          obj.label = item.name;
+          obj.value = item.id;
+          return obj;
         });
+        setStateWrap({
+          equityDropList: list
+        });
+        formRef.resetFields(['equityGroupId'])
         callback && callback(res);
       });
   }
