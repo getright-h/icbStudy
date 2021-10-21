@@ -24,7 +24,7 @@ export function useOrderManagementListStore() {
     const { dateRange } = formValues;
     const req = Object.assign({}, formValues, {
       size,
-      page,
+      index: page,
       beginTime: dateRange?.[0] && moment(dateRange[0]).set({ hours: 0, minutes: 0, seconds: 0 }),
       endTime: dateRange?.[1] && moment(dateRange[1]).set({ hours: 23, minutes: 59, seconds: 59 })
     });
