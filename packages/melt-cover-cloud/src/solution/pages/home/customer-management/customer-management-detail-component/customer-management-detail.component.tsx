@@ -192,8 +192,8 @@ export default function CustomerManagementDetailComponent() {
       radio
     } = state;
     const options = [
-      { label: '跟进&提醒记录', value: 2, disabled: true },
-      { label: '回店记录', value: 1 }
+      { label: '跟进&提醒记录', value: 1, disabled: true },
+      { label: '回店记录', value: 2 }
     ];
     return (
       <div>
