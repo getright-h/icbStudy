@@ -7,6 +7,7 @@ import { GetShuangBaoServiceLetterByOrderIdResType, QueryPaginOrderParams, Query
 import { OrderManageService } from '~/solution/model/services/order-manage.service';
 import { CustomerManageService } from '~/solution/model/services/customer-manage.service';
 import { useEffect } from 'react';
+import { message } from 'antd';
 
 export function useOrderManagementListStore() {
   const { state, setStateWrap } = useStateStore(new IOrderManagementListState());
@@ -69,10 +70,20 @@ export function useOrderManagementListStore() {
         let eleLink = document.createElement('a');
         eleLink.download = name + '.png';
         eleLink.target = '_blank';
+        outerif:
         if (name == '带章服务函') {
+          if(!res.resultUri){
+            message.error('无带章服务函');
+            return;
+          }
           eleLink.href = res.resultUri;
         }
+        outerif:
         if (name == '不带章服务函') {
+          if(!res.defaultUri){
+            message.error('不带章服务函');
+            return;
+          }
           eleLink.href = res.defaultUri;
         }
         eleLink.click();
