@@ -23,7 +23,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@fch/fch-shop-web": "0.0.28",
-    "@fch/fch-tool": "0.0.8",
+    "@fch/fch-tool": "0.0.9",
     "@rollup/pluginutils": "^4.1.1",
     "@sentry/browser": "^5.7.1",
     "@types/js-cookie": "^2.2.2",
