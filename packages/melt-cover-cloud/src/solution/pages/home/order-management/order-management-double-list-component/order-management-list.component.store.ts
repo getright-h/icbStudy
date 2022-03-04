@@ -72,13 +72,13 @@ export function useOrderManagementListStore() {
         eleLink.target = '_blank';
         outerif:
         if (name == '带章服务函') {
-          innerif:
           if(!res.resultUri){
             message.error('无带章服务函');
             return;
           }
           eleLink.href = res.resultUri;
         }
+        outerif:
         if (name == '不带章服务函') {
           if(!res.defaultUri){
             message.error('不带章服务函');
