@@ -25,7 +25,11 @@ export const PAGES_MENU = {
         {
           path: 'orderManagementList',
           title: '订单列表'
-        }
+        },
+        {
+          path: 'orderManagementDoubleList',
+          title: '双保无忧订单列表'
+        }        
       ]
     },
     {
