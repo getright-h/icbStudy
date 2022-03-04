@@ -68,25 +68,15 @@ export function useOrderManagementListStore() {
       (res: GetShuangBaoServiceLetterByOrderIdResType) => {
         let eleLink = document.createElement('a');
         eleLink.download = name + '.png';
-        const img = new Image();
+        eleLink.target = '_blank';
         if (name == '带章服务函') {
-          img.src = res.resultUri;
+          eleLink.href = res.resultUri;
         }
         if (name == '不带章服务函') {
-          img.src = res.defaultUri;
+          eleLink.href = res.defaultUri;
         }
-        img.crossOrigin = 'Anonymous';
-        img.onload = function(res){
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0,0,canvas.width,canvas.height);
-          eleLink.href = canvas.toDataURL('image/jpeg', 1);
-          eleLink.click();
-          eleLink.remove();
-          canvas.remove();
-        }
+        eleLink.click();
+        eleLink.remove();
       },
       () => { }
     );
