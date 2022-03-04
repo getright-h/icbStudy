@@ -6,6 +6,7 @@ import { IPreviewImgComponent } from '@fch/fch-shop-web';
 import { TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
 import style from './order-detail.module.less';
 import { useOrderDetailStore } from './order-detail.component.store';
+import moment from 'moment';
 // const IPreviewImgComponent = ImageShowPreviewComponent;
 export default function OrderDetailComponent() {
   const { state, goback } = useOrderDetailStore();
@@ -52,7 +53,7 @@ export default function OrderDetailComponent() {
                 <span>{info?.identificationNumber || '-'}</span>
               </Form.Item>
             </Col>
-            <Col className="" span={span}>
+            {info?.ownerType == 1 && (<><Col className="" span={span}>
               <Form.Item label={'车主姓名'}>
                 <span>{info?.ownerName || '-'}</span>
               </Form.Item>
@@ -61,7 +62,27 @@ export default function OrderDetailComponent() {
               <Form.Item label={'车主手机号'}>
                 <span>{info?.ownerTelephone || '-'}</span>
               </Form.Item>
+            </Col></>)}
+            {info?.ownerType == 2 && (<><Col className="" span={span}>
+              <Form.Item label={'公司名称'}>
+                <span>{info?.ownerName || '-'}</span>
+              </Form.Item>
             </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'公司电话'}>
+                <span>{info?.ownerTelephone || '-'}</span>
+              </Form.Item>
+            </Col></>)}
+            {info?.ownerType == 2 && (<><Col className="" span={span}>
+              <Form.Item label={'驾驶员姓名'}>
+                <span>{info?.driverName || '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'驾驶员电话'}>
+                <span>{info?.driverTelephone || '-'}</span>
+              </Form.Item>
+            </Col></>)}
             {/* 新增需求 */}
             <Col className="" span={span}>
               <Form.Item label={'车主与本人关系'}>
@@ -126,13 +147,13 @@ export default function OrderDetailComponent() {
               </Form.Item>
             </Col>
             <Col className="" span={span}>
-              <Form.Item label={'是否非运营乘用车'}>
+              <Form.Item label={'是否运营乘用车'}>
                 <span>{info?.isTheVehicleOperated ? '是' : '否' || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'排量'}>
-                <span>{info?.displacement || '-'}</span>
+                <span>{info?.displacement && (info?.displacement + 'T') || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
@@ -147,27 +168,32 @@ export default function OrderDetailComponent() {
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'新车购置价'}>
-                <span>{info?.purchasePriceOfNewCar || '-'}</span>
+                <span>{info?.purchasePriceOfNewCar && (info?.purchasePriceOfNewCar + '万') || '-'}</span>
               </Form.Item>
             </Col>
-            <Col className="" span={span}>
+            {/* <Col className="" span={span}>
               <Form.Item label={'服务购买费用'}>
                 <span>{info?.purchaseServiceFee || '-'}</span>
               </Form.Item>
-            </Col>
+            </Col> */}
             <Col className="" span={span}>
               <Form.Item label={'服务开始时间'}>
-                <span>{info?.serviceStartTime || '-'}</span>
+                <span>{info?.serviceStartTime && moment(info?.serviceStartTime).format('YYYY-MM-DD') || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'服务截止时间'}>
-                <span>{info?.serviceDeadline || '-'}</span>
+                <span>{info?.serviceDeadline && moment(info?.serviceDeadline).format('YYYY-MM-DD') || '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'服务期限'}>
+                <span>{info?.maximumServicePeriod && info?.maximumServicePeriod + '月' || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'入会车辆里程数'}>
-                <span>{info?.joiningVehicleMileage || '-'}</span>
+                <span>{info?.joiningVehicleMileage && (info?.joiningVehicleMileage + 'km') || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
@@ -195,7 +221,7 @@ export default function OrderDetailComponent() {
           <Row>
             <Col className="" span={span}>
               <Form.Item label={'套餐包金额'}>
-                <span>{info?.purchaseServiceFee || '-'}</span>
+                <span>{info?.purchaseServiceFee && (info?.purchaseServiceFee + '元') || '-'}</span>
               </Form.Item>
             </Col>
             {/* 新增 */}
