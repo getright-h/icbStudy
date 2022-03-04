@@ -70,7 +70,9 @@ export function useOrderManagementListStore() {
         let eleLink = document.createElement('a');
         eleLink.download = name + '.png';
         eleLink.target = '_blank';
+        outerif:
         if (name == '带章服务函') {
+          innerif:
           if(!res.resultUri){
             message.error('无带章服务函');
             return;
@@ -78,13 +80,13 @@ export function useOrderManagementListStore() {
           eleLink.href = res.resultUri;
         }
         if (name == '不带章服务函') {
-          if(!res.resultUri){
+          if(!res.defaultUri){
             message.error('不带章服务函');
             return;
           }
           eleLink.href = res.defaultUri;
         }
-        eleLink.href && eleLink.click();
+        eleLink.click();
         eleLink.remove();
       },
       () => { }
