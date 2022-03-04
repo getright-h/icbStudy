@@ -16,8 +16,6 @@ yarn-error.log*
 packages/**/src/**/*.d.ts
 # 本地环境变量
 .env.local
-yarn.lock
-*.lock
 *.less.d.ts
 
 .vscode
