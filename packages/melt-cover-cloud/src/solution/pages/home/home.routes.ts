@@ -35,6 +35,12 @@ export const homeRoutes: IRoute[] = [
     exact: true
   },
   {
+    path: `${MODULE_PATH}orderManagement/orderManagementDoubleList`,
+    component: ROUTERS.orderManagementDoubleList,
+    lazyload: true,
+    exact: true
+  },
+  {
     path: `${MODULE_PATH}orderManagement/addOrder`,
     component: ROUTERS.addOrder,
     lazyload: true,
@@ -54,6 +60,12 @@ export const homeRoutes: IRoute[] = [
   {
     path: `${MODULE_PATH}orderManagement/orderDetail`,
     component: ROUTERS.orderDetail,
+    lazyload: true,
+    exact: true
+  },
+  {
+    path: `${MODULE_PATH}orderManagement/orderDoubleDetail`,
+    component: ROUTERS.orderDoubleDetail,
     lazyload: true,
     exact: true
   },

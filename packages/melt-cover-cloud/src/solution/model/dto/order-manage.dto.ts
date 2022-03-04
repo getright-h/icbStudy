@@ -32,6 +32,63 @@ export interface QueryPaginOrderReturn {
   message: string;
   timestamp: string;
 }
+export interface GetShuangBaoServiceLetterByOrderIdResType {
+  id: string;
+  defaultUri: string;
+  resultUri: string;
+  createTime: string;
+}
+export interface QueryPaginOrderReturnList {
+  dataList: QueryPaginShuangBaoOrderResType[];
+  total: number;
+  status: boolean;
+  code: number;
+  message: string;
+  timestamp: string;
+}
+export interface QueryPaginShuangBaoOrderResType {
+  id: string;
+  agreedServiceProvider: string;
+  agreedServiceProviderId: string;
+  businessType: string;
+  businessTypeId: string;
+  ownerType: number;
+  documentType: number;
+  identificationNumber: string;
+  ownerName: string;
+  ownerTelephone: string;
+  maximumServicePeriod: number;
+  driverName: string;
+  driverTelephone: string;
+  relationshipBetweenTheOwnerAndHimself: string;
+  isTheVehicleOperated: boolean;
+  ownerContactAddress: string;
+  licensePlateNumber: string;
+  engineNumber: string;
+  frameNumber: string;
+  model: string;
+  vehicleConfiguration: string;
+  displacement: string;
+  variableSpeedType: string;
+  pressurizationType: string;
+  numberOfSeats: string;
+  vehiclePurchaseDate: string;
+  purchasePriceOfNewCar: string;
+  purchaseServiceFee: string;
+  serviceStartTime: string;
+  serviceDeadline: string;
+  billingClerk: string;
+  billingClerkId: string;
+  joiningVehicleMileage: string;
+  whetherToPurchaseVehicleLossInsurance: string;
+  paymentMethod: string;
+  paymentVoucherNo: string;
+  ownerCertificatePhoto: string;
+  purchaseInvoice: string;
+  paymentVoucher: string;
+  attachPicturePackage: string;
+  serviceLetter: string;
+}
 
 export interface Datum {
   id: string;
@@ -186,4 +243,48 @@ export interface CurrentImageTemplt {
   index: number;
   type: number;
   subType: number;
+}
+
+export interface GetShuangBaoOrderByIdResType {
+  id: string;
+  agreedServiceProvider: string;
+  agreedServiceProviderId: string;
+  businessType: string;
+  businessTypeId: string;
+  ownerType: number;
+  documentType: number;
+  identificationNumber: string;
+  ownerName: string;
+  ownerTelephone: string;
+  maximumServicePeriod: number;
+  driverName: string;
+  driverTelephone: string;
+  relationshipBetweenTheOwnerAndHimself: string;
+  isTheVehicleOperated: boolean;
+  ownerContactAddress: string;
+  licensePlateNumber: string;
+  engineNumber: string;
+  frameNumber: string;
+  model: string;
+  vehicleConfiguration: string;
+  displacement: string;
+  variableSpeedType: string;
+  pressurizationType: string;
+  numberOfSeats: string;
+  vehiclePurchaseDate: string;
+  purchasePriceOfNewCar: string;
+  purchaseServiceFee: string;
+  serviceStartTime: string;
+  serviceDeadline: string;
+  billingClerk: string;
+  billingClerkId: string;
+  joiningVehicleMileage: string;
+  whetherToPurchaseVehicleLossInsurance: string;
+  paymentMethod: string;
+  paymentVoucherNo: string;
+  ownerCertificatePhoto: string;
+  purchaseInvoice: string;
+  paymentVoucher: string;
+  attachPicturePackage: string;
+  serviceLetter: string;
 }
