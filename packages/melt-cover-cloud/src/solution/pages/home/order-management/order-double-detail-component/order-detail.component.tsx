@@ -236,7 +236,7 @@ export default function OrderDetailComponent() {
               </Form.Item>
             </Col>
             <Col className="" span={span}>
-              <Form.Item label={'订单状态'}>
+              <Form.Item label={'订单备注'}>
                 <span>{info?.remark || '-'}</span>
               </Form.Item>
             </Col>
