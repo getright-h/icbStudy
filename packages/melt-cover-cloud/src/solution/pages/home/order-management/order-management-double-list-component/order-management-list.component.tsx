@@ -20,9 +20,9 @@ export default function OrderManagementListComponent() {
         <Button type="primary" className="ml20" onClick={() => handleSearch()}>
           查询
         </Button>
-        <Button type="primary" className="ml20" onClick={addOrder}>
+        {/* <Button type="primary" className="ml20" onClick={addOrder}>
           创建订单
-        </Button>
+        </Button> */}
       </>
     );
   }

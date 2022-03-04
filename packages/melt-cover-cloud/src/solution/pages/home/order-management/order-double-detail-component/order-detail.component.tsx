@@ -236,6 +236,11 @@ export default function OrderDetailComponent() {
               </Form.Item>
             </Col>
             <Col className="" span={span}>
+              <Form.Item label={'订单状态'}>
+                <span>{info?.remark || '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
               <Form.Item label={'支付凭证号'}>
                 <span>{info?.paymentVoucherNo || '-'}</span>
               </Form.Item>

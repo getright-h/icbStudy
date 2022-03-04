@@ -50,6 +50,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
       dataIndex: 'createTime'
     },
     {
+      title: '备注',
+      dataIndex: 'remark'
+    },
+    {
       title: '状态',
       render: record => {
         return <span>已完成</span>;
