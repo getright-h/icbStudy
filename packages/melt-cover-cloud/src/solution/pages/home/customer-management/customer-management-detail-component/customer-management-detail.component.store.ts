@@ -37,7 +37,7 @@ export function useCustomerManagementDetailStore() {
   }
 
   function changeRaido(e: any) {
-    console.log('e===>',e);
+    console.log('e===>', e);
     setStateWrap({
       radio: e.target.value
     });

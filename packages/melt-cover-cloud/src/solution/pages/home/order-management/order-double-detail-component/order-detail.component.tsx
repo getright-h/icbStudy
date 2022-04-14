@@ -53,40 +53,62 @@ export default function OrderDetailComponent() {
                 <span>{info?.identificationNumber || '-'}</span>
               </Form.Item>
             </Col>
-            {info?.ownerType == 1 && (<><Col className="" span={span}>
-              <Form.Item label={'车主姓名'}>
-                <span>{info?.ownerName || '-'}</span>
-              </Form.Item>
-            </Col>
-            <Col className="" span={span}>
-              <Form.Item label={'车主手机号'}>
-                <span>{info?.ownerTelephone || '-'}</span>
-              </Form.Item>
-            </Col></>)}
-            {info?.ownerType == 2 && (<><Col className="" span={span}>
-              <Form.Item label={'公司名称'}>
-                <span>{info?.ownerName || '-'}</span>
-              </Form.Item>
-            </Col>
-            <Col className="" span={span}>
-              <Form.Item label={'公司电话'}>
-                <span>{info?.ownerTelephone || '-'}</span>
-              </Form.Item>
-            </Col></>)}
-            {info?.ownerType == 2 && (<><Col className="" span={span}>
-              <Form.Item label={'驾驶员姓名'}>
-                <span>{info?.driverName || '-'}</span>
-              </Form.Item>
-            </Col>
-            <Col className="" span={span}>
-              <Form.Item label={'驾驶员电话'}>
-                <span>{info?.driverTelephone || '-'}</span>
-              </Form.Item>
-            </Col></>)}
+            {info?.ownerType == 1 && (
+              <>
+                <Col className="" span={span}>
+                  <Form.Item label={'车主姓名'}>
+                    <span>{info?.ownerName || '-'}</span>
+                  </Form.Item>
+                </Col>
+                <Col className="" span={span}>
+                  <Form.Item label={'车主手机号'}>
+                    <span>{info?.ownerTelephone || '-'}</span>
+                  </Form.Item>
+                </Col>
+              </>
+            )}
+            {info?.ownerType == 2 && (
+              <>
+                <Col className="" span={span}>
+                  <Form.Item label={'公司名称'}>
+                    <span>{info?.ownerName || '-'}</span>
+                  </Form.Item>
+                </Col>
+                <Col className="" span={span}>
+                  <Form.Item label={'公司电话'}>
+                    <span>{info?.ownerTelephone || '-'}</span>
+                  </Form.Item>
+                </Col>
+              </>
+            )}
+            {info?.ownerType == 2 && (
+              <>
+                <Col className="" span={span}>
+                  <Form.Item label={'驾驶员姓名'}>
+                    <span>{info?.driverName || '-'}</span>
+                  </Form.Item>
+                </Col>
+                <Col className="" span={span}>
+                  <Form.Item label={'驾驶员电话'}>
+                    <span>{info?.driverTelephone || '-'}</span>
+                  </Form.Item>
+                </Col>
+              </>
+            )}
             {/* 新增需求 */}
             <Col className="" span={span}>
               <Form.Item label={'车主与本人关系'}>
                 <span>{info?.relationshipBetweenTheOwnerAndHimself || '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'代签人姓名'}>
+                <span>{info?.allographName || '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'代签人证件'}>
+                <span>{info?.allographCard || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
@@ -153,7 +175,7 @@ export default function OrderDetailComponent() {
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'排量'}>
-                <span>{info?.displacement && (info?.displacement + 'T') || '-'}</span>
+                <span>{(info?.displacement && info?.displacement + 'T') || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
@@ -168,7 +190,7 @@ export default function OrderDetailComponent() {
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'新车购置价'}>
-                <span>{info?.purchasePriceOfNewCar && (info?.purchasePriceOfNewCar + '万') || '-'}</span>
+                <span>{(info?.purchasePriceOfNewCar && info?.purchasePriceOfNewCar + '万') || '-'}</span>
               </Form.Item>
             </Col>
             {/* <Col className="" span={span}>
@@ -178,22 +200,22 @@ export default function OrderDetailComponent() {
             </Col> */}
             <Col className="" span={span}>
               <Form.Item label={'服务开始时间'}>
-                <span>{info?.serviceStartTime && moment(info?.serviceStartTime).format('YYYY-MM-DD') || '-'}</span>
+                <span>{(info?.serviceStartTime && moment(info?.serviceStartTime).format('YYYY-MM-DD')) || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'服务截止时间'}>
-                <span>{info?.serviceDeadline && moment(info?.serviceDeadline).format('YYYY-MM-DD') || '-'}</span>
+                <span>{(info?.serviceDeadline && moment(info?.serviceDeadline).format('YYYY-MM-DD')) || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'服务期限'}>
-                <span>{info?.maximumServicePeriod && info?.maximumServicePeriod + '月' || '-'}</span>
+                <span>{(info?.maximumServicePeriod && info?.maximumServicePeriod + '月') || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'入会车辆里程数'}>
-                <span>{info?.joiningVehicleMileage && (info?.joiningVehicleMileage + 'km') || '-'}</span>
+                <span>{(info?.joiningVehicleMileage && info?.joiningVehicleMileage + 'km') || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
@@ -221,7 +243,7 @@ export default function OrderDetailComponent() {
           <Row>
             <Col className="" span={span}>
               <Form.Item label={'套餐包金额'}>
-                <span>{info?.purchaseServiceFee && (info?.purchaseServiceFee + '元') || '-'}</span>
+                <span>{(info?.purchaseServiceFee && info?.purchaseServiceFee + '元') || '-'}</span>
               </Form.Item>
             </Col>
             {/* 新增 */}
@@ -251,7 +273,7 @@ export default function OrderDetailComponent() {
     );
   }
   function renderLeft() {
-    const span = 8;
+    const span = 10;
     return (
       <Form className={style.imgBox}>
         {renderUserInfo({ span })}
@@ -280,7 +302,8 @@ export default function OrderDetailComponent() {
               </>
             )} */}
             {info?.ownerCertificatePhoto && (
-              <><p>车主证件照</p>
+              <>
+                <p>车主证件照</p>
                 <Form.Item>
                   <div className={style.img}>
                     <IPreviewImgComponent
@@ -289,18 +312,15 @@ export default function OrderDetailComponent() {
                       alt={'车主证件照'}
                     />
                   </div>
-                </Form.Item></>
+                </Form.Item>
+              </>
             )}
             {info?.purchaseInvoice && (
               <>
                 <p>购车发票</p>
                 <Form.Item>
                   <div className={style.img}>
-                    <IPreviewImgComponent
-                      key={info?.purchaseInvoice}
-                      src={info?.purchaseInvoice}
-                      alt="购车发票 "
-                    />
+                    <IPreviewImgComponent key={info?.purchaseInvoice} src={info?.purchaseInvoice} alt="购车发票 " />
                   </div>
                 </Form.Item>
               </>
@@ -310,11 +330,7 @@ export default function OrderDetailComponent() {
                 <p>支付凭证</p>
                 <Form.Item>
                   <div className={style.img}>
-                    <IPreviewImgComponent
-                      key={info?.paymentVoucher}
-                      src={info?.paymentVoucher}
-                      alt="支付凭证 "
-                    />
+                    <IPreviewImgComponent key={info?.paymentVoucher} src={info?.paymentVoucher} alt="支付凭证 " />
                   </div>
                 </Form.Item>
               </>
@@ -366,7 +382,7 @@ export default function OrderDetailComponent() {
       <React.Fragment>
         <div className={style.addOrderContent}>
           <div>{renderLeft()}</div>
-          <div>{renderRight()}</div>
+          <div style={{ flex: 0.5 }}>{renderRight()}</div>
         </div>
       </React.Fragment>
     </div>

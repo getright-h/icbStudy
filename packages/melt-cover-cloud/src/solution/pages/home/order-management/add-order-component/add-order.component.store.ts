@@ -122,10 +122,10 @@ export function useAddOrderStore() {
     equityGroupId: (val: string) => {
       const equityContainsXiaoxiu = equityOptions.find(item => item.id == val);
       const contains = equityContainsXiaoxiu.equityList.find(it => it.type == 1);
-      console.log('===>contains',contains, !!contains);
+      console.log('===>contains', contains, !!contains);
       setStateWrap({
         containsXiaoxiu: !!contains
-      })
+      });
       formRef.setFieldsValue({
         amount: equityContainsXiaoxiu?.price || 0
       });
@@ -173,7 +173,7 @@ export function useAddOrderStore() {
         setStateWrap({
           equityDropList: list
         });
-        formRef.resetFields(['equityGroupId'])
+        formRef.resetFields(['equityGroupId']);
         callback && callback(res);
       });
   }

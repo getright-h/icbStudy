@@ -8,7 +8,9 @@ export const ROUTERS = {
   orderManagementList: () =>
     import('~/solution/pages/home/order-management/order-management-list-component/order-management-list.component'),
   orderManagementDoubleList: () =>
-    import('~/solution/pages/home/order-management/order-management-double-list-component/order-management-list.component'),
+    import(
+      '~/solution/pages/home/order-management/order-management-double-list-component/order-management-list.component'
+    ),
   addOrder: () => import('~/solution/pages/home/order-management/add-order-component/add-order.component'),
   rightsConsumerList: () =>
     import('~/solution/pages/home/rights-consumer/rights-consumer-list-component/rights-consumer-list.component'),
@@ -21,7 +23,8 @@ export const ROUTERS = {
       '~/solution/pages/home/customer-management/customer-management-detail-component/customer-management-detail.component'
     ),
   orderDetail: () => import('~/solution/pages/home/order-management/order-detail-component/order-detail.component'),
-  orderDoubleDetail: () => import('~/solution/pages/home/order-management/order-double-detail-component/order-detail.component'),
+  orderDoubleDetail: () =>
+    import('~/solution/pages/home/order-management/order-double-detail-component/order-detail.component'),
   equityPackageManage: () =>
     import('~/solution/pages/home/equity-management/equity-package-manage-component/equity-package-manage.component'),
   maintainModule: () => import('~/solution/pages/home/maintain-manage/maintain.module'),

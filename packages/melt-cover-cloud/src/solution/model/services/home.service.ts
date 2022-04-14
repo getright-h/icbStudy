@@ -1,10 +1,9 @@
-import { HomeDTO, MenuAndAuthResult } from '../dto/home.dto';
+import { GetRoleMenuHttpRes, HomeDTO, MenuAndAuthResult, MenuRequestParam, MyInfo } from '../dto/home.dto';
 import { RequestService } from '~/framework/util/base-http/request.service';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DepUtil } from '~/framework/aop/inject';
-import { delay } from 'rxjs/operators';
-import { PAGES_MENU } from '~/solution/shared/constant/common.const';
-
+const GetRoleMenuHttp = 'prvilege/common/menuTreeLogin';
+const GET_MY_INFO = 'prvilege/GetMyInfo';
 /**
  * 真实开发中，请将示例代码移除
  */
@@ -17,14 +16,13 @@ export class HomeService extends HomeDTO {
     super();
   }
 
+  // 获取登录用户信息
+  getMyInfo(): Observable<MyInfo> {
+    return this.requestService.get(GET_MY_INFO);
+  }
+
   // 获取菜单权限
-  getMenuAndAuthKeys(): Observable<MenuAndAuthResult> {
-    const initialMenuList: any = PAGES_MENU.MENU;
-    return Observable.create((observer: Subscriber<MenuAndAuthResult>) => {
-      observer.next({
-        data: initialMenuList
-      });
-      observer.complete();
-    }).pipe(delay(500));
+  getMenuList(params: MenuRequestParam): Observable<GetRoleMenuHttpRes[]> {
+    return this.requestService.post(GetRoleMenuHttp, params);
   }
 }
