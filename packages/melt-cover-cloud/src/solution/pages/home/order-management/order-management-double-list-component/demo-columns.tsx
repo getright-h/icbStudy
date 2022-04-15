@@ -73,7 +73,7 @@ export function demoColumns(action: Function): ColumnsType<any> {
               <Menu triggerSubMenuAction="click" expandIcon={null} mode={'horizontal'} className={style.hoverNone}>
                 <SubMenu title="下载">
                   <Menu.Item onClick={() => action(row, '带章服务函')}>带章服务函</Menu.Item>
-                  <Menu.Item onClick={() => action(row, '不带章服务函')}>不带章服务函</Menu.Item>
+                  {/* <Menu.Item onClick={() => action(row, '不带章服务函')}>不带章服务函</Menu.Item> */}
                 </SubMenu>
               </Menu>
             </div>
