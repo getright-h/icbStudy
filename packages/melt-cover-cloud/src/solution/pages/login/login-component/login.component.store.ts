@@ -75,11 +75,13 @@ export class LoginStore extends ReducerStore<IState> {
         StorageUtil.setLocalStorage('TOKENINFO', res.token);
         StorageUtil.setLocalStorage('userInfo', JSON.stringify(res));
         this.dispatch(setLoadingAction(false));
-        new CommonUtilService().getRoleInfo().subscribe(res => {
-          StorageUtil.setLocalStorage('userInfoRole', JSON.stringify(res));
-          message.success('登录成功');
-          this.props.history.push('/home/customerManagement/customerManagementList');
-        });
+        setTimeout(() => {
+          new CommonUtilService().getRoleInfo().subscribe(res => {
+            StorageUtil.setLocalStorage('userInfoRole', JSON.stringify(res));
+            message.success('登录成功');
+            this.props.history.push('/home/customerManagement/customerManagementList');
+          });
+        }, 0);
       },
       err => {
         this.dispatch(setLoadingAction(false));

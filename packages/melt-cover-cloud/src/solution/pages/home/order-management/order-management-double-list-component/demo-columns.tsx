@@ -67,13 +67,13 @@ export function demoColumns(action: Function): ColumnsType<any> {
       render: (text, row) => {
         return (
           <React.Fragment>
-            <div style={{display:'flex',alignItems: 'center', justifyContent: 'center'}}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <a onClick={() => action(row, '详情')}>详情</a>
               <Divider type="vertical" />
-              <Menu triggerSubMenuAction='click' expandIcon={null} mode={'horizontal'} className={style.hoverNone}>
-                <SubMenu title='下载'>
+              <Menu triggerSubMenuAction="click" expandIcon={null} mode={'horizontal'} className={style.hoverNone}>
+                <SubMenu title="下载">
                   <Menu.Item onClick={() => action(row, '带章服务函')}>带章服务函</Menu.Item>
-                  <Menu.Item onClick={() => action(row, '不带章服务函')}>不带章服务函</Menu.Item>
+                  {/* <Menu.Item onClick={() => action(row, '不带章服务函')}>不带章服务函</Menu.Item> */}
                 </SubMenu>
               </Menu>
             </div>

@@ -17,3 +17,4 @@ declare module 'vite';
 declare module '@vitejs/plugin-react-refresh';
 declare module 'vite-plugin-html';
 declare module 'postcss-modules';
+declare module 'file-saver'

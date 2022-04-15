@@ -47,7 +47,7 @@ export default function OrderManagementListComponent() {
         rightFlex={5}
         pageName={'订单管理/双保无忧订单列表'}
         // pageLeft={renderPageLeft()}
-        // selectItems={renderSelectItems()}
+        selectItems={renderSelectItems()}
         searchButton={renderSearchButtons()}
         // otherSearchBtns={renderOtherButtons()}
         table={renderTable()}

@@ -29,7 +29,7 @@ export const PAGES_MENU = {
         {
           path: 'orderManagementDoubleList',
           title: '双保无忧订单列表'
-        }        
+        }
       ]
     },
     {
@@ -62,25 +62,7 @@ export const PAGES_MENU = {
         }
       ]
     },
-    // {
-    //   path: 'home/maintain',
-    //   title: '保养管理',
-    //   icon: 'tool',
-    //   children: [
-    //     {
-    //       path: 'maintainNotifyList',
-    //       title: '保养提醒'
-    //     },
-    //     {
-    //       path: 'maintainLogsList',
-    //       title: '保养记录'
-    //     },
-    //     {
-    //       path: 'maintainSetting',
-    //       title: '保养设置'
-    //     }
-    //   ]
-    // }
+
     {
       path: 'home/preOrderManagement',
       title: '预创单管理',
@@ -120,3 +102,23 @@ export const STATUS = [
     value: 1
   }
 ];
+
+// {
+//   path: 'home/maintain',
+//   title: '保养管理',
+//   icon: 'tool',
+//   children: [
+//     {
+//       path: 'maintainNotifyList',
+//       title: '保养提醒'
+//     },
+//     {
+//       path: 'maintainLogsList',
+//       title: '保养记录'
+//     },
+//     {
+//       path: 'maintainSetting',
+//       title: '保养设置'
+//     }
+//   ]
+// }

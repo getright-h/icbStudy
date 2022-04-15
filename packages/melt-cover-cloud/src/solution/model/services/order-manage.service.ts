@@ -29,7 +29,6 @@ const GET_ORDER_DOUBLE_LIST_PATH = 'order/manager/QueryPaginShuangBaoOrder'; //�
 const GET_ORDER_DOUBLE_IMAGE = 'order/manager/GetShuangBaoServiceLetterByOrderId'; //下载服务函图片
 const GET_ORDER_DOUBLE_DETAIL = 'order/manager/GetShuangBaoOrderById'; //查询详情
 
-
 @DepUtil.Injectable()
 export class OrderManageService extends OrderManageDTO {
   @DepUtil.Inject(RequestService)
@@ -52,8 +51,8 @@ export class OrderManageService extends OrderManageDTO {
     return this.requestService.post(GET_ORDER_DOUBLE_LIST_PATH, params);
   }
   // 下载服务函
-  downImage(orderId: string): Observable<GetShuangBaoServiceLetterByOrderIdResType>{
-    return this.requestService.get(GET_ORDER_DOUBLE_IMAGE, {orderId});
+  downImage(orderId: string): Observable<GetShuangBaoServiceLetterByOrderIdResType[]> {
+    return this.requestService.get(GET_ORDER_DOUBLE_IMAGE, { orderId });
   }
 
   getNewOrderImage(params: QueryPaginOrderParams): Observable<QueryPaginOrderReturn> {

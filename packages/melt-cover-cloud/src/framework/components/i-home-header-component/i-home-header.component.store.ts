@@ -6,7 +6,7 @@ import { useStateStore } from '~/framework/aop/hooks/use-base-store';
 export function useHomeHeaderStore() {
   const { state, setStateWrap } = useStateStore(new IIHomeHeaderState());
   function logout() {
-    StorageUtil.removeLocalStorage('token');
+    StorageUtil.removeLocalStorage('TOKENINFO');
     HistoryService.getHashHistory().push('/login');
   }
 
