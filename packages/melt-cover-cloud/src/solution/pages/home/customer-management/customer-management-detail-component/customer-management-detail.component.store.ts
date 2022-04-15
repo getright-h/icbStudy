@@ -66,7 +66,7 @@ export function useCustomerManagementDetailStore() {
 
   function queryChargeBalance() {
     customerManageService.queryChargeBalance(orderId.current).subscribe(res => {
-      setStateWrap({ chargeBalance: res });
+      setStateWrap({ chargeBalance: res || 0 });
     });
   }
 
