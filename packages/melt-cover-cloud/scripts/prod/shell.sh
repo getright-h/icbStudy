@@ -1,5 +1,5 @@
 #/usr/bin
-version="1.6.0";
+version="1.6.2";
 imageName="melt-cover-cloud-release";
 cd ../..
 # yarn
