@@ -335,17 +335,15 @@ export default function OrderDetailComponent() {
                 </Form.Item>
               </>
             )}
-            {info?.attachPicturePackage && (
+            {info?.attachPicturePackage && JSON.parse(info?.attachPicturePackage)?.length > 0 && (
               <>
                 <p> 附加图片</p>
                 <Form.Item>
-                  <div className={style.img}>
-                    <IPreviewImgComponent
-                      key={info?.attachPicturePackage}
-                      src={info?.attachPicturePackage}
-                      alt="购车发票 "
-                    />
-                  </div>
+                  {JSON.parse(info?.attachPicturePackage).map((item: any) => (
+                    <div className={style.img} key={item}>
+                      <IPreviewImgComponent key={item} src={item} alt="购车发票 " />
+                    </div>
+                  ))}
                 </Form.Item>
               </>
             )}
