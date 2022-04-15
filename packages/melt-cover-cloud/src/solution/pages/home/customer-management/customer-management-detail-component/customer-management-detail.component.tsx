@@ -149,7 +149,7 @@ export default function CustomerManagementDetailComponent() {
           <Row>
             <Col className="" span={6}>
               <Form.Item label={'账户抵扣金余额'}>
-                <span>{'￥' + chargeBalance || '-'}</span>
+                <span>{`￥${chargeBalance}`}</span>
               </Form.Item>
             </Col>
             {/* 有效期与表格内相同，可不展示
