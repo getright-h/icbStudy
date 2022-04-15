@@ -1,6 +1,9 @@
 // import { message } from 'antd';
 import { useContext, useState, useCallback } from 'react';
-
+import JSZip from 'jszip';
+import FileSaver from 'file-saver';
+import { ShowNotification } from '@fch/fch-shop-web';
+import { message } from 'antd';
 export const CommonUtil = {
   downFile: (
     data: string,
@@ -110,5 +113,36 @@ export const CommonUtil = {
     }, [dispatch]);
 
     return memoizedDispatch;
+  },
+  toZip(imgSrcList: string[], fileName: string) {
+    const zip = new JSZip(); //实例化一个压缩文件对象
+    const imgFolder = zip.folder(fileName); //新建一个图片文件夹用来存放图片，参数为文件名
+    for (let i = 0; i < imgSrcList.length; i++) {
+      const src = imgSrcList[i];
+      const tempImage = new Image();
+      tempImage.src = src;
+      tempImage.crossOrigin = '*';
+      tempImage.onload = () => {
+        imgFolder.file(i + 1 + '.jpg', this.getBase64Image(tempImage).substring(22), { base64: true });
+      };
+    }
+
+    const hideMessage = message.loading('下载中...', 0);
+    setTimeout(() => {
+      zip.generateAsync({ type: 'blob' }).then(function(content) {
+        hideMessage();
+        FileSaver.saveAs(content, 'images.zip');
+      });
+    }, 3000);
+  },
+  getBase64Image(img: HTMLImageElement) {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, img.width, img.height);
+    const ext = img.src.substring(img.src.lastIndexOf('.') + 1).toLowerCase();
+    const dataURL = canvas.toDataURL('image/' + ext);
+    return dataURL;
   }
 };

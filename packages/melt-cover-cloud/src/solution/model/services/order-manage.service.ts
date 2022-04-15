@@ -51,7 +51,7 @@ export class OrderManageService extends OrderManageDTO {
     return this.requestService.post(GET_ORDER_DOUBLE_LIST_PATH, params);
   }
   // 下载服务函
-  downImage(orderId: string): Observable<GetShuangBaoServiceLetterByOrderIdResType> {
+  downImage(orderId: string): Observable<GetShuangBaoServiceLetterByOrderIdResType[]> {
     return this.requestService.get(GET_ORDER_DOUBLE_IMAGE, { orderId });
   }
 

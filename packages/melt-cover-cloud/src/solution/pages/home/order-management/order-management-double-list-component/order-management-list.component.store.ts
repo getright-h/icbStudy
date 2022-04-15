@@ -12,6 +12,7 @@ import { OrderManageService } from '~/solution/model/services/order-manage.servi
 import { CustomerManageService } from '~/solution/model/services/customer-manage.service';
 import { useEffect } from 'react';
 import { message } from 'antd';
+import { CommonUtil } from '~/solution/shared/utils/baseFunction';
 
 export function useOrderManagementListStore() {
   const { state, setStateWrap } = useStateStore(new IOrderManagementListState());
@@ -70,26 +71,12 @@ export function useOrderManagementListStore() {
 
   function downImage(id: string, name: string) {
     orderManageService.downImage(id).subscribe(
-      (res: GetShuangBaoServiceLetterByOrderIdResType) => {
-        const eleLink = document.createElement('a');
-        eleLink.download = name + '.png';
-        eleLink.target = '_blank';
-        outerif: if (name == '带章服务函') {
-          if (!res.resultUri) {
-            message.error('无带章服务函');
-            return;
-          }
-          eleLink.href = res.resultUri;
-        }
-        outerif: if (name == '不带章服务函') {
-          if (!res.defaultUri) {
-            message.error('不带章服务函');
-            return;
-          }
-          eleLink.href = res.defaultUri;
-        }
-        eleLink.click();
-        eleLink.remove();
+      (res: GetShuangBaoServiceLetterByOrderIdResType[]) => {
+        const ids: string[] = [];
+        res?.forEach(item => {
+          ids.push(item.resultUri);
+        });
+        ids.length && CommonUtil.toZip(ids, '服务函');
       },
       () => {}
     );
