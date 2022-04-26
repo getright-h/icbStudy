@@ -126,6 +126,9 @@ export function useAddOrderStore() {
       setStateWrap({
         containsXiaoxiu: !!contains
       });
+      formRef.setSchema('amount', schema => {
+        schema.props.disabled = !equityContainsXiaoxiu.customPrice;
+      });
       formRef.setFieldsValue({
         amount: equityContainsXiaoxiu?.price || 0
       });

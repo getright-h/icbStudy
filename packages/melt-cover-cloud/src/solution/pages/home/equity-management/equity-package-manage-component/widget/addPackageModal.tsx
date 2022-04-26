@@ -259,6 +259,16 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
+        key: 'customPrice',
+        type: 'Switch',
+        formItemProps: {
+          label: '自定义价格',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
         key: 'name',
         type: 'Input',
         formItemProps: {

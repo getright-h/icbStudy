@@ -47,6 +47,7 @@ export interface DataList {
   belongingText: string;
   createTime: string;
   createTimeStamp: number;
+  customPrice: boolean;
   equityList: EquityList[];
 }
 
