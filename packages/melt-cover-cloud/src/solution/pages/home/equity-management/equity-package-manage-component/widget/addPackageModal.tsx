@@ -246,11 +246,22 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
+        key: 'customPrice',
+        type: 'Switch',
+        formItemProps: {
+          valuePropName: 'checked',
+          label: '自定义价格',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
         key: 'price',
         type: 'Input',
         formItemProps: {
           label: '套餐包价格',
-          required: true,
+          required: '{{!formData.customPrice}}',
           wrapperCol: { span: 10 }
         },
         props: {
@@ -258,16 +269,7 @@ export const schema: IFormBaseComponentsUnion[] = [
           placeholder: '请输入套餐包价格'
         }
       },
-      {
-        key: 'customPrice',
-        type: 'Switch',
-        formItemProps: {
-          label: '自定义价格',
-          required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
-        }
-      },
+
       {
         key: 'name',
         type: 'Input',

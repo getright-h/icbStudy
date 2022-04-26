@@ -94,10 +94,15 @@ export function useEquityPackageManageStore() {
         });
       }
     }
+    // customPrice: (changedValues: any) => {
+    //   form2.setSchema('price', schema => {
+    //     schema.formItemProps.required = !changedValues;
+    //     return schema;
+    //   });
+    // }
   };
 
   function handleFormChangeEvent(changedValues: any, values: any) {
-    console.log(changedValues, changedValues['distributor']?.key);
     if (changedValues['distributor']?.key) {
       handleGetDropEquity(changedValues['distributor'].key, (res: IResponseEquityResult[]) => {
         const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
@@ -328,6 +333,7 @@ export function useEquityPackageManageStore() {
         id: state.equityPackageTitle !== '添加权益包' ? currentEquityPackage?.id : undefined,
         distributorId: formValues.distributor.value,
         distributorName: formValues.distributor.label,
+        price: formValues.price || 0,
         equityList: selectEquityList?.map((item: IResponseEquityResult) => {
           const _item = Object.assign({}, item, {
             equityId: item.id,
