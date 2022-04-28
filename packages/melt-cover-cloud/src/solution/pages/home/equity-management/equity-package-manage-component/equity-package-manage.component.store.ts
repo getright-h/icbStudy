@@ -94,10 +94,15 @@ export function useEquityPackageManageStore() {
         });
       }
     }
+    // customPrice: (changedValues: any) => {
+    //   form2.setSchema('price', schema => {
+    //     schema.formItemProps.required = !changedValues;
+    //     return schema;
+    //   });
+    // }
   };
 
   function handleFormChangeEvent(changedValues: any, values: any) {
-    console.log(changedValues, changedValues['distributor']?.key);
     if (changedValues['distributor']?.key) {
       handleGetDropEquity(changedValues['distributor'].key, (res: IResponseEquityResult[]) => {
         const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
@@ -318,17 +323,17 @@ export function useEquityPackageManageStore() {
     const formValues = form2.getFieldsValue();
     const { equityDropList } = state;
     form2.validateFields().then(() => {
-      console.log(formValues, formValues['yearConfig.3d762b593612c84ba10008d9415eed56']);
       const selectEquityList: IResponseEquityResult[] = formValues.equityList?.map((item: string) => {
         const _item = equityDropList.filter(it => item == it.id);
         return _item?.[0];
       });
-      console.log(selectEquityList);
+
       const req: InsertEquityGroupParams = Object.assign({}, formValues, {
         FEE_TYPE_PACKAGE: state.equityPackageTitle == '添加权益包',
         id: state.equityPackageTitle !== '添加权益包' ? currentEquityPackage?.id : undefined,
         distributorId: formValues.distributor.value,
         distributorName: formValues.distributor.label,
+        price: formValues.price || 0,
         equityList: selectEquityList?.map((item: IResponseEquityResult) => {
           const _item = Object.assign({}, item, {
             equityId: item.id,
@@ -345,6 +350,7 @@ export function useEquityPackageManageStore() {
       setStateWrap({
         isLoadingModal2: true
       });
+
       equityPackageManageService.handleEquityPackage(req).subscribe(
         () => {
           message.info('操作成功');
