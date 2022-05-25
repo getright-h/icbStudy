@@ -369,7 +369,6 @@ export function useEquityPackageManageStore() {
           });
         }
       );
-      console.log(req);
     });
   }
 

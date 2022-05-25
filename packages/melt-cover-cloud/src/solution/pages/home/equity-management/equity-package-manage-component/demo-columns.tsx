@@ -15,6 +15,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
       dataIndex: 'name'
     },
     {
+        title: '套餐说明',
+        dataIndex: 'desc'
+    },
+    {
       title: '套餐包价格',
       dataIndex: 'price'
     },

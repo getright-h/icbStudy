@@ -11,7 +11,7 @@ const GET_MY_INFO = 'prvilege/GetMyInfo';
 @DepUtil.Injectable()
 export class HomeService extends HomeDTO {
   @DepUtil.Inject(RequestService)
-  private readonly requestService: RequestService;
+  private readonly requestService: RequestService = new RequestService();
   constructor() {
     super();
   }
