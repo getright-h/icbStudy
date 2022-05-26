@@ -325,6 +325,16 @@ export default function OrderDetailComponent() {
                 </Form.Item>
               </>
             )}
+            {info?.dashboardImage && (
+              <>
+                <p>仪表盘图片</p>
+                <Form.Item>
+                  <div className={style.img}>
+                    <IPreviewImgComponent key={info?.dashboardImage} src={info?.dashboardImage} alt="仪表盘图片 " />
+                  </div>
+                </Form.Item>
+              </>
+            )}
             {info?.paymentVoucher && (
               <>
                 <p>支付凭证</p>
