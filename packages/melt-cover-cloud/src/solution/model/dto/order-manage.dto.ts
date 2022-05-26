@@ -291,4 +291,5 @@ export interface GetShuangBaoOrderByIdResType {
   paymentVoucher: string;
   attachPicturePackage: string;
   serviceLetter: string;
+  dashboardImage: any;
 }

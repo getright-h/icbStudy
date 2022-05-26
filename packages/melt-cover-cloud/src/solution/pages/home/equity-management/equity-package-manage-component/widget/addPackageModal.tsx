@@ -283,6 +283,17 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
+        key: 'desc',
+        type: 'Input',
+        formItemProps: {
+          label: '套餐说明',
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          placeholder: '请输入套餐说明'
+        }
+      },
+      {
         key: 'equityList',
         type: 'Select',
         formItemProps: {
