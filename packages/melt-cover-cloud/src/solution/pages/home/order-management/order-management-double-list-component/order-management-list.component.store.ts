@@ -11,8 +11,8 @@ import {
 import { OrderManageService } from '~/solution/model/services/order-manage.service';
 import { CustomerManageService } from '~/solution/model/services/customer-manage.service';
 import { useEffect } from 'react';
-import { message } from 'antd';
 import { CommonUtil } from '~/solution/shared/utils/baseFunction';
+import { DOUBLE_SERVICE_CHARTER } from '~/solution/shared/constant/common.const';
 
 export function useOrderManagementListStore() {
   const { state, setStateWrap } = useStateStore(new IOrderManagementListState());
@@ -66,6 +66,9 @@ export function useOrderManagementListStore() {
     }
     if (actionName == '不带章服务函') {
       downImage(row.id, actionName);
+    }
+    if (actionName == '服务章程') {
+      window.open(DOUBLE_SERVICE_CHARTER[row?.businessTypeId]);
     }
   }
 

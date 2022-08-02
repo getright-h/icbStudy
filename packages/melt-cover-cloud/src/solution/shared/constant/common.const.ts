@@ -122,3 +122,10 @@ export const STATUS = [
 //     }
 //   ]
 // }
+
+/** 双保无忧中包含服务章程的方案 */
+export const DOUBLE_SERVICE_CHARTER = {
+  /** 爱车保延保无忧（总成）服务章程(7.22).pdf */
+  '67d479d98f2fc4a3942808da6f114f9f':
+    'https://file.i-cbao.com/uploads/double/%E7%88%B1%E8%BD%A6%E4%BF%9D%E5%BB%B6%E4%BF%9D%E6%97%A0%E5%BF%A7%EF%BC%88%E6%80%BB%E6%88%90%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%AB%A0%E7%A8%8B(7.22).pdf'
+};

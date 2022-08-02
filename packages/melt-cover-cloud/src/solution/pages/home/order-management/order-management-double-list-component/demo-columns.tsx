@@ -3,6 +3,7 @@ import { ColumnsType } from 'antd/lib/table';
 import { Divider, Menu } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import style from './order-management-list.module.less';
+import { DOUBLE_SERVICE_CHARTER } from '~/solution/shared/constant/common.const';
 
 export function demoColumns(action: Function): ColumnsType<any> {
   return [
@@ -74,6 +75,9 @@ export function demoColumns(action: Function): ColumnsType<any> {
                 <SubMenu title="下载">
                   <Menu.Item onClick={() => action(row, '带章服务函')}>带章服务函</Menu.Item>
                   {/* <Menu.Item onClick={() => action(row, '不带章服务函')}>不带章服务函</Menu.Item> */}
+                  {DOUBLE_SERVICE_CHARTER[row?.businessTypeId] && (
+                    <Menu.Item onClick={() => action(row, '服务章程')}>服务章程</Menu.Item>
+                  )}
                 </SubMenu>
               </Menu>
             </div>
