@@ -1,3 +1,5 @@
+import { isDev } from '~/framework/util/common/tool';
+
 export enum ADDRESS_TYPE {
   Province,
   City,
@@ -123,9 +125,17 @@ export const STATUS = [
 //   ]
 // }
 
+/** 不同环境的产品方案ID */
+/** 原厂整车双保无忧 */
+const allCarDouble = 'f7751d606332c80dbbc108d9fb8f17a7';
+/** 原厂总成双保无忧 */
+const totalDouble = '4c042dde48d8c7a6b65d08d9fb8f02dd';
+/** 爱车保延保无忧（总成）服务包 */
+const delay = isDev ? '67d479d98f2fc4a3942808da6f114f9f' : '732635f94502cd73485d08da6f1fa1d5';
+
 /** 双保无忧中包含服务章程的方案 */
 export const DOUBLE_SERVICE_CHARTER = {
   /** 爱车保延保无忧（总成）服务章程(7.22).pdf */
-  '732635f94502cd73485d08da6f1fa1d5':
+  [delay]:
     'https://file.i-cbao.com/uploads/double/%E7%88%B1%E8%BD%A6%E4%BF%9D%E5%BB%B6%E4%BF%9D%E6%97%A0%E5%BF%A7%EF%BC%88%E6%80%BB%E6%88%90%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%AB%A0%E7%A8%8B(7.22).pdf'
 };
