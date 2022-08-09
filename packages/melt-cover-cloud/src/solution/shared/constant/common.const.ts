@@ -132,10 +132,20 @@ const allCarDouble = 'f7751d606332c80dbbc108d9fb8f17a7';
 const totalDouble = '4c042dde48d8c7a6b65d08d9fb8f02dd';
 /** 爱车保延保无忧（总成）服务包 */
 const delay = isDev ? '67d479d98f2fc4a3942808da6f114f9f' : '732635f94502cd73485d08da6f1fa1d5';
+/** 爱车保延保无忧服务包（总成） */
+const delayCost = isDev ? '29288822703dcc73ac4408da73ddc170' : '0eb5feca80d0cb28391808da7541d3cd';
+/** 爱车保延保无忧服务包（整车） */
+const delayCar = isDev ? '00c52c91ac9bc3ae6a6508da73dda852' : 'd7cb439622bdcc1f259a08da7541eec6';
 
 /** 双保无忧中包含服务章程的方案 */
 export const DOUBLE_SERVICE_CHARTER = {
   /** 爱车保延保无忧（总成）服务章程(7.22).pdf */
   [delay]:
-    'https://file.i-cbao.com/uploads/double/%E7%88%B1%E8%BD%A6%E4%BF%9D%E5%BB%B6%E4%BF%9D%E6%97%A0%E5%BF%A7%EF%BC%88%E6%80%BB%E6%88%90%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%AB%A0%E7%A8%8B(7.22).pdf'
+    'https://file.i-cbao.com/uploads/double/%E7%88%B1%E8%BD%A6%E4%BF%9D%E5%BB%B6%E4%BF%9D%E6%97%A0%E5%BF%A7%EF%BC%88%E6%80%BB%E6%88%90%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%AB%A0%E7%A8%8B(7.22).pdf',
+  /** 爱车保延保无忧（总成）服务章程(油车).pdf */
+  [delayCost]:
+    'https://file.i-cbao.com/uploads/double/%E7%88%B1%E8%BD%A6%E4%BF%9D%E5%BB%B6%E4%BF%9D%E6%97%A0%E5%BF%A7%EF%BC%88%E6%80%BB%E6%88%90%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%AB%A0%E7%A8%8B(%E6%B2%B9%E8%BD%A6).pdf',
+  /** 爱车保延保无忧（整车）服务章程(油车).pdf */
+  [delayCar]:
+    'https://file.i-cbao.com/uploads/double/%E7%88%B1%E8%BD%A6%E4%BF%9D%E5%BB%B6%E4%BF%9D%E6%97%A0%E5%BF%A7%EF%BC%88%E6%95%B4%E8%BD%A6%EF%BC%89%E6%9C%8D%E5%8A%A1%E7%AB%A0%E7%A8%8B(%E6%B2%B9%E8%BD%A6).pdf'
 };
