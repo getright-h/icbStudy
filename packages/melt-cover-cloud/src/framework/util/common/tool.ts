@@ -40,7 +40,7 @@ function rgba2Obj(rgba = '') {
 
 export { uuid, rgba2Obj };
 
-export const isDev = process.env.ENV_SET === 'development';
+export const isDev = process.env.NODE_ENV === 'development';
 
 export function useGetRect() {
   const [rect, setRect] = useState({ width: 0, height: 0 });
