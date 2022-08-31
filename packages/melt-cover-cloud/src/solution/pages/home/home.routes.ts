@@ -71,5 +71,11 @@ export const homeRoutes: IRoute[] = [
     component: ROUTERS.preOrderList,
     lazyload: true,
     exact: true
+  },
+  {
+    path: `${MODULE_PATH}equityManagement/rightsListOfDouble`,
+    component: ROUTERS.rightsListOfDouble,
+    lazyload: true,
+    exact: true
   }
 ];
