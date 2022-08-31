@@ -17,4 +17,5 @@ export { default as IEditPasswordComponent } from '~/framework/components/i-edit
 export { default as ImageDisplayComponent } from '~/framework/components/image-display-component/image-display.component';
 export { default as IAreaCascaderComponent } from '~/framework/components/i-area-cascader-component/i-area-cascader.component';
 export { default as StandardFormComponent } from '~/framework/components/standard-form-component/standard-form.component';
+export { default as PermissionButton } from '~/framework/components/permission-button-components/permission-button.component';
 //  -- Package End --

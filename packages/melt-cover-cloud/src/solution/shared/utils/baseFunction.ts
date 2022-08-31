@@ -144,5 +144,12 @@ export const CommonUtil = {
     const ext = img.src.substring(img.src.lastIndexOf('.') + 1).toLowerCase();
     const dataURL = canvas.toDataURL('image/' + ext);
     return dataURL;
+  },
+  /** 获取文件后缀类型,要求是 .格式 结尾形式 */
+  getFileSuffix(url: string) {
+    if (!url) return undefined;
+    const lastPoint = url.lastIndexOf('.');
+    const fileType = url.slice(lastPoint);
+    return fileType;
   }
 };

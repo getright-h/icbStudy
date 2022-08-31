@@ -35,5 +35,7 @@ export const ROUTERS = {
   maintainLogsList: () =>
     import('~/solution/pages/home/maintain-manage/maintain-logs-list-component/maintain-logs-list.component'),
   preOrderList: () =>
-    import('~/solution/pages/home/pre-order-management/pre-order-list-component/pre-order-list.component')
+    import('~/solution/pages/home/pre-order-management/pre-order-list-component/pre-order-list.component'),
+  rightsListOfDouble: () =>
+    import('~/solution/pages/home/rights-consumer/rights-list-of-double-component/rights-list-of-double.component')
 };

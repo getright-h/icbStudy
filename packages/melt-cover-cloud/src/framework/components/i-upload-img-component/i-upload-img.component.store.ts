@@ -33,7 +33,7 @@ export function useIUploadImgStore(props: IIUploadImgProps) {
       fileList = fileList.map(item => {
         return item;
       });
-      props.onChange?.(returnImageListInfo.current);
+      // props.onChange?.(returnImageListInfo.current);
     } else if (file.status === 'removed') {
       returnImageListInfo.current = returnImageListInfo.current.filter(returnImage => {
         return returnImage != (file['response'] || file['url']);
@@ -42,8 +42,9 @@ export function useIUploadImgStore(props: IIUploadImgProps) {
       returnImageListInfo.current?.map((item, index) => {
         fileList[index].response = item;
       });
-      props.onChange?.(returnImageListInfo.current);
+      // props.onChange?.(returnImageListInfo.current);
     }
+    props.onChange?.(returnImageListInfo.current, fileList);
     setStateWrap({ fileList: file.status ? [...fileList] : state.fileList });
   }
 

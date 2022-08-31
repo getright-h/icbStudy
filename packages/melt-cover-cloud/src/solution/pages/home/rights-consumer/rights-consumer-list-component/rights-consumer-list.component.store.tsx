@@ -74,6 +74,7 @@ export function useRightsConsumerListStore() {
   }
 
   function addOrder() {
+    setStateWrap({ id: undefined });
     toggleModal();
   }
   // 导出

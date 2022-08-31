@@ -44,6 +44,10 @@ export const PAGES_MENU = {
         {
           path: 'rightsConsumerList',
           title: '权益消费'
+        },
+        {
+          path: 'rightsListOfDouble',
+          title: '双保权益消费'
         }
       ]
     },
