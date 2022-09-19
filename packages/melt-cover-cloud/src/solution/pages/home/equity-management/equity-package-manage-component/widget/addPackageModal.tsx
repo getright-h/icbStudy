@@ -334,6 +334,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         },
         props: {
           mode: 'multiple',
+          placeholder: '请选择支付方式（可多选）',
           options: PAY_METHOD_TYPES
         }
       }
