@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import { Divider } from 'antd';
+import { PAY_METHOD } from '~/solution/shared/enums/home.enum';
 
 export function demoColumns(action: Function): ColumnsType<any> {
   return [
@@ -54,6 +55,11 @@ export function demoColumns(action: Function): ColumnsType<any> {
     {
       title: '备注',
       dataIndex: 'remark'
+    },
+    {
+      title: '支付方式',
+      dataIndex: 'payMethod',
+      render: (v: number) => PAY_METHOD[v] || '-'
     },
     {
       title: '操作',

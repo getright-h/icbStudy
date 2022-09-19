@@ -177,6 +177,7 @@ export interface DataDetail {
   salesmenId: string;
   ownerType: number;
   xiaoXiuActivationCheckRemark: string;
+  payMethod: number;
 }
 
 interface ImagesData {

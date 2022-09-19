@@ -47,3 +47,17 @@ export enum TEMPLATESUBTYPE {
   IMAGE = 1,
   VIDEO = 2
 }
+
+export enum PAY_METHOD {
+  '微信' = 1,
+  '支付宝',
+  '预授权分期',
+  '其他系统支付'
+}
+
+export const PAY_METHOD_TYPES = [
+  { label: '微信', value: 1 },
+  { label: '支付宝', value: 2 },
+  { label: '预授权分期', value: 3 },
+  { label: '其他系统支付', value: 4 }
+];
