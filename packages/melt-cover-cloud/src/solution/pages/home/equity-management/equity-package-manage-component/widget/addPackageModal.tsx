@@ -5,7 +5,7 @@ import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-re
 import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manage.dto';
 import { IEquityPackageManageState } from '../equity-package-manage.interface';
 import style from '../equity-package-manage.module.less';
-import { EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
+import { EQYITY_USE_TYPE, PAY_METHOD_TYPES } from '~/solution/shared/enums/home.enum';
 
 interface IAddEquityProps {
   title: string;
@@ -322,6 +322,20 @@ export const schema: IFormBaseComponentsUnion[] = [
             { label: '启用', value: 1 },
             { label: '禁用', value: 0 }
           ]
+        }
+      },
+      {
+        key: 'payMethods',
+        type: 'Select',
+        formItemProps: {
+          label: '支付方式',
+          required: true,
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          mode: 'multiple',
+          placeholder: '请选择支付方式（可多选）',
+          options: PAY_METHOD_TYPES
         }
       }
     ],

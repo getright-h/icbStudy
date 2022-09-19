@@ -49,6 +49,7 @@ export interface DataList {
   createTimeStamp: number;
   customPrice: boolean;
   equityList: EquityList[];
+  payMethod: number;
 }
 
 export interface EquityList {

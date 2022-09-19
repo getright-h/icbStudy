@@ -2,6 +2,7 @@ import { TypeUseForm } from '@fch/fch-shop-web';
 import { Button, Col, Form, Modal, Row } from 'antd';
 import * as React from 'react';
 import { EquityList } from '~/solution/model/dto/equity-package-manage.dto';
+import { PAY_METHOD } from '~/solution/shared/enums/home.enum';
 import { IEquityPackageManageState } from '../equity-package-manage.interface';
 
 interface IAddEquityProps {
@@ -48,6 +49,11 @@ export default function DetailPackageModalComponent(props: IAddEquityProps) {
           <Col className="" span={12}>
             <Form.Item label={'状态'}>
               <span>{detail?.statusText || '-'}</span>
+            </Form.Item>
+          </Col>
+          <Col className="" span={12}>
+            <Form.Item label={'支付方式'}>
+              <span>{PAY_METHOD[detail?.payMethod] || '-'}</span>
             </Form.Item>
           </Col>
           <Col className="" span={24}>
