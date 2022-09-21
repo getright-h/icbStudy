@@ -16,7 +16,8 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '套餐说明',
-      dataIndex: 'desc'
+      dataIndex: 'desc',
+      render: html => <div dangerouslySetInnerHTML={{ __html: html }}></div>
     },
     {
       title: '套餐包价格',
