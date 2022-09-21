@@ -53,7 +53,7 @@ export default function DetailPackageModalComponent(props: IAddEquityProps) {
           </Col>
           <Col className="" span={12}>
             <Form.Item label={'支付方式'}>
-              <span>{PAY_METHOD[detail?.payMethod] || '-'}</span>
+              <span>{detail?.payMethods?.map(m => PAY_METHOD[m]).join(',') || '-'}</span>
             </Form.Item>
           </Col>
           <Col className="" span={24}>
