@@ -17,7 +17,13 @@ export function demoColumns(action: Function): ColumnsType<any> {
     {
       title: '套餐说明',
       dataIndex: 'desc',
-      render: html => <div dangerouslySetInnerHTML={{ __html: html }}></div>
+      ellipsis: true,
+      render: html => (
+        <div
+          style={{ maxHeight: 120, maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis' }}
+          dangerouslySetInnerHTML={{ __html: html }}
+        ></div>
+      )
     },
     {
       title: '套餐包价格',
