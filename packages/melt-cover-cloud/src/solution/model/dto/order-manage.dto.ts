@@ -134,6 +134,7 @@ export interface QueryPaginOrderParams {
   size: number;
 }
 export interface DataDetail {
+  discountMethod: number;
   id: string;
   orderNumber: string;
   ownerId: string;
