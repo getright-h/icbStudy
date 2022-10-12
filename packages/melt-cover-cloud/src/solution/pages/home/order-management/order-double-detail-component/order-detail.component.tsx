@@ -320,7 +320,7 @@ export default function OrderDetailComponent() {
                 <p>购车发票</p>
                 <Form.Item>
                   <div className={style.img}>
-                    <IPreviewImgComponent key={info?.purchaseInvoice} src={info?.purchaseInvoice} alt="购车发票 " />
+                    <IPreviewImgComponent key={info?.purchaseInvoice} src={info?.purchaseInvoice} alt="购车发票" />
                   </div>
                 </Form.Item>
               </>
@@ -330,7 +330,7 @@ export default function OrderDetailComponent() {
                 <p>仪表盘图片</p>
                 <Form.Item>
                   <div className={style.img}>
-                    <IPreviewImgComponent key={info?.dashboardImage} src={info?.dashboardImage} alt="仪表盘图片 " />
+                    <IPreviewImgComponent key={info?.dashboardImage} src={info?.dashboardImage} alt="仪表盘图片" />
                   </div>
                 </Form.Item>
               </>
@@ -340,7 +340,35 @@ export default function OrderDetailComponent() {
                 <p>支付凭证</p>
                 <Form.Item>
                   <div className={style.img}>
-                    <IPreviewImgComponent key={info?.paymentVoucher} src={info?.paymentVoucher} alt="支付凭证 " />
+                    <IPreviewImgComponent key={info?.paymentVoucher} src={info?.paymentVoucher} alt="支付凭证" />
+                  </div>
+                </Form.Item>
+              </>
+            )}
+            {info?.vehicleLicenseImage && (
+              <>
+                <p>行驶证照片</p>
+                <Form.Item>
+                  <div className={style.img}>
+                    <IPreviewImgComponent
+                      key={info?.vehicleLicenseImage}
+                      src={info?.vehicleLicenseImage}
+                      alt="行驶证照片"
+                    />
+                  </div>
+                </Form.Item>
+              </>
+            )}
+            {info?.warrantyCertificate && (
+              <>
+                <p>原车3包凭证/保修手册</p>
+                <Form.Item>
+                  <div className={style.img}>
+                    <IPreviewImgComponent
+                      key={info?.warrantyCertificate}
+                      src={info?.warrantyCertificate}
+                      alt="原车3包凭证/保修手册"
+                    />
                   </div>
                 </Form.Item>
               </>

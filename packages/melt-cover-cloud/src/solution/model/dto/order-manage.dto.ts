@@ -179,6 +179,8 @@ export interface DataDetail {
   ownerType: number;
   xiaoXiuActivationCheckRemark: string;
   payMethod: number;
+  vehicleLicenseImage?: string;
+  warrantyCertificate?: string;
 }
 
 interface ImagesData {
@@ -294,4 +296,6 @@ export interface GetShuangBaoOrderByIdResType {
   attachPicturePackage: string;
   serviceLetter: string;
   dashboardImage: any;
+  vehicleLicenseImage?: string;
+  warrantyCertificate?: string;
 }
