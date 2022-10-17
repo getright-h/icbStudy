@@ -55,6 +55,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
       dataIndex: 'remark'
     },
     {
+      title: '支付方式',
+      dataIndex: 'paymentMethod'
+    },
+    {
       title: '状态',
       render: record => {
         return <span>已完成</span>;
