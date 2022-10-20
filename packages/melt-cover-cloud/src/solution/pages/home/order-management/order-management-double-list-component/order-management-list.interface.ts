@@ -12,6 +12,7 @@ export class IOrderManagementListState {
   total: number;
   tableData: any = [];
   isLoading = false;
+  charterList: any[] = [];
 }
 
 /**

@@ -299,3 +299,14 @@ export interface GetShuangBaoOrderByIdResType {
   vehicleLicenseImage?: string;
   warrantyCertificate?: string;
 }
+
+/** 服务章程集合 */
+export interface CharterListRes {
+  data: {
+    productId: string;
+    productName: string;
+    serviceCharterUrl: string;
+  }[];
+  total: number;
+  status: boolean;
+}

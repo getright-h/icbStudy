@@ -20,6 +20,8 @@ function getRootUrl(url: string) {
     returnInfo = process.env.MAINTAINCONFIG;
   } else if (!!~url.indexOf('GetUpLoadImageTemplate') || url.includes('Image/aliyun')) {
     returnInfo = process.env.TEMPLATE;
+  } else if (url.includes('double/constitution')) {
+    returnInfo = process.env.OPEN;
   } else {
     returnInfo = process.env.MAIN;
   }
@@ -27,11 +29,14 @@ function getRootUrl(url: string) {
 }
 
 function createAuthHeaders() {
-  const headers = { token: '' };
+  const headers: any = { token: '' };
   const token = StorageUtil.getLocalStorage('TOKENINFO');
   if (token) {
     headers.token = token;
   }
+  /** 7309开放接口需要该参数,已取消 */
+  // headers.AppKey = 'c809f8299759double';
+
   return headers;
 }
 

@@ -7,8 +7,8 @@ import { useOrderManagementListStore } from './order-management-list.component.s
 import { schema } from './order-management-list.interface';
 
 export default function OrderManagementListComponent() {
-  const { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder } = useOrderManagementListStore();
-  const { searchForm, tableData, total, isLoading } = state;
+  const { state, handleSearch, formRef, tableAction, changeTablePageIndex } = useOrderManagementListStore();
+  const { searchForm, tableData, total, isLoading, charterList } = state;
   function renderSelectItems() {
     return (
       <IFormComponent form={formRef} schema={schema} props={{ labelCol: { span: 6 }, wrapperCol: { span: 18 } }} />
@@ -29,7 +29,7 @@ export default function OrderManagementListComponent() {
   function renderTable() {
     return (
       <ITableComponent
-        columns={demoColumns(tableAction)}
+        columns={demoColumns(tableAction, { charterList })}
         isLoading={isLoading}
         pageIndex={searchForm.index}
         pageSize={searchForm.size}

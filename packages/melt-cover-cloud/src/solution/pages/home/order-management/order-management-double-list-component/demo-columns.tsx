@@ -3,9 +3,9 @@ import { ColumnsType } from 'antd/lib/table';
 import { Divider, Menu } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import style from './order-management-list.module.less';
-import { DOUBLE_SERVICE_CHARTER } from '~/solution/shared/constant/common.const';
 
-export function demoColumns(action: Function): ColumnsType<any> {
+export function demoColumns(action: Function, prop: Record<string, any>): ColumnsType<any> {
+  const { charterList } = prop;
   return [
     // {
     //   title: '序号',
@@ -70,6 +70,16 @@ export function demoColumns(action: Function): ColumnsType<any> {
       fixed: 'right',
       width: 200,
       render: (text, row) => {
+        /** 服务章程按钮 */
+        let charter = '';
+        /** 判断当前方案是否包含服务章程 */
+        charterList?.some((item: { serviceCharterUrl: string; productId: string }) => {
+          if (item?.productId === row?.businessTypeId) {
+            charter = item.serviceCharterUrl;
+          }
+          return charter;
+        });
+
         return (
           <React.Fragment>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -79,8 +89,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
                 <SubMenu title="下载">
                   <Menu.Item onClick={() => action(row, '带章服务函')}>带章服务函</Menu.Item>
                   {/* <Menu.Item onClick={() => action(row, '不带章服务函')}>不带章服务函</Menu.Item> */}
-                  {DOUBLE_SERVICE_CHARTER[row?.businessTypeId] && (
-                    <Menu.Item onClick={() => action(row, '服务章程')}>服务章程</Menu.Item>
+                  {charter && (
+                    <Menu.Item onClick={() => action(Object.assign({}, row, { charter }), '服务章程')}>
+                      服务章程
+                    </Menu.Item>
                   )}
                 </SubMenu>
               </Menu>
