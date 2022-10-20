@@ -12,7 +12,6 @@ import { OrderManageService } from '~/solution/model/services/order-manage.servi
 import { CustomerManageService } from '~/solution/model/services/customer-manage.service';
 import { useEffect } from 'react';
 import { CommonUtil } from '~/solution/shared/utils/baseFunction';
-import { DOUBLE_SERVICE_CHARTER } from '~/solution/shared/constant/common.const';
 
 export function useOrderManagementListStore() {
   const { state, setStateWrap } = useStateStore(new IOrderManagementListState());
@@ -24,6 +23,7 @@ export function useOrderManagementListStore() {
     handleSearch();
     getOrgList();
     GetEquityGroupList();
+    getConstitution();
   }, []);
   function handleSearch(page = 1, size = 10) {
     const formValues = formRef.getFieldsValue();
@@ -68,7 +68,7 @@ export function useOrderManagementListStore() {
       downImage(row.id, actionName);
     }
     if (actionName == '服务章程') {
-      window.open(DOUBLE_SERVICE_CHARTER[row?.businessTypeId]);
+      window.open(row?.charter);
     }
   }
 
@@ -127,6 +127,14 @@ export function useOrderManagementListStore() {
         schema.props.options = equityOptions;
         return schema;
       });
+    });
+  }
+  /** 获取双保包含服务章程的集合 */
+  function getConstitution() {
+    orderManageService.getDoubleConstitution().subscribe(res => {
+      if (Array.isArray(res?.data)) {
+        setStateWrap({ charterList: res.data });
+      }
     });
   }
 

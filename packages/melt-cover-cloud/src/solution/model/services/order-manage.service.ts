@@ -8,7 +8,8 @@ import {
   InputOrderParams,
   QueryPaginOrderReturnList,
   GetShuangBaoServiceLetterByOrderIdResType,
-  GetShuangBaoOrderByIdResType
+  GetShuangBaoOrderByIdResType,
+  CharterListRes
 } from '../dto/order-manage.dto';
 import { RequestService } from '~/framework/util/base-http/request.service';
 import { Observable } from 'rxjs';
@@ -28,6 +29,8 @@ const GET_QUICK_ORDER_LIST_PATH = 'order/QueryQuickOrder'; //预创单订单列�
 const GET_ORDER_DOUBLE_LIST_PATH = 'order/manager/QueryPaginShuangBaoOrder'; //查询订单列表
 const GET_ORDER_DOUBLE_IMAGE = 'order/manager/GetShuangBaoServiceLetterByOrderId'; //下载服务函图片
 const GET_ORDER_DOUBLE_DETAIL = 'order/manager/GetShuangBaoOrderById'; //查询详情
+/** 获取包含服务章程的集合 */
+const GET_DOUBLE_CONSTITUTION = 'double/constitution';
 
 @DepUtil.Injectable()
 export class OrderManageService extends OrderManageDTO {
@@ -66,5 +69,8 @@ export class OrderManageService extends OrderManageDTO {
   }
   getQuickOrderList(params: QueryPaginOrderParams): Observable<QueryPaginOrderReturn> {
     return this.requestService.post(GET_QUICK_ORDER_LIST_PATH, params);
+  }
+  getDoubleConstitution(productId?: string): Observable<CharterListRes> {
+    return this.requestService.get(GET_DOUBLE_CONSTITUTION, { productId });
   }
 }
