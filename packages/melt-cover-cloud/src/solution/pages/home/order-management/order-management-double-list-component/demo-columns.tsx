@@ -59,9 +59,10 @@ export function demoColumns(action: Function, prop: Record<string, any>): Column
       dataIndex: 'paymentMethod'
     },
     {
+      dataIndex: 'status',
       title: '状态',
       render: record => {
-        return <span>已完成</span>;
+        return <span>{record === 1 ? '完成' : record === 2 ? '作废' : '-'}</span>;
       }
     },
     {
