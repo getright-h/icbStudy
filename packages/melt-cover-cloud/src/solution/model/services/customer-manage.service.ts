@@ -24,6 +24,8 @@ const QUERY_CONSUME_PAGED_LIST = 'equity/manage/queryConsumePagedList';
 const QUERY_CHARGE_BALANCE_PAGED_LIST = 'equity/manage/queryChargeBalancePagedList';
 const GET_USER_DETAILS = 'order/user/manager/GetUserDetails';
 const GET_CHARGE_BALANCE = 'equity/manage/queryChargeBalance';
+/** 导出 */
+const EXPORT = 'equity/manage/exportConsumePagedList';
 
 @DepUtil.Injectable()
 export class CustomerManageService extends CustomerManageDTO {
@@ -35,6 +37,10 @@ export class CustomerManageService extends CustomerManageDTO {
 
   queryCustomerList(params: QueryPaginUserInfoParams): Observable<QueryDataListReturn<PaginUserInfoData>> {
     return this.requestService.post(QUERY_PAGIN_USER_INFO, params);
+  }
+  /** 导出客户列表 */
+  exportList(param: QueryPaginUserInfoParams): Observable<any> {
+    return this.requestService.postDownload(EXPORT, param);
   }
 
   getOrgList(): Observable<{ id: string; name: string }[]> {

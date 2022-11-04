@@ -138,6 +138,18 @@ export const schema: IFormBaseComponentsUnion[] = [
           ]
         }
       },
+      /* {
+        key: 'childrenOrganization',
+        type: 'Input',
+        hidden: '{{!formData.isParentSelected}}',
+        formItemProps: {
+          label: '必选的机构',
+          required: true
+        },
+        props: {
+          placeholder: '请选择下级机构'
+        }
+      }, */
       {
         type: 'Select',
         key: 'type',
