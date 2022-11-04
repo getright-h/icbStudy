@@ -7,7 +7,14 @@ import { CustomerManageColumns } from './customer-manage.columns';
 import { schema } from './customer-management.interface';
 
 export default function CustomerManagementComponent() {
-  const { state, handleSearch, formRef, tableAction, changeTablePageIndex } = useCustomerManagementStore();
+  const {
+    state,
+    handleSearch,
+    formRef,
+    tableAction,
+    changeTablePageIndex,
+    handleExport
+  } = useCustomerManagementStore();
   const { searchForm, tableData, total, isLoading } = state;
   function renderSelectItems() {
     return (
@@ -27,6 +34,9 @@ export default function CustomerManagementComponent() {
       <>
         <Button type="primary" className="ml20" onClick={() => handleSearch(true)}>
           查询
+        </Button>
+        <Button type="primary" className="ml20" onClick={() => handleExport()}>
+          导出
         </Button>
       </>
     );

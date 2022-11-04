@@ -1,6 +1,6 @@
 import { ActionType, ICustomerManagementState } from './customer-management.interface';
-import { useStateStore } from '@fch/fch-tool';
-import { useForm, ISelectType } from '@fch/fch-shop-web';
+import { CommonUtil, useStateStore } from '@fch/fch-tool';
+import { useForm, ISelectType, ShowNotification } from '@fch/fch-shop-web';
 import { CustomerManageService } from '~/solution/model/services/customer-manage.service';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -27,9 +27,7 @@ export function useCustomerManagementStore() {
       endTime: v.time && v.time[1] ? moment(v.time[1]).set({ hours: 23, minutes: 59, seconds: 59 }) : '',
       ...getState().searchForm
     };
-    setStateWrap({
-      isLoading: true
-    });
+    setStateWrap({ isLoading: true });
     customerManageService.queryCustomerList(params).subscribe(
       res => {
         setStateWrap({ tableData: res.dataList, total: res.total });
@@ -39,6 +37,28 @@ export function useCustomerManagementStore() {
         setStateWrap({
           isLoading: false
         });
+      }
+    );
+  }
+  /** 导出 */
+  function handleExport() {
+    const v = formRef.getFieldsValue(true);
+    const params = {
+      ...v,
+      beginTime: v.time && v.time[0] ? moment(v.time[0]).set({ hours: 0, minutes: 0, seconds: 0 }) : '',
+      endTime: v.time && v.time[1] ? moment(v.time[1]).set({ hours: 23, minutes: 59, seconds: 59 }) : '',
+      ...getState().searchForm
+    };
+    setStateWrap({ isLoading: true });
+    customerManageService.exportList(params).subscribe(
+      res => {
+        CommonUtil.downFile(res, `客户管理列表${moment(new Date()).format('YYYY-MM-DD')}.xlsx`);
+        ShowNotification.success('导出成功');
+        setStateWrap({ isLoading: false });
+      },
+      err => {
+        setStateWrap({ isLoading: false });
+        ShowNotification.error(err);
       }
     );
   }
@@ -85,5 +105,5 @@ export function useCustomerManagementStore() {
     });
   }
 
-  return { state, handleSearch, formRef, tableAction, changeTablePageIndex };
+  return { state, handleSearch, formRef, tableAction, changeTablePageIndex, handleExport };
 }
