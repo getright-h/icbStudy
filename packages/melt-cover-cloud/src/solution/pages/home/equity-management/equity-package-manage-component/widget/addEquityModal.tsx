@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Modal } from 'antd';
+import { Button, Modal, TreeSelect } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
 import { IUploadImgComponent } from '~/framework/components/component.module';
 import { uuid } from '~/framework/util/common/tool';
@@ -138,18 +138,26 @@ export const schema: IFormBaseComponentsUnion[] = [
           ]
         }
       },
-      /* {
-        key: 'childrenOrganization',
-        type: 'Input',
+      {
+        key: 'selectionOrgs',
+        type: 'TreeSelect',
         hidden: '{{!formData.isParentSelected}}',
         formItemProps: {
           label: '必选的机构',
           required: true
         },
         props: {
-          placeholder: '请选择下级机构'
+          placeholder: '请选择下级机构',
+          allowClear: true,
+          treeCheckable: true,
+          maxTagCount: 3,
+          treeCheckStrictly: true,
+          showCheckedStrategy: TreeSelect.SHOW_ALL,
+          dropdownStyle: { maxHeight: 600, overflow: 'auto' },
+          fieldNames: { label: 'name', value: 'id' },
+          treeData: []
         }
-      }, */
+      },
       {
         type: 'Select',
         key: 'type',

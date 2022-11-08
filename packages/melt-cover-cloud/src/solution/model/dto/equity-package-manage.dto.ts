@@ -180,3 +180,12 @@ export interface IResponseEquityListResultLeft {
   hasPrev: boolean;
   hasNext: boolean;
 }
+export interface GetSubOrganizationResType {
+  id: string;
+  name: string;
+  isHasChildOrganization?: boolean;
+  isSelect: boolean;
+  isLeaf?: boolean;
+  pos?: string;
+  children?: GetSubOrganizationResType[];
+}
