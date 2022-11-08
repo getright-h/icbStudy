@@ -1,17 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { message, Modal } from 'antd';
 import moment from 'moment';
 import { StorageUtil, useStateStore } from '@fch/fch-tool';
 import { useForm } from '@fch/fch-shop-web';
-import { debounce } from 'lodash';
+import { debounce, identity, cloneDeep } from 'lodash';
 import { EquityPackageManageService } from '~/solution/model/services/equity-package-manage.service';
 import { ReserveManageService } from '~/solution/model/services/reserve-manage.service';
 import { CommonUtilService } from '~/solution/model/services/common-util.service';
-import { IEquityPackageManageState } from './equity-package-manage.interface';
+import { IEquityPackageManageState, OrgData } from './equity-package-manage.interface';
 import {
   EquityList,
   EquityListPackage,
   EquityPagedListParams,
+  GetSubOrganizationResType,
   IAddEquity,
   IAddEquityResult,
   InsertEquityGroupParams,
@@ -24,7 +25,7 @@ let currentEquity: IResponseEquityResult;
 let currentEquityPackage: InsertEquityGroupParams;
 
 export function useEquityPackageManageStore() {
-  const { state, setStateWrap } = useStateStore(new IEquityPackageManageState());
+  const { state, setStateWrap, getState } = useStateStore(new IEquityPackageManageState());
   const form = useForm();
   const form1 = useForm();
   const form2 = useForm();
@@ -34,6 +35,11 @@ export function useEquityPackageManageStore() {
   const isBelonging = Role && Role.privilegesCode.length <= 0;
   const commonUtilService = new CommonUtilService();
   const { data, refetch } = useGetDistributor();
+  const userInfo = JSON.parse(StorageUtil.getLocalStorage('userInfoRole') || '{}');
+  /** 下级机构源数据 */
+  const treeData = useRef([]);
+  /** 编辑时回显已选中的数据 */
+  const selectedData = useRef([]);
 
   useEffect(() => {
     setStateWrap({
@@ -44,6 +50,13 @@ export function useEquityPackageManageStore() {
     handleSearchEquity(); // 权益
     getOrgList();
   }, []);
+
+  /* useEffect(() => {
+    form1.setSchema('selectionOrgs', schema => {
+      schema.props.treeData = treeData.current;
+      schema.props.value = selectedData.current;
+    });
+  }, [treeData.current, selectedData.current]); */
 
   useEffect(() => {
     const notDeleteEquityList = state.equityDropList
@@ -101,6 +114,67 @@ export function useEquityPackageManageStore() {
     //   });
     // }
   };
+
+  /** 处理已选中的机构数据回显 */
+  const loopSelectedData = (arr: OrgData[]) => {
+    if (Array.isArray(arr)) {
+      arr.forEach((item: OrgData) => {
+        if (item?.isSelect) {
+          selectedData.current.push({ label: item.name, value: item.id });
+        }
+        if (Array.isArray(item?.children) && item.children.length) {
+          loopSelectedData(item.children);
+        }
+      });
+    }
+  };
+
+  /** 获取下级机构列表 */
+  async function getInstitutionList(equityId = '') {
+    treeData.current = [{ id: 'loading', name: '加载中,请稍候...', disabled: true, disableCheckbox: true }];
+    selectedData.current = [];
+    if (Array.isArray(userInfo?.organizationIds) && userInfo.organizationIds?.length) {
+      /** 登录账号如果绑定多个机构,需要遍历获取全部下级机构 */
+      userInfo.organizationIds.forEach(async (parent: any) => {
+        if (parent?.organizationId) {
+          /* equityPackageManageService
+            .getSubOrganization({ parentId: parent?.organizationId, equityId })
+            .subscribe(res => {
+              if (Array.isArray(res) && res.length) {
+                res.forEach(item => {
+                  item.isLeaf = !item.isHasChildren;
+                  item.children = item.isHasChildren ? [] : null;
+                });
+                treeData.current = [...treeData.current, ...res];
+                setStateWrap({ treeData: treeData.current });
+              }
+            }); */
+          equityPackageManageService
+            .getSubOrganization({ parentId: parent.organizationId, equityId })
+            .subscribe(res => {
+              if (Array.isArray(res) && res.length) {
+                /** 遍历获取已选中的机构 */
+                loopSelectedData(res as OrgData[]);
+                /* res.forEach(item => {
+                  item.isLeaf = !item.isHasChildOrganization;
+                }); */
+                treeData.current = res;
+                setStateWrap({ treeData: treeData.current });
+              } else {
+                treeData.current = [];
+                setStateWrap({ treeData: treeData.current });
+              }
+              /** 设置源数据 */
+              form1.setSchema('selectionOrgs', schema => {
+                schema.props.treeData = treeData.current;
+              });
+              /** 设置回显值 */
+              form1.setFieldsValue({ selectionOrgs: selectedData.current });
+            });
+        }
+      });
+    }
+  }
 
   function handleFormChangeEvent(changedValues: any, values: any) {
     if (changedValues['distributor']?.key) {
@@ -271,6 +345,17 @@ export function useEquityPackageManageStore() {
   function handleOk() {
     const formValues = form1.getFieldsValue();
     form1.validateFields().then(res => {
+      if (Array.isArray(formValues?.selectionOrgs)) {
+        /** 处理数据结构，适配后端接口需求 */
+        formValues.equityRequirSelectionOrgs = formValues?.selectionOrgs.map((item: any) => ({
+          orgId: item.value,
+          orgName: item.label,
+          equityId: state.equityTitle !== '添加权益' ? currentEquity?.id : undefined
+        }));
+      } else {
+        /** 后端接口需要该字段 */
+        formValues.equityRequirSelectionOrgs = [];
+      }
       const req: IAddEquity = Object.assign({}, formValues, {
         isProportion: (formValues.useType && !!~formValues.useType?.indexOf('1')) || false,
         isNumber: (formValues.useType && !!~formValues.useType?.indexOf('2')) || false,
@@ -375,8 +460,10 @@ export function useEquityPackageManageStore() {
   /**
    * 修改权益
    */
-  function handleContextMenuChange(value: IResponseEquityResult) {
+  async function handleContextMenuChange(value: IResponseEquityResult) {
     currentEquity = value;
+    /** 编辑时获取子机构 */
+    await getInstitutionList(currentEquity?.id);
     let useType: string[] = [];
 
     if (value.isProportion) {
@@ -401,8 +488,10 @@ export function useEquityPackageManageStore() {
   /**
    * 新增权益显示
    */
-  function handleAddEquity() {
+  async function handleAddEquity() {
     form1.resetFields();
+    /** 获取下级机构列表 */
+    await getInstitutionList();
     setStateWrap({
       equityTitle: '添加权益'
     });

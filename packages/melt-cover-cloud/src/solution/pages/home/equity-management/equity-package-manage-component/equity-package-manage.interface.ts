@@ -36,7 +36,20 @@ export class IEquityPackageManageState {
   equityDropList: (IResponseEquityResult & { disabled?: boolean })[];
   isParentSelected = false;
   detail: DataList;
+  /** 下级机构选择框数据 */
+  treeData: OrgData[] = [];
 }
+
+/** 机构数据类型 */
+export type OrgData = {
+  id?: string;
+  value?: string;
+  name?: string;
+  label?: string;
+  isLeaf: boolean;
+  isSelect?: boolean;
+  children?: OrgData[];
+};
 
 export const schema: IFormBaseComponentsUnion[] = [
   {

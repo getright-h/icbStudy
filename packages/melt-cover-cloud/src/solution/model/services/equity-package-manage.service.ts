@@ -5,6 +5,7 @@ import {
   EquityPagedListParams,
   ExampleRequestParam,
   ExampleResponseResult,
+  GetSubOrganizationResType,
   IAddEquity,
   IAddEquityResult,
   InsertEquityGroupParams,
@@ -33,6 +34,7 @@ const GET_EQUITY_LIST_NO_PAGE_PATH = 'equity/manage/queryEquityGroupList';
 const GET_EQUITY_PAGE_PATH = 'equity/manage/equityPagedList';
 const dropDownEquityList = 'equity/manage/dropDownEquityList';
 const GET_EQUITY_LIST_NO_PAGE_CHILD_PATH = 'equity/manage/dropDownEquityGroupList';
+const GET_SUB_ORGANIZATION = 'equity/manage/GetOrgList'; //查找子级机构 (Web)
 
 @DepUtil.Injectable()
 export class EquityPackageManageService extends EquityPackageManageDTO {
@@ -77,5 +79,9 @@ export class EquityPackageManageService extends EquityPackageManageDTO {
   }
   getEquityNoPageChildList(params: EquityPagedListParams): Observable<DataList[]> {
     return this.requestService.post(GET_EQUITY_LIST_NO_PAGE_CHILD_PATH, params);
+  }
+  // 查找子级机构 (Web)
+  getSubOrganization(params: { parentId: string; equityId?: string }): Observable<GetSubOrganizationResType[]> {
+    return this.requestService.get(GET_SUB_ORGANIZATION, params);
   }
 }
