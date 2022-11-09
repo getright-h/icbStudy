@@ -51,6 +51,11 @@ export function useEquityPackageManageStore() {
     handleSearch(); // 权益包
     handleSearchEquity(); // 权益
     getOrgList();
+
+    /** 下级机构增加筛选功能 */
+    form1.setSchema('selectionOrgs', schema => {
+      schema.props.filterTreeNode = (value: string, node: OrgData) => node.name?.includes(value);
+    });
   }, []);
 
   /* useEffect(() => {
