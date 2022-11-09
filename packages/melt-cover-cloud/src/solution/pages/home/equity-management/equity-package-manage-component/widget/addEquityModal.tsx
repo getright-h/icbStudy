@@ -151,8 +151,9 @@ export const schema: IFormBaseComponentsUnion[] = [
           allowClear: true,
           treeCheckable: true,
           maxTagCount: 3,
-          treeCheckStrictly: true,
-          showCheckedStrategy: TreeSelect.SHOW_ALL,
+          labelInValue: true,
+          // treeCheckStrictly: true,
+          // showCheckedStrategy: TreeSelect.SHOW_ALL,
           dropdownStyle: { maxHeight: 600, overflow: 'auto' },
           fieldNames: { label: 'name', value: 'id' },
           treeData: []
