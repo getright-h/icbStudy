@@ -61,11 +61,11 @@ export function demoColumns(action: Function): ColumnsType<any> {
       dataIndex: 'payMethod',
       render: (v: number) => PAY_METHOD[v] || '-'
     },
-    {
+    /* {
       title: '优惠方式',
       dataIndex: 'discountMethod',
       render: (v: number) => DISCOUNT_METHOD[v] || '-'
-    },
+    }, */
     {
       title: '操作',
       dataIndex: 'action',

@@ -54,10 +54,10 @@ export function demoColumns(action: Function, prop: Record<string, any>): Column
       title: '备注',
       dataIndex: 'remark'
     },
-    {
+    /* {
       title: '支付方式',
       dataIndex: 'paymentMethod'
-    },
+    }, */
     {
       dataIndex: 'status',
       title: '状态',

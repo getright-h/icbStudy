@@ -141,11 +141,11 @@ export default function OrderDetailComponent() {
                 <span>{PAY_METHOD[info?.payMethod] || '-'}</span>
               </Form.Item>
             </Col>
-            <Col className="" span={span}>
+            {/* <Col className="" span={span}>
               <Form.Item label={'优惠方式'}>
                 <span>{DISCOUNT_METHOD[info?.discountMethod] || '-'}</span>
               </Form.Item>
-            </Col>
+            </Col> */}
             {info?.xiaoXiuActivationCheckRemark && (
               <Col className="" span={24}>
                 <Form.Item label={'助修宝审核备注'}>
