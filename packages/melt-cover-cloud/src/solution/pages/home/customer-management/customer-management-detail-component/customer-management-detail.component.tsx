@@ -8,6 +8,8 @@ import { useCustomerManagementDetailStore } from './customer-management-detail.c
 import { ConsumeRecordColumns, FollowRecordColumns, RemainEquityColumns } from './customer-detail.columns';
 import { TableType } from './customer-management-detail.interface';
 import { CERTIFICATE_TYPE_ENUM } from '~/solution/shared/enums/home.enum';
+import { GetRowKey } from 'antd/lib/table/interface';
+import { uuid } from '~/framework/util/common/tool';
 
 export default function CustomerManagementDetailComponent() {
   const { state, imgList, goback, changeTablePageIndex, changeRaido, toggleModal } = useCustomerManagementDetailStore();
@@ -170,7 +172,11 @@ export default function CustomerManagementDetailComponent() {
             data={chargeTableData}
             total={chargeTotal}
             isPagination={true}
-            rowKey={'equityName'}
+            rowKey={
+              function(record: any) {
+                return uuid(7, 0);
+              } as string & GetRowKey<any>
+            }
             changeTablePageIndex={(index: number, pageSize: number) =>
               changeTablePageIndex(index, pageSize, TableType.CHARGE)
             }
