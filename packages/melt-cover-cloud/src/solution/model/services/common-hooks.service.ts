@@ -18,7 +18,7 @@ export function useGetDistributor(name?: string): any {
     url: AddOrderOrgCanSelectPath,
     params: { name }
   });
-  const options = data?.map((item: IDistributorData) => {
+  const options = data?.map?.((item: IDistributorData) => {
     return {
       label: item.name,
       value: item.id
