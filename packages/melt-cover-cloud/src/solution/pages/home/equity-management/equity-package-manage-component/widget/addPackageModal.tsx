@@ -279,6 +279,7 @@ export const schema: IFormBaseComponentsUnion[] = [
           wrapperCol: { span: 10 }
         },
         props: {
+          maxLength: 40,
           placeholder: '请输入套餐包名'
         }
       },

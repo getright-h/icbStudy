@@ -12,6 +12,7 @@ import AddEquityModalComponent from './widget/addEquityModal';
 import AddPackageModalComponent from './widget/addPackageModal';
 import { EQUITY_ENUM } from '~/solution/shared/enums/home.enum';
 import DetailPackageModalComponent from './widget/packageDetailModal';
+import { PERMISSIONS } from '~/solution/shared/enums/permissions.enum';
 
 const EquityPackageManageComponent = React.memo(() => {
   const {
@@ -38,7 +39,8 @@ const EquityPackageManageComponent = React.memo(() => {
   let currentEquity: any = null;
   const { searchForm, tableData, total, isLoading, equityTitle } = state;
   const Role = JSON.parse(StorageUtil.getLocalStorage('userInfoRole'));
-  const isBelonging = Role && Role.privilegesCode.length <= 0;
+  /** 检测是否非经销商 */
+  const isBelonging = Role && !Role.privilegesCode?.some((item: string) => item.includes(PERMISSIONS.isDistributor));
   const renderSelectItems = () => {
     return (
       <>

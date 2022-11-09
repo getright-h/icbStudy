@@ -21,6 +21,7 @@ import {
 } from '~/solution/model/dto/equity-package-manage.dto';
 import { useGetDistributor } from '~/solution/model/services/common-hooks.service';
 import { EQUITY_ENUM } from '~/solution/shared/enums/home.enum';
+import { PERMISSIONS } from '~/solution/shared/enums/permissions.enum';
 let currentEquity: IResponseEquityResult;
 let currentEquityPackage: InsertEquityGroupParams;
 
@@ -32,7 +33,8 @@ export function useEquityPackageManageStore() {
   const equityPackageManageService: EquityPackageManageService = new EquityPackageManageService();
   const reserveManageService: ReserveManageService = new ReserveManageService();
   const Role = JSON.parse(StorageUtil.getLocalStorage('userInfoRole'));
-  const isBelonging = Role && Role.privilegesCode.length <= 0;
+  /** 检测是否非经销商 */
+  const isBelonging = Role && !Role.privilegesCode?.some((item: string) => item.includes(PERMISSIONS.isDistributor));
   const commonUtilService = new CommonUtilService();
   const { data, refetch } = useGetDistributor();
   const userInfo = JSON.parse(StorageUtil.getLocalStorage('userInfoRole') || '{}');
