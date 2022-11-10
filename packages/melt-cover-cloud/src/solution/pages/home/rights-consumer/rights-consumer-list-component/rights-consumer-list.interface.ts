@@ -71,17 +71,17 @@ export const schema: IFormBaseComponentsUnion[] = [
         key: 'status',
         type: 'Select',
         formItemProps: {
-          label: '启用状态',
-          initialValue: -1
+          label: '启用状态'
+          // initialValue: -1
         },
         props: {
           placeholder: '请选择启用状态',
           allowClear: true,
           options: [
-            {
+            /* {
               value: -1,
               label: '全部'
-            },
+            }, */
             {
               value: 0,
               label: '待核销'
