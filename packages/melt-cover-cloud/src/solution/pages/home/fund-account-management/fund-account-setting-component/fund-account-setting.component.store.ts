@@ -1,11 +1,12 @@
 import { IFundAccountSettingState } from './fund-account-setting.interface';
-import { useStateStore } from '@fch/fch-tool';
-import { useForm } from '@fch/fch-shop-web';
+import { CommonUtil, useStateStore } from '@fch/fch-tool';
+import { ShowNotification, useForm } from '@fch/fch-shop-web';
 import { QueryPaginOrderParams, QueryPaginOrderReturn } from '~/solution/model/dto/order-manage.dto';
 import { OrderManageService } from '~/solution/model/services/order-manage.service';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Modal } from 'antd';
+import moment from 'moment';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -98,8 +99,28 @@ export function useFundAccountSettingStore() {
   }
 
   // 导出表格
+  // 导出表格
   function exportExcel() {
-    console.log('导出表格');
+    console.log('导出');
+    const { searchForm } = state;
+    searchForm.index = 1;
+    const formData = formRef.getFieldsValue();
+    const params = {
+      ...formData,
+      ...searchForm
+    };
+    // todo req
+    /* rightsConsumerService.exportConsumeList(params).subscribe(
+      res => {
+        CommonUtil.downFile(res, `权益消费列表${moment(new Date()).format('YYYY-MM-DD')}.xlsx`);
+        ShowNotification.success('导出成功');
+        setStateWrap({ isLoading: false });
+      },
+      err => {
+        setStateWrap({ isLoading: false });
+        ShowNotification.error(err);
+      }
+    ); */
   }
 
   // 冻结账户

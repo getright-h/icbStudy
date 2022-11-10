@@ -50,6 +50,10 @@ export const ROUTERS = {
     ),
   rechargeFunds: () =>
     import('~/solution/pages/home/fund-account-management/recharge-funds-component/recharge-funds.component'),
+  rechargeDetail: () =>
+    import(
+      '~/solution/pages/home/fund-account-management/recharge-funds-component/recharge-detail-component/recharge-detail.component'
+    ),
   organizationConfiguration: () =>
     import(
       '~/solution/pages/home/organization-configuration-management/organization-configuration-component/organization-configuration.component'

@@ -109,6 +109,12 @@ export const homeRoutes: IRoute[] = [
     exact: true
   },
   {
+    path: `${MODULE_PATH}fundAccoutManagement/rechargeFunds/rechargeDetail/:id`,
+    component: ROUTERS.rechargeDetail,
+    lazyload: true,
+    exact: true
+  },
+  {
     path: `${MODULE_PATH}organizationConfigurationManagment/organizationConfiguration`,
     component: ROUTERS.organizationConfiguration,
     lazyload: true,

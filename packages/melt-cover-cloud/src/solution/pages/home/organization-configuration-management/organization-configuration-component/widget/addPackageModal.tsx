@@ -3,8 +3,8 @@ import * as React from 'react';
 import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem } from '@fch/fch-shop-web';
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manage.dto';
-import { IOrderLimitSettingState } from '../order-limit-setting.interface';
-import style from '../order-limit-setting.module.less';
+import { IOrganizationConfigurationState } from '../organization-configuration.interface';
+import style from '../organization-configuration.module.less';
 import { EQYITY_USE_TYPE, PAY_METHOD_TYPES } from '~/solution/shared/enums/home.enum';
 
 interface IAddEquityProps {
@@ -13,7 +13,7 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IOrderLimitSettingState;
+  stateParent: IOrganizationConfigurationState;
   handleFormChangeEvent?: Function;
   watch2?: IWidget;
 }
@@ -215,28 +215,62 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         key: 'distributor',
-        type: 'Input',
+        type: 'Select',
         formItemProps: {
-          label: '录单最高限额',
+          label: '关联资金账户',
           required: true,
           wrapperCol: { span: 10 }
         },
         props: {
-          placeholder: '请输入限额值',
-          addonAfter: '元'
+          // options 从req中获取
+          options: [],
+          placeholder: '请选择账户'
         }
       },
       {
-        key: 'distributor',
-        type: 'Input',
+        key: 'isPare1ntSelected',
+        type: 'RadioGroup',
         formItemProps: {
-          label: '录单剩余额度告警值',
+          label: '配置是否开启额度限制',
           required: true,
-          wrapperCol: { span: 10 }
+          initialValue: 1
         },
         props: {
-          placeholder: '请输入告警值',
-          addonAfter: '元'
+          placeholder: '请选择下级机构',
+          options: [
+            { label: '是', value: 1 },
+            { label: '否', value: 0 }
+          ]
+        }
+      },
+      {
+        key: 'isParentSele2cted',
+        type: 'RadioGroup',
+        formItemProps: {
+          label: '是否从关联资金账户扣款',
+          required: true,
+          initialValue: 1
+        },
+        props: {
+          options: [
+            { label: '是', value: 1 },
+            { label: '否', value: 0 }
+          ]
+        }
+      },
+      {
+        key: 'isParentSelected2',
+        type: 'RadioGroup',
+        formItemProps: {
+          label: '是否允许下级机构扣款',
+          required: true,
+          initialValue: 1
+        },
+        props: {
+          options: [
+            { label: '是', value: 1 },
+            { label: '否', value: 0 }
+          ]
         }
       }
     ],

@@ -4,7 +4,7 @@ import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-
 import { IUploadImgComponent } from '~/framework/components/component.module';
 import { uuid } from '~/framework/util/common/tool';
 import { EQYITY_TYPE, EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
-import { IOrderLimitSettingState } from '../order-limit-setting.interface';
+import { IOrganizationConfigurationState } from '../organization-configuration.interface';
 
 interface IAddEquityProps {
   title: string;
@@ -12,7 +12,7 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IOrderLimitSettingState;
+  stateParent: IOrganizationConfigurationState;
 }
 
 export default function AddEquityModalComponent(props: IAddEquityProps) {

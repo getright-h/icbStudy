@@ -3,10 +3,10 @@ import * as React from 'react';
 import { IFormComponent, ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
 import { StorageUtil } from '@fch/fch-tool';
 import 'react-contexify/dist/ReactContexify.min.css';
-import { demoColumns, equityColumns } from './demo-columns';
-import style from './equity-package-manage.module.less';
-import { useEquityPackageManageStore } from './equity-package-manage.component.store';
-import { schema } from './equity-package-manage.interface';
+import { demoColumns, channelColumns } from './demo-columns';
+import style from './order-limit-setting.module.less';
+import { useOrderLimitSettingStore } from './order-limit-setting.component.store';
+import { schema } from './order-limit-setting.interface';
 import { Menu, Item, MenuProvider } from 'react-contexify';
 import AddEquityModalComponent from './widget/addEquityModal';
 import AddPackageModalComponent from './widget/addPackageModal';
@@ -14,7 +14,7 @@ import { EQUITY_ENUM } from '~/solution/shared/enums/home.enum';
 import DetailPackageModalComponent from './widget/packageDetailModal';
 import { PERMISSIONS } from '~/solution/shared/enums/permissions.enum';
 
-const EquityPackageManageComponent = React.memo(() => {
+const OrderLimitSettingComponent = React.memo(() => {
   const {
     state,
     handleSearch,
@@ -35,8 +35,8 @@ const EquityPackageManageComponent = React.memo(() => {
     changeTablePageIndexEquity,
     handleFormChangeEvent,
     watch2
-  } = useEquityPackageManageStore();
-  let currentEquity: any = null;
+  } = useOrderLimitSettingStore();
+  const currentEquity: any = null;
   const { searchForm, tableData, total, isLoading, equityTitle } = state;
   const Role = JSON.parse(StorageUtil.getLocalStorage('userInfoRole'));
   /** 检测是否非经销商 */
@@ -67,18 +67,6 @@ const EquityPackageManageComponent = React.memo(() => {
         >
           查询
         </Button>
-        <Button
-          type="primary"
-          className="ml20"
-          onClick={() => {
-            handleResetSearch();
-          }}
-        >
-          重置
-        </Button>
-        <Button type="primary" className="ml20" onClick={handleAddEquityPackage}>
-          创建套餐包
-        </Button>
       </React.Fragment>
     );
   }
@@ -100,8 +88,7 @@ const EquityPackageManageComponent = React.memo(() => {
     return (
       <div className={style.addEquity}>
         <h3>
-          <span>权益管理</span>
-          <span onClick={handleAddEquity}>添加权益</span>
+          <span>渠道列表</span>
         </h3>
         <MenuProvider
           id="menu_id"
@@ -112,7 +99,7 @@ const EquityPackageManageComponent = React.memo(() => {
           }}
         >
           <ITableComponent
-            columns={equityColumns(tableAction, isBelonging)}
+            columns={channelColumns(tableAction, isBelonging)}
             isLoading={state.isLoadingEquity}
             pageIndex={state.searchFormEquity.index}
             pageSize={state.searchFormEquity.size}
@@ -121,17 +108,18 @@ const EquityPackageManageComponent = React.memo(() => {
             isPagination={true}
             onRow={record => {
               return {
-                onDoubleClick: event => {
-                  currentEquity = record;
-                },
-                onContextMenu: (event: any) => {
+                onClick: e => {
+                  // todo 点击显示右侧对应的列表
+                  console.log('1');
+                }
+                /* onContextMenu: (event: any) => {
                   console.log(11111, record);
                   currentEquity = record;
                   if (!currentEquity.isEdit) {
                     event.preventDefault();
                     event.stopPropagation();
                   }
-                }
+                } */
               };
             }}
             changeTablePageIndex={(index: number, pageSize: number) => changeTablePageIndexEquity(index, pageSize)}
@@ -221,10 +209,11 @@ const EquityPackageManageComponent = React.memo(() => {
         form={form1}
         stateParent={state}
       />
+      {/* 设置额度 */}
       <AddPackageModalComponent
         stateParent={state}
         title={state.equityPackageTitle}
-        visible={state.equityPackageTitle != '详情' && state.visibleAddPackage}
+        visible={state.visibleAddPackage}
         handleCancel={toggleModal2}
         handleOk={handleOk2}
         form={form2}
@@ -244,4 +233,4 @@ const EquityPackageManageComponent = React.memo(() => {
   );
 });
 
-export default EquityPackageManageComponent;
+export default OrderLimitSettingComponent;

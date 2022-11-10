@@ -1,10 +1,10 @@
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, Modal, Typography } from 'antd';
 import * as React from 'react';
 import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem } from '@fch/fch-shop-web';
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manage.dto';
-import { IOrderLimitSettingState } from '../order-limit-setting.interface';
-import style from '../order-limit-setting.module.less';
+// import { IEquityPackageManageState } from '../fund-account-setting.interface';
+import style from '../recharge-funds.component';
 import { EQYITY_USE_TYPE, PAY_METHOD_TYPES } from '~/solution/shared/enums/home.enum';
 
 interface IAddEquityProps {
@@ -13,7 +13,8 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IOrderLimitSettingState;
+  stateParent: any;
+  // stateParent: IEquityPackageManageState;
   handleFormChangeEvent?: Function;
   watch2?: IWidget;
 }
@@ -180,6 +181,10 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
         watch={watch2}
         schema={schema}
         slot={renderContent}
+        // schema type text
+        widget={{
+          Text: Typography.Text
+        }}
         props={{
           labelCol: { span: 8 },
           wrapperCol: { span: 16 },
@@ -193,15 +198,13 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
     <div>
       <Modal
         width={700}
-        title={'设置额度'}
+        title={title}
         onOk={handleOk}
         onCancel={handleCancel}
         visible={visible}
         okText={<Button loading={stateParent.isLoadingModal2}>确定</Button>}
         footer={footer}
       >
-        <p>按照订单金额设置</p>
-        <p>当前仅有额度可设置，请合理安排</p>
         {renderForm()}
       </Modal>
     </div>
@@ -214,29 +217,89 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'distributor',
-        type: 'Input',
+        key: 'isTest',
+        type: 'Text',
         formItemProps: {
-          label: '录单最高限额',
+          valuePropName: 'children',
+          label: '账户名称',
           required: true,
+          initialValue: 1,
           wrapperCol: { span: 10 }
-        },
-        props: {
-          placeholder: '请输入限额值',
-          addonAfter: '元'
         }
       },
       {
-        key: 'distributor',
-        type: 'Input',
+        key: 'isTest',
+        type: 'Text',
         formItemProps: {
-          label: '录单剩余额度告警值',
+          valuePropName: 'children',
+          label: '账户号',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'isTest',
+        type: 'Text',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '账户累计充值总额',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'isTest',
+        type: 'Text',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '账户资金余额',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'isTest',
+        type: 'Text',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '充值金额',
           required: true,
           wrapperCol: { span: 10 }
-        },
-        props: {
-          placeholder: '请输入告警值',
-          addonAfter: '元'
+        }
+      },
+      {
+        key: 'isTest',
+        type: 'Text',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '创建时间',
+          required: true,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'isTest',
+        type: 'Text',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '支付类型',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'isTest',
+        type: 'Text',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '备注',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
         }
       }
     ],

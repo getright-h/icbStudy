@@ -3,8 +3,8 @@ import * as React from 'react';
 import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem } from '@fch/fch-shop-web';
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manage.dto';
-import { IOrderLimitSettingState } from '../order-limit-setting.interface';
-import style from '../order-limit-setting.module.less';
+import { IRechargeFundsState } from '../recharge-funds.interface';
+import style from '../recharge-funds.component';
 import { EQYITY_USE_TYPE, PAY_METHOD_TYPES } from '~/solution/shared/enums/home.enum';
 
 interface IAddEquityProps {
@@ -13,12 +13,12 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IOrderLimitSettingState;
+  stateParent: IRechargeFundsState;
   handleFormChangeEvent?: Function;
   watch2?: IWidget;
 }
 
-export default function AddPackageModalComponent(props: IAddEquityProps) {
+export default function AddPackageModalComponent2(props: IAddEquityProps) {
   const { title, form, handleOk, handleCancel, visible, stateParent, watch2 } = props;
   const { disableFooter } = stateParent;
   const footer: any = disableFooter ? null : (
@@ -193,15 +193,13 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
     <div>
       <Modal
         width={700}
-        title={'设置额度'}
+        title={title}
         onOk={handleOk}
         onCancel={handleCancel}
         visible={visible}
         okText={<Button loading={stateParent.isLoadingModal2}>确定</Button>}
         footer={footer}
       >
-        <p>按照订单金额设置</p>
-        <p>当前仅有额度可设置，请合理安排</p>
         {renderForm()}
       </Modal>
     </div>
@@ -214,29 +212,52 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'distributor',
+        key: 'price',
         type: 'Input',
         formItemProps: {
-          label: '录单最高限额',
-          required: true,
+          label: '账号名称',
           wrapperCol: { span: 10 }
         },
         props: {
-          placeholder: '请输入限额值',
-          addonAfter: '元'
+          type: 'text',
+          placeholder: '请输入账号名称'
         }
       },
       {
         key: 'distributor',
-        type: 'Input',
+        type: 'Select',
         formItemProps: {
-          label: '录单剩余额度告警值',
+          label: '支付类型',
           required: true,
           wrapperCol: { span: 10 }
         },
         props: {
-          placeholder: '请输入告警值',
-          addonAfter: '元'
+          placeholder: '请选择支付类型',
+          options: [{ label: '其他', value: 0 }]
+        }
+      },
+      {
+        key: 'price',
+        type: 'Input',
+        formItemProps: {
+          label: '充值金额',
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          type: 'number',
+          placeholder: '请输入充值金额'
+        }
+      },
+      {
+        key: 'price',
+        type: 'Input',
+        formItemProps: {
+          label: '备注',
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          type: 'text',
+          placeholder: '请输入备注'
         }
       }
     ],

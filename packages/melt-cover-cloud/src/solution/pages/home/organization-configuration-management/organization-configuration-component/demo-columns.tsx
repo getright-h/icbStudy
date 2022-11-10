@@ -1,54 +1,26 @@
 import * as React from 'react';
 import { ColumnsType } from 'antd/lib/table';
 import { Divider } from 'antd';
-// import { EquityList } from '~/solution/model/dto/equity-package-manage.dto';
-// import style from './equity-package-manage.module.less';
+import { EquityList } from '~/solution/model/dto/equity-package-manage.dto';
+import style from './organization-configuration.module.less';
 
 export function demoColumns(action: Function): ColumnsType<any> {
   return [
     {
-      title: '创建机构',
+      title: '机构名称',
       dataIndex: 'distributorName'
     },
     {
-      title: '套餐包名',
+      title: '资金账户',
       dataIndex: 'name'
     },
     {
-      title: '套餐说明',
-      dataIndex: 'desc',
-      ellipsis: true,
-      render: html => (
-        <div
-          style={{ maxHeight: 120, maxWidth: 300, overflow: 'hidden', textOverflow: 'ellipsis' }}
-          dangerouslySetInnerHTML={{ __html: html }}
-        ></div>
-      )
+      title: '更新时间',
+      dataIndex: 'desc'
     },
     {
-      title: '套餐包价格',
+      title: '配置是否开启额度限制',
       dataIndex: 'price'
-    },
-    /* {
-      title: '包含权益',
-      dataIndex: 'equityList',
-      render: (record: EquityList[]) => {
-        return (
-          <>
-            {record.map((item: EquityList) => {
-              return <span key={item.id}>{item.name + ' '}</span>;
-            })}
-          </>
-        );
-      }
-    }, */
-    {
-      title: '创建时间',
-      dataIndex: 'createTime'
-    },
-    {
-      title: '状态',
-      dataIndex: 'statusText'
     },
     {
       title: '操作',
@@ -58,13 +30,7 @@ export function demoColumns(action: Function): ColumnsType<any> {
       render: (text, row) => {
         return (
           <React.Fragment>
-            <a onClick={() => action(row, '详情')}>详情</a>
-            <Divider type="vertical" />
-            <span style={{ display: row.isEdit ? 'block' : 'none' }}>
-              <a onClick={() => action(row, '编辑')}>编辑</a>
-              <Divider type="vertical" />
-              <a onClick={() => action(row, '删除')}>删除</a>
-            </span>
+            <a onClick={() => action(row, '配置')}>配置</a>
           </React.Fragment>
         );
       }
@@ -72,24 +38,12 @@ export function demoColumns(action: Function): ColumnsType<any> {
   ];
 }
 
-export function orgConfigColumns(action: Function, isBelonging: boolean): ColumnsType<any> {
+export function channelColumns(action: Function, isBelonging: boolean): ColumnsType<any> {
   return [
     {
-      title: '权益',
+      title: '名称',
       dataIndex: 'name',
       align: 'left'
     }
-    /* {
-      title: '所属',
-      dataIndex: 'distributorName',
-      align: 'left',
-      render: (row, record) => {
-        return (
-          <span className={style.textOverFlow + ' ' + (!record.isEdit ? style.disable : '')} title={row}>
-            {row}
-          </span>
-        );
-      }
-    } */
   ];
 }

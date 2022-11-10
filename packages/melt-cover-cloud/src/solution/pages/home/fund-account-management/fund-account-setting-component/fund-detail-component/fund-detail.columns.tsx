@@ -29,27 +29,27 @@ export function inComeColumns(): ColumnsType<any> {
 export function spendingColumns(): ColumnsType<any> {
   return [
     {
-      title: '回店时间',
+      title: '支出金额',
       dataIndex: 'createTime'
     },
     {
-      title: '项目',
+      title: '支出类型',
       dataIndex: 'equityName'
     },
     {
-      title: '使用权益',
+      title: '操作值时间',
       dataIndex: 'discountPrice',
       render: (value, row) => {
         return row.isNumber ? `${row.equityName}1次` : `${value}元抵扣`;
       }
     },
     {
-      title: '备注',
-      dataIndex: 'remark'
+      title: '操作人',
+      dataIndex: 'modifyName'
     },
     {
-      title: '处理人',
-      dataIndex: 'modifyName'
+      title: '备注',
+      dataIndex: 'remark'
     }
   ];
 }

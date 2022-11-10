@@ -6,7 +6,7 @@ import { IStatusEquity } from '~/solution/shared/constant/select.const';
  * @export state变量定义和初始化
  * @class IEquityPackageManageState
  */
-export class IEquityPackageManageState {
+export class IOrderLimitSettingState {
   searchForm = {
     index: 1,
     size: 10
@@ -58,54 +58,27 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         key: 'distributorId',
-        type: 'Select',
+        type: 'Input',
         formItemProps: {
           label: '创建机构'
         },
         props: {
-          placeholder: '请选择创建机构',
-          allowClear: true,
-          filterOption: false,
-          options: [],
-          showSearch: true
+          placeholder: '输入账户名称/组织代码'
         }
       },
       {
         key: 'status',
         type: 'Select',
         formItemProps: {
-          label: '启用状态'
+          label: '预警状态'
         },
         props: {
-          placeholder: '请选择启用状态',
-          allowClear: true,
-          options: IStatusEquity
-        }
-      },
-      {
-        key: 'dateRange',
-        type: 'RangePicker',
-        formItemProps: {
-          label: '创建时间'
-        },
-        props: {
-          allowClear: true
-        }
-      },
-      {
-        key: 'name',
-        type: 'Input',
-        formItemProps: {
-          label: '套餐包名'
-        },
-        props: {
-          placeholder: '请输入套餐包名',
-          allowClear: true
+          options: [{ label: '正常' }, { label: '预警' }]
         }
       }
     ],
     props: {
-      cols: 3
+      cols: 2
     }
   }
 ];

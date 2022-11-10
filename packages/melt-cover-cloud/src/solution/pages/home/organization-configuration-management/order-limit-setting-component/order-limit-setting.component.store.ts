@@ -7,7 +7,7 @@ import { debounce, identity, cloneDeep } from 'lodash';
 import { EquityPackageManageService } from '~/solution/model/services/equity-package-manage.service';
 import { ReserveManageService } from '~/solution/model/services/reserve-manage.service';
 import { CommonUtilService } from '~/solution/model/services/common-util.service';
-import { IEquityPackageManageState, OrgData } from './equity-package-manage.interface';
+import { IOrderLimitSettingState, OrgData } from './order-limit-setting.interface';
 import {
   EquityList,
   EquityListPackage,
@@ -25,8 +25,8 @@ import { PERMISSIONS } from '~/solution/shared/enums/permissions.enum';
 let currentEquity: IResponseEquityResult;
 let currentEquityPackage: InsertEquityGroupParams;
 
-export function useEquityPackageManageStore() {
-  const { state, setStateWrap, getState } = useStateStore(new IEquityPackageManageState());
+export function useOrderLimitSettingStore() {
+  const { state, setStateWrap, getState } = useStateStore(new IOrderLimitSettingState());
   const form = useForm();
   const form1 = useForm();
   const form2 = useForm();
@@ -308,7 +308,16 @@ export function useEquityPackageManageStore() {
 
   function tableAction(row: any, actionName: string) {
     console.log(row, actionName);
-    if (actionName == '编辑') {
+    if (actionName == '设置额度') {
+      // todo 获取对应的列表id 设置 值
+      toggleModal2();
+      // handleContextMenuChangePackage(row);
+      // setStateWrap({
+      //   disableFooter: false,
+      //   equityPackageTitle: '编辑'
+      // });
+    }
+    /* if (actionName == '编辑') {
       handleContextMenuChangePackage(row);
       setStateWrap({
         disableFooter: false,
@@ -330,7 +339,7 @@ export function useEquityPackageManageStore() {
         disableFooter: true,
         equityPackageTitle: '详情'
       });
-    }
+    } */
   }
 
   function addOrder() {

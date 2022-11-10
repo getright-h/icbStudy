@@ -4,12 +4,13 @@ import * as React from 'react';
 import { IPreviewImgComponent, ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
 // import ImageShowPreviewComponent from '~framework/components/image-show-preview-component/image-show-preview.component';
 import { DISCOUNT_METHOD, PAY_METHOD, TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
-import style from './order-detail.module.less';
-import { useOrderDetailStore } from './order-detail.component.store';
+import style from './fund-detail.module.less';
+import { useOrderDetailStore } from './fund-detail.component.store';
 import { inComeColumns, spendingColumns } from './fund-detail.columns';
+import { TableType, IFundDetailState } from './fund-detail.interface';
 // const IPreviewImgComponent = ImageShowPreviewComponent;
-export default function OrderDetailComponent() {
-  const { state, goback, changeRaido } = useOrderDetailStore();
+export default function FundDetailComponent() {
+  const { state, goback, changeRaido, changeTablePageIndex } = useOrderDetailStore();
   const { info } = state;
 
   function renderUserInfo(props: { span: number }) {
@@ -23,11 +24,15 @@ export default function OrderDetailComponent() {
           </strong>
         </h3>
         <h3>
-          <strong>交易明细</strong>
+          <strong>
+            <strong></strong>
+          </strong>
         </h3>
         <hr />
         <div>
-          <h5>账户基本信息</h5>
+          <h4>
+            <strong>账户基本信息</strong>
+          </h4>
           <Row>
             <Col className="" span={span}>
               <Form.Item label={'账户名'}>
@@ -105,26 +110,36 @@ export default function OrderDetailComponent() {
             <ITableComponent
               columns={inComeColumns()}
               isLoading={isLoading}
+              // isLoading={true}
               pageIndex={followSearchForm.index}
+              // pageIndex={1}
               pageSize={followSearchForm.size}
+              // pageSize={10}
               data={followTableData}
+              // data={[]}
               total={followTotal}
+              // total={10}
               isPagination={true}
               changeTablePageIndex={(index: number, pageSize: number) =>
-                changeTablePageIndex(index, pageSize, TableType.FOLLOW)
+                changeTablePageIndex(index, pageSize, TableType.INCOME)
               }
             ></ITableComponent>
           ) : (
             <ITableComponent
               columns={spendingColumns()}
-              isLoading={isLoading}
-              pageIndex={consumeSearchForm.index}
-              pageSize={consumeSearchForm.size}
-              data={consumeTableData}
-              total={consumeTotal}
+              // isLoading={isLoading}
+              isLoading={true}
+              // pageIndex={followSearchForm.index}
+              pageIndex={1}
+              // pageSize={followSearchForm.size}
+              pageSize={10}
+              // data={followTableData}
+              data={[]}
+              // total={followTotal}
+              total={10}
               isPagination={true}
               changeTablePageIndex={(index: number, pageSize: number) =>
-                changeTablePageIndex(index, pageSize, TableType.CONSUME)
+                changeTablePageIndex(index, pageSize, TableType.SPENDING)
               }
             ></ITableComponent>
           )}
@@ -133,76 +148,24 @@ export default function OrderDetailComponent() {
     );
   }
 
-  function renderContent() {
-    return <div>{renderLogs()}</div>;
-  }
-
-  function renderCarInfo(props: { span: number }) {
-    const { span } = props;
-    return (
-      <div className={style.test}>
-        <h5>交易明细</h5>
-        <ITablePageComponent leftFlex={1} rightFlex={5} table={renderContent()}></ITablePageComponent>
-      </div>
-    );
-  }
-
-  function renderOrderInfo(props: { span: number }) {
+  function renderDetailInfo(props: { span: number }) {
     const { span } = props;
     return (
       <div>
-        <div>
-          <h3>
-            <strong>订单信息</strong>
-          </h3>
-          <hr />
-        </div>
-        <div>
-          <Row>
-            <Col className="" span={span}>
-              <Form.Item label={'套餐包金额'}>
-                <span>{info?.equityGroupPrice || '-'}</span>
-              </Form.Item>
-            </Col>
-            <Col className="" span={span}>
-              <Form.Item label={'订单是否为散户'}>
-                <span>{info?.isScatteredUser ? '是' : '否' || '-'}</span>
-              </Form.Item>
-            </Col>
-            <Col className="" span={span}>
-              <Form.Item label={'订单备注'}>
-                <span>{info?.remark || '-'}</span>
-              </Form.Item>
-            </Col>
-            <Col className="" span={span}>
-              <Form.Item label={'支付方式'}>
-                <span>{PAY_METHOD[info?.payMethod] || '-'}</span>
-              </Form.Item>
-            </Col>
-            {/* <Col className="" span={span}>
-              <Form.Item label={'优惠方式'}>
-                <span>{DISCOUNT_METHOD[info?.discountMethod] || '-'}</span>
-              </Form.Item>
-            </Col> */}
-            {info?.xiaoXiuActivationCheckRemark && (
-              <Col className="" span={24}>
-                <Form.Item label={'助修宝审核备注'}>
-                  <span>{info?.xiaoXiuActivationCheckRemark || '-'}</span>
-                </Form.Item>
-              </Col>
-            )}
-          </Row>
-        </div>
+        <h4>
+          <strong> 交易明细</strong>
+        </h4>
+        <ITablePageComponent leftFlex={1} rightFlex={5} table={renderLogs()}></ITablePageComponent>
       </div>
     );
   }
+
   function renderLeft() {
     const span = 8;
     return (
       <Form className={style.imgBox}>
         {renderUserInfo({ span })}
-        {renderCarInfo({ span })}
-        {renderOrderInfo({ span })}
+        {renderDetailInfo({ span })}
       </Form>
     );
   }

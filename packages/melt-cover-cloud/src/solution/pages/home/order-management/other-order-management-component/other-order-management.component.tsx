@@ -3,11 +3,11 @@ import * as React from 'react';
 import { ITableComponent, IFormComponent, ITablePageComponent } from '@fch/fch-shop-web';
 import { demoColumns } from './demo-columns';
 import style from './other-order-management.module.less';
-import { useOrderManagementListStore } from './other-order-management.component.store';
+import { useOtherOrderManagementStore } from './other-order-management.component.store';
 import { schema } from './other-order-management.interface';
 
-export default function OrderManagementListComponent() {
-  const { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder } = useOrderManagementListStore();
+export default function OtherOrderManagementComponent() {
+  const { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder } = useOtherOrderManagementStore();
   const { searchForm, tableData, total, isLoading } = state;
   function renderSelectItems() {
     return (

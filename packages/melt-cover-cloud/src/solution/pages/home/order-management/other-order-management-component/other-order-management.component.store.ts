@@ -9,7 +9,7 @@ import { CustomerManageService } from '~/solution/model/services/customer-manage
 import { useEffect } from 'react';
 import { Modal } from 'antd';
 
-export function useOrderManagementListStore() {
+export function useOtherOrderManagementStore() {
   const { state, setStateWrap } = useStateStore(new IOtherOrderManagement());
   const formRef = useForm();
   const history = useHistory();

@@ -218,146 +218,101 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         key: 'distributor',
-        type: 'Select',
+        type: 'Input',
         formItemProps: {
-          label: '创建机构',
+          label: '账户名',
           required: true,
           wrapperCol: { span: 10 }
         },
         props: {
-          placeholder: '请选择创建机构',
-          allowClear: true,
-          labelInValue: true,
-          filterOption: false,
-          options: [],
-          showSearch: true
+          placeholder: '请输入账户名'
         }
       },
       {
-        key: 'isTest',
+        key: 'distributor',
         type: 'Text',
         formItemProps: {
-          valuePropName: 'children',
           label: '账户号',
-          required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
-        }
-      },
-      {
-        key: 'customPrice',
-        type: 'Switch',
-        formItemProps: {
-          valuePropName: 'checked',
-          label: '自定义价格',
-          required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
-        }
-      },
-      {
-        key: 'price',
-        type: 'Input',
-        formItemProps: {
-          label: '套餐包价格',
-          required: '{{!formData.customPrice}}',
-          wrapperCol: { span: 10 }
-        },
-        props: {
-          type: 'number',
-          placeholder: '请输入套餐包价格'
-        }
-      },
-
-      {
-        key: 'name',
-        type: 'Input',
-        formItemProps: {
-          label: '套餐包名',
+          valuePropName: 'children',
           required: true,
           wrapperCol: { span: 10 }
         },
         props: {
-          maxLength: 40,
-          placeholder: '请输入套餐包名'
+          placeholder: '账户号'
         }
       },
       {
-        key: 'desc',
-        type: 'Input',
+        key: 'distributor',
+        type: 'Text',
         formItemProps: {
-          label: '套餐说明',
+          label: '创建时间',
+          valuePropName: 'children',
+          required: true,
           wrapperCol: { span: 10 }
         },
         props: {
-          placeholder: '请输入套餐说明'
+          placeholder: '创建时间'
         }
       },
       {
-        key: 'equityList',
+        key: 'distributor',
         type: 'Select',
         formItemProps: {
-          label: '包函权益',
-          required: true,
-          wrapperCol: { span: 10 }
-        },
-        props: {
-          mode: 'multiple',
-          placeholder: '请选择包函权益（可多选）',
-          filterOption: false,
-          options: []
-        }
-      },
-      {
-        key: 'status',
-        type: 'RadioGroup',
-        formItemProps: {
-          label: '状态',
+          label: '支付类型',
           required: true,
           initialValue: 1,
           wrapperCol: { span: 10 }
         },
         props: {
           options: [
-            { label: '启用', value: 1 },
-            { label: '禁用', value: 0 }
+            { label: '其他', value: 1 },
+            { label: '上级分配', value: 0 }
           ]
         }
       },
       {
-        key: 'payMethods',
-        type: 'Select',
+        key: 'distributor',
+        type: 'Text',
         formItemProps: {
-          label: '支付方式',
+          label: '账户状态',
+          valuePropName: 'children',
           required: true,
           wrapperCol: { span: 10 }
-        },
-        props: {
-          mode: 'multiple',
-          placeholder: '请选择支付方式（可多选）',
-          options: PAY_METHOD_TYPES
         }
       },
-      // todo
       {
-        key: 'checkAccount',
-        type: 'RadioGroup',
+        key: 'distributor',
+        type: 'Text',
         formItemProps: {
-          label: '是否录单需检测资金账户',
+          label: '累计充值总额',
+          valuePropName: 'children',
           required: true,
-          initialValue: 1,
           wrapperCol: { span: 10 }
-        },
-        props: {
-          options: [
-            { label: '是', value: 1 },
-            { label: '否', value: 0 }
-          ]
+        }
+      },
+      {
+        key: 'distributor',
+        type: 'Text',
+        formItemProps: {
+          label: '资金总额',
+          valuePropName: 'children',
+          required: true,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'distributor',
+        type: 'Text',
+        formItemProps: {
+          label: '锁定资金',
+          valuePropName: 'children',
+          required: true,
+          wrapperCol: { span: 10 }
         }
       }
     ],
     props: {
-      cols: 1
+      cols: 2
     }
   }
 ];

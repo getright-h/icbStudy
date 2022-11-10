@@ -3,7 +3,7 @@ import { Button, Col, Form, Modal, Row } from 'antd';
 import * as React from 'react';
 import { EquityList } from '~/solution/model/dto/equity-package-manage.dto';
 import { PAY_METHOD } from '~/solution/shared/enums/home.enum';
-import { IOrderLimitSettingState } from '../order-limit-setting.interface';
+import { IRechargeFundsState } from '../recharge-funds.interface';
 
 interface IAddEquityProps {
   title: string;
@@ -11,7 +11,7 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IOrderLimitSettingState;
+  stateParent: IRechargeFundsState;
   handleFormChangeEvent: Function;
 }
 

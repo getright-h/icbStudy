@@ -6,58 +6,32 @@ import { DISCOUNT_METHOD, PAY_METHOD } from '~/solution/shared/enums/home.enum';
 export function demoColumns(action: Function): ColumnsType<any> {
   return [
     {
-      title: '订单编号',
+      title: '账户名',
       dataIndex: 'orderNumber'
     },
     {
-      title: '车主姓名',
+      title: '账户号',
       dataIndex: 'ownerName'
     },
     {
-      title: '车主电话',
+      title: '支付类型',
       dataIndex: 'ownerMobile'
     },
     {
-      title: '所属机构',
+      title: '账户状态',
       dataIndex: 'distributorName'
     },
     {
-      title: '车牌号',
+      title: '账户累计充值总额',
       dataIndex: 'ownerPlateNo'
     },
     {
-      title: '车架号',
+      title: '账户资金余额',
       dataIndex: 'ownerVinNo'
     },
     {
-      title: '购买套餐包',
+      title: '创建时间',
       dataIndex: 'equityGroupName'
-    },
-    {
-      title: '套餐金额',
-      dataIndex: 'equityGroupPrice'
-    },
-    {
-      title: '订单时间',
-      dataIndex: 'createTime'
-    },
-    {
-      title: '状态',
-      dataIndex: 'xiaoXiuStatusStr'
-    },
-    {
-      title: '备注',
-      dataIndex: 'remark'
-    },
-    {
-      title: '支付方式',
-      dataIndex: 'payMethod',
-      render: (v: number) => PAY_METHOD[v] || '-'
-    },
-    {
-      title: '优惠方式',
-      dataIndex: 'discountMethod',
-      render: (v: number) => DISCOUNT_METHOD[v] || '-'
     },
     {
       title: '操作',
@@ -68,10 +42,13 @@ export function demoColumns(action: Function): ColumnsType<any> {
         return (
           <React.Fragment>
             <a onClick={() => action(row, '详情')}>详情</a>
-            {/* <Divider type="vertical" />
-            <a onClick={() => action(row, '编辑')}>编辑</a>
             <Divider type="vertical" />
-            <a onClick={() => action(row, '删除')}>删除</a> */}
+            {/* 状态为 通过 不通过 */}{' '}
+            {row?.xxx == 1 ? (
+              <a onClick={() => action(row, '充值审核')}>充值审核</a>
+            ) : (
+              <a onClick={() => action(row, '修改充值')}>修改充值</a>
+            )}
           </React.Fragment>
         );
       }
