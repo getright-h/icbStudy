@@ -109,6 +109,12 @@ export function useEquityPackageManageStore() {
         });
       }
     }
+    // customPrice: (changedValues: any) => {
+    //   form2.setSchema('price', schema => {
+    //     schema.formItemProps.required = !changedValues;
+    //     return schema;
+    //   });
+    // }
   };
 
   /** 处理已选中的机构数据回显 */

@@ -1,0 +1,59 @@
+@import '~/solution/assets/style/var.modify.less';
+.test {
+    color: #aaaaaa;
+}
+
+.addEquity {
+    h3 {
+        display: flex;
+        justify-content: space-around;
+
+        &:first-of-type {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+
+            span:last-of-type {
+                color: @primary-color;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.addEquityContent {
+    display: flex;
+    justify-content: space-around;
+    color: #000;
+    cursor: pointer;
+    &:hover{
+        color: @primary-color;
+    }
+    span {
+        padding: 10px;
+        flex: 1;
+        text-align: center;
+        &.disable {
+            color: #aaa;
+        }
+    }
+
+}
+
+.flex{
+    display: flex;
+}
+.red{
+    color: @primary-color;
+}
+.disable {
+    color: #aaa;
+}
+
+.textOverFlow{
+    display: block;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: nowrap;
+}

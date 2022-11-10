@@ -338,23 +338,6 @@ export const schema: IFormBaseComponentsUnion[] = [
           placeholder: '请选择支付方式（可多选）',
           options: PAY_METHOD_TYPES
         }
-      },
-      // todo
-      {
-        key: 'checkAccount',
-        type: 'RadioGroup',
-        formItemProps: {
-          label: '是否录单需检测资金账户',
-          required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
-        },
-        props: {
-          options: [
-            { label: '是', value: 1 },
-            { label: '否', value: 0 }
-          ]
-        }
       }
     ],
     props: {

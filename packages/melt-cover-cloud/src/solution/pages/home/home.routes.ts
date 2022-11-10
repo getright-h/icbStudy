@@ -27,6 +27,12 @@ export const homeRoutes: IRoute[] = [
     exact: true
   },
   {
+    path: `${MODULE_PATH}orderManagement/otherOrderManagement`,
+    component: ROUTERS.otherOrderManagement,
+    lazyload: true,
+    exact: true
+  },
+  {
     path: `${MODULE_PATH}reserve`,
     component: ROUTERS.reserveManageModule,
     lazyload: true
@@ -40,6 +46,12 @@ export const homeRoutes: IRoute[] = [
   {
     path: `${MODULE_PATH}orderManagement/orderDetail`,
     component: ROUTERS.orderDetail,
+    lazyload: true,
+    exact: true
+  },
+  {
+    path: `${MODULE_PATH}orderManagement/orderOtherDetail`,
+    component: ROUTERS.orderOtherDetail,
     lazyload: true,
     exact: true
   },
@@ -75,6 +87,36 @@ export const homeRoutes: IRoute[] = [
   {
     path: `${MODULE_PATH}equityManagement/rightsListOfDouble`,
     component: ROUTERS.rightsListOfDouble,
+    lazyload: true,
+    exact: true
+  },
+  {
+    path: `${MODULE_PATH}fundAccoutManagement/fundAccountSetting`,
+    component: ROUTERS.fundAccountSetting,
+    lazyload: true,
+    exact: true
+  },
+  {
+    path: `${MODULE_PATH}fundAccoutManagement/fundAccountSetting/fundDetail/:id`,
+    component: ROUTERS.fundDetail,
+    lazyload: true,
+    exact: true
+  },
+  {
+    path: `${MODULE_PATH}fundAccoutManagement/rechargeFunds`,
+    component: ROUTERS.rechargeFunds,
+    lazyload: true,
+    exact: true
+  },
+  {
+    path: `${MODULE_PATH}organizationConfigurationManagment/organizationConfiguration`,
+    component: ROUTERS.organizationConfiguration,
+    lazyload: true,
+    exact: true
+  },
+  {
+    path: `${MODULE_PATH}organizationConfigurationManagment/orderLimitSetting`,
+    component: ROUTERS.orderLimitSetting,
     lazyload: true,
     exact: true
   }

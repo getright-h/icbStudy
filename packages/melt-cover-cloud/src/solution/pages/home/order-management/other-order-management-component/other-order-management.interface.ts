@@ -2,9 +2,9 @@ import { IFormBaseComponentsUnion } from '@fch/fch-shop-web';
 
 /**
  * @export state变量定义和初始化
- * @class IOrderManagementListState
+ * @class IOtherOrderManagement IOtherOrderManagement
  */
-export class IOrderManagementListState {
+export class IOtherOrderManagement {
   searchForm = {
     index: 1,
     size: 10
@@ -81,10 +81,21 @@ export const schema: IFormBaseComponentsUnion[] = [
         props: {
           allowClear: true
         }
+      },
+      {
+        type: 'Input',
+        key: 'userNameAccount',
+        formItemProps: {
+          label: '账户'
+        },
+        props: {
+          placeholder: '搜索账户名, 账号',
+          allowClear: true
+        }
       }
     ],
     props: {
-      cols: 2
+      cols: 3
     }
   }
   // {

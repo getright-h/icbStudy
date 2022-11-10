@@ -1,10 +1,10 @@
-import { Button, Input, Modal } from 'antd';
+import { Button, Input, Modal, Typography } from 'antd';
 import * as React from 'react';
 import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem } from '@fch/fch-shop-web';
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manage.dto';
-import { IEquityPackageManageState } from '../equity-package-manage.interface';
-import style from '../equity-package-manage.module.less';
+// import { IEquityPackageManageState } from '../fund-account-setting.interface';
+import style from '../fund-account-setting.component';
 import { EQYITY_USE_TYPE, PAY_METHOD_TYPES } from '~/solution/shared/enums/home.enum';
 
 interface IAddEquityProps {
@@ -13,7 +13,8 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IEquityPackageManageState;
+  stateParent: any;
+  // stateParent: IEquityPackageManageState;
   handleFormChangeEvent?: Function;
   watch2?: IWidget;
 }
@@ -180,6 +181,10 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
         watch={watch2}
         schema={schema}
         slot={renderContent}
+        // schema type text
+        widget={{
+          Text: Typography.Text
+        }}
         props={{
           labelCol: { span: 8 },
           wrapperCol: { span: 16 },
@@ -230,19 +235,13 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         key: 'isTest',
-        type: 'RadioGroup',
-        hidden: true,
+        type: 'Text',
         formItemProps: {
-          label: '是否演示套餐包',
+          valuePropName: 'children',
+          label: '账户号',
           required: true,
           initialValue: 1,
           wrapperCol: { span: 10 }
-        },
-        props: {
-          options: [
-            { label: '是', value: true },
-            { label: '否', value: false }
-          ]
         }
       },
       {

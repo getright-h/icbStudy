@@ -25,6 +25,8 @@ export const ROUTERS = {
   orderDetail: () => import('~/solution/pages/home/order-management/order-detail-component/order-detail.component'),
   orderDoubleDetail: () =>
     import('~/solution/pages/home/order-management/order-double-detail-component/order-detail.component'),
+  orderOtherDetail: () =>
+    import('~/solution/pages/home/order-management/order-other-detail-component/order-detail.component'),
   equityPackageManage: () =>
     import('~/solution/pages/home/equity-management/equity-package-manage-component/equity-package-manage.component'),
   maintainModule: () => import('~/solution/pages/home/maintain-manage/maintain.module'),
@@ -37,5 +39,25 @@ export const ROUTERS = {
   preOrderList: () =>
     import('~/solution/pages/home/pre-order-management/pre-order-list-component/pre-order-list.component'),
   rightsListOfDouble: () =>
-    import('~/solution/pages/home/rights-consumer/rights-list-of-double-component/rights-list-of-double.component')
+    import('~/solution/pages/home/rights-consumer/rights-list-of-double-component/rights-list-of-double.component'),
+  fundAccountSetting: () =>
+    import(
+      '~/solution/pages/home/fund-account-management/fund-account-setting-component/fund-account-setting.component'
+    ),
+  fundDetail: () =>
+    import(
+      '~/solution/pages/home/fund-account-management/fund-account-setting-component/fund-detail-component/fund-detail.component'
+    ),
+  rechargeFunds: () =>
+    import('~/solution/pages/home/fund-account-management/recharge-funds-component/recharge-funds.component'),
+  organizationConfiguration: () =>
+    import(
+      '~/solution/pages/home/organization-configuration-management/organization-configuration-component/organization-configuration.component'
+    ),
+  orderLimitSetting: () =>
+    import(
+      '~/solution/pages/home/organization-configuration-management/order-limit-setting-component/order-limit-setting.component'
+    ),
+  otherOrderManagement: () =>
+    import('~/solution/pages/home/order-management/other-order-management-component/other-order-management.component')
 };
