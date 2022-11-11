@@ -7,31 +7,35 @@ export function demoColumns(action: Function): ColumnsType<any> {
   return [
     {
       title: '账户名',
-      dataIndex: 'orderNumber'
+      dataIndex: 'name'
     },
     {
       title: '账户号',
-      dataIndex: 'ownerName'
+      dataIndex: 'number'
     },
     {
       title: '支付类型',
-      dataIndex: 'ownerMobile'
+      dataIndex: 'typeText'
     },
     {
       title: '账户状态',
-      dataIndex: 'distributorName'
+      dataIndex: 'stateText'
     },
     {
       title: '账户累计充值总额',
-      dataIndex: 'ownerPlateNo'
+      dataIndex: 'totalIncome'
     },
     {
       title: '账户资金余额',
+      dataIndex: 'banance'
+    },
+    {
+      title: '锁定资金',
       dataIndex: 'ownerVinNo'
     },
     {
       title: '创建时间',
-      dataIndex: 'equityGroupName'
+      dataIndex: 'createTime'
     },
     {
       title: '操作',

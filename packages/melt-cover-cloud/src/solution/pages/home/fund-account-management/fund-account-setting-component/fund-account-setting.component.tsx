@@ -27,7 +27,7 @@ export default function FundAccountSettingComponent() {
     handleFormChangeEvent
   } = useFundAccountSettingStore();
 
-  const { visibleEdit, visibleCreat } = state;
+  const { visibleEdit, visibleCreat, isLoading, total, tableData } = state;
 
   // 渲染选择框函数
   function renderSelectItems() {
@@ -59,11 +59,11 @@ export default function FundAccountSettingComponent() {
       <>
         <ITableComponent
           columns={demoColumns(tableAction)}
-          isLoading={false}
+          isLoading={isLoading}
           pageIndex={1}
           pageSize={10}
-          data={[]}
-          total={0}
+          data={tableData}
+          total={total}
           // isLoading={isLoading}
           // pageIndex={searchForm.index}
           // pageSize={searchForm.size}

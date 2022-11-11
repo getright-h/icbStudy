@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Modal } from 'antd';
 import moment from 'moment';
+import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
+import { PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -16,6 +18,8 @@ export function useFundAccountSettingStore() {
 
   // 初始化请求表单信息
   useEffect(() => {
+    // 初始化获取表单信息
+    // getFSettingList();
     handleSearch();
   }, []);
 
@@ -52,24 +56,15 @@ export function useFundAccountSettingStore() {
 
   // todo 根据ezmoke 创建的网络请求
   const orderManageService: OrderManageService = new OrderManageService();
+  const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
 
-  /** 查询按钮 */
-  function handleSearch(page = 1, size = 10) {
-    const formValues = formRef.getFieldsValue();
-    const req = Object.assign({}, formValues, {
-      size,
-      page
-    });
-    handleGetOrderList(req);
-  }
-  /** get 获取表单信息 */
-  // todo 此处 dto 由 ezMOck 生成
-  function handleGetOrderList(params: QueryPaginOrderParams) {
+  // req 获取列表
+  function getFSettingList(params: PagedListReqType) {
     setStateWrap({
       isLoading: true
     });
-    orderManageService.getOrderList(params).subscribe(
-      (res: QueryPaginOrderReturn) => {
+    fundsOrganizitonOtherService.pagedList(params).subscribe(
+      res => {
         setStateWrap({
           tableData: res.dataList,
           total: res.total
@@ -84,6 +79,17 @@ export function useFundAccountSettingStore() {
         });
       }
     );
+  }
+
+  /** req 查询列表 查询按钮 */
+  function handleSearch(index = 1, size = 2, state = 0) {
+    const formValues = formRef.getFieldsValue();
+    const req = Object.assign({}, formValues, {
+      size,
+      index,
+      state
+    });
+    getFSettingList(req);
   }
 
   /** get 创建资金账户 */
