@@ -7,31 +7,39 @@ export function demoColumns(action: Function): ColumnsType<any> {
   return [
     {
       title: '账户名',
-      dataIndex: 'orderNumber'
+      dataIndex: 'bagNumber'
     },
     {
       title: '账户号',
-      dataIndex: 'ownerName'
+      dataIndex: 'bagName'
     },
     {
       title: '支付类型',
-      dataIndex: 'ownerMobile'
+      dataIndex: 'bagTypeText'
     },
     {
-      title: '账户状态',
-      dataIndex: 'distributorName'
+      title: '当前账户累计充值总额',
+      dataIndex: 'totalInCome'
     },
     {
-      title: '账户累计充值总额',
-      dataIndex: 'ownerPlateNo'
+      title: '当前账户资金余额',
+      dataIndex: 'balance'
     },
     {
-      title: '账户资金余额',
-      dataIndex: 'ownerVinNo'
+      title: '充值金额',
+      dataIndex: 'number'
+    },
+    {
+      title: '审核状态',
+      dataIndex: 'auditStateText'
     },
     {
       title: '创建时间',
-      dataIndex: 'equityGroupName'
+      dataIndex: 'createTime'
+    },
+    {
+      title: '备注',
+      dataIndex: 'remark'
     },
     {
       title: '操作',
@@ -44,10 +52,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
             <a onClick={() => action(row, '详情')}>详情</a>
             <Divider type="vertical" />
             {/* 状态为 通过 不通过 */}{' '}
-            {row?.xxx == 1 ? (
-              <a onClick={() => action(row, '充值审核')}>充值审核</a>
-            ) : (
+            {row?.auditState == 1 ? (
               <a onClick={() => action(row, '修改充值')}>修改充值</a>
+            ) : (
+              <a onClick={() => action(row, '充值审核')}>充值审核</a>
             )}
           </React.Fragment>
         );

@@ -15,7 +15,7 @@ export default function FundAccountSettingComponent() {
     state,
     formRef,
     form2,
-    watch2,
+    form3,
     handleSearch,
     toggleModalCreat,
     toggleModalEdit,
@@ -23,11 +23,10 @@ export default function FundAccountSettingComponent() {
     exportExcel,
     tableAction,
     changeTablePageIndex,
-    creatFundAccount,
-    handleFormChangeEvent
+    creatFundAccount
   } = useFundAccountSettingStore();
 
-  const { visibleEdit, visibleCreat, isLoading, total, tableData } = state;
+  const { visibleEdit, visibleCreat, isLoading, total, tableData, searchForm } = state;
 
   // 渲染选择框函数
   function renderSelectItems() {
@@ -60,32 +59,13 @@ export default function FundAccountSettingComponent() {
         <ITableComponent
           columns={demoColumns(tableAction)}
           isLoading={isLoading}
-          pageIndex={1}
-          pageSize={10}
           data={tableData}
           total={total}
-          // isLoading={isLoading}
-          // pageIndex={searchForm.index}
-          // pageSize={searchForm.size}
-          // data={tableData}
-          // total={total}
+          pageIndex={searchForm.index}
+          pageSize={searchForm.size}
           isPagination={true}
           changeTablePageIndex={(index: number, pageSize: number) => changeTablePageIndex(index, pageSize)}
         ></ITableComponent>
-        {/* <AddEquityModalComponent
-          visible={false}
-          title={'创建账户'}
-          // visible={visibleCreat}
-          handleCancel={() => toggleModalCreat()}
-          handleOk={() => creatFundAccount()}
-          form={form2}
-          // title={equityTitle}
-          // visible={state.visible}
-          // handleCancel={toggleModal}
-          // handleOk={handleOk}
-          // form={form1}
-          stateParent={state}
-        /> */}
       </>
     );
   }
@@ -96,26 +76,20 @@ export default function FundAccountSettingComponent() {
         leftFlex={1}
         rightFlex={5}
         pageName={'资金账户管理/资金账户设置'}
-        // pageLeft={renderPageLeft()}
         selectItems={renderSelectItems()}
         searchButton={renderSearchButtons()}
-        // otherSearchBtns={renderOtherButtons()}
         table={renderTable()}
       ></ITablePageComponent>
 
-      {/* 新增权益 */}
+      {/* 创建账户 */}
       <AddEquityModalComponent
         stateParent={state}
         title={'创建账户'}
-        // title={state.equityPackageTitle}
         visible={state.visibleCreat}
-        // visible={state.equityPackageTitle != '详情' && state.visibleAddPackage}
         handleCancel={toggleModalCreat}
         handleOk={creatFundAccount}
-        form={form2}
+        form={form3}
       />
-      <button onClick={() => toggleModalEdit()}>1</button>
-      <button onClick={() => tableAction('', '交易明细')}>2</button>
 
       {/* 编辑框 */}
       <AddPackageModalComponent
@@ -125,8 +99,6 @@ export default function FundAccountSettingComponent() {
         handleCancel={toggleModalEdit}
         handleOk={saveEdit}
         form={form2}
-        handleFormChangeEvent={handleFormChangeEvent}
-        watch2={watch2}
       />
     </div>
   );

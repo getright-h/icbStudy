@@ -212,7 +212,7 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'price',
+        key: 'id',
         type: 'Input',
         formItemProps: {
           label: '账号名称',
@@ -224,7 +224,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'distributor',
+        key: 'type',
         type: 'Select',
         formItemProps: {
           label: '支付类型',
@@ -237,7 +237,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'price',
+        key: 'number',
         type: 'Input',
         formItemProps: {
           label: '充值金额',
@@ -249,7 +249,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'price',
+        key: 'remark',
         type: 'Input',
         formItemProps: {
           label: '备注',

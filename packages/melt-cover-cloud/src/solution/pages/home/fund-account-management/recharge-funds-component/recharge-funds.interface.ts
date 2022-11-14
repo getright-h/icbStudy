@@ -15,7 +15,7 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         type: 'Input',
-        key: 'foo',
+        key: 'bagSearch',
         formItemProps: {
           label: '输入搜索'
         },
@@ -26,15 +26,32 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         type: 'Select',
-        key: 'foo',
+        key: 'bagState',
         formItemProps: {
           label: '状态'
         },
         props: {
           placeholder: '查看状态',
           options: [
-            { label: '正常', value: 1 },
-            { label: '冻结', value: 2 }
+            { label: '正常', value: 0 },
+            { label: '冻结', value: 1 }
+          ],
+          allowClear: true,
+          showSearch: true,
+          optionFilterProp: 'label'
+        }
+      },
+      {
+        type: 'Select',
+        key: 'auditState',
+        formItemProps: {
+          label: '审核'
+        },
+        props: {
+          placeholder: '查看审核',
+          options: [
+            { label: '通过', value: 1 },
+            { label: '未通过', value: 0 }
           ],
           allowClear: true,
           showSearch: true,
@@ -43,12 +60,13 @@ export const schema: IFormBaseComponentsUnion[] = [
       }
     ],
     props: {
-      cols: 2
+      cols: 3
     }
   }
 ];
 
 export class IRechargeFundsState {
+  auditId: string;
   visibleCreat = false;
   visibleAudit = false;
   visibleEditAudit = false;

@@ -285,6 +285,7 @@ export function useEquityPackageManageStore() {
 
   function handleSearch(page = 1, size = 10) {
     const formValues = form.getFieldsValue();
+    console.log('formValues', formValues);
     const { dateRange } = formValues;
     const req = Object.assign({}, formValues, {
       size,

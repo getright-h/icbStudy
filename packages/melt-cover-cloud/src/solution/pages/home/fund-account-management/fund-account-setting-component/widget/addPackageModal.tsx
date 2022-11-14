@@ -217,7 +217,7 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'distributor',
+        key: 'name',
         type: 'Input',
         formItemProps: {
           label: '账户名',
@@ -229,7 +229,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'distributor',
+        key: 'number',
         type: 'Text',
         formItemProps: {
           label: '账户号',
@@ -242,7 +242,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'distributor',
+        key: 'createTime',
         type: 'Text',
         formItemProps: {
           label: '创建时间',
@@ -255,7 +255,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'distributor',
+        key: 'type',
         type: 'Select',
         formItemProps: {
           label: '支付类型',
@@ -271,7 +271,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'distributor',
+        key: 'stateText',
         type: 'Text',
         formItemProps: {
           label: '账户状态',
@@ -281,7 +281,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'distributor',
+        key: 'totalInCome',
         type: 'Text',
         formItemProps: {
           label: '累计充值总额',
@@ -291,7 +291,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'distributor',
+        key: 'balance',
         type: 'Text',
         formItemProps: {
           label: '资金总额',
@@ -305,6 +305,17 @@ export const schema: IFormBaseComponentsUnion[] = [
         type: 'Text',
         formItemProps: {
           label: '锁定资金',
+          valuePropName: 'children',
+          required: true,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'bagId',
+        type: 'Text',
+        formItemProps: {
+          hidden: true,
+          label: 'bagId',
           valuePropName: 'children',
           required: true,
           wrapperCol: { span: 10 }

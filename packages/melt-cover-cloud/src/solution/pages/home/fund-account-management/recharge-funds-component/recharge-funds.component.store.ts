@@ -5,82 +5,46 @@ import { QueryPaginOrderParams, QueryPaginOrderReturn } from '~/solution/model/d
 import { OrderManageService } from '~/solution/model/services/order-manage.service';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Modal } from 'antd';
+import { message, Modal } from 'antd';
 import moment from 'moment';
+import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
+import { RechargePagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useRechargeFundsStore() {
   const { state, setStateWrap } = useStateStore(new IRechargeFundsState());
   const formRef = useForm();
   const form2 = useForm();
   const form3 = useForm();
+  const form4 = useForm();
   const history = useHistory();
 
   // 初始化请求表单信息
   useEffect(() => {
+    // 初始化获取表单信息
     handleSearch();
   }, []);
 
-  // widget watch2
-  const watch2 = {
-    /* distributor: (changedValues: any, values: any) => {
-      if (changedValues?.key) {
-        const isParentDistributor =
-          state.orgCanOptions.filter((item: any) => item.id == changedValues.key && item.isPlatform)?.length > 0;
-        handleGetDropEquity(changedValues.key, () => {
-          const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
-          form2.setFieldsValue({
-            equityList: defaultEquityList
-          });
-          form2.setSchema('isTest', schema => {
-            schema.hidden = !isParentDistributor;
-            return schema;
-          });
-        });
-      }
-    } */
-  };
-
-  function handleFormChangeEvent(changedValues: any, values: any) {
-    /* if (changedValues['distributor']?.key) {
-      handleGetDropEquity(changedValues['distributor'].key, (res: IResponseEquityResult[]) => {
-        const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
-        form2.setFieldsValue({
-          equityList: defaultEquityList
-        });
-      });
-    } */
-  }
-  function handleFormChangeEvent2(changedValues: any, values: any) {
-    /* if (changedValues['distributor']?.key) {
-      handleGetDropEquity(changedValues['distributor'].key, (res: IResponseEquityResult[]) => {
-        const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
-        form2.setFieldsValue({
-          equityList: defaultEquityList
-        });
-      });
-    } */
-  }
-
   // todo 根据ezmoke 创建的网络请求
-  const orderManageService: OrderManageService = new OrderManageService();
+  const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
 
   /** 查询按钮 */
-  function handleSearch(page = 1, size = 10) {
+  function handleSearch(index = 1, size = 10) {
     const formValues = formRef.getFieldsValue();
     const req = Object.assign({}, formValues, {
-      size,
-      page
+      index,
+      size
     });
-    handleGetOrderList(req);
+    getRFundsList(req);
   }
   /** get 获取表单信息 */
   // todo 此处 dto 由 ezMOck 生成
-  function handleGetOrderList(params: QueryPaginOrderParams) {
+  function getRFundsList(params: RechargePagedListReqType) {
     setStateWrap({
       isLoading: true
     });
-    orderManageService.getOrderList(params).subscribe(
-      (res: QueryPaginOrderReturn) => {
+
+    fundsOrganizitonOtherService.rechargePagedList(params).subscribe(
+      res => {
         setStateWrap({
           tableData: res.dataList,
           total: res.total
@@ -97,19 +61,59 @@ export function useRechargeFundsStore() {
     );
   }
 
-  /** get 创建资金账户 */
-  function creatFundAccount() {
-    console.log('发送了请求');
-    // todo 验证后关闭modal
-    toggleModalCreat();
+  /** req 创建资金账户 */
+  function recharge() {
+    const value = form2.getFieldsValue();
+    const req = {
+      bagId: value.req,
+      type: value.type,
+      number: value.number,
+      remark: value.remark
+    };
+    fundsOrganizitonOtherService.assetsRecord(req).subscribe(() => {
+      message.info('操作成功');
+      form2.resetFields();
+      // 重绘页面
+      handleSearch();
+    });
+    toggleModalRecharge();
   }
 
+  /** req 充值审核信息 */
   function saveAudit() {
+    const value = form4.getFieldsValue();
+
+    const req = {
+      id: state.auditId,
+      auditState: value.auditState,
+      auditRemark: value.auditRemark
+    };
+    fundsOrganizitonOtherService.audit(req).subscribe(() => {
+      message.info('操作成功');
+      form4.resetFields();
+      // 重绘页面
+      handleSearch();
+    });
     console.log('保存了审核信息');
     toggleModalAudit();
   }
 
+  /** req 审核不通过时 编辑充值信息 */
   function saveEditCharge() {
+    const value = form3.getFieldsValue();
+    const { id, type, number, remark } = value;
+    const req = {
+      id,
+      type,
+      number,
+      remark
+    };
+    fundsOrganizitonOtherService.edit(req).subscribe(() => {
+      message.info('操作成功');
+      form3.resetFields();
+      // 重绘页面
+      handleSearch();
+    });
     console.log('保存了审核信息');
     toggleModalEditCharge();
   }
@@ -123,18 +127,6 @@ export function useRechargeFundsStore() {
       ...formData,
       ...searchForm
     };
-    // todo req
-    /* rightsConsumerService.exportConsumeList(params).subscribe(
-      res => {
-        CommonUtil.downFile(res, `权益消费列表${moment(new Date()).format('YYYY-MM-DD')}.xlsx`);
-        ShowNotification.success('导出成功');
-        setStateWrap({ isLoading: false });
-      },
-      err => {
-        setStateWrap({ isLoading: false });
-        ShowNotification.error(err);
-      }
-    ); */
   }
 
   // 冻结账户
@@ -146,23 +138,25 @@ export function useRechargeFundsStore() {
 
   // 表单体按钮操作函数
   function tableAction(row: any, actionName: string) {
+    console.log('row', row);
+
     if (actionName == '充值审核') {
-      console.log('充值审核，弹出modal');
-      // todo 开启对应modal Top-up audit
+      // 同时保存对应列的id
+      setStateWrap({ auditId: row.id });
+      toggleModalAudit();
     } else if (actionName == '修改充值') {
+      // 回显数据 主要是id
+      form3.setFieldsValue({ id: row.id });
       toggleModalEditCharge();
-      console.log('修改充值，弹出modal');
-      // todo 开启对应modal Top-up audit
     } else if (actionName == '详情') {
       // todo 携参跳转 id乱码
       history.push('rechargeFunds/rechargeDetail/' + 2);
-      // history.push('fundDetail?id=' + row.id);
       console.log('详情');
     }
   }
 
   // 控制Modal框
-  function toggleModalCreat() {
+  function toggleModalRecharge() {
     setStateWrap({ visibleCreat: !state.visibleCreat });
   }
   function toggleModalAudit() {
@@ -193,18 +187,16 @@ export function useRechargeFundsStore() {
     formRef,
     form2,
     form3,
-    watch2,
+    form4,
     saveAudit,
     saveEditCharge,
     handleSearch,
-    toggleModalCreat,
+    toggleModalRecharge,
     toggleModalEditCharge,
     exportExcel,
     tableAction,
     changeTablePageIndex,
-    creatFundAccount,
-    toggleModalAudit,
-    handleFormChangeEvent,
-    handleFormChangeEvent2
+    recharge,
+    toggleModalAudit
   };
 }

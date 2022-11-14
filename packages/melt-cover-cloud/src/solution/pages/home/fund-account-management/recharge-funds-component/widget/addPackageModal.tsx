@@ -301,6 +301,32 @@ export const schema: IFormBaseComponentsUnion[] = [
           initialValue: 1,
           wrapperCol: { span: 10 }
         }
+      },
+      {
+        key: 'auditState',
+        type: 'Select',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '审核结果',
+          required: true,
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          options: [
+            { label: '通过', value: 1 },
+            { label: '不通过', value: 0 }
+          ]
+        }
+      },
+      {
+        key: 'auditRemark',
+        type: 'Input',
+        formItemProps: {
+          label: '备注',
+          required: true,
+          wrapperCol: { span: 10 }
+        }
       }
     ],
     props: {

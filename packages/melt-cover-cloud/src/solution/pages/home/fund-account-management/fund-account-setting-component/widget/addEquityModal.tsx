@@ -45,7 +45,7 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
             <Button type="primary" onClick={handleCancel}>
               取消
             </Button>
-            <Button loading={stateParent.isLoadingModal1} type="primary" onClick={handleOk}>
+            <Button loading={stateParent.isLoadingModal3} type="primary" onClick={handleOk}>
               确定
             </Button>
           </>
@@ -63,7 +63,7 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'path',
+        key: 'name',
         type: 'Input',
         formItemProps: {
           label: '账户名',
@@ -74,7 +74,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'useType',
+        key: 'state',
         type: 'RadioGroup',
         formItemProps: {
           label: '账户状态',
@@ -84,13 +84,13 @@ export const schema: IFormBaseComponentsUnion[] = [
         props: {
           placeholder: '',
           options: [
-            { label: '正常', value: 1 },
-            { label: '冻结', value: 2 }
+            { label: '正常', value: 0 },
+            { label: '冻结', value: 1 }
           ]
         }
       },
       {
-        key: 'path',
+        key: 'remark',
         type: 'Input',
         formItemProps: {
           label: '备注',

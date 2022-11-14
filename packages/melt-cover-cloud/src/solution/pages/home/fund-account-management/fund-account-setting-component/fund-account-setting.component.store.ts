@@ -5,57 +5,28 @@ import { QueryPaginOrderParams, QueryPaginOrderReturn } from '~/solution/model/d
 import { OrderManageService } from '~/solution/model/services/order-manage.service';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
-import { Modal } from 'antd';
+import { message, Modal } from 'antd';
 import moment from 'moment';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { PagedListReqType, PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
+  // 查询框
   const formRef = useForm();
+  // 编辑
   const form2 = useForm();
+  // 新建
+  const form3 = useForm();
   const history = useHistory();
 
   // 初始化请求表单信息
   useEffect(() => {
     // 初始化获取表单信息
-    // getFSettingList();
     handleSearch();
   }, []);
 
-  // widget watch2
-  const watch2 = {
-    /* distributor: (changedValues: any, values: any) => {
-      if (changedValues?.key) {
-        const isParentDistributor =
-          state.orgCanOptions.filter((item: any) => item.id == changedValues.key && item.isPlatform)?.length > 0;
-        handleGetDropEquity(changedValues.key, () => {
-          const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
-          form2.setFieldsValue({
-            equityList: defaultEquityList
-          });
-          form2.setSchema('isTest', schema => {
-            schema.hidden = !isParentDistributor;
-            return schema;
-          });
-        });
-      }
-    } */
-  };
-
-  function handleFormChangeEvent(changedValues: any, values: any) {
-    /* if (changedValues['distributor']?.key) {
-      handleGetDropEquity(changedValues['distributor'].key, (res: IResponseEquityResult[]) => {
-        const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
-        form2.setFieldsValue({
-          equityList: defaultEquityList
-        });
-      });
-    } */
-  }
-
   // todo 根据ezmoke 创建的网络请求
-  const orderManageService: OrderManageService = new OrderManageService();
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
 
   // req 获取列表
@@ -82,8 +53,9 @@ export function useFundAccountSettingStore() {
   }
 
   /** req 查询列表 查询按钮 */
-  function handleSearch(index = 1, size = 2, state = 0) {
+  function handleSearch(index = 1, size = 10, state = 0) {
     const formValues = formRef.getFieldsValue();
+
     const req = Object.assign({}, formValues, {
       size,
       index,
@@ -92,16 +64,66 @@ export function useFundAccountSettingStore() {
     getFSettingList(req);
   }
 
-  /** get 创建资金账户 */
-  function creatFundAccount() {
-    console.log('发送了请求');
-    // todo 验证后关闭modal
-    toggleModalCreat();
-  }
+  /** req 编辑框提交 */
 
   function saveEdit() {
     console.log('保存了编辑信息');
+    const values = form2.getFieldsValue();
+    console.log(values);
+    const req = {
+      bagId: values.bagId,
+      name: values.name,
+      type: values.type
+    };
+    setStateWrap({
+      isLoadingModal2: true
+    });
+    fundsOrganizitonOtherService.set(req).subscribe(
+      () => {
+        message.info('操作成功');
+        form2.resetFields();
+        // 重绘页面
+        handleSearch();
+      },
+      () => {
+        setStateWrap({
+          isLoadingModal2: false
+        });
+      }
+    );
+
     toggleModalEdit();
+  }
+
+  /** req 创建资金账户 */
+  function creatFundAccount() {
+    const values = form3.getFieldsValue();
+    console.log('form3', values);
+    const req = {
+      name: values.name,
+      state: values.state,
+      remark: values.remark
+    };
+    setStateWrap({
+      isLoadingModal3: true
+    });
+    fundsOrganizitonOtherService.bag(req).subscribe(
+      () => {
+        message.info('操作成功');
+        form3.resetFields();
+        // 重绘页面
+        handleSearch();
+      },
+      () => {
+        setStateWrap({
+          isLoadingModal3: false
+        });
+      }
+    );
+
+    console.log('创建资金账户');
+    // todo 验证后关闭modal
+    toggleModalCreat();
   }
 
   // 导出表格
@@ -140,7 +162,10 @@ export function useFundAccountSettingStore() {
   function tableAction(row: any, actionName: string) {
     console.log(row, '表单体按钮操作函数');
     if (actionName == '编辑') {
-      console.log('编辑');
+      // 显示模态框
+      toggleModalEdit();
+      // 回显数据到框内
+      handleEditContext(row);
     } else if (actionName == '交易明细') {
       // todo 携参跳转 id乱码
       history.push('fundAccountSetting/fundDetail/' + 2);
@@ -178,11 +203,16 @@ export function useFundAccountSettingStore() {
     handleSearch(index, pageSize);
   }
 
+  // 回显函数 edit
+  function handleEditContext(row: any) {
+    form2.setFieldsValue({ ...row });
+  }
+
   return {
     state,
     formRef,
     form2,
-    watch2,
+    form3,
     saveEdit,
     handleSearch,
     toggleModalCreat,
@@ -190,7 +220,6 @@ export function useFundAccountSettingStore() {
     tableAction,
     changeTablePageIndex,
     creatFundAccount,
-    toggleModalEdit,
-    handleFormChangeEvent
+    toggleModalEdit
   };
 }

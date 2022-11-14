@@ -5,6 +5,7 @@ import { IUploadImgComponent } from '~/framework/components/component.module';
 import { uuid } from '~/framework/util/common/tool';
 import { EQYITY_TYPE, EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
 import { IEquityPackageManageState } from '../equity-package-manage.interface';
+import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
 
 interface IAddEquityProps {
   title: string;
@@ -13,6 +14,32 @@ interface IAddEquityProps {
   handleCancel: () => void;
   visible: boolean;
   stateParent: IEquityPackageManageState;
+}
+
+/**req 获取机构下拉框选项 */
+let data: { label: any; value: any }[] = [];
+const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
+
+function handleChange() {
+  console.log(1);
+
+  // value 是输入值
+  const params = {
+    index: 1,
+    size: 10,
+    state: 0,
+    bagSearch: ''
+  };
+
+  fundsOrganizitonOtherService.pagedList(params).subscribe(res => {
+    const { dataList } = res;
+    data = dataList.map((item: any) => ({
+      label: item[0],
+      value: item[0]
+    }));
+
+    // callback(data);
+  });
 }
 
 export default function AddEquityModalComponent(props: IAddEquityProps) {
@@ -63,19 +90,24 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'path',
-        type: 'Input',
+        key: 'bagId',
+        type: 'SelectLoading',
         formItemProps: {
           label: '账户名',
           required: true
         },
         props: {
+          reqUrl: 'currency/manage/currency/bag/pagedList',
           placeholder: '请输入账户名',
-          readOnly: true
+          onChange: handleChange(),
+          options: (data || []).map(d => ({
+            value: d.value,
+            label: d.label
+          }))
         }
       },
       {
-        key: 'useType',
+        key: 'type',
         type: 'Select',
         formItemProps: {
           label: '支付类型',
@@ -87,7 +119,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'path',
+        key: 'number',
         type: 'Input',
         formItemProps: {
           label: '充值金额',
@@ -98,7 +130,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'path',
+        key: 'remark',
         type: 'Input',
         formItemProps: {
           label: '备注',

@@ -17,9 +17,9 @@ export default function RechargeFundsComponent() {
     formRef,
     form2,
     form3,
-    watch2,
+    form4,
     handleSearch,
-    toggleModalCreat,
+    toggleModalRecharge,
     toggleModalAudit,
     toggleModalEditCharge,
     saveAudit,
@@ -27,12 +27,10 @@ export default function RechargeFundsComponent() {
     exportExcel,
     tableAction,
     changeTablePageIndex,
-    creatFundAccount,
-    handleFormChangeEvent,
-    handleFormChangeEvent2
+    recharge
   } = useRechargeFundsStore();
 
-  const { visibleAudit, visibleCreat } = state;
+  const { visibleAudit, visibleCreat, tableData, total, isLoading, searchForm } = state;
 
   // 渲染选择框函数
   function renderSelectItems() {
@@ -48,7 +46,7 @@ export default function RechargeFundsComponent() {
         <Button type="primary" className="ml20" onClick={() => handleSearch()}>
           查询
         </Button>
-        <Button type="primary" className="ml20" onClick={() => toggleModalCreat()}>
+        <Button type="primary" className="ml20" onClick={() => toggleModalRecharge()}>
           账户充值
         </Button>
         <Button type="primary" className="ml20" onClick={() => exportExcel()}>
@@ -64,16 +62,11 @@ export default function RechargeFundsComponent() {
       <>
         <ITableComponent
           columns={demoColumns(tableAction)}
-          isLoading={false}
-          pageIndex={1}
-          pageSize={10}
-          data={[]}
-          total={0}
-          // isLoading={isLoading}
-          // pageIndex={searchForm.index}
-          // pageSize={searchForm.size}
-          // data={tableData}
-          // total={total}
+          isLoading={isLoading}
+          pageIndex={searchForm.index}
+          pageSize={searchForm.size}
+          data={tableData}
+          total={total}
           isPagination={true}
           changeTablePageIndex={(index: number, pageSize: number) => changeTablePageIndex(index, pageSize)}
         ></ITableComponent>
@@ -102,8 +95,6 @@ export default function RechargeFundsComponent() {
         handleCancel={toggleModalEditCharge}
         handleOk={saveEditCharge}
         form={form3}
-        handleFormChangeEvent={handleFormChangeEvent2}
-        watch2={watch2}
       />
 
       {/* 账户充值 */}
@@ -113,8 +104,8 @@ export default function RechargeFundsComponent() {
         // title={state.equityPackageTitle}
         visible={state.visibleCreat}
         // visible={state.equityPackageTitle != '详情' && state.visibleAddPackage}
-        handleCancel={toggleModalCreat}
-        handleOk={creatFundAccount}
+        handleCancel={toggleModalRecharge}
+        handleOk={recharge}
         form={form2}
       />
       <button onClick={() => toggleModalAudit()}>充值审核</button>
@@ -128,9 +119,7 @@ export default function RechargeFundsComponent() {
         visible={state.visibleAudit}
         handleCancel={toggleModalAudit}
         handleOk={saveAudit}
-        form={form2}
-        handleFormChangeEvent={handleFormChangeEvent}
-        watch2={watch2}
+        form={form4}
       />
     </div>
   );

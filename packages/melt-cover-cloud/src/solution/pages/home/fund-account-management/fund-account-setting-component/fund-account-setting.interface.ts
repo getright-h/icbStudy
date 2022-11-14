@@ -14,6 +14,8 @@ export class IFundAccountSettingState {
   isLoading = false;
   visibleCreat = false;
   visibleEdit = false;
+  isLoadingModal2: boolean;
+  isLoadingModal3: boolean;
 }
 /**
  * @exports 表单组件配置
@@ -25,7 +27,7 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         type: 'Input',
-        key: 'foo',
+        key: 'bagSearch',
         formItemProps: {
           label: '输入搜索'
         },
@@ -36,15 +38,15 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         type: 'Select',
-        key: 'foo',
+        key: 'bagState',
         formItemProps: {
           label: '状态'
         },
         props: {
           placeholder: '查看状态',
           options: [
-            { label: '正常', value: 1 },
-            { label: '冻结', value: 2 }
+            { label: '正常', value: 0 },
+            { label: '冻结', value: 1 }
           ],
           allowClear: true,
           showSearch: true,
