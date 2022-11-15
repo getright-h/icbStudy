@@ -9,10 +9,18 @@ import {
   FiltListReqType,
   FiltListResType,
   FundsOrganizitonOtherDTO,
+  GetSubOrganizationResType,
+  LimitPagedListReqType,
+  LimitPagedListResType,
+  LogPageListReqType,
+  LogPageListResType,
+  OrganizationPagedListResType,
   PagedListReqType,
   PagedListResType,
   RechargePagedListReqType,
   RechargePagedListResType,
+  SetLimitReqType,
+  SetOrganizationConfReqType,
   SetReqType
 } from '../dto/funds-organiziton-other.dto';
 
@@ -31,6 +39,18 @@ const EDIT = 'currency/manage/currency/assetsRecord/edit'; //编辑充值记录
 const BAG = 'currency/manage/currency/bag'; //新增账户钱包
 
 const SET = 'currency/manage/currency/bag/set'; //编辑账户钱包
+
+const GET_SUB_ORGANIZATION = 'currency/manage/currency/organizationSet/getSubOrganization'; //[机构配置-左侧树形列表]查询子级组织结构
+
+const ORGANIZATION_PAGED_LIST = 'currency/manage/currency/organizationSet/pagedList'; //[机构配置-右侧分页查询]机构设置管理分页列表
+
+const LIMIT_PAGED_LIST = 'currency/manage/currency/organizationOrderLimit/pagedList'; //[出单额度设置-右侧分页查询]机构订单限制管理分页列表
+
+const SET_LIMIT = 'currency/manage/currency/organizationOrderLimit/Set'; //[出单额度设置-设置额度]配置机构订单限制
+
+const LOG_PAGE_LIST = 'currency/manage/currency/organizationOrderLimit/logPageList'; //[出单额度设置-日志]配置机构订单限制日志分页列表
+
+const SET_ORGANIZATION_CONF = 'currency/manage/currency/organizationSet/Set'; //[机构配置-配置]配置机构设置
 
 @DepUtil.Injectable()
 export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
@@ -79,5 +99,39 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   // 编辑账户钱包
   set(params: SetReqType): Observable<{}> {
     return this.requestService.post(SET, params);
+  }
+
+  // [机构配置-左侧树形列表]查询子级组织结构
+  getSubOrganization(params: { parentId: string }): Observable<GetSubOrganizationResType> {
+    return this.requestService.get(GET_SUB_ORGANIZATION, params);
+  }
+
+  // [机构配置-右侧分页查询]机构设置管理分页列表
+  organizationPagedList = (
+    params: PagedListReqType
+  ): Observable<{ total: number; dataList: OrganizationPagedListResType[] }> => {
+    return this.requestService.post(ORGANIZATION_PAGED_LIST, params);
+  };
+
+  // [出单额度设置-右侧分页查询]机构订单限制管理分页列表
+  orderLimitPagedList = (
+    params: LimitPagedListReqType
+  ): Observable<{ total: number; dataList: LimitPagedListResType[] }> => {
+    return this.requestService.post(LIMIT_PAGED_LIST, params);
+  };
+
+  // [出单额度设置-设置额度]配置机构订单限制
+  setLimit(params: SetLimitReqType): Observable<{}> {
+    return this.requestService.post(SET_LIMIT, params);
+  }
+
+  // [出单额度设置-日志]配置机构订单限制日志分页列表
+  logPageList = (params: LogPageListReqType): Observable<{ total: number; dataList: LogPageListResType[] }> => {
+    return this.requestService.post(LOG_PAGE_LIST, params);
+  };
+
+  // [机构配置-配置]配置机构设置
+  setOrganizationConf(params: SetOrganizationConfReqType): Observable<{}> {
+    return this.requestService.post(SET_ORGANIZATION_CONF, params);
   }
 }

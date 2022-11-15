@@ -6,50 +6,30 @@ import { IStatusEquity } from '~/solution/shared/constant/select.const';
  * @export state变量定义和初始化
  * @class IEquityPackageManageState
  */
-export class IOrganizationConfigurationState {
-  searchForm = {
-    index: 1,
-    size: 10
-  };
-  searchFormEquity = {
-    index: 1,
-    size: 10
-  };
-  total: number;
-  totalEquity: number;
-  isLoading = false;
-  tableData: any = [];
-  tableDataEquityList: IResponseEquityResult[];
-  isLoadingEquity = false;
-  visible = false;
-  visibleAddPackage = false;
-  equityList: IResponseEquityResult[];
-  equityTitle = '添加权益';
-  equityPackageTitle = '添加权益包';
-  disableFooter = false;
-  isLoadingModal1 = false;
-  isLoadingModal2 = false;
-  isBelonging = true;
-  currentEquity: IResponseEquityResult;
-  orgOptions: any = [];
-  orgCanOptions: any = [];
-  equityDropList: (IResponseEquityResult & { disabled?: boolean })[];
-  isParentSelected = false;
-  detail: DataList;
-  /** 下级机构选择框数据 */
-  treeData: OrgData[] = [];
+export class IOrganizationConfigState {}
+
+export const visibleList = {
+  settingVisible: false
+};
+
+export enum ACTION_TYPE {
+  SETTING
 }
 
-/** 机构数据类型 */
-export type OrgData = {
-  id?: string;
-  value?: string;
-  name?: string;
-  label?: string;
-  isLeaf: boolean;
-  isSelect?: boolean;
-  children?: OrgData[];
-};
+export enum BAG_STATE_ENUM {
+  /** 正常 */
+  normal = 0,
+  /** 冻结 */
+  frozen = 1,
+  /** 预警 */
+  warn = 2
+}
+
+export const BagStateOptions = [
+  { label: '正常', value: BAG_STATE_ENUM.normal, color: 'green' },
+  { label: '冻结', value: BAG_STATE_ENUM.frozen, color: 'blue' },
+  { label: '预警', value: BAG_STATE_ENUM.warn, color: 'orange' }
+];
 
 export const schema: IFormBaseComponentsUnion[] = [
   {
@@ -57,23 +37,26 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'distributorId',
+        key: 'bagSearch',
         type: 'Input',
         formItemProps: {
-          label: '创建机构'
+          label: '账户'
         },
         props: {
-          placeholder: '输入账户名称/组织代码'
+          allowClear: true,
+          placeholder: '请输入账户名称/账户号'
         }
       },
       {
-        key: 'status',
+        key: 'bagState',
         type: 'Select',
         formItemProps: {
-          label: '预警状态'
+          label: '状态'
         },
         props: {
-          options: [{ label: '正常' }, { label: '预警' }]
+          allowClear: true,
+          placeholder: '请选择状态',
+          options: BagStateOptions
         }
       }
     ],

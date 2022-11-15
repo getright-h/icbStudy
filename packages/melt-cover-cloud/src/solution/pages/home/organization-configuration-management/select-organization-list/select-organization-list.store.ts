@@ -1,12 +1,14 @@
 import { useStateStore } from '@fch/fch-tool';
 import { cloneDeep } from 'lodash';
 import { useEffect } from 'react';
+import { GetSubOrganizationResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 import { EquityPackageManageService } from '~/solution/model/services/equity-package-manage.service';
-import { SelectOrganizationListState } from './select-organization-list.interface';
+import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
+import { SelectOrganizationListProps, SelectOrganizationListState } from './select-organization-list.interface';
 
-export function useOrganizationListStore() {
+export function useOrganizationListStore(props: SelectOrganizationListProps) {
   const { state, setStateWrap, getState } = useStateStore(new SelectOrganizationListState());
-  const equityPackageManageService: EquityPackageManageService = new EquityPackageManageService();
+  const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
   useEffect(() => {
     getTableData();
   }, []);
@@ -14,27 +16,21 @@ export function useOrganizationListStore() {
   function getTableData() {
     // form.validateFields().then(values => {
     setStateWrap({ isLoading: true });
-    equityPackageManageService
-      .getPackageClassifylist({
-        // ...values,
-        // coursePackageClassifyId: values?.coursePackageClassifyId?.[0],
-        // state: STATE_ENUM.Enable
-      })
-      .subscribe(
-        (res: any) => {
-          const tableData = cloneDeep(
-            res.map((item: any) => {
-              item.children = [];
-              return item;
-            })
-          );
-          setStateWrap({ tableData, total: res?.length, isLoading: false });
-        },
-        () => {
-          setStateWrap({ isLoading: false });
-        }
-      );
-    // });
+    fundsOrganizitonOtherService.getSubOrganization({ parentId: '' }).subscribe(
+      (res: any) => {
+        const tableData = cloneDeep(
+          res.map((item: any) => {
+            item.children = [];
+            return item;
+          })
+        );
+        setStateWrap({ tableData, total: res?.length, isLoading: false });
+        selectFn(tableData?.[0]);
+      },
+      () => {
+        setStateWrap({ isLoading: false });
+      }
+    );
   }
 
   function onExpand(expanded: any, record: any) {
@@ -42,16 +38,16 @@ export function useOrganizationListStore() {
       return;
     }
     setStateWrap({ isLoading: true });
-    teachingService
-      .getPackageClassifylist({
+    fundsOrganizitonOtherService
+      .getSubOrganization({
         parentId: record['id']
-        // state: STATE_ENUM.Enable
       })
       .subscribe(
         (res: any) => {
           const tableData = state.tableData.map((item: any) => {
             if (item.id === record['id']) {
-              item.children = res.map((o: any) => ({ ...o, isLeaf: true }));
+              // item.children = res.map((o: any) => ({ ...o, isLeaf: true }));
+              item.children = res.map((o: any) => ({ ...o }));
             }
             return item;
           });
@@ -63,10 +59,15 @@ export function useOrganizationListStore() {
       );
   }
 
-  function changeTablePageIndex(pageIndex: number, pageSize: number) {
-    setStateWrap({ pageIndex, pageSize });
-    getTableData();
+  // function changeTablePageIndex(pageIndex: number, pageSize: number) {
+  //   setStateWrap({ pageIndex, pageSize });
+  //   getTableData();
+  // }
+
+  function selectFn(record: GetSubOrganizationResType) {
+    setStateWrap({ currentData: record });
+    props?.selectEvent?.(record);
   }
 
-  return { state, changeTablePageIndex, onExpand };
+  return { state, onExpand, selectFn };
 }
