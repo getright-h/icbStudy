@@ -26,7 +26,7 @@ export default function FundAccountSettingComponent() {
     creatFundAccount
   } = useFundAccountSettingStore();
 
-  const { visibleEdit, visibleCreat, isLoading, total, tableData, searchForm } = state;
+  const { isLoading, total, tableData, searchForm } = state;
 
   // 渲染选择框函数
   function renderSelectItems() {

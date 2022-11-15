@@ -51,10 +51,15 @@ export function demoColumns(action: Function): ColumnsType<any> {
           <React.Fragment>
             <a onClick={() => action(row, '详情')}>详情</a>
             <Divider type="vertical" />
-            {/* 状态为 通过 不通过 */}{' '}
-            {row?.auditState == 1 ? (
+            {/* 状态为 通过 不通过 */}
+            {row?.auditState == 0 ? (
+              // 未通过
               <a onClick={() => action(row, '修改充值')}>修改充值</a>
+            ) : // 已通过
+            row?.auditState == 1 ? (
+              <></>
             ) : (
+              // 未审核
               <a onClick={() => action(row, '充值审核')}>充值审核</a>
             )}
           </React.Fragment>

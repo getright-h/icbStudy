@@ -8,6 +8,8 @@ function getRootUrl(url: string) {
   let returnInfo = process.env.MAIN;
   if (!!~url.indexOf('/VerifyCode') || !!~url.indexOf('/Login')) {
     returnInfo = process.env.LOGIN;
+  } else if (url.includes('currency/manage/currency')) {
+    returnInfo = process.env.FOOS;
   } else if (!!~url.indexOf('Appointment')) {
     returnInfo = process.env.APPOINT;
   } else if (!!~url.indexOf('order/') || !!~url.indexOf('OcrScan/')) {
@@ -22,11 +24,10 @@ function getRootUrl(url: string) {
     returnInfo = process.env.TEMPLATE;
   } else if (url.includes('double/constitution')) {
     returnInfo = process.env.OPEN;
-  } else if (url.includes('currency/manage/currency')) {
-    returnInfo = process.env.FOOS;
   } else {
     returnInfo = process.env.MAIN;
   }
+  console.log('url', url, returnInfo);
   return returnInfo;
 }
 

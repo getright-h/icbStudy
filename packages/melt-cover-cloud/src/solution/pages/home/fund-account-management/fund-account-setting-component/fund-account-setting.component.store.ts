@@ -1,14 +1,11 @@
 import { IFundAccountSettingState } from './fund-account-setting.interface';
-import { CommonUtil, useStateStore } from '@fch/fch-tool';
-import { ShowNotification, useForm } from '@fch/fch-shop-web';
-import { QueryPaginOrderParams, QueryPaginOrderReturn } from '~/solution/model/dto/order-manage.dto';
-import { OrderManageService } from '~/solution/model/services/order-manage.service';
+import { useStateStore } from '@fch/fch-tool';
+import { useForm } from '@fch/fch-shop-web';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { message, Modal } from 'antd';
-import moment from 'moment';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { PagedListReqType, PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { PagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -152,7 +149,7 @@ export function useFundAccountSettingStore() {
   }
 
   // 冻结账户
-  function frozenAccount(row) {
+  function frozenAccount(row: any) {
     console.log('冻结了账户');
 
     // todo 网络请求

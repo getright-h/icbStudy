@@ -24,7 +24,7 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         type: 'Input',
-        key: 'vhicleKeyWord',
+        key: 'vehicleSerach',
         formItemProps: {
           label: '车辆信息'
         },
@@ -35,41 +35,27 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         type: 'Input',
-        key: 'userKeyWord',
+        key: 'ownerSerach',
         formItemProps: {
           label: '用户信息'
         },
         props: {
-          placeholder: '电话姓名',
+          placeholder: '电话或姓名',
           allowClear: true
         }
       },
       {
-        type: 'Select',
+        type: 'ISelectDistributor',
         key: 'distributorId',
         formItemProps: {
           label: '所属机构'
-        },
-        props: {
-          placeholder: '查看所属机构',
-          options: [],
-          allowClear: true,
-          showSearch: true,
-          optionFilterProp: 'label'
         }
       },
       {
-        type: 'Select',
+        type: 'ISelectEquityGroup',
         key: 'equityGroupId',
         formItemProps: {
           label: '购买套餐包'
-        },
-        props: {
-          placeholder: '请选择套餐包',
-          options: [],
-          allowClear: true,
-          showSearch: true,
-          optionFilterProp: 'label'
         }
       },
       {
@@ -84,7 +70,7 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         type: 'Input',
-        key: 'userNameAccount',
+        key: 'bagSearch',
         formItemProps: {
           label: '账户'
         },

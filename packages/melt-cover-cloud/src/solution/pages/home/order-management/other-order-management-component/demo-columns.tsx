@@ -30,11 +30,11 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '账户名',
-      dataIndex: 'userName'
+      dataIndex: 'bagName'
     },
     {
-      title: '账号名',
-      dataIndex: 'userAccount'
+      title: '账户号',
+      dataIndex: 'bagNumber'
     },
     {
       title: '车牌号',
@@ -58,7 +58,11 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '状态',
-      dataIndex: 'xiaoXiuStatusStr'
+      dataIndex: 'orderStateTxt'
+    },
+    {
+      title: '原因',
+      dataIndex: 'orderErrorMsg'
     },
     {
       title: '备注',
@@ -66,14 +70,9 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '支付方式',
-      dataIndex: 'payMethod',
+      dataIndex: 'payTypeText',
       render: (v: number) => PAY_METHOD[v] || '-'
     },
-    /* {
-      title: '优惠方式',
-      dataIndex: 'discountMethod',
-      render: (v: number) => DISCOUNT_METHOD[v] || '-'
-    }, */
     {
       title: '操作',
       dataIndex: 'action',
@@ -85,9 +84,6 @@ export function demoColumns(action: Function): ColumnsType<any> {
             <a onClick={() => action(row, '详情')}>详情</a>
             <Divider type="vertical" />
             <a onClick={() => action(row, '发起扣款')}>发起扣款</a>
-            {/* <Divider type="vertical" />
-            <a onClick={() => action(row, '编辑')}>编辑</a>
-            <a onClick={() => action(row, '删除')}>删除</a> */}
           </React.Fragment>
         );
       }

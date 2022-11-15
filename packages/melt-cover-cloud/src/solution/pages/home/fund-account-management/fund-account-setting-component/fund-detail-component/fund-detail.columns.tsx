@@ -30,7 +30,11 @@ export function spendingColumns(): ColumnsType<any> {
   return [
     {
       title: '支出金额',
-      dataIndex: 'createTime'
+      dataIndex: 'createTime',
+      // todo 后端给的一个状态值，在金额这一栏前面加个 + -
+      render: (value, row) => {
+        return row.isNumber ? `${row.equityName}1次` : `${value}元抵扣`;
+      }
     },
     {
       title: '支出类型',
@@ -38,10 +42,7 @@ export function spendingColumns(): ColumnsType<any> {
     },
     {
       title: '操作值时间',
-      dataIndex: 'discountPrice',
-      render: (value, row) => {
-        return row.isNumber ? `${row.equityName}1次` : `${value}元抵扣`;
-      }
+      dataIndex: 'discountPrice'
     },
     {
       title: '操作人',

@@ -9,6 +9,7 @@ export class IFundAccountSettingState {
     index: 1,
     size: 10
   };
+  disableFooter = false;
   total: number;
   tableData: any = [];
   isLoading = false;

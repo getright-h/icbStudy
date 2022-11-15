@@ -97,3 +97,85 @@ export interface SetReqType {
   bagId: string;
   name: string;
 }
+
+// [其他订单管理-分页查询]订单管理分页列表
+export interface OrderPagedListReqType {
+  index: number;
+  size: number;
+  bagSearch: string;
+  ownerSerach: string;
+  vehicleSerach: string;
+  ceateTimeBegin: number;
+  ceateTimeEnd: number;
+  equityGroupId: string;
+  distributorId: string;
+}
+
+export interface OrderPagedListResType {
+  id: string;
+  orderNumber: string;
+  bagId: string;
+  bagNumber: string;
+  bagName: string;
+  distributorId: string;
+  distributorName: string;
+  ownerId: string;
+  ownerName: string;
+  ownerMobile: string;
+  ownerVinNo: string;
+  ownerPlateNo: string;
+  remark: string;
+  vehicleType: string;
+  vehicleClass: string;
+  price: number;
+  equityGroupId: string;
+  equityGroupName: string;
+  equityGroupPrice: number;
+  additionalImages: string;
+  images: string;
+  createTime: string;
+  orderState: number;
+  orderStateTxt: string;
+  orderErrorMsg: string;
+  orderWorkFlowLog: string;
+  payType: number;
+  payTypeText: string;
+}
+
+// [其他订单管理-订单明细查询]订单明细查询
+export interface DetailReqType {
+  id: string;
+}
+
+export interface DetailResType {
+  id: string;
+  orderNumber: string;
+  bagId: string;
+  bagNumber: string;
+  bagName: string;
+  distributorId: string;
+  distributorName: string;
+  ownerId: string;
+  ownerName: string;
+  ownerMobile: string;
+  ownerVinNo: string;
+  ownerPlateNo: string;
+  remark: string;
+  vehicleType: string;
+  vehicleClass: string;
+  price: number;
+  equityGroupId: string;
+  equityGroupName: string;
+  equityGroupPrice: number;
+  additionalImages: string;
+  currentImageTemplt: string;
+  images: string;
+  createTime: string;
+  orderState: number;
+  orderStateTxt: string;
+  orderErrorMsg: string;
+  orderWorkFlowLog: string;
+  payType: number;
+  payTypeText: string;
+  serviceTime: string;
+}
