@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Modal, TreeSelect } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
-import { IUploadImgComponent } from '~/framework/components/component.module';
+import { ISelectAccount, IUploadImgComponent } from '~/framework/components/component.module';
 import { uuid } from '~/framework/util/common/tool';
 import { EQYITY_TYPE, EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
 import { IEquityPackageManageState } from '../equity-package-manage.interface';
@@ -50,7 +50,8 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
         form={form}
         schema={schema}
         widget={{
-          IUploadImgComponent: IUploadImgComponent
+          IUploadImgComponent: IUploadImgComponent,
+          ISelectAccount: ISelectAccount
         }}
         props={{
           labelCol: { span: 8 },
@@ -91,20 +92,12 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         key: 'bagId',
-        type: 'SelectLoading',
+        type: 'ISelectAccount',
         formItemProps: {
           label: '账户名',
           required: true
         },
-        props: {
-          reqUrl: 'currency/manage/currency/bag/pagedList',
-          placeholder: '请输入账户名',
-          onChange: handleChange(),
-          options: (data || []).map(d => ({
-            value: d.value,
-            label: d.label
-          }))
-        }
+        props: {}
       },
       {
         key: 'type',

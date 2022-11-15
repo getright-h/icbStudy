@@ -40,9 +40,9 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
     super();
   }
   // 账户钱包管理分页列表
-  pagedList(params: PagedListReqType): Observable<{ total: number; dataList: PagedListResType[] }> {
+  pagedList = (params: PagedListReqType): Observable<{ total: number; dataList: PagedListResType[] }> => {
     return this.requestService.post(PAGED_LIST, params);
-  }
+  };
 
   // 账户钱包筛选列表
   filtList(params: FiltListReqType): Observable<{ total: number; dataList: FiltListResType[] }> {
