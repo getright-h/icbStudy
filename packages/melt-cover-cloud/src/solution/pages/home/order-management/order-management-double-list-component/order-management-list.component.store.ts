@@ -59,7 +59,8 @@ export function useOrderManagementListStore() {
   }
   function tableAction(row: any, actionName: string) {
     if (actionName == '详情') {
-      history.push('orderDoubleDetail?id=' + row.id);
+      history.push('orderDoubleDetail');
+      // history.push('orderDoubleDetail?id=' + row.id);
     }
     if (actionName == '带章服务函') {
       downImage(row.id, actionName);

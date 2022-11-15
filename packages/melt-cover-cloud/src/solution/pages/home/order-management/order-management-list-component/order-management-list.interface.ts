@@ -84,7 +84,7 @@ export const schema: IFormBaseComponentsUnion[] = [
       }
     ],
     props: {
-      cols: 3
+      cols: 2
     }
   }
   // {

@@ -3,7 +3,7 @@ import { Col, Form, Row } from 'antd';
 import * as React from 'react';
 import { IPreviewImgComponent } from '@fch/fch-shop-web';
 // import ImageShowPreviewComponent from '~framework/components/image-show-preview-component/image-show-preview.component';
-import { PAY_METHOD, TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
+import { DISCOUNT_METHOD, PAY_METHOD, TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
 import style from './order-detail.module.less';
 import { useOrderDetailStore } from './order-detail.component.store';
 // const IPreviewImgComponent = ImageShowPreviewComponent;
@@ -141,6 +141,11 @@ export default function OrderDetailComponent() {
                 <span>{PAY_METHOD[info?.payMethod] || '-'}</span>
               </Form.Item>
             </Col>
+            {/* <Col className="" span={span}>
+              <Form.Item label={'优惠方式'}>
+                <span>{DISCOUNT_METHOD[info?.discountMethod] || '-'}</span>
+              </Form.Item>
+            </Col> */}
             {info?.xiaoXiuActivationCheckRemark && (
               <Col className="" span={24}>
                 <Form.Item label={'助修宝审核备注'}>

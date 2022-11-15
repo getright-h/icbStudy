@@ -61,3 +61,10 @@ export const PAY_METHOD_TYPES = [
   { label: '预授权分期', value: 3 },
   { label: '其他系统支付', value: 4 }
 ];
+
+export enum DISCOUNT_METHOD {
+  // Null = 0,
+  '无' = 0,
+  // ZhiMaGo = 1
+  '芝麻Go' = 1
+}

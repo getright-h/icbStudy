@@ -22,6 +22,8 @@ function getRootUrl(url: string) {
     returnInfo = process.env.TEMPLATE;
   } else if (url.includes('double/constitution')) {
     returnInfo = process.env.OPEN;
+  } else if (url.includes('currency/manage/currency')) {
+    returnInfo = process.env.FOOS;
   } else {
     returnInfo = process.env.MAIN;
   }

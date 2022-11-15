@@ -114,12 +114,6 @@ export function useEquityPackageManageStore() {
         });
       }
     }
-    // customPrice: (changedValues: any) => {
-    //   form2.setSchema('price', schema => {
-    //     schema.formItemProps.required = !changedValues;
-    //     return schema;
-    //   });
-    // }
   };
 
   /** 处理已选中的机构数据回显 */
@@ -310,6 +304,7 @@ export function useEquityPackageManageStore() {
 
   function handleSearch(page = 1, size = 10) {
     const formValues = form.getFieldsValue();
+    console.log('formValues', formValues);
     const { dateRange } = formValues;
     const req = Object.assign({}, formValues, {
       size,

@@ -79,6 +79,17 @@ export const PAGES_MENU = {
           title: '预创单列表'
         }
       ]
+    },
+    {
+      path: 'home/fundAccoutManagement',
+      title: '资金账户管理',
+      icon: 'tool',
+      children: [
+        {
+          path: 'fundAccountSetting',
+          title: '资金账户设置'
+        }
+      ]
     }
   ]
 };

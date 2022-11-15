@@ -18,4 +18,8 @@ export { default as ImageDisplayComponent } from '~/framework/components/image-d
 export { default as IAreaCascaderComponent } from '~/framework/components/i-area-cascader-component/i-area-cascader.component';
 export { default as StandardFormComponent } from '~/framework/components/standard-form-component/standard-form.component';
 export { default as PermissionButton } from '~/framework/components/permission-button-components/permission-button.component';
+export { default as ISearchSelectComponent } from '~/framework/components/i-search-select-component/i-search-select.component';
 //  -- Package End --
+
+// select
+export { default as ISelectAccount } from '~/framework/components/select-account-component/select-account.component';
