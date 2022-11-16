@@ -1,7 +1,13 @@
 import { IRoute } from '~framework/interfaces/IRoute';
 import { ROUTERS } from '~/solution/shared/constant/routers.const';
+import { LazyloadLoadingComponent } from '@fch/fch-shop-web';
 const MODULE_PATH = 'home/';
 export const homeRoutes: IRoute[] = [
+  {
+    path: MODULE_PATH,
+    component: LazyloadLoadingComponent,
+    exact: true
+  },
   {
     path: `${MODULE_PATH}customerManagement/customerManagementList`,
     component: ROUTERS.customerManagement,

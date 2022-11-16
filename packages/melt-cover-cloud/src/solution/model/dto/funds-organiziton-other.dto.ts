@@ -17,6 +17,16 @@ export interface LimitPagedListReqType {
   parentId: string;
 }
 
+export interface SimpleListReqType {
+  index: number;
+  size: number;
+  name: string;
+}
+
+export interface SimpleListResType {
+  id: string;
+  name: string;
+}
 export interface LimitPagedListResType {
   id: string;
   distributorId: string;

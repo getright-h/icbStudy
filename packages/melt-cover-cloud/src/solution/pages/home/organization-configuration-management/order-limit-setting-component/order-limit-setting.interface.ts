@@ -10,11 +10,13 @@ export class IOrderLimitSettingState {}
 
 export enum ACTION_TYPE {
   SETTING,
+  DETAIL,
   LOG
 }
 
 export const visibleList = {
   settingVisible: false,
+  detailVisible: false,
   logVisible: false
 };
 
