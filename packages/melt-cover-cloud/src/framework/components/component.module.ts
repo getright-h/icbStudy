@@ -23,6 +23,8 @@ export { default as ISearchSelectComponent } from '~/framework/components/i-sear
 
 // select
 export { default as ISelectAccount } from '~/framework/components/select-account-component/select-account.component';
+export { default as ISelectDistributor } from '~/framework/components/select-distributor-component/select-distributor.component';
+export { default as ISelectEquityGroup } from '~/framework/components/select-equity-group-component/select-equity-group.component';
 
 // 全新
 export { default as ITablePlus } from '~/framework/components/i-table-plus/i-table.component';

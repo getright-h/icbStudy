@@ -97,7 +97,7 @@ export const homeRoutes: IRoute[] = [
     exact: true
   },
   {
-    path: `${MODULE_PATH}fundAccoutManagement/fundAccountSetting/fundDetail/:id`,
+    path: `${MODULE_PATH}fundAccoutManagement/fundAccountSetting/fundDetail`,
     component: ROUTERS.fundDetail,
     lazyload: true,
     exact: true

@@ -1,11 +1,7 @@
 import * as React from 'react';
-import { Button, Modal, TreeSelect } from 'antd';
+import { Button, Modal } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
 import { ISelectAccount, IUploadImgComponent } from '~/framework/components/component.module';
-import { uuid } from '~/framework/util/common/tool';
-import { EQYITY_TYPE, EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
-import { IEquityPackageManageState } from '../equity-package-manage.interface';
-import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
 
 interface IAddEquityProps {
   title: string;
@@ -13,35 +9,10 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IEquityPackageManageState;
+  stateParent: any;
 }
 
 /**req 获取机构下拉框选项 */
-let data: { label: any; value: any }[] = [];
-const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
-
-function handleChange() {
-  console.log(1);
-
-  // value 是输入值
-  const params = {
-    index: 1,
-    size: 10,
-    state: 0,
-    bagSearch: ''
-  };
-
-  fundsOrganizitonOtherService.pagedList(params).subscribe(res => {
-    const { dataList } = res;
-    data = dataList.map((item: any) => ({
-      label: item[0],
-      value: item[0]
-    }));
-
-    // callback(data);
-  });
-}
-
 export default function AddEquityModalComponent(props: IAddEquityProps) {
   const { title, form, handleOk, handleCancel, visible, stateParent } = props;
   function renderForm() {

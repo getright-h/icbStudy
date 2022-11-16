@@ -1,14 +1,11 @@
 import { IFundAccountSettingState } from './fund-account-setting.interface';
-import { CommonUtil, useStateStore } from '@fch/fch-tool';
-import { ShowNotification, useForm } from '@fch/fch-shop-web';
-import { QueryPaginOrderParams, QueryPaginOrderReturn } from '~/solution/model/dto/order-manage.dto';
-import { OrderManageService } from '~/solution/model/services/order-manage.service';
+import { useStateStore } from '@fch/fch-tool';
+import { useForm } from '@fch/fch-shop-web';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { message, Modal } from 'antd';
-import moment from 'moment';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { PagedListReqType, PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { PagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -68,62 +65,63 @@ export function useFundAccountSettingStore() {
 
   function saveEdit() {
     console.log('保存了编辑信息');
-    const values = form2.getFieldsValue();
-    console.log(values);
-    const req = {
-      bagId: values.bagId,
-      name: values.name,
-      type: values.type
-    };
-    setStateWrap({
-      isLoadingModal2: true
+    form2.validateFields().then(values => {
+      console.log(values);
+      const req = {
+        bagId: values.bagId,
+        name: values.name,
+        type: values.type
+      };
+      setStateWrap({
+        isLoadingModal2: true
+      });
+      fundsOrganizitonOtherService.set(req).subscribe(
+        () => {
+          message.info('操作成功');
+          form2.resetFields();
+          // 重绘页面
+          handleSearch();
+        },
+        () => {
+          setStateWrap({
+            isLoadingModal2: false
+          });
+        }
+      );
+      toggleModalEdit();
     });
-    fundsOrganizitonOtherService.set(req).subscribe(
-      () => {
-        message.info('操作成功');
-        form2.resetFields();
-        // 重绘页面
-        handleSearch();
-      },
-      () => {
-        setStateWrap({
-          isLoadingModal2: false
-        });
-      }
-    );
-
-    toggleModalEdit();
   }
 
   /** req 创建资金账户 */
   function creatFundAccount() {
-    const values = form3.getFieldsValue();
-    console.log('form3', values);
-    const req = {
-      name: values.name,
-      state: values.state,
-      remark: values.remark
-    };
-    setStateWrap({
-      isLoadingModal3: true
-    });
-    fundsOrganizitonOtherService.bag(req).subscribe(
-      () => {
-        message.info('操作成功');
-        form3.resetFields();
-        // 重绘页面
-        handleSearch();
-      },
-      () => {
-        setStateWrap({
-          isLoadingModal3: false
-        });
-      }
-    );
+    form3.validateFields().then(values => {
+      console.log('form3', values);
+      const req = {
+        name: values.name,
+        state: values.state,
+        remark: values.remark
+      };
+      setStateWrap({
+        isLoadingModal3: true
+      });
+      fundsOrganizitonOtherService.bag(req).subscribe(
+        () => {
+          message.info('操作成功');
+          form3.resetFields();
+          // 重绘页面
+          handleSearch();
+        },
+        () => {
+          setStateWrap({
+            isLoadingModal3: false
+          });
+        }
+      );
 
-    console.log('创建资金账户');
-    // todo 验证后关闭modal
-    toggleModalCreat();
+      console.log('创建资金账户');
+      // todo 验证后关闭modal
+      toggleModalCreat();
+    });
   }
 
   // 导出表格
@@ -152,7 +150,7 @@ export function useFundAccountSettingStore() {
   }
 
   // 冻结账户
-  function frozenAccount(row) {
+  function frozenAccount(row: any) {
     console.log('冻结了账户');
 
     // todo 网络请求
@@ -168,7 +166,7 @@ export function useFundAccountSettingStore() {
       handleEditContext(row);
     } else if (actionName == '交易明细') {
       // todo 携参跳转 id乱码
-      history.push('fundAccountSetting/fundDetail/' + 2);
+      history.push('fundAccountSetting/fundDetail?id=' + row.id);
       // history.push('fundDetail?id=' + row.id);
       console.log('交易明细');
     } else if (actionName == '冻结') {

@@ -1,10 +1,7 @@
 import * as React from 'react';
-import { Button, Modal, TreeSelect } from 'antd';
+import { Button, Modal } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
-import { IUploadImgComponent } from '~/framework/components/component.module';
-import { uuid } from '~/framework/util/common/tool';
-import { EQYITY_TYPE, EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
-import { IEquityPackageManageState } from '../equity-package-manage.interface';
+import { IFundAccountSettingState } from '../fund-account-setting.interface';
 
 interface IAddEquityProps {
   title: string;
@@ -12,7 +9,7 @@ interface IAddEquityProps {
   handleOk: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: IEquityPackageManageState;
+  stateParent: IFundAccountSettingState;
 }
 
 export default function AddEquityModalComponent(props: IAddEquityProps) {
@@ -22,9 +19,6 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
       <IFormComponent
         form={form}
         schema={schema}
-        widget={{
-          IUploadImgComponent: IUploadImgComponent
-        }}
         props={{
           labelCol: { span: 8 },
           wrapperCol: { span: 16 },

@@ -1,39 +1,26 @@
-import { Button, Modal, Typography } from 'antd';
+import { Modal, Typography } from 'antd';
 import * as React from 'react';
 import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem } from '@fch/fch-shop-web';
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
+import { IRechargeFundsState } from '../recharge-funds.interface';
 
 interface IAddEquityProps {
   title: string;
   form: TypeUseForm;
-  handleOk: () => void;
+  handleOk?: () => void;
   handleCancel: () => void;
   visible: boolean;
-  stateParent: any;
+  stateParent: IRechargeFundsState;
   handleFormChangeEvent?: Function;
   watch2?: IWidget;
 }
 
-export default function AddPackageModalComponent(props: IAddEquityProps) {
-  const { title, form, handleOk, handleCancel, visible, stateParent, watch2 } = props;
-  const { disableFooter } = stateParent;
-  const footer: any = disableFooter ? null : (
-    <>
-      <Button type="primary" onClick={handleCancel}>
-        取消
-      </Button>
-      <Button loading={stateParent.isLoadingModal2} type="primary" onClick={handleOk}>
-        确定
-      </Button>
-    </>
-  );
+export default function AddPackageModalComponent3(props: IAddEquityProps) {
+  const { title, form, handleCancel, visible, stateParent, watch2 } = props;
+
   const renderContent = (props: any) => {
     const { renderItem } = props;
-    return (
-      <div>
-        <div>{schema.map(renderItem)}</div>
-      </div>
-    );
+    return <div>{schema.map(renderItem)}</div>;
   };
   function renderForm() {
     return (
@@ -41,10 +28,8 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
         form={form}
         watch={watch2}
         schema={schema}
+        widget={{ Text: Typography.Text }}
         slot={renderContent}
-        widget={{
-          Text: Typography.Text
-        }}
         props={{
           labelCol: { span: 8 },
           wrapperCol: { span: 16 },
@@ -56,15 +41,7 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
 
   return (
     <div>
-      <Modal
-        width={700}
-        title={title}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        visible={visible}
-        okText={<Button loading={stateParent.isLoadingModal2}>确定</Button>}
-        footer={footer}
-      >
+      <Modal width={700} footer={null} title={title} onCancel={handleCancel} visible={visible}>
         {renderForm()}
       </Modal>
     </div>
@@ -77,102 +54,93 @@ export const schema: IFormBaseComponentsUnion[] = [
     type: 'Layout',
     children: [
       {
-        key: 'bagName',
-        type: 'Text',
-        formItemProps: {
-          valuePropName: 'children',
-          label: '账户名称',
-          required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
-        }
-      },
-      {
         key: 'bagNumber',
         type: 'Text',
         formItemProps: {
-          valuePropName: 'children',
-          label: '账户号',
+          label: '账户名',
           required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
+          valuePropName: 'children'
         }
       },
       {
-        key: 'totalIncome',
+        key: 'bagName',
         type: 'Text',
         formItemProps: {
-          valuePropName: 'children',
+          label: '账户号',
+          required: true,
+          valuePropName: 'children'
+        }
+      },
+      {
+        key: 'totalInCome',
+        type: 'Text',
+        formItemProps: {
           label: '账户累计充值总额',
           required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
+          valuePropName: 'children'
         }
       },
       {
         key: 'balance',
         type: 'Text',
         formItemProps: {
-          valuePropName: 'children',
           label: '账户资金余额',
           required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
+          valuePropName: 'children'
         }
       },
       {
         key: 'number',
         type: 'Text',
         formItemProps: {
-          valuePropName: 'children',
           label: '充值金额',
           required: true,
-          wrapperCol: { span: 10 }
+          valuePropName: 'children'
         }
       },
       {
         key: 'createTime',
         type: 'Text',
         formItemProps: {
-          valuePropName: 'children',
           label: '创建时间',
           required: true,
-          wrapperCol: { span: 10 }
+          valuePropName: 'children'
         }
       },
       {
         key: 'bagTypeText',
         type: 'Text',
         formItemProps: {
-          valuePropName: 'children',
           label: '支付类型',
           required: true,
-          initialValue: 1,
-          wrapperCol: { span: 10 }
+          valuePropName: 'children'
         }
       },
       {
-        key: 'auditState',
-        type: 'Select',
+        key: 'remark',
+        type: 'Text',
+        formItemProps: {
+          label: '充值备注',
+          required: true,
+          valuePropName: 'children'
+        }
+      },
+      {
+        key: 'auditStateText',
+        type: 'Text',
         formItemProps: {
           label: '审核结果',
           required: true,
-          wrapperCol: { span: 10 }
-        },
-        props: {
-          options: [
-            { label: '通过', value: 1 },
-            { label: '不通过', value: 0 }
-          ]
+          valuePropName: 'children'
         }
       },
       {
         key: 'auditRemark',
-        type: 'Input',
+        type: 'Text',
         formItemProps: {
-          label: '备注',
+          label: '审核备注',
           required: true,
-          wrapperCol: { span: 10 }
+          valuePropName: 'children'
         }
       }
     ],

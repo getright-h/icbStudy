@@ -8,6 +8,8 @@ import { OrderManageService } from '~/solution/model/services/order-manage.servi
 import { CustomerManageService } from '~/solution/model/services/customer-manage.service';
 import { useEffect } from 'react';
 import { Modal } from 'antd';
+import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
+import { OrderPagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useOtherOrderManagementStore() {
   const { state, setStateWrap } = useStateStore(new IOtherOrderManagement());
@@ -15,28 +17,32 @@ export function useOtherOrderManagementStore() {
   const history = useHistory();
   const orderManageService: OrderManageService = new OrderManageService();
   const customerManageService: CustomerManageService = new CustomerManageService();
+
+  // todo 根据ezmoke 创建的网络请求
+  const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
+
   useEffect(() => {
     handleSearch();
     getOrgList();
     GetEquityGroupList();
   }, []);
-  function handleSearch(page = 1, size = 10) {
+  function handleSearch(index = 1, size = 10) {
     const formValues = formRef.getFieldsValue();
     const { dateRange } = formValues;
     const req = Object.assign({}, formValues, {
       size,
-      page,
-      beginTime: dateRange?.[0] && moment(dateRange[0]).set({ hours: 0, minutes: 0, seconds: 0 }),
-      endTime: dateRange?.[1] && moment(dateRange[1]).set({ hours: 23, minutes: 59, seconds: 59 })
+      index,
+      ceateTimeBegin: dateRange?.[0] && moment(dateRange[0]).valueOf(),
+      ceateTimeEnd: dateRange?.[1] && moment(dateRange[1]).valueOf()
     });
-    handleGetOrderList(req);
+    handleOtherOrderList(req);
   }
-  function handleGetOrderList(params: QueryPaginOrderParams) {
+  function handleOtherOrderList(params: OrderPagedListReqType) {
     setStateWrap({
       isLoading: true
     });
-    orderManageService.getOrderList(params).subscribe(
-      (res: QueryPaginOrderReturn) => {
+    fundsOrganizitonOtherService.orderPagedList(params).subscribe(
+      res => {
         setStateWrap({
           tableData: res.dataList,
           total: res.total
@@ -56,9 +62,7 @@ export function useOtherOrderManagementStore() {
     if (actionName == '详情') {
       // todo 跳到 其他订单 的详情页
       history.push('orderOtherDetail?id=' + row.id);
-    }
-    if (actionName == '发起扣款') {
-      // todo 跳到 其他订单 的详情页
+    } else if (actionName == '发起扣款') {
       Modal.confirm({
         title: '发起扣款提示',
         type: 'warning',

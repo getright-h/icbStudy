@@ -6,7 +6,7 @@ import { DataDetail } from '~/solution/model/dto/order-manage.dto';
  */
 export class IFundDetailState {
   info: DataDetail;
-  radio: 2;
+  radio: 1;
   chargeSearchForm = {
     index: 1,
     size: 5

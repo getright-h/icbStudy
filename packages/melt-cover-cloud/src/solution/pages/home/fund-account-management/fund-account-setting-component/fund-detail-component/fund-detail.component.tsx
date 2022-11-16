@@ -1,14 +1,11 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Col, Form, Radio, Row } from 'antd';
 import * as React from 'react';
-import { IPreviewImgComponent, ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
-// import ImageShowPreviewComponent from '~framework/components/image-show-preview-component/image-show-preview.component';
-import { DISCOUNT_METHOD, PAY_METHOD, TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
+import { ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
 import style from './fund-detail.module.less';
 import { useOrderDetailStore } from './fund-detail.component.store';
 import { inComeColumns, spendingColumns } from './fund-detail.columns';
-import { TableType, IFundDetailState } from './fund-detail.interface';
-// const IPreviewImgComponent = ImageShowPreviewComponent;
+import { TableType } from './fund-detail.interface';
 export default function FundDetailComponent() {
   const { state, goback, changeRaido, changeTablePageIndex } = useOrderDetailStore();
   const { info } = state;
@@ -76,16 +73,7 @@ export default function FundDetailComponent() {
   }
 
   function renderLogs() {
-    const {
-      followSearchForm,
-      followTableData,
-      followTotal,
-      consumeSearchForm,
-      consumeTableData,
-      consumeTotal,
-      isLoading,
-      radio
-    } = state;
+    const { followSearchForm, followTableData, followTotal, isLoading, radio } = state;
     const options = [
       { label: '收入', value: 1 },
       { label: '支出', value: 2 }
@@ -96,7 +84,7 @@ export default function FundDetailComponent() {
           <br />
           <br />
           <Radio.Group
-            defaultValue={radio}
+            defaultValue={1}
             options={options}
             onChange={changeRaido}
             value={radio}
@@ -110,15 +98,10 @@ export default function FundDetailComponent() {
             <ITableComponent
               columns={inComeColumns()}
               isLoading={isLoading}
-              // isLoading={true}
               pageIndex={followSearchForm.index}
-              // pageIndex={1}
               pageSize={followSearchForm.size}
-              // pageSize={10}
               data={followTableData}
-              // data={[]}
               total={followTotal}
-              // total={10}
               isPagination={true}
               changeTablePageIndex={(index: number, pageSize: number) =>
                 changeTablePageIndex(index, pageSize, TableType.INCOME)
@@ -127,16 +110,11 @@ export default function FundDetailComponent() {
           ) : (
             <ITableComponent
               columns={spendingColumns()}
-              // isLoading={isLoading}
-              isLoading={true}
-              // pageIndex={followSearchForm.index}
-              pageIndex={1}
-              // pageSize={followSearchForm.size}
-              pageSize={10}
-              // data={followTableData}
-              data={[]}
-              // total={followTotal}
-              total={10}
+              isLoading={isLoading}
+              pageIndex={followSearchForm.index}
+              pageSize={followSearchForm.size}
+              data={followTableData}
+              total={followTotal}
               isPagination={true}
               changeTablePageIndex={(index: number, pageSize: number) =>
                 changeTablePageIndex(index, pageSize, TableType.SPENDING)

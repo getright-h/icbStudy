@@ -4,12 +4,15 @@ import { OrderManageService } from '~/solution/model/services/order-manage.servi
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { useForm } from '@fch/fch-shop-web';
+import { useParams } from 'react-router-dom';
 
 export function useRechargeDetailStore() {
   const { state, setStateWrap } = useStateStore(new IRechargeDetailState());
   const id = getQueryString('id');
   const orderManageService: OrderManageService = new OrderManageService();
   const history = useHistory();
+
+  const params = useParams<{ id: string }>();
   useEffect(() => {
     orderManageService.getOrderDetail(id).subscribe(res => setStateWrap({ info: res }));
   }, []);

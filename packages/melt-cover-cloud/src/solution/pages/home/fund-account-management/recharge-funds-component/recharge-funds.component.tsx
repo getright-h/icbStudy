@@ -1,5 +1,5 @@
 import { IFormComponent, ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
-import { Button, Modal } from 'antd';
+import { Button } from 'antd';
 import * as React from 'react';
 import { demoColumns } from './demo-columns';
 import style from './recharge-funds.component.less';
@@ -9,7 +9,7 @@ import { schema } from './recharge-funds.interface';
 import AddEquityModalComponent from './widget/addEquityModal';
 import AddPackageModalComponent from './widget/addPackageModal';
 import AddPackageModalComponent2 from './widget/addPackageModal2';
-import DetailPackageModalComponent from './widget/packageDetailModal';
+import AddPackageModalComponent3 from './widget/addPackageModal3';
 
 export default function RechargeFundsComponent() {
   const {
@@ -18,9 +18,11 @@ export default function RechargeFundsComponent() {
     form2,
     form3,
     form4,
+    form5,
     handleSearch,
     toggleModalRecharge,
     toggleModalAudit,
+    toggleModalDetail,
     toggleModalEditCharge,
     saveAudit,
     saveEditCharge,
@@ -30,7 +32,7 @@ export default function RechargeFundsComponent() {
     recharge
   } = useRechargeFundsStore();
 
-  const { visibleAudit, visibleCreat, tableData, total, isLoading, searchForm } = state;
+  const { tableData, total, isLoading, searchForm } = state;
 
   // 渲染选择框函数
   function renderSelectItems() {
@@ -80,10 +82,8 @@ export default function RechargeFundsComponent() {
         leftFlex={1}
         rightFlex={5}
         pageName={'资金账户管理/资金账户充值'}
-        // pageLeft={renderPageLeft()}
         selectItems={renderSelectItems()}
         searchButton={renderSearchButtons()}
-        // otherSearchBtns={renderOtherButtons()}
         table={renderTable()}
       ></ITablePageComponent>
 
@@ -96,22 +96,24 @@ export default function RechargeFundsComponent() {
         handleOk={saveEditCharge}
         form={form3}
       />
+      {/* action 详情 */}
+      <AddPackageModalComponent3
+        stateParent={state}
+        title={'详情'}
+        visible={state.visibleDetail}
+        handleCancel={toggleModalDetail}
+        form={form5}
+      />
 
       {/* 账户充值 */}
       <AddEquityModalComponent
         stateParent={state}
         title={'充值'}
-        // title={state.equityPackageTitle}
         visible={state.visibleCreat}
-        // visible={state.equityPackageTitle != '详情' && state.visibleAddPackage}
         handleCancel={toggleModalRecharge}
         handleOk={recharge}
         form={form2}
       />
-      <button onClick={() => toggleModalAudit()}>充值审核</button>
-      <button onClick={() => tableAction('', '修改充值')}>修改充值</button>
-      <button onClick={() => tableAction('', '详情')}>详情</button>
-
       {/* 充值审核信息 */}
       <AddPackageModalComponent
         stateParent={state}

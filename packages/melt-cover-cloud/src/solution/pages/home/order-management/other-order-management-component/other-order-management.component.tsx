@@ -5,13 +5,19 @@ import { demoColumns } from './demo-columns';
 import style from './other-order-management.module.less';
 import { useOtherOrderManagementStore } from './other-order-management.component.store';
 import { schema } from './other-order-management.interface';
+import { ISelectEquityGroup, ISelectDistributor } from '~/framework/components/component.module';
 
 export default function OtherOrderManagementComponent() {
   const { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder } = useOtherOrderManagementStore();
   const { searchForm, tableData, total, isLoading } = state;
   function renderSelectItems() {
     return (
-      <IFormComponent form={formRef} schema={schema} props={{ labelCol: { span: 6 }, wrapperCol: { span: 18 } }} />
+      <IFormComponent
+        widget={{ ISelectDistributor: ISelectDistributor, ISelectEquityGroup: ISelectEquityGroup }}
+        form={formRef}
+        schema={schema}
+        props={{ labelCol: { span: 6 }, wrapperCol: { span: 18 } }}
+      />
     );
   }
   function renderSearchButtons() {
@@ -19,9 +25,6 @@ export default function OtherOrderManagementComponent() {
       <>
         <Button type="primary" className="ml20" onClick={() => handleSearch()}>
           查询
-        </Button>
-        <Button type="primary" className="ml20" onClick={addOrder}>
-          创建订单
         </Button>
       </>
     );

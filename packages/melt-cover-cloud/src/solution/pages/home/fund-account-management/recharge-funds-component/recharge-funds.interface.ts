@@ -70,6 +70,7 @@ export class IRechargeFundsState {
   visibleCreat = false;
   visibleAudit = false;
   visibleEditAudit = false;
+  visibleDetail = false;
   searchForm = {
     index: 1,
     size: 10
