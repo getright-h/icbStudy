@@ -104,6 +104,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         type: 'Input',
         formItemProps: {
           label: '充值金额',
+          required: true,
           wrapperCol: { span: 10 }
         },
         props: {

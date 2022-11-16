@@ -65,62 +65,63 @@ export function useFundAccountSettingStore() {
 
   function saveEdit() {
     console.log('保存了编辑信息');
-    const values = form2.getFieldsValue();
-    console.log(values);
-    const req = {
-      bagId: values.bagId,
-      name: values.name,
-      type: values.type
-    };
-    setStateWrap({
-      isLoadingModal2: true
+    form2.validateFields().then(values => {
+      console.log(values);
+      const req = {
+        bagId: values.bagId,
+        name: values.name,
+        type: values.type
+      };
+      setStateWrap({
+        isLoadingModal2: true
+      });
+      fundsOrganizitonOtherService.set(req).subscribe(
+        () => {
+          message.info('操作成功');
+          form2.resetFields();
+          // 重绘页面
+          handleSearch();
+        },
+        () => {
+          setStateWrap({
+            isLoadingModal2: false
+          });
+        }
+      );
+      toggleModalEdit();
     });
-    fundsOrganizitonOtherService.set(req).subscribe(
-      () => {
-        message.info('操作成功');
-        form2.resetFields();
-        // 重绘页面
-        handleSearch();
-      },
-      () => {
-        setStateWrap({
-          isLoadingModal2: false
-        });
-      }
-    );
-
-    toggleModalEdit();
   }
 
   /** req 创建资金账户 */
   function creatFundAccount() {
-    const values = form3.getFieldsValue();
-    console.log('form3', values);
-    const req = {
-      name: values.name,
-      state: values.state,
-      remark: values.remark
-    };
-    setStateWrap({
-      isLoadingModal3: true
-    });
-    fundsOrganizitonOtherService.bag(req).subscribe(
-      () => {
-        message.info('操作成功');
-        form3.resetFields();
-        // 重绘页面
-        handleSearch();
-      },
-      () => {
-        setStateWrap({
-          isLoadingModal3: false
-        });
-      }
-    );
+    form3.validateFields().then(values => {
+      console.log('form3', values);
+      const req = {
+        name: values.name,
+        state: values.state,
+        remark: values.remark
+      };
+      setStateWrap({
+        isLoadingModal3: true
+      });
+      fundsOrganizitonOtherService.bag(req).subscribe(
+        () => {
+          message.info('操作成功');
+          form3.resetFields();
+          // 重绘页面
+          handleSearch();
+        },
+        () => {
+          setStateWrap({
+            isLoadingModal3: false
+          });
+        }
+      );
 
-    console.log('创建资金账户');
-    // todo 验证后关闭modal
-    toggleModalCreat();
+      console.log('创建资金账户');
+      // todo 验证后关闭modal
+      toggleModalCreat();
+    });
   }
 
   // 导出表格

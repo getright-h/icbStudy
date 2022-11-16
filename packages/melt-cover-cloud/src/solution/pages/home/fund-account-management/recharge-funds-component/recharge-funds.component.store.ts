@@ -60,61 +60,62 @@ export function useRechargeFundsStore() {
 
   /** req 创建资金账户 */
   function recharge() {
-    const value = form2.getFieldsValue();
-    console.log('value', value);
-
-    const req = {
-      bagId: value.bagId,
-      type: value.type,
-      number: value.number,
-      remark: value.remark
-    };
-    fundsOrganizitonOtherService.assetsRecord(req).subscribe(() => {
-      message.info('操作成功');
-      form2.resetFields();
-      // 重绘页面
-      handleSearch();
+    form2.validateFields().then(value => {
+      console.log('value', value);
+      const req = {
+        bagId: value.bagId,
+        type: value.type,
+        number: value.number,
+        remark: value.remark
+      };
+      fundsOrganizitonOtherService.assetsRecord(req).subscribe(() => {
+        message.info('操作成功');
+        form2.resetFields();
+        // 重绘页面
+        handleSearch();
+      });
+      toggleModalRecharge();
     });
-    toggleModalRecharge();
   }
 
   /** req 充值审核信息 */
   function saveAudit() {
-    const value = form4.getFieldsValue();
-
-    const req = {
-      id: state.auditId,
-      auditState: value.auditState,
-      auditRemark: value.auditRemark
-    };
-    fundsOrganizitonOtherService.audit(req).subscribe(() => {
-      message.info('操作成功');
-      form4.resetFields();
-      // 重绘页面
-      handleSearch();
+    form4.validateFields().then(value => {
+      const req = {
+        id: state.auditId,
+        auditState: value.auditState,
+        auditRemark: value.auditRemark
+      };
+      fundsOrganizitonOtherService.audit(req).subscribe(() => {
+        message.info('操作成功');
+        form4.resetFields();
+        // 重绘页面
+        handleSearch();
+      });
+      console.log('保存了审核信息');
+      toggleModalAudit();
     });
-    console.log('保存了审核信息');
-    toggleModalAudit();
   }
 
   /** req 审核不通过时 编辑充值信息 */
   function saveEditCharge() {
-    const value = form3.getFieldsValue();
-    const { id, type, number, remark } = value;
-    const req = {
-      id,
-      type,
-      number,
-      remark
-    };
-    fundsOrganizitonOtherService.edit(req).subscribe(() => {
-      message.info('操作成功');
-      form3.resetFields();
-      // 重绘页面
-      handleSearch();
+    form3.validateFields().then(value => {
+      const { id, type, number, remark } = value;
+      const req = {
+        id,
+        type,
+        number,
+        remark
+      };
+      fundsOrganizitonOtherService.edit(req).subscribe(() => {
+        message.info('操作成功');
+        form3.resetFields();
+        // 重绘页面
+        handleSearch();
+      });
+      console.log('保存了审核信息');
+      toggleModalEditCharge();
     });
-    console.log('保存了审核信息');
-    toggleModalEditCharge();
   }
   // 导出表格
   function exportExcel() {
@@ -140,8 +141,8 @@ export function useRechargeFundsStore() {
     console.log('row', row);
 
     if (actionName == '充值审核') {
-      // 回显
-      form4.setFieldsValue({ ...row });
+      // 回显 auditState 处理为空 不然columns中对应的回显会展示为 1 0 -1 状态码
+      form4.setFieldsValue({ ...row, auditState: '' });
       // 同时保存对应列的id
       setStateWrap({ auditId: row.id });
       toggleModalAudit();

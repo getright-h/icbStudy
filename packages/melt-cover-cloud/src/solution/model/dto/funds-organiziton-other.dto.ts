@@ -9,6 +9,29 @@ export interface PagedListReqType {
   state: number;
 }
 
+export interface LimitPagedListReqType {
+  index: number;
+  size: number;
+  bagSearch: string;
+  bagState: number;
+  parentId: string;
+}
+
+export interface LimitPagedListResType {
+  id: string;
+  distributorId: string;
+  distributorName: string;
+  createTime: string;
+  unitCode: string;
+  unitMobile: string;
+  orderResidueWarnMoney: number;
+  contactName: string;
+  orderLimit: number;
+  orderResidueMoney: number;
+  orderResidueWarnState: number;
+  orderResidueWarnStateTxt: string;
+}
+
 export interface PagedListResType {
   id: string;
   name: string;
@@ -22,6 +45,63 @@ export interface PagedListResType {
   balance: number;
   totalInCome: number;
   createTime: string;
+}
+
+export interface OrganizationPagedListResType {
+  id: string;
+  bagId: string;
+  bagName: string;
+  bagNumber: string;
+  distributorId: string;
+  distributorName: string;
+  distributorNameChain: string;
+  modifyTime: string;
+  isLimit: number;
+  isLimitTxt: string;
+  isRelationDeductMoney: number;
+  isRelationDeductMoneyTxt: string;
+  isAllowSubDeductMoney: number;
+  isAllowSubDeductMoneyTxt: string;
+}
+
+export interface LogPageListReqType {
+  index: number;
+  size: number;
+  organizationSetId: string;
+}
+
+export interface SetOrganizationConfReqType {
+  bagId: string;
+  distributorId: string;
+  isLimit: number;
+  isRelationDeductMoney: number;
+  isAllowSubDeductMoney: number;
+}
+
+export interface SetLimitReqType {
+  id: string;
+  orderLimit: number;
+  orderResidueWarnMoney: number;
+}
+
+export interface LogPageListResType {
+  id: string;
+  organizationSetId: string;
+  distributorId: string;
+  distributorName: string;
+  orderLimit: number;
+  orderResidueWarnMoney: number;
+  createTime: string;
+  createUserId: string;
+  createUserName: string;
+  oldContext: string;
+}
+
+export interface GetSubOrganizationResType {
+  id: string;
+  name: string;
+  parentId: string;
+  parentName: string;
 }
 
 // 账户钱包筛选列表

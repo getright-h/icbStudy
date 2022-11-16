@@ -170,18 +170,6 @@ export const schema: IFormBaseComponentsUnion[] = [
         formItemProps: {
           label: '锁定资金',
           valuePropName: 'children',
-          required: true,
-          wrapperCol: { span: 10 }
-        }
-      },
-      {
-        key: 'bagId',
-        type: 'Text',
-        formItemProps: {
-          hidden: true,
-          label: 'bagId',
-          valuePropName: 'children',
-          required: true,
           wrapperCol: { span: 10 }
         }
       }

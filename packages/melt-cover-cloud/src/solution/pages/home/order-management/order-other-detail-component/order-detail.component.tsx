@@ -158,7 +158,7 @@ export default function OrderDetailComponent() {
       <>
         <div className={style.scrollContent}>
           {/* todo 返回图片 */}
-          {/* <Form className={style.imgBox}>
+          <Form className={style.imgBox}>
             <Form.Item>
               {vehicleTitle.map((title, index) => {
                 return (
@@ -166,7 +166,7 @@ export default function OrderDetailComponent() {
                     <p>{title}</p>
                     <div className={style.img} key={index}>
                       <IPreviewImgComponent
-                        src={info?.images[index] ? info?.images[index] : info?.currentImageTemplt}
+                        src={info?.images?.[index] ? info?.images?.[index] : info?.currentImageTemplt}
                         alt="车身图"
                       />
                     </div>
@@ -174,7 +174,7 @@ export default function OrderDetailComponent() {
                 );
               })}
             </Form.Item>
-          </Form> */}
+          </Form>
         </div>
       </>
     );

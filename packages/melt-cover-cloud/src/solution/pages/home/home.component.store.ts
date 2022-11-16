@@ -2,27 +2,36 @@ import { HomeService } from '~/solution/model/services/home.service';
 import { MenuService } from '~/framework/util/menu/menu.service';
 import { useService, useStateStore, StorageUtil } from '@fch/fch-tool';
 import { IHomeProps } from './home.interface';
-import { useEffect } from 'react';
-import { Subscription } from 'rxjs';
-import { PAGES_MENU } from '~/solution/shared/constant/common.const';
+import { useEffect, useRef } from 'react';
 import { MenuListService } from '~/framework/aop/strategy/menuListService';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { HistoryService } from '~/framework/util/routes/history.service';
 export function useHomeStore() {
   const { state, setStateWrap } = useStateStore(new IHomeProps());
   const menuListService: MenuListService = useService(MenuListService);
   const menuService: MenuService = useService(MenuService);
   const history = useHistory();
+  const { pathname } = useLocation();
+
+  // useEffect(() => {
+  //   getMenuList();
+  // return () => {
+  //   menuAndAuthSubscription.unsubscribe();
+  // };
+  // }, []);
+
   useEffect(() => {
-    getMenuList();
-    // return () => {
-    //   menuAndAuthSubscription.unsubscribe();
-    // };
-  }, []);
+    if (StorageUtil.getLocalStorage('TOKENINFO')) {
+      getMenuList();
+    } else {
+      logout();
+    }
+  }, [pathname]);
 
   async function getMenuList() {
     try {
       const res = await menuListService.getMenuList().toPromise();
-      console.log('menuListService =>>>>>>>>>>>>>>>>>>>>>>>>', menuListService);
+      // console.log('menuListService =>>>>>>>>>>>>>>>>>>>>>>>>', menuListService);
 
       const menuList = menuService.updateMenuByRoutes(res?.menuList);
       if (menuList) {
@@ -73,9 +82,10 @@ export function useHomeStore() {
       arr.map((node: any) => {
         if (!isValidPath) {
           if (!node.children.length) {
-            path = node.path;
             isValidPath = true;
+            path += '/' + node.path;
           } else {
+            path += '/' + node.path;
             expand(node.children);
           }
         }
@@ -83,6 +93,12 @@ export function useHomeStore() {
     }
     expand(arr);
     !!path && history.replace(path);
+  }
+
+  function logout() {
+    // 清除cookie 返回登录界面
+    StorageUtil.removeLocalStorage('TOKENINFO');
+    HistoryService.getHashHistory().push('/login');
   }
 
   return { state };

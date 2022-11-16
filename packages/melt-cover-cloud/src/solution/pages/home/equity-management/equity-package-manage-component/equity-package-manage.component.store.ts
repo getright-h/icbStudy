@@ -51,6 +51,11 @@ export function useEquityPackageManageStore() {
     handleSearch(); // 权益包
     handleSearchEquity(); // 权益
     getOrgList();
+
+    /** 下级机构增加筛选功能 */
+    form1.setSchema('selectionOrgs', schema => {
+      schema.props.filterTreeNode = (value: string, node: OrgData) => node.name?.includes(value);
+    });
   }, []);
 
   /* useEffect(() => {
@@ -115,6 +120,20 @@ export function useEquityPackageManageStore() {
   const loopSelectedData = (arr: OrgData[]) => {
     if (Array.isArray(arr)) {
       arr.forEach((item: OrgData) => {
+        /** 有下级机构的，手动处理数据，在下级首位增加自己，本身仅做全选作用 */
+        if (!item.isLeaf && Array.isArray(item.children)) {
+          /** 构建新的机构数据，添加到子集首位 */
+          item.children.unshift({
+            id: item.id,
+            isLeaf: true,
+            isSelect: item.isSelect,
+            name: item.name
+          });
+          /** 改变当前数据内容，避免重复数据存在 */
+          item.id = 'prefix-' + item.id;
+          item.name = '(全选)-' + item.name;
+          item.isSelect = false;
+        }
         if (item?.isSelect) {
           selectedData.current.push({ label: item.name, value: item.id });
         }
@@ -340,6 +359,7 @@ export function useEquityPackageManageStore() {
    * 新增权益
    */
   function handleOk() {
+    console.log('🚀 ~ formValues', form1.getFieldsValue());
     const formValues = form1.getFieldsValue();
     form1.validateFields().then(res => {
       if (Array.isArray(formValues?.selectionOrgs)) {
