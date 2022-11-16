@@ -4,6 +4,19 @@ import { IFormBaseComponentsUnion } from '@fch/fch-shop-web';
  * @export state变量定义和初始化
  * @class IFundAccountSettingState
  */
+export enum ACTION_TYPE {
+  /** 编辑 */
+  DETAIL,
+  /** 交易明细 */
+  INFO,
+  /** 冻结 */
+  frozen,
+  /** 解冻 */
+  thaw,
+  /** 卡卷管理 */
+  card
+}
+
 export class IFundAccountSettingState {
   searchForm = {
     index: 1,

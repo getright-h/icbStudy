@@ -10,11 +10,12 @@ import { ITablePlus } from '~/framework/components/component.module';
 import { Columns } from './order-limit-setting.columns';
 import SetOrderLimitComponent from './widget/set-order-limit/set-order-limit.component';
 import LogPageComponent from './widget/log-page/log-page.interface.component';
+import ConfigDetailComponent from './widget/config-detail/config-detail.component';
 
 const OrderLimitSettingComponent = React.memo(() => {
   const { modalState, modalClose, action, table, form, getRightList } = useOrderLimitSettingStore();
   const { tableActions, getTableData } = table;
-  const { settingVisible, modalData, logVisible } = modalState;
+  const { settingVisible, detailVisible, modalData, logVisible } = modalState;
   /** 检测是否非经销商 */
   const renderSelectItems = () => {
     return (
@@ -62,6 +63,8 @@ const OrderLimitSettingComponent = React.memo(() => {
       />
       {/* 日志 */}
       <LogPageComponent visible={logVisible} close={modalClose('logVisible')} initData={modalData} />
+      {/* 详情 */}
+      <ConfigDetailComponent visible={detailVisible} close={modalClose('detailVisible')} initData={modalData} />
     </div>
   );
 });
