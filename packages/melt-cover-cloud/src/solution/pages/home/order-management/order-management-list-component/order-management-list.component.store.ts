@@ -70,8 +70,8 @@ export function useOrderManagementListStore() {
     history.push('addOrder');
   }
 
-  // 获取所属机构列表
   function getOrgList() {
+    // 获取所属机构列表
     customerManageService.getOrgList().subscribe(res => {
       const orgOptions = res?.map(org => {
         return {

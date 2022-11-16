@@ -79,7 +79,7 @@ export class LoginStore extends ReducerStore<IState> {
           new CommonUtilService().getRoleInfo().subscribe(res => {
             StorageUtil.setLocalStorage('userInfoRole', JSON.stringify(res));
             message.success('登录成功');
-            this.props.history.push('/home/customerManagement/customerManagementList');
+            this.props.history.push('/home');
           });
         }, 0);
       },
