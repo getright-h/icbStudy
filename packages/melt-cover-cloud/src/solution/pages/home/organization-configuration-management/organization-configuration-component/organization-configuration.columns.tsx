@@ -3,23 +3,28 @@ import { ColumnsType } from 'antd/lib/table';
 import { ColumnTools } from '~/framework/util/widget';
 import { ACTION_TYPE } from './organization-configuration.interface';
 
+const { render } = ColumnTools;
 export function Columns(action: Function): ColumnsType<any> {
   return [
     {
       title: '机构名称',
-      dataIndex: 'distributorName'
+      dataIndex: 'distributorName',
+      render
     },
     {
       title: '资金账户',
-      dataIndex: 'bagName'
+      dataIndex: 'bagName',
+      render
     },
     {
       title: '更新时间',
-      dataIndex: 'modifyTime'
+      dataIndex: 'modifyTime',
+      render
     },
     {
       title: '配置是否开启额度限制',
-      dataIndex: 'isLimitTxt'
+      dataIndex: 'isLimitTxt',
+      render
     },
     {
       title: '操作',

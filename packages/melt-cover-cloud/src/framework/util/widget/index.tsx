@@ -1,7 +1,7 @@
 import { Divider, Tag, Tooltip, Typography } from 'antd';
 import Column from 'antd/lib/table/Column';
 import { BaseType } from 'antd/lib/typography/Base';
-import React, { ReactNode } from 'react';
+import React from 'react';
 const { Link, Text } = Typography;
 
 export type Options = Array<{
@@ -41,7 +41,7 @@ export interface ColumnToolsType {
 }
 
 /** 表格行上各式各样的展示控件。包括但不限于：`多彩文字、标签、事件栏、超长备注、开关...`🎈 */
-export const ColumnTools = {
+export const ColumnTools: ColumnToolsType = {
   render: (value: any) => {
     return value ?? '-';
   },

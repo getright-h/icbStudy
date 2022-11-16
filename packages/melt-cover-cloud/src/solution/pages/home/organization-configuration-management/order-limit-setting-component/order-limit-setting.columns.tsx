@@ -3,27 +3,33 @@ import { ColumnsType } from 'antd/lib/table';
 import { ColumnTools } from '~/framework/util/widget';
 import { ACTION_TYPE, WarnOptions } from './order-limit-setting.interface';
 
+const { render } = ColumnTools;
 export function Columns(action: Function): ColumnsType<any> {
   return [
     {
       title: '机构名称',
-      dataIndex: 'distributorName'
+      dataIndex: 'distributorName',
+      render
     },
     {
       title: '社会信用代码',
-      dataIndex: 'unitCode'
+      dataIndex: 'unitCode',
+      render
     },
     {
       title: '联系电话',
-      dataIndex: 'unitMobile'
+      dataIndex: 'unitMobile',
+      render
     },
     {
       title: '联系人',
-      dataIndex: 'contactName'
+      dataIndex: 'contactName',
+      render
     },
     {
       title: '创建时间',
-      dataIndex: 'createTime'
+      dataIndex: 'createTime',
+      render
     },
     {
       title: '录单限额',
