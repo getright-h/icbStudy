@@ -27,7 +27,9 @@ import {
   DetailPagedListReqType,
   DetailPagedListResType,
   SetLimitReqType,
-  SetOrganizationConfReqType
+  SetOrganizationConfReqType,
+  SimpleListReqType,
+  SimpleListResType
 } from '../dto/funds-organiziton-other.dto';
 
 //
@@ -62,6 +64,8 @@ const SET_LIMIT = 'currency/manage/currency/organizationOrderLimit/Set'; //[出�
 const LOG_PAGE_LIST = 'currency/manage/currency/organizationOrderLimit/logPageList'; //[出单额度设置-日志]配置机构订单限制日志分页列表
 
 const SET_ORGANIZATION_CONF = 'currency/manage/currency/organizationSet/Set'; //[机构配置-配置]配置机构设置
+
+const SIMPLE_LIST = 'currency/manage/currency/simpleList'; //卡券基本信息分页列表（平台）
 
 @DepUtil.Injectable()
 export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
@@ -158,4 +162,9 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   setOrganizationConf(params: SetOrganizationConfReqType): Observable<{}> {
     return this.requestService.post(SET_ORGANIZATION_CONF, params);
   }
+
+  // 卡券基本信息分页列表（平台）
+  cardSimpleList = (params: SimpleListReqType): Observable<{ total: number; dataList: SimpleListResType[] }> => {
+    return this.requestService.post(SIMPLE_LIST, params);
+  };
 }

@@ -31,16 +31,16 @@ export function Columns(action: Function): ColumnsType<any> {
       dataIndex: 'createTime',
       render
     },
-    {
-      title: '录单限额',
-      dataIndex: 'orderLimit',
-      render: (text: number) => `${text}元`
-    },
-    {
-      title: '剩余额度',
-      dataIndex: 'orderResidueMoney',
-      render: (text: number) => `${text}元`
-    },
+    // {
+    //   title: '录单限额',
+    //   dataIndex: 'orderLimit',
+    //   render: (text: number) => `${text}元`
+    // },
+    // {
+    //   title: '剩余额度',
+    //   dataIndex: 'orderResidueMoney',
+    //   render: (text: number) => `${text}元`
+    // },
     {
       title: '预警状态',
       dataIndex: 'orderResidueWarnState',
@@ -53,6 +53,7 @@ export function Columns(action: Function): ColumnsType<any> {
       width: 200,
       render: (text, row) =>
         ColumnTools.renderTableColumnAction([
+          { text: '详情', click: () => action(ACTION_TYPE.DETAIL, row) },
           { text: '设置额度', click: () => action(ACTION_TYPE.SETTING, row) },
           { text: '日志', click: () => action(ACTION_TYPE.LOG, row) }
         ])

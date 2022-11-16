@@ -34,6 +34,8 @@ export function useOrderLimitSettingStore() {
       case ACTION_TYPE.LOG:
         visibleChange('logVisible', true, data);
         break;
+      case ACTION_TYPE.DETAIL:
+        visibleChange('detailVisible', true, data);
     }
   }
 
