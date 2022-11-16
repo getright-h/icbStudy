@@ -58,11 +58,10 @@ export const schema: IFormBaseComponentsUnion[] = [
     children: [
       {
         key: 'name',
-        type: 'Text',
+        type: 'Input',
         formItemProps: {
           label: '账户名',
-          required: true,
-          valuePropName: 'children'
+          required: true
         },
         props: {
           placeholder: '请输入账户名'

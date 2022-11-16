@@ -17,7 +17,9 @@ import {
   OrderPagedListReqType,
   OrderPagedListResType,
   DetailReqType,
-  DetailResType
+  DetailResType,
+  DetailPagedListReqType,
+  DetailPagedListResType
 } from '../dto/funds-organiziton-other.dto';
 
 //
@@ -40,6 +42,7 @@ const ORDER_PAGED_LIST = 'currency/manage/currency/order/pagedList'; //[其他�
 
 const DETAIL = 'currency/manage/currency/order/detail'; //[其他订单管理-订单明细查询]订单明细查询
 
+const DETAIL_PAGED_LIST = 'currency/manage/currency/assetsRecord/detailPagedList'; //[资金账户设置-交易明细]资产明细记录分页列表
 @DepUtil.Injectable()
 export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   @DepUtil.Inject(RequestService)
@@ -96,5 +99,10 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   // [其他订单管理-订单明细查询]订单明细查询
   detail(params: DetailReqType): Observable<DetailResType> {
     return this.requestService.post(DETAIL, params);
+  }
+
+  // [资金账户设置-交易明细]资产明细记录分页列表
+  detailPagedList(params: DetailPagedListReqType): Observable<{ total: number; dataList: DetailPagedListResType[] }> {
+    return this.requestService.post(DETAIL_PAGED_LIST, params);
   }
 }

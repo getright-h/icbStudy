@@ -165,7 +165,7 @@ export function useFundAccountSettingStore() {
       handleEditContext(row);
     } else if (actionName == '交易明细') {
       // todo 携参跳转 id乱码
-      history.push('fundAccountSetting/fundDetail/' + 2);
+      history.push('fundAccountSetting/fundDetail?id=' + row.id);
       // history.push('fundDetail?id=' + row.id);
       console.log('交易明细');
     } else if (actionName == '冻结') {

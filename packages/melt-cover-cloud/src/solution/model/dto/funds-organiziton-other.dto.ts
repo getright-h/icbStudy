@@ -179,3 +179,20 @@ export interface DetailResType {
   payTypeText: string;
   serviceTime: string;
 }
+
+// [资金账户设置-交易明细]资产明细记录分页列表
+export interface DetailPagedListReqType {
+  index: number;
+  size: number;
+  bagId: string;
+  isInCome: boolean;
+}
+
+export interface DetailPagedListResType {
+  isInCome: boolean;
+  number: number;
+  subjectName: string;
+  remark: string;
+  createTime: string;
+  createUserName: string;
+}

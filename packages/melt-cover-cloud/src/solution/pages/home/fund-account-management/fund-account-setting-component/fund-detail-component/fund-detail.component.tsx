@@ -84,7 +84,7 @@ export default function FundDetailComponent() {
           <br />
           <br />
           <Radio.Group
-            defaultValue={radio}
+            defaultValue={1}
             options={options}
             onChange={changeRaido}
             value={radio}
