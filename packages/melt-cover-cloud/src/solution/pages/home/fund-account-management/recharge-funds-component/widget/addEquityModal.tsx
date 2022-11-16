@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Modal } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
 import { ISelectAccount, IUploadImgComponent } from '~/framework/components/component.module';
+import { uuid } from '~/framework/util/common/tool';
 
 interface IAddEquityProps {
   title: string;
@@ -97,11 +98,20 @@ export const schema: IFormBaseComponentsUnion[] = [
         key: 'remark',
         type: 'Input',
         formItemProps: {
-          label: '备注',
-          required: true
+          label: '备注'
         },
         props: {
           placeholder: '填写备注'
+        }
+      },
+      {
+        type: 'IUploadImgComponent',
+        key: 'icon',
+        formItemProps: {
+          label: '附件凭证'
+        },
+        props: {
+          defaultFileList: `{{formData.icon?.[0]&&[{uid: ${uuid(9, 10)},name: '权益图标',url: formData.icon?.[0]}]}}`
         }
       }
     ],

@@ -8,6 +8,10 @@ export function inComeColumns(): ColumnsType<any> {
       dataIndex: 'number'
     },
     {
+      title: '卡券',
+      dataIndex: 'number'
+    },
+    {
       title: '支付类型',
       dataIndex: 'subjectName'
     },
@@ -39,6 +43,10 @@ export function spendingColumns(): ColumnsType<any> {
     },
     {
       title: '支出类型',
+      dataIndex: 'subjectName'
+    },
+    {
+      title: '卡券',
       dataIndex: 'subjectName'
     },
     {

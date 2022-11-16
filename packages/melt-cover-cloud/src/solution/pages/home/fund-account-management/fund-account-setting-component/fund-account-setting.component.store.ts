@@ -155,6 +155,12 @@ export function useFundAccountSettingStore() {
 
     // todo 网络请求
   }
+  // 解冻账户
+  function thawAccount(row: any) {
+    console.log('解冻账户');
+
+    // todo 网络请求
+  }
 
   // 表单体按钮操作函数
   function tableAction(row: any, actionName: string) {
@@ -176,6 +182,15 @@ export function useFundAccountSettingStore() {
         content: '确定要冻结这个账户吗?',
         onOk: () => frozenAccount(row)
       });
+    } else if (actionName == '解冻') {
+      Modal.confirm({
+        title: '提示',
+        type: 'warning',
+        content: '确定要解冻这个账户吗?',
+        onOk: () => thawAccount(row)
+      });
+    } else if (actionName == '卡券管理') {
+      history.push('');
     }
   }
 

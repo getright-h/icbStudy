@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Modal } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
 import { IFundAccountSettingState } from '../fund-account-setting.interface';
+import { ISelectDistributor } from '~/framework/components/component.module';
 
 interface IAddEquityProps {
   title: string;
@@ -19,6 +20,10 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
       <IFormComponent
         form={form}
         schema={schema}
+        widget={{
+          // todo 替换为卡券下拉
+          ISelectDistributor: ISelectDistributor
+        }}
         props={{
           labelCol: { span: 8 },
           wrapperCol: { span: 16 },
@@ -65,6 +70,14 @@ export const schema: IFormBaseComponentsUnion[] = [
         },
         props: {
           placeholder: '请输入账户名'
+        }
+      },
+      {
+        // 目前用的是其他的请求，需要替换
+        type: 'ISelectDistributor',
+        key: 'equityGroupId',
+        formItemProps: {
+          label: '购买套餐包'
         }
       },
       {

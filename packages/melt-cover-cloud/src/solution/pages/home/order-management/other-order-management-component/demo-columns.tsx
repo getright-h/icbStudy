@@ -5,13 +5,6 @@ import { DISCOUNT_METHOD, PAY_METHOD } from '~/solution/shared/enums/home.enum';
 
 export function demoColumns(action: Function): ColumnsType<any> {
   return [
-    // {
-    //   title: '序号',
-    //   dataIndex: 'id',
-    //   render: record => {
-    //     return <span>{record}</span>;
-    //   }
-    // },
     {
       title: '订单编号',
       dataIndex: 'orderNumber'

@@ -105,6 +105,16 @@ export const schema: IFormBaseComponentsUnion[] = [
           placeholder: '账户号'
         }
       },
+      //  用于回显时获取 bagId 同时作为参数发起请求
+      {
+        key: 'bagId',
+        type: 'Text',
+        formItemProps: {
+          label: 'bagId',
+          hidden: true,
+          wrapperCol: { span: 10 }
+        }
+      },
       {
         key: 'createTime',
         type: 'Text',

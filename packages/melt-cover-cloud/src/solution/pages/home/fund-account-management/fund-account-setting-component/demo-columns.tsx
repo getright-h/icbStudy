@@ -23,11 +23,11 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '账户累计充值总额',
-      dataIndex: 'totalIncome'
+      dataIndex: 'totalInCome'
     },
     {
       title: '账户资金余额',
-      dataIndex: 'banance'
+      dataIndex: 'balance'
     },
     {
       title: '锁定资金',
@@ -49,7 +49,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
             <Divider type="vertical" />
             <a onClick={() => action(row, '交易明细')}>交易明细</a>
             <Divider type="vertical" />
-            <a onClick={() => action(row, '冻结')}>冻结</a>
+            {/* todo 判断冻结状态来觉得显示 */}
+            {1 ? <a onClick={() => action(row, '冻结')}>冻结</a> : <a onClick={() => action(row, '解冻')}>解冻</a>}
+            <Divider type="vertical" />
+            <a onClick={() => action(row, '卡券管理')}>卡券管理</a>
           </React.Fragment>
         );
       }

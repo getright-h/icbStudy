@@ -1,8 +1,15 @@
 import { Modal, Typography } from 'antd';
 import * as React from 'react';
-import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem } from '@fch/fch-shop-web';
+import {
+  IFormBaseComponentsUnion,
+  TypeUseForm,
+  IFormComponent,
+  FormRenderItem,
+  IPreviewImgComponent
+} from '@fch/fch-shop-web';
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 import { IRechargeFundsState } from '../recharge-funds.interface';
+import { RechargePagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 interface IAddEquityProps {
   title: string;
@@ -28,7 +35,7 @@ export default function AddPackageModalComponent3(props: IAddEquityProps) {
         form={form}
         watch={watch2}
         schema={schema}
-        widget={{ Text: Typography.Text }}
+        widget={{ Text: Typography.Text, Img: IPreviewImgComponent }}
         slot={renderContent}
         props={{
           labelCol: { span: 8 },
@@ -126,21 +133,43 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
+        key: 'remark',
+        type: 'Img',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '附件图片',
+          // style: { width: '50px' },
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          src: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
+          // style: { width: '50px' }
+        }
+      },
+      {
         key: 'auditStateText',
         type: 'Text',
         formItemProps: {
           label: '审核结果',
-          required: true,
-          valuePropName: 'children'
+          required: true
         }
       },
       {
         key: 'auditRemark',
         type: 'Text',
         formItemProps: {
-          label: '审核备注',
-          required: true,
-          valuePropName: 'children'
+          label: '审核备注'
+        }
+      },
+      {
+        key: 'auditRemark',
+        type: 'Text',
+        formItemProps: {
+          label: '审核原因'
+        },
+        // todo 待审核 -1 就不显示原因
+        render: (text: string, row: RechargePagedListResType) => {
+          return row?.auditState == -1 ? '-' : row?.yuanyin;
         }
       }
     ],
