@@ -9,6 +9,7 @@ import { ReserveManageService } from '~/solution/model/services/reserve-manage.s
 import { CommonUtilService } from '~/solution/model/services/common-util.service';
 import { IEquityPackageManageState, OrgData } from './equity-package-manage.interface';
 import {
+  DetailGroupReqType,
   EquityList,
   EquityListPackage,
   EquityPagedListParams,
@@ -339,14 +340,20 @@ export function useEquityPackageManageStore() {
     }
     if (actionName == '详情') {
       handleContextMenuChangePackage(row);
-      setStateWrap({
-        detail: row,
-        disableFooter: true,
-        equityPackageTitle: '详情'
-      });
+      setStateWrap({ equityPackageTitle: '详情' });
+      // 改动 详情之前是直接从列表接口里面拿的数据，现在要改成单独的接口请求
+      getDetailGroup({ id: row.id });
     }
   }
 
+  function getDetailGroup(id: DetailGroupReqType) {
+    equityPackageManageService.detailGroup(id).subscribe(res => {
+      setStateWrap({
+        detail: res,
+        disableFooter: true
+      });
+    });
+  }
   function addOrder() {
     toggleModal2();
   }
@@ -558,7 +565,9 @@ export function useEquityPackageManageStore() {
       ...value,
       distributor,
       equityList,
-      ..._formObject
+      ..._formObject,
+      isCheckAccount: value?.isCheckAccount === true ? 1 : 0,
+      associatedCardAndCoupon: value?.associatedCardAndCoupon
     });
     setStateWrap({
       equityPackageTitle: '修改权益包'

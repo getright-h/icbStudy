@@ -135,6 +135,8 @@ export interface IAddEquityResult {
 }
 
 export interface InsertEquityGroupParams {
+  associatedCardAndCoupon: string;
+  isCheckAccount: boolean;
   id?: string;
   distributorId: string;
   distributorName: string;
@@ -188,4 +190,59 @@ export interface GetSubOrganizationResType {
   isLeaf?: boolean;
   pos?: string;
   children?: GetSubOrganizationResType[];
+}
+
+// 改动 权益包详情 接口
+export interface DetailGroupReqType {
+  id: string;
+}
+export interface DetailGroupResType {
+  id: string;
+  distributorId: string;
+  distributorName: string;
+  price: number;
+  customPrice: boolean;
+  name: string;
+  desc: string;
+  status: number;
+  statusText: string;
+  belonging: number;
+  belongingText: string;
+  createTime: string;
+  createTimeStamp: number;
+  isEdit: boolean;
+  isTest: boolean;
+  isCheckAccount: boolean;
+  equityList: EquityList[];
+  zhiMaGoEquityGroupRelationship: ZhiMaGoEquityGroupRelationship;
+  payMethods: number[];
+  payMethodsStr: string;
+  associatedCardAndCoupon: string;
+}
+export interface ZhiMaGoEquityGroupRelationship {
+  id: string;
+  zhiMaGoTempleteId: string;
+  equityGroupId: string;
+  isNecessaryZhiMaGo: boolean;
+  zhiMaGoDiscount: number;
+  createTime: string;
+  lastUpdateTime: string;
+}
+export interface EquityList {
+  id: string;
+  equityId: string;
+  equityGroupId: string;
+  name: string;
+  proportion: number;
+  number: number;
+  oilSubsidy: number;
+  month: number;
+  path: string;
+  isProportion: boolean;
+  isNumber: boolean;
+  isH5Path: boolean;
+  isSmallPath: boolean;
+  type: number;
+  createTime: string;
+  createTimeStamp: number;
 }

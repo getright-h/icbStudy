@@ -9,9 +9,7 @@ export default function OrderDetailComponent() {
   const { state, goback } = useOrderDetailStore();
   const { info } = state;
   // 车辆图片标题
-  const vehicleTitle = ['车辆正前方', '车辆正后方', '车辆左侧', '车辆右侧'];
-  // 图片
-  const vehiclePic = info?.images;
+  const vehicleTitle = ['车辆正前方', '车辆正后方', '车辆左侧', '车辆右侧', '挡风玻璃处车架号图'];
 
   function renderUserInfo(props: { span: number }) {
     const { span } = props;
@@ -71,6 +69,11 @@ export default function OrderDetailComponent() {
               </Form.Item>
             </Col>
             <Col className="" span={span}>
+              <Form.Item label={'车辆类型'}>
+                <span>{info?.vehicleClass}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
               <Form.Item label={'车型'}>
                 <span>{info?.vehicleType}</span>
               </Form.Item>
@@ -101,6 +104,17 @@ export default function OrderDetailComponent() {
             <Col className="" span={span}>
               <Form.Item label={'账户名'}>
                 <span>{info?.bagName || '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'账户号'}>
+                <span>{info?.bagNumber || '-'}</span>
+              </Form.Item>
+            </Col>
+            {/* todo 缺少字段 */}
+            <Col className="" span={span}>
+              <Form.Item label={'卡券号'}>
+                <span>{info?.bagNumber || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
@@ -156,45 +170,25 @@ export default function OrderDetailComponent() {
   function renderRight() {
     return (
       <>
-        <div className={style.scrollContent}>
-          {/* todo 返回图片 */}
-          <Form className={style.imgBox}>
-            <Form.Item>
-              {vehicleTitle.map((title, index) => {
-                return (
-                  <>
-                    <p>{title}</p>
-                    <div className={style.img} key={index}>
-                      <IPreviewImgComponent
-                        src={info?.images?.[index] ? info?.images?.[index] : info?.currentImageTemplt}
-                        alt="车身图"
-                      />
+        {info?.images && (
+          <div className={style.scrollContent}>
+            {/* todo 返回图片 */}
+            <Form className={style.imgBox}>
+              <Form.Item>
+                {info?.images?.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <p>{item.title}</p>
+                      <div className={style.img}>
+                        <IPreviewImgComponent src={item.Url[0]} alt="车身图" />
+                      </div>
                     </div>
-                  </>
-                );
-              })}
-            </Form.Item>
-            {/* todo 条件判断来展示 */}
-            {/* 挡风玻璃处车架号图*/}
-            {info?.images && (
-              <Form.Item>
-                <p>挡风玻璃处车架号图</p>
-                <div className={style.img}>
-                  <IPreviewImgComponent src={info?.images ? info?.images : info?.currentImageTemplt} alt="车身图" />
-                </div>
+                  );
+                })}
               </Form.Item>
-            )}
-            {/* 附加图片*/}
-            {info?.images && (
-              <Form.Item>
-                <p>附加图片</p>
-                <div className={style.img}>
-                  <IPreviewImgComponent src={info?.images ? info?.images : info?.currentImageTemplt} alt="车身图" />
-                </div>
-              </Form.Item>
-            )}
-          </Form>
-        </div>
+            </Form>
+          </div>
+        )}
       </>
     );
   }
