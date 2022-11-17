@@ -45,6 +45,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
+        // 目前用的是其他的请求，需要替换
         type: 'ISelectDistributor',
         key: 'distributorId',
         formItemProps: {
@@ -52,6 +53,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
+        // 目前用的是其他的请求，需要替换
         type: 'ISelectEquityGroup',
         key: 'equityGroupId',
         formItemProps: {

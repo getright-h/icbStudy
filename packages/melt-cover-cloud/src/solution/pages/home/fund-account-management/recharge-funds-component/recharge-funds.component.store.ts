@@ -8,7 +8,7 @@ import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-or
 import { RechargePagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useRechargeFundsStore() {
-  const { state, setStateWrap } = useStateStore(new IRechargeFundsState());
+  const { state, setStateWrap, getState } = useStateStore(new IRechargeFundsState());
   const formRef = useForm();
   const form2 = useForm();
   const form3 = useForm();
@@ -42,6 +42,8 @@ export function useRechargeFundsStore() {
 
     fundsOrganizitonOtherService.rechargePagedList(params).subscribe(
       res => {
+        console.log('xx=>', res.dataList);
+
         setStateWrap({
           tableData: res.dataList,
           total: res.total
@@ -61,7 +63,6 @@ export function useRechargeFundsStore() {
   /** req 创建资金账户 */
   function recharge() {
     form2.validateFields().then(value => {
-      console.log('value', value);
       const req = {
         bagId: value.bagId,
         type: value.type,
@@ -179,7 +180,7 @@ export function useRechargeFundsStore() {
 
   // 改变分页函数
   function changeTablePageIndex(index: number, pageSize: number) {
-    console.log(index, pageSize);
+    console.log('index, pageSize', index, pageSize);
     setStateWrap({
       searchForm: {
         size: pageSize,

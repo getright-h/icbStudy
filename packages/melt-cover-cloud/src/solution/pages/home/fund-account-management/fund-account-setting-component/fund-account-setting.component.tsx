@@ -8,6 +8,7 @@ import { useFundAccountSettingStore } from './fund-account-setting.component.sto
 import { schema } from './fund-account-setting.interface';
 import AddEquityModalComponent from './widget/addEquityModal';
 import AddPackageModalComponent from './widget/addPackageModal';
+import CardManageComponent from './widget/card-manage/card-manage.component';
 import DetailPackageModalComponent from './widget/packageDetailModal';
 
 export default function FundAccountSettingComponent() {
@@ -16,6 +17,7 @@ export default function FundAccountSettingComponent() {
     formRef,
     form2,
     form3,
+    closeCard,
     handleSearch,
     toggleModalCreat,
     toggleModalEdit,
@@ -99,6 +101,13 @@ export default function FundAccountSettingComponent() {
         handleCancel={toggleModalEdit}
         handleOk={saveEdit}
         form={form2}
+      />
+      {/* 卡券管理 */}
+      <CardManageComponent
+        visible={state.visibaleCard}
+        close={closeCard}
+        initData={state.rowData}
+        action={tableAction}
       />
     </div>
   );

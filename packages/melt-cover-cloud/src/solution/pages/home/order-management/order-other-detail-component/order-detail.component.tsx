@@ -174,6 +174,25 @@ export default function OrderDetailComponent() {
                 );
               })}
             </Form.Item>
+            {/* todo 条件判断来展示 */}
+            {/* 挡风玻璃处车架号图*/}
+            {info?.images && (
+              <Form.Item>
+                <p>挡风玻璃处车架号图</p>
+                <div className={style.img}>
+                  <IPreviewImgComponent src={info?.images ? info?.images : info?.currentImageTemplt} alt="车身图" />
+                </div>
+              </Form.Item>
+            )}
+            {/* 附加图片*/}
+            {info?.images && (
+              <Form.Item>
+                <p>附加图片</p>
+                <div className={style.img}>
+                  <IPreviewImgComponent src={info?.images ? info?.images : info?.currentImageTemplt} alt="车身图" />
+                </div>
+              </Form.Item>
+            )}
           </Form>
         </div>
       </>

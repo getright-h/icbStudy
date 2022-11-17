@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { message, Modal } from 'antd';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { PagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { PagedListReqType, PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -155,9 +155,15 @@ export function useFundAccountSettingStore() {
 
     // todo 网络请求
   }
+  // 解冻账户
+  function thawAccount(row: any) {
+    console.log('解冻账户');
+
+    // todo 网络请求
+  }
 
   // 表单体按钮操作函数
-  function tableAction(row: any, actionName: string) {
+  function tableAction(row: PagedListResType, actionName: string) {
     console.log(row, '表单体按钮操作函数');
     if (actionName == '编辑') {
       // 显示模态框
@@ -176,6 +182,16 @@ export function useFundAccountSettingStore() {
         content: '确定要冻结这个账户吗?',
         onOk: () => frozenAccount(row)
       });
+    } else if (actionName == '解冻') {
+      Modal.confirm({
+        title: '提示',
+        type: 'warning',
+        content: '确定要解冻这个账户吗?',
+        onOk: () => thawAccount(row)
+      });
+    } else if (actionName == '卡券管理') {
+      setStateWrap({ rowData: row });
+      closeCard();
     }
   }
 
@@ -187,6 +203,9 @@ export function useFundAccountSettingStore() {
     setStateWrap({
       visibleEdit: !state.visibleEdit
     });
+  }
+  function closeCard() {
+    setStateWrap({ visibaleCard: !state.visibaleCard });
   }
 
   // 改变分页函数
@@ -212,6 +231,7 @@ export function useFundAccountSettingStore() {
     form2,
     form3,
     saveEdit,
+    closeCard,
     handleSearch,
     toggleModalCreat,
     exportExcel,

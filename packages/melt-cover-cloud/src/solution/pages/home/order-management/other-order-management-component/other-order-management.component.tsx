@@ -49,10 +49,8 @@ export default function OtherOrderManagementComponent() {
         leftFlex={1}
         rightFlex={5}
         pageName={'订单管理/订单列表'}
-        // pageLeft={renderPageLeft()}
         selectItems={renderSelectItems()}
         searchButton={renderSearchButtons()}
-        // otherSearchBtns={renderOtherButtons()}
         table={renderTable()}
       ></ITablePageComponent>
     </div>

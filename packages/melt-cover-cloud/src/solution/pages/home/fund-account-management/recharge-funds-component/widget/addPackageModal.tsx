@@ -1,6 +1,12 @@
 import { Button, Modal, Typography } from 'antd';
 import * as React from 'react';
-import { IFormBaseComponentsUnion, TypeUseForm, IFormComponent, FormRenderItem } from '@fch/fch-shop-web';
+import {
+  IFormBaseComponentsUnion,
+  TypeUseForm,
+  IFormComponent,
+  FormRenderItem,
+  IPreviewImgComponent
+} from '@fch/fch-shop-web';
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 
 interface IAddEquityProps {
@@ -43,7 +49,8 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
         schema={schema}
         slot={renderContent}
         widget={{
-          Text: Typography.Text
+          Text: Typography.Text,
+          Img: IPreviewImgComponent
         }}
         props={{
           labelCol: { span: 8 },
@@ -152,6 +159,30 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
+        key: 'remark',
+        type: 'Text',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '充值备注',
+          initialValue: 1,
+          wrapperCol: { span: 10 }
+        }
+      },
+      {
+        key: 'remark',
+        type: 'Img',
+        formItemProps: {
+          valuePropName: 'children',
+          label: '附件图片',
+          // style: { width: '50px' },
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          src: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
+          // style: { width: '50px' }
+        }
+      },
+      {
         key: 'auditState',
         type: 'Select',
         formItemProps: {
@@ -170,8 +201,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         key: 'auditRemark',
         type: 'Input',
         formItemProps: {
-          label: '备注',
-          required: true,
+          label: '审核备注',
           wrapperCol: { span: 10 }
         }
       }
