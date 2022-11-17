@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Button, Modal } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
-import { ISelectAccount, IUploadImgComponent } from '~/framework/components/component.module';
+import { ISelectAccount, ISelectCard, IUploadImgComponent } from '~/framework/components/component.module';
 import { uuid } from '~/framework/util/common/tool';
+import { PayOptions, PAY_ENUM } from '~/solution/shared/constant/currency.const';
+import { options } from '~/framework/components/i-home-header-component/i-home-header.module.less';
 
 interface IAddEquityProps {
   title: string;
@@ -23,7 +25,8 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
         schema={schema}
         widget={{
           IUploadImgComponent: IUploadImgComponent,
-          ISelectAccount: ISelectAccount
+          ISelectAccount: ISelectAccount,
+          ISelectCard: ISelectCard
         }}
         props={{
           labelCol: { span: 8 },
@@ -66,21 +69,36 @@ export const schema: IFormBaseComponentsUnion[] = [
         key: 'bagId',
         type: 'ISelectAccount',
         formItemProps: {
-          label: '账户名',
+          label: '充值账户',
           required: true
         },
-        props: {}
+        props: {
+          isPreload: true
+        }
+      },
+      {
+        // 目前用的是其他的请求，需要替换
+        type: 'ISelectCard',
+        key: 'businessId',
+        formItemProps: {
+          label: '充值卡券',
+          required: true
+        },
+        props: {
+          isPreload: true
+        }
       },
       {
         key: 'type',
         type: 'Select',
         formItemProps: {
           label: '支付类型',
-          required: true
+          required: true,
+          initialValue: PAY_ENUM.other,
+          wrapperCol: { span: 10 }
         },
         props: {
-          placeholder: '请选择',
-          options: [{ label: '其他', value: 1 }]
+          options: PayOptions
         }
       },
       {
@@ -106,12 +124,15 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         type: 'IUploadImgComponent',
-        key: 'icon',
+        key: 'receiptImage',
         formItemProps: {
           label: '附件凭证'
         },
         props: {
-          defaultFileList: `{{formData.icon?.[0]&&[{uid: ${uuid(9, 10)},name: '权益图标',url: formData.icon?.[0]}]}}`
+          defaultFileList: `{{formData.receiptImage?.[0]&&[{uid: ${uuid(
+            9,
+            10
+          )},name: '权益图标',url: formData.receiptImage?.[0]}]}}`
         }
       }
     ],

@@ -3,7 +3,7 @@ import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-or
 import { ISearchSelectComponent } from '../component.module';
 
 export class ISelectProps {
-  onChange?: (value: unknown) => void;
+  onChange?: (value: unknown, row: unknown) => void;
   /**是否预加载下拉框数据 */
   isPreload?: boolean;
   searchKey?: string;
@@ -21,7 +21,7 @@ export default React.memo((props: ISelectProps) => {
   const params = {
     placeholder,
     requestFn,
-    onChange: (v: any, obj: any) => onChange(isSendObj ? obj : v),
+    onChange: (v: any, obj: any) => onChange(v, obj),
     isPreload: isPreload,
     disabled: disabled,
     value: props.value,

@@ -7,6 +7,7 @@ import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-or
 import { IS_ENUM, YesNoOptions } from '~/solution/shared/constant/currency.const';
 import { IConfigProps, IConfigState, LevelOptions } from './config-modal.interface';
 import style from './config-modal.component.module.less';
+import { SimpleListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 const { Text } = Typography;
 
@@ -33,9 +34,9 @@ export default function ConfigModalComponent(props: IConfigProps) {
     //   isAllowSubDeductMoney:
     //     initData?.isAllowSubDeductMoney === IS_ENUM.NULL ? IS_ENUM.OPEN : initData?.isAllowSubDeductMoney
     // });
-    form.setFieldsValue({
-      cardList: [{ name: '李华' }, { name: '小黑' }]
-    });
+    // form.setFieldsValue({
+    //   cardList: [{ name: '李华' }, { name: '小黑' }]
+    // });
   }
 
   function handleOk() {
@@ -60,6 +61,17 @@ export default function ConfigModalComponent(props: IConfigProps) {
 
   function formValuesChange() {}
 
+  function businessChange(value: string[], data: { info: SimpleListResType }[]) {
+    console.log('[value]===>🚀', value, data);
+    const cardListConst = form.getFieldValue('cardList');
+    const cardList = data?.map(m => {
+      return {
+        name: m?.info?.name
+      };
+    });
+    form.setFieldsValue({ cardList });
+  }
+
   function RenderForm() {
     const layout = {
       labelCol: { span: 8 },
@@ -71,11 +83,8 @@ export default function ConfigModalComponent(props: IConfigProps) {
         <Form.Item label="关联资金账户" name="bagId" rules={[{ required: true }]}>
           <ISelectAccount isPreload={true} />
         </Form.Item>
-        <Form.Item label="关联卡券1" name="cardId1" rules={[{ required: true }]}>
-          <ISelectCard isPreload={true} />
-        </Form.Item>
-        <Form.Item label="关联卡券" name="cardId" rules={[{ required: true }]}>
-          <ISelectCardMultiple isPreload={true} />
+        <Form.Item label="关联卡券" name="businessIds" rules={[{ required: true }]}>
+          <ISelectCardMultiple isPreload={true} onChange={businessChange} />
         </Form.Item>
         <Form.List name="cardList">
           {(fields, { add, remove, move }) => (

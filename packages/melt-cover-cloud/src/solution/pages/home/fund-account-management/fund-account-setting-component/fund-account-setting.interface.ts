@@ -6,16 +6,20 @@ import { PagedListResType } from '~/solution/model/dto/funds-organiziton-other.d
  * @class IFundAccountSettingState
  */
 export enum ACTION_TYPE {
+  /** 创建账户  */
+  ADD,
   /** 编辑 */
   DETAIL,
   /** 交易明细 */
   INFO,
-  /** 冻结 */
+  /** 钱包冻结 */
   frozen,
-  /** 解冻 */
+  /** 钱包解冻 */
   thaw,
   /** 卡卷管理 */
-  card
+  card,
+  /** 导出 */
+  Export
 }
 
 export class IFundAccountSettingState {

@@ -25,6 +25,7 @@ export interface SimpleListReqType {
 
 export interface SimpleListResType {
   id: string;
+  businessId: string;
   name: string;
 }
 export interface LimitPagedListResType {
@@ -51,6 +52,7 @@ export interface PagedListResType {
   typeText: string;
   state: number;
   stateText: string;
+  businessIds: string[];
   distributorId: string;
   balance: number;
   totalInCome: number;
@@ -162,7 +164,7 @@ export interface RechargePagedListResType {
 
 //   审核充值记录
 export interface AuditReqType {
-  id: string;
+  recordId: string;
   auditState: number;
   auditRemark: string;
 }
@@ -180,6 +182,7 @@ export interface BagReqType {
   name: string;
   remark: string;
   state: number;
+  businessIds: string[];
 }
 
 // 编辑账户钱包
@@ -282,6 +285,83 @@ export interface DetailPagedListResType {
   isInCome: boolean;
   number: number;
   subjectName: string;
+  remark: string;
+  createTime: string;
+  createUserName: string;
+}
+
+export interface BagDetailResType {
+  bag: Bag;
+  bagRelations: BagRelation[];
+}
+export interface BagRelation {
+  id: string;
+  bagRelationId: string;
+  businessName: string;
+  balance: number;
+  businessId: string;
+  totalInCome: number;
+  state: number;
+  stateText: string;
+}
+export interface Bag {
+  id: string;
+  name: string;
+  number: string;
+  channelId: string;
+  type: number;
+  state: number;
+  distributorId: string;
+  contactMobile: string;
+  isDefault: boolean;
+  updateTime: string;
+  createTime: string;
+  remark: string;
+  balance: number;
+  totalInCome: number;
+  totalUnCome: number;
+  distributorCode: string;
+  distributorIdChain: string;
+  distributorCodeChain: string;
+  distributorLevel: number;
+  distributorName: string;
+  distributorNameChain: string;
+}
+
+export interface AssetsDetailResType {
+  bagInfo: BagInfo;
+  buyInfo: BuyInfo;
+  auditInfo: AuditInfo;
+}
+export interface AuditInfo {
+  auditState: number;
+  auditStateText: string;
+  auditRemark: string;
+}
+export interface BuyInfo {
+  recordId: string;
+  businessName: string;
+  number: number;
+  remark: string;
+  createTime: string;
+  payType: number;
+  payTypeText: string;
+  receiptImage: string;
+  balance: number;
+  totalInCome: number;
+}
+export interface BagInfo {
+  name: string;
+  number: string;
+  balance: number;
+  totalInCome: number;
+}
+
+export interface BagAssetsPagedListResType {
+  isInCome: string;
+  number: number;
+  subjectName: string;
+  businessName: string;
   remark: string;
   createTime: string;
   createUserName: string;

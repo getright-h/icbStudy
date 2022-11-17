@@ -6,6 +6,8 @@ import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manag
 import style from '../fund-account-setting.component';
 import { EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
 import { IFundAccountSettingState } from '../fund-account-setting.interface';
+import { ISelectCardMultiple } from '~/framework/components/component.module';
+import { PayOptions, PAY_ENUM } from '~/solution/shared/constant/currency.const';
 
 interface IAddEquityProps {
   title: string;
@@ -47,7 +49,8 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
         schema={schema}
         slot={renderContent}
         widget={{
-          Text: Typography.Text
+          Text: Typography.Text,
+          ISelectCardMultiple
         }}
         props={{
           labelCol: { span: 8 },
@@ -112,6 +115,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         formItemProps: {
           label: 'bagId',
           hidden: true,
+          valuePropName: 'children',
           wrapperCol: { span: 10 }
         }
       },
@@ -134,16 +138,35 @@ export const schema: IFormBaseComponentsUnion[] = [
         formItemProps: {
           label: '支付类型',
           required: true,
-          initialValue: 1,
+          initialValue: PAY_ENUM.other,
           wrapperCol: { span: 10 }
         },
         props: {
-          options: [
-            { label: '其他', value: 1 },
-            { label: '上级分配', value: 0 }
-          ]
+          options: PayOptions
         }
       },
+      {
+        type: 'ISelectCardMultiple',
+        key: 'businessIds',
+        formItemProps: {
+          label: '绑定关联卡券',
+          required: true
+        },
+        props: {
+          isPreload: true
+          // disabled: true
+        }
+      },
+      // {
+      //   key: 'businessIds',
+      //   type: 'Text',
+      //   formItemProps: {
+      //     label: '绑定关联卡券',
+      //     valuePropName: 'children',
+      //     required: true,
+      //     wrapperCol: { span: 10 }
+      //   }
+      // },
       {
         key: 'stateText',
         type: 'Text',
@@ -168,21 +191,21 @@ export const schema: IFormBaseComponentsUnion[] = [
         key: 'balance',
         type: 'Text',
         formItemProps: {
-          label: '资金总额',
+          label: '资金余额',
           valuePropName: 'children',
           required: true,
           wrapperCol: { span: 10 }
         }
-      },
-      {
-        key: 'distributor',
-        type: 'Text',
-        formItemProps: {
-          label: '锁定资金',
-          valuePropName: 'children',
-          wrapperCol: { span: 10 }
-        }
       }
+      // {
+      //   key: 'distributor',
+      //   type: 'Text',
+      //   formItemProps: {
+      //     label: '锁定资金',
+      //     valuePropName: 'children',
+      //     wrapperCol: { span: 10 }
+      //   }
+      // }
     ],
     props: {
       cols: 2

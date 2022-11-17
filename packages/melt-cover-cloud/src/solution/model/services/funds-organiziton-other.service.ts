@@ -29,7 +29,10 @@ import {
   SetLimitReqType,
   SetOrganizationConfReqType,
   SimpleListReqType,
-  SimpleListResType
+  SimpleListResType,
+  BagDetailResType,
+  AssetsDetailResType,
+  BagAssetsPagedListResType
 } from '../dto/funds-organiziton-other.dto';
 
 //
@@ -53,6 +56,9 @@ const ORDER_PAGED_LIST = 'currency/manage/currency/order/pagedList'; //[其他�
 const DETAIL = 'currency/manage/currency/order/detail'; //[其他订单管理-订单明细查询]订单明细查询
 
 const DETAIL_PAGED_LIST = 'currency/manage/currency/assetsRecord/detailPagedList'; //[资金账户设置-交易明细]资产明细记录分页列表
+
+const ASSETS_DETAIL = 'currency/manage/currency/assetsRecord/detail'; //[资金充值-详情]详情
+
 const GET_SUB_ORGANIZATION = 'currency/manage/currency/organizationSet/getSubOrganization'; //[机构配置-左侧树形列表]查询子级组织结构
 
 const ORGANIZATION_PAGED_LIST = 'currency/manage/currency/organizationSet/pagedList'; //[机构配置-右侧分页查询]机构设置管理分页列表
@@ -66,6 +72,14 @@ const LOG_PAGE_LIST = 'currency/manage/currency/organizationOrderLimit/logPageLi
 const SET_ORGANIZATION_CONF = 'currency/manage/currency/organizationSet/Set'; //[机构配置-配置]配置机构设置
 
 const SIMPLE_LIST = 'currency/manage/currency/simpleList'; //卡券基本信息分页列表（平台）
+
+const SET_BAG_STATE = 'currency/manage/currency/bag/setBagState'; //[资金账户设置-冻结]冻结解冻钱包
+
+const SET_BAG_RELATION_STATE = 'currency/manage/currency/bag/setBagRelationState'; //[资金账户设置-冻结]冻结解冻钱包关联的卡券
+
+const BAG_DETAIL = 'currency/manage/currency/bag/bagDetail'; //[资金账户设置-账户详情] 账户详情
+
+const BAG_ASSETS_PAGED_LIST = 'currency/manage/currency/bag/bagAssetsPagedList'; //[资金账户设置-交易明细]资产明细记录分页列表
 
 @DepUtil.Injectable()
 export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
@@ -166,5 +180,35 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   // 卡券基本信息分页列表（平台）
   cardSimpleList = (params: SimpleListReqType): Observable<{ total: number; dataList: SimpleListResType[] }> => {
     return this.requestService.post(SIMPLE_LIST, params);
+  };
+
+  // [资金账户设置-冻结]冻结解冻钱包
+  setBagState(params: { bagId: string; state: number }): Observable<{}> {
+    return this.requestService.post(SET_BAG_STATE, params);
+  }
+
+  // [资金账户设置-冻结]冻结解冻钱包关联的卡券
+  setBagRelationState(params: { bagRelationId: string; state: number }): Observable<{}> {
+    return this.requestService.post(SET_BAG_RELATION_STATE, params);
+  }
+
+  // [资金账户设置-账户详情] 账户详情
+  bagDetail(params: { bagId: string }): Observable<BagDetailResType> {
+    return this.requestService.post(BAG_DETAIL, params);
+  }
+
+  // [资金充值-详情]详情
+  assetsDetail(params: { recordId: string }): Observable<AssetsDetailResType> {
+    return this.requestService.post(ASSETS_DETAIL, params);
+  }
+
+  // [资金账户设置-交易明细]资产明细记录分页列表
+  bagAssetsPagedList = (params: {
+    index: number;
+    size: number;
+    bagId: string;
+    isInCome: boolean;
+  }): Observable<{ total: number; dataList: BagAssetsPagedListResType[] }> => {
+    return this.requestService.post(BAG_ASSETS_PAGED_LIST, params);
   };
 }

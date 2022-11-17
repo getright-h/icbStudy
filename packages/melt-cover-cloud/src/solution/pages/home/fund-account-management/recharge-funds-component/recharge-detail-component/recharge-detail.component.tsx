@@ -1,12 +1,15 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Col, Form, Row } from 'antd';
+import { Button, Col, Form, Row, Divider, Input, Radio } from 'antd';
 import * as React from 'react';
 // import ImageShowPreviewComponent from '~framework/components/image-show-preview-component/image-show-preview.component';
 import style from './recharge-detail.module.less';
 import { useRechargeDetailStore } from './recharge-detail.component.store';
+import TextArea from 'antd/lib/input/TextArea';
+import { ElementOptions } from './recharge-detail.interface';
+import { ImageDisplayComponent } from '~/framework/components/component.module';
 // const IPreviewImgComponent = ImageShowPreviewComponent;
 export default function RechargeDetailComponent() {
-  const { state, goback, form } = useRechargeDetailStore();
+  const { state, goback, form, isExamine, examineFn } = useRechargeDetailStore();
   const { info } = state;
 
   function renderUserInfo(props: { span: number }) {
@@ -14,95 +17,134 @@ export default function RechargeDetailComponent() {
     return (
       <div>
         <h3>
-          <strong onClick={goback}>
-            <ArrowLeftOutlined />
+          <Button onClick={goback} icon={<ArrowLeftOutlined />}>
             返回
-          </strong>
+          </Button>
         </h3>
-        <h3>
-          <strong>
-            <strong>充值信息</strong>
-          </strong>
-        </h3>
-        <hr />
+        <h2>充值信息</h2>
         <div>
-          <h4>
-            <strong>账户基本信息</strong>
-          </h4>
           <Row>
             <Col className="" span={span}>
               <Form.Item label={'账户名'}>
-                <span>{info?.distributorName || '-'}</span>
+                <span>{info?.bagInfo?.name || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'账户号'}>
-                <span>{info?.equityGroupName || '-'}</span>
+                <span>{info?.bagInfo?.number || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'账户累计充值总额'}>
-                <span>{(info?.ownerType == 1 ? '个人' : '企业') || '-'}</span>
+                <span>{info?.bagInfo?.totalInCome ?? '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'账户资金余额'}>
-                <span>{(info?.certificateType == 1 ? '身份证' : '营业执照') || '-'}</span>
+                <span>{info?.bagInfo?.balance ?? '-'}</span>
               </Form.Item>
             </Col>
           </Row>
         </div>
+        <Divider />
         <div>
-          <h4>
-            <strong>充值信息</strong>
-          </h4>
+          <h2>充值信息</h2>
           <Row>
             <Col className="" span={span}>
-              <Form.Item label={'充值金额'}>
-                <span>{info?.distributorName || '-'}</span>
+              <Form.Item label={'充值卡卷'}>
+                <span>{info?.buyInfo?.businessName || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
-              <Form.Item label={'创建时间'}>
-                <span>{info?.equityGroupName || '-'}</span>
+              <Form.Item label={'充值金额'}>
+                <span>{info?.buyInfo?.number ?? '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'卡券积累充值金额'}>
+                <span>{info?.buyInfo?.totalInCome ?? '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'卡券金额'}>
+                <span>{info?.buyInfo?.balance ?? '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'支付类型'}>
-                <span>{(info?.ownerType == 1 ? '个人' : '企业') || '-'}</span>
+                <span>{info?.buyInfo?.payType || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'备注'}>
-                <span>{(info?.certificateType == 1 ? '身份证' : '营业执照') || '-'}</span>
+                <span>{info?.buyInfo?.remark || '-'}</span>
+              </Form.Item>
+            </Col>
+            <Col className="" span={span}>
+              <Form.Item label={'附件凭证'}>
+                {info?.buyInfo?.receiptImage ? (
+                  <ImageDisplayComponent width={'200px'} height="auto" imageUrl={info?.buyInfo?.receiptImage} />
+                ) : (
+                  '-'
+                )}
               </Form.Item>
             </Col>
           </Row>
         </div>
+        <Divider />
         <div>
-          <h4>
-            <strong>审核信息</strong>
-          </h4>
-          <Row>
-            <Col className="" span={span}>
-              <Form.Item label={'审核结果'}>
-                <span>{info?.distributorName || '-'}</span>
-              </Form.Item>
-            </Col>
-            <Col className="" span={span}>
-              <Form.Item label={'备注'}>
-                <span>{info?.equityGroupName || '-'}</span>
-              </Form.Item>
-            </Col>
-          </Row>
+          <h2>审核信息</h2>
+          {isExamine ? (
+            <Row>
+              <Col className="" span={span}>
+                <Form.Item name="auditState" label={'审核结果'} rules={[{ required: true }]}>
+                  <Radio.Group options={ElementOptions} />
+                </Form.Item>
+              </Col>
+              <Col className="" span={span}>
+                <Form.Item name="auditRemark" label={'备注'}>
+                  <TextArea placeholder="请输入审核备注" />
+                </Form.Item>
+              </Col>
+            </Row>
+          ) : (
+            <Row>
+              <Col className="" span={span}>
+                <Form.Item label={'审核结果'}>
+                  <span>{info?.auditInfo?.auditStateText || '-'}</span>
+                </Form.Item>
+              </Col>
+              <Col className="" span={span}>
+                <Form.Item label={'备注'}>
+                  <span>{info?.auditInfo?.auditRemark || '-'}</span>
+                </Form.Item>
+              </Col>
+            </Row>
+          )}
         </div>
+        {isExamine && (
+          <>
+            <Divider />
+            <Row>
+              <Col offset={22}>
+                <Button onClick={examineFn} danger>
+                  确认
+                </Button>
+              </Col>
+            </Row>
+          </>
+        )}
       </div>
     );
   }
 
   function renderLeft() {
     const span = 8;
-    return <Form className={style.imgBox}>{renderUserInfo({ span })}</Form>;
+    return (
+      <Form form={form} className={style.imgBox}>
+        {renderUserInfo({ span })}
+      </Form>
+    );
   }
   return (
     <div className={style.addOrder}>
