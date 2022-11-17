@@ -259,7 +259,11 @@ export interface DetailResType {
   equityGroupPrice: number;
   additionalImages: string;
   currentImageTemplt: string;
-  images: string;
+  images: {
+    type: number;
+    title: string;
+    Url: string[];
+  }[];
   createTime: string;
   orderState: number;
   orderStateTxt: string;

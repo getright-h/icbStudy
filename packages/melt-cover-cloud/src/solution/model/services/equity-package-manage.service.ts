@@ -1,5 +1,7 @@
 import {
   DataList,
+  DetailGroupReqType,
+  DetailGroupResType,
   EquityListParams,
   EquityPackageManageDTO,
   EquityPagedListParams,
@@ -35,6 +37,8 @@ const GET_EQUITY_PAGE_PATH = 'equity/manage/equityPagedList';
 const dropDownEquityList = 'equity/manage/dropDownEquityList';
 const GET_EQUITY_LIST_NO_PAGE_CHILD_PATH = 'equity/manage/dropDownEquityGroupList';
 const GET_SUB_ORGANIZATION = 'equity/manage/GetOrgList'; //查找子级机构 (Web)
+
+const DETAIL_GROUP = 'equity/manage/detailGroup'; //权益包详情
 
 @DepUtil.Injectable()
 export class EquityPackageManageService extends EquityPackageManageDTO {
@@ -83,5 +87,10 @@ export class EquityPackageManageService extends EquityPackageManageDTO {
   // 查找子级机构 (Web)
   getSubOrganization(params: { parentId: string; equityId?: string }): Observable<GetSubOrganizationResType[]> {
     return this.requestService.get(GET_SUB_ORGANIZATION, params);
+  }
+
+  // 权益包详情
+  detailGroup(params: DetailGroupReqType): Observable<DetailGroupResType> {
+    return this.requestService.get(DETAIL_GROUP, params);
   }
 }
