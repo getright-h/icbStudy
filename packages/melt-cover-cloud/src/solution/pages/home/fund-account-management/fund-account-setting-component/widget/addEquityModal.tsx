@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Button, Modal } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
 import { IFundAccountSettingState } from '../fund-account-setting.interface';
-import { ISelectDistributor } from '~/framework/components/component.module';
+import { ISelectCardMultiple, ISelectDistributor } from '~/framework/components/component.module';
+import { BagStateOptions, BAG_STATE_ENUM, PayOptions, PAY_ENUM } from '~/solution/shared/constant/currency.const';
 
 interface IAddEquityProps {
   title: string;
@@ -22,7 +23,8 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
         schema={schema}
         widget={{
           // todo 替换为卡券下拉
-          ISelectDistributor: ISelectDistributor
+          ISelectDistributor: ISelectDistributor,
+          ISelectCardMultiple
         }}
         props={{
           labelCol: { span: 8 },
@@ -74,10 +76,24 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         // 目前用的是其他的请求，需要替换
-        type: 'ISelectDistributor',
-        key: 'equityGroupId',
+        type: 'ISelectCardMultiple',
+        key: 'businessIds',
         formItemProps: {
-          label: '购买套餐包'
+          label: '绑定关联卡券',
+          required: true
+        }
+      },
+      {
+        key: 'type',
+        type: 'Select',
+        formItemProps: {
+          label: '支付类型',
+          required: true,
+          initialValue: PAY_ENUM.other,
+          wrapperCol: { span: 10 }
+        },
+        props: {
+          options: PayOptions
         }
       },
       {
@@ -85,15 +101,12 @@ export const schema: IFormBaseComponentsUnion[] = [
         type: 'RadioGroup',
         formItemProps: {
           label: '账户状态',
-          initialValue: 1,
+          initialValue: BAG_STATE_ENUM.normal,
           required: true
         },
         props: {
           placeholder: '',
-          options: [
-            { label: '正常', value: 0 },
-            { label: '冻结', value: 1 }
-          ]
+          options: BagStateOptions
         }
       },
       {

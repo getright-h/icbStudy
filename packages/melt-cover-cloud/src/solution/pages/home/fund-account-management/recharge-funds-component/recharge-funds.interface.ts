@@ -1,10 +1,26 @@
 import { IFormBaseComponentsUnion } from '@fch/fch-shop-web';
+import { DataList, IResponseEquityResult } from '~/solution/model/dto/equity-package-manage.dto';
+import { AssetsDetailResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { AssetAuditOptions } from '~/solution/shared/constant/currency.const';
+import { OrgData } from '../../equity-management/equity-package-manage-component/equity-package-manage.interface';
 
 /**
  * @export state变量定义和初始化
  * @class IFundAccountSettingState
  */
 
+export enum ACTION_TYPE {
+  /** 详情 */
+  DETAIL,
+  /** 充值审核 */
+  EXAMINE,
+  /** 修改充值 */
+  UPDATE,
+  /** 卡券充值 */
+  Recharge,
+  /** 导出 */
+  Export
+}
 /**
  * @exports 表单组件配置
  */
@@ -49,10 +65,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         },
         props: {
           placeholder: '查看审核',
-          options: [
-            { label: '通过', value: 1 },
-            { label: '未通过', value: 0 }
-          ],
+          options: AssetAuditOptions,
           allowClear: true,
           showSearch: true,
           optionFilterProp: 'label'
@@ -66,6 +79,7 @@ export const schema: IFormBaseComponentsUnion[] = [
 ];
 
 export class IRechargeFundsState {
+  info: AssetsDetailResType;
   auditId: string;
   visibleCreat = false;
   visibleAudit = false;

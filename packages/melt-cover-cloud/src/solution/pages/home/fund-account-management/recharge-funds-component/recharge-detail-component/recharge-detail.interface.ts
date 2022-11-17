@@ -1,12 +1,21 @@
 import { IFormBaseComponentsUnion } from '@fch/fch-shop-web';
+import { AssetsDetailResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 import { DataDetail } from '~/solution/model/dto/order-manage.dto';
 
 /**
  * @export state变量定义和初始化
  * @class IOrderDetailState
  */
+
+export const ElementOptions = [
+  { label: '通过', value: 1 },
+  { label: '不通过', value: 0 }
+];
+
 export class IRechargeDetailState {
-  info: DataDetail;
+  info: AssetsDetailResType;
+
+  // 以下都是垃圾数据
   radio: 2;
   chargeSearchForm = {
     index: 1,
@@ -31,42 +40,42 @@ export class IRechargeDetailState {
   isLoading = false;
 }
 
-export const schema: IFormBaseComponentsUnion[] = [
-  {
-    key: 'container',
-    type: 'Layout',
-    children: [
-      {
-        key: 'distributorId',
-        type: 'Select',
-        formItemProps: {
-          label: '审核结果 '
-        },
-        props: {
-          placeholder: '请选择',
-          options: [
-            { label: '通过', value: 1 },
-            { label: '不通过', value: 0 }
-          ]
-        }
-      },
-      {
-        key: 'name',
-        type: 'Input',
-        formItemProps: {
-          label: '备注'
-        },
-        props: {
-          placeholder: '请输入备注',
-          allowClear: true
-        }
-      }
-    ],
-    props: {
-      cols: 2
-    }
-  }
-];
+// export const schema: IFormBaseComponentsUnion[] = [
+//   {
+//     key: 'container',
+//     type: 'Layout',
+//     children: [
+//       {
+//         key: 'distributorId',
+//         type: 'Select',
+//         formItemProps: {
+//           label: '审核结果 '
+//         },
+//         props: {
+//           placeholder: '请选择',
+//           options: [
+//             { label: '通过', value: 1 },
+//             { label: '不通过', value: 0 }
+//           ]
+//         }
+//       },
+//       {
+//         key: 'name',
+//         type: 'Input',
+//         formItemProps: {
+//           label: '备注'
+//         },
+//         props: {
+//           placeholder: '请输入备注',
+//           allowClear: true
+//         }
+//       }
+//     ],
+//     props: {
+//       cols: 2
+//     }
+//   }
+// ];
 
 export enum TableType {
   INCOME = 'income', // 收入

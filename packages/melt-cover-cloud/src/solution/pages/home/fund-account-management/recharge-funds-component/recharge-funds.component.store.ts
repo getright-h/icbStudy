@@ -1,20 +1,23 @@
-import { IRechargeFundsState } from './recharge-funds.interface';
+import { ACTION_TYPE, IRechargeFundsState } from './recharge-funds.interface';
 import { useStateStore } from '@fch/fch-tool';
 import { useForm } from '@fch/fch-shop-web';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useHistory } from 'react-router';
 import { message } from 'antd';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { RechargePagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { RechargePagedListReqType, RechargePagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { uuid } from '~/framework/util/common/tool';
 
 export function useRechargeFundsStore() {
   const { state, setStateWrap, getState } = useStateStore(new IRechargeFundsState());
   const formRef = useForm();
+  const rowRef = useRef<RechargePagedListResType>();
   const form2 = useForm();
   const form3 = useForm();
   const form4 = useForm();
   const form5 = useForm();
 
+  const history = useHistory();
   // 初始化请求表单信息
   useEffect(() => {
     // 初始化获取表单信息
@@ -64,18 +67,20 @@ export function useRechargeFundsStore() {
   function recharge() {
     form2.validateFields().then(value => {
       const req = {
+        ...value,
+        receiptImage: value?.receiptImage?.[0],
         bagId: value.bagId,
         type: value.type,
         number: value.number,
         remark: value.remark
       };
       fundsOrganizitonOtherService.assetsRecord(req).subscribe(() => {
-        message.info('操作成功');
+        message.success('充值成功');
         form2.resetFields();
         // 重绘页面
         handleSearch();
+        toggleModalRecharge();
       });
-      toggleModalRecharge();
     });
   }
 
@@ -83,39 +88,41 @@ export function useRechargeFundsStore() {
   function saveAudit() {
     form4.validateFields().then(value => {
       const req = {
+        ...value,
         id: state.auditId,
         auditState: value.auditState,
         auditRemark: value.auditRemark
       };
       fundsOrganizitonOtherService.audit(req).subscribe(() => {
-        message.info('操作成功');
+        message.success('操作成功');
         form4.resetFields();
         // 重绘页面
         handleSearch();
+        toggleModalAudit();
       });
-      console.log('保存了审核信息');
-      toggleModalAudit();
     });
   }
 
   /** req 审核不通过时 编辑充值信息 */
   function saveEditCharge() {
     form3.validateFields().then(value => {
-      const { id, type, number, remark } = value;
+      // const { id, type, number, remark } = value;
       const req = {
-        id,
-        type,
-        number,
-        remark
+        ...value,
+        recordId: rowRef.current?.id,
+        receiptImage: value?.receiptImage?.[0],
+        bagId: value.bagId,
+        type: value.type,
+        number: value.number,
+        remark: value.remark
       };
       fundsOrganizitonOtherService.edit(req).subscribe(() => {
-        message.info('操作成功');
+        message.success('操作成功');
         form3.resetFields();
         // 重绘页面
         handleSearch();
+        toggleModalEditCharge();
       });
-      console.log('保存了审核信息');
-      toggleModalEditCharge();
     });
   }
   // 导出表格
@@ -130,33 +137,56 @@ export function useRechargeFundsStore() {
     };
   }
 
-  // 冻结账户
-  function frozenAccount(row) {
-    console.log('冻结了账户');
-
-    // todo 网络请求
+  // 获取资金详情
+  function getADetail(row: RechargePagedListResType) {
+    toggleModalEditCharge();
+    fundsOrganizitonOtherService.assetsDetail({ recordId: row.id }).subscribe(res => {
+      setStateWrap({ info: res });
+      form3.setFieldsValue({
+        ...row,
+        receiptImage: res?.buyInfo?.receiptImage ? [res?.buyInfo?.receiptImage] : undefined
+      });
+      // if (res?.buyInfo?.receiptImage) {
+      //   form3.setSchema('receiptImage', (schema: any) => {
+      //     schema.props.defaultFileList = [{ uid: uuid(9, 10), name: '附件凭证Img', url: res?.buyInfo?.receiptImage }];
+      //   });
+      // }
+    });
   }
 
   // 表单体按钮操作函数
-  function tableAction(row: any, actionName: string) {
-    console.log('row', row);
-
-    if (actionName == '充值审核') {
-      // 回显 auditState 处理为空 不然columns中对应的回显会展示为 1 0 -1 状态码
-      form4.setFieldsValue({ ...row, auditState: '' });
-      // 同时保存对应列的id
-      setStateWrap({ auditId: row.id });
-      toggleModalAudit();
-    } else if (actionName == '修改充值') {
-      // 回显数据 主要是id
-      form3.setFieldsValue({ id: row.id });
-      toggleModalEditCharge();
-    } else if (actionName == '详情') {
-      // todo 携参跳转 调整为modal框显示
-      // history.push('rechargeFunds/rechargeDetail/' + row.id);
-      // 回显
-      form5.setFieldsValue({ ...row });
-      toggleModalDetail();
+  function tableAction(actionName: ACTION_TYPE, row?: RechargePagedListResType) {
+    rowRef.current = row;
+    // 初始化表格
+    form2.resetFields();
+    form3.resetFields();
+    form4.resetFields();
+    form5.resetFields();
+    switch (actionName) {
+      case ACTION_TYPE.DETAIL:
+        history.push(`./rechargeFunds/rechargeDetail?id=${row.id}`);
+        // todo 携参跳转 调整为modal框显示
+        // 回显
+        // form5.setFieldsValue({ ...row });
+        // toggleModalDetail();
+        break;
+      case ACTION_TYPE.EXAMINE:
+        history.push(`./rechargeFunds/rechargeDetail?id=${row.id}&examine=true`);
+        // 回显 auditState 处理为空 不然columns中对应的回显会展示为 1 0 -1 状态码
+        // setStateWrap({ auditId: row.id });
+        // form4.setFieldsValue({ ...row, auditState: '' });
+        // 同时保存对应列的id
+        // toggleModalAudit();
+        break;
+      case ACTION_TYPE.UPDATE:
+        getADetail(row);
+        break;
+      case ACTION_TYPE.Recharge:
+        toggleModalRecharge();
+        break;
+      case ACTION_TYPE.Export:
+        exportExcel();
+        break;
     }
   }
 

@@ -5,7 +5,7 @@ import { demoColumns } from './demo-columns';
 import style from './fund-account-setting.component.less';
 import { useFundAccountSettingStore } from './fund-account-setting.component.store';
 
-import { schema } from './fund-account-setting.interface';
+import { ACTION_TYPE, schema } from './fund-account-setting.interface';
 import AddEquityModalComponent from './widget/addEquityModal';
 import AddPackageModalComponent from './widget/addPackageModal';
 import CardManageComponent from './widget/card-manage/card-manage.component';
@@ -44,7 +44,7 @@ export default function FundAccountSettingComponent() {
         <Button type="primary" className="ml20" onClick={() => handleSearch()}>
           查询
         </Button>
-        <Button type="primary" className="ml20" onClick={() => toggleModalCreat()}>
+        <Button type="primary" className="ml20" onClick={() => tableAction(ACTION_TYPE.ADD)}>
           创建账户
         </Button>
         <Button type="primary" className="ml20" onClick={() => exportExcel()}>
@@ -103,12 +103,7 @@ export default function FundAccountSettingComponent() {
         form={form2}
       />
       {/* 卡券管理 */}
-      <CardManageComponent
-        visible={state.visibaleCard}
-        close={closeCard}
-        initData={state.rowData}
-        action={tableAction}
-      />
+      <CardManageComponent visible={state.visibaleCard} close={closeCard} initData={state.rowData} />
     </div>
   );
 }

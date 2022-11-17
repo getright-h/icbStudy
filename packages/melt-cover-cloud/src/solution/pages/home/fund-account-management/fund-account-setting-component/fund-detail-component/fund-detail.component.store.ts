@@ -4,34 +4,53 @@ import { OrderManageService } from '~/solution/model/services/order-manage.servi
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
+import { useTable } from '~/framework/hooks/useTable';
+import { useForm } from '@fch/fch-shop-web';
 
 export function useOrderDetailStore() {
-  const { state, setStateWrap } = useStateStore(new IFundDetailState());
+  const { state, setStateWrap, getState } = useStateStore(new IFundDetailState());
   const id = getQueryString('id');
-  console.log('id', id);
-
-  const orderManageService: OrderManageService = new OrderManageService();
   // todo 根据ezmoke 创建的网络请求
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
 
   const history = useHistory();
+  const form = useForm();
+  const table = useTable({
+    form,
+    require: fundsOrganizitonOtherService.bagAssetsPagedList,
+    isPreload: false,
+    customParamsFn: () => {
+      const { radio } = getState();
+      return { isInCome: radio === 1 ? true : false };
+    }
+  });
+
   useEffect(() => {
+    setStateWrap({ radio: 1 });
+    table.getTableData();
+    getDetail();
     // todo 替换
-    orderManageService.getOrderDetail(id).subscribe(res => setStateWrap({ info: res }));
-    getIncomeTableData();
-    getSpendingTableData();
+    // getIncomeTableData();
+    // getSpendingTableData();
   }, []);
+
   function goback() {
     history.goBack();
   }
 
+  function getDetail() {
+    fundsOrganizitonOtherService.bagDetail({ bagId: id }).subscribe(res => {
+      setStateWrap({ info: res?.bag });
+    });
+  }
+
   // 交易明细切换 显示
   function changeRaido(e: any) {
-    console.log('e===>', e);
-    changeTablePageIndex(1, 10, e.target.value == 1 ? 'income' : 'spending');
+    // changeTablePageIndex(1, 10, e.target.value == 1 ? 'income' : 'spending');
     setStateWrap({
       radio: e.target.value
     });
+    table.getTableData();
   }
 
   // 交易明细切换 获取表单数据
@@ -111,5 +130,5 @@ export function useOrderDetailStore() {
     console.log('获取支出数据');
     // todo req
   }
-  return { state, id, goback, changeRaido, changeTablePageIndex };
+  return { state, id, table, goback, changeRaido, changeTablePageIndex };
 }

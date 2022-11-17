@@ -1,11 +1,12 @@
-import { IFundAccountSettingState } from './fund-account-setting.interface';
+import { ACTION_TYPE, IFundAccountSettingState } from './fund-account-setting.interface';
 import { useStateStore } from '@fch/fch-tool';
-import { useForm } from '@fch/fch-shop-web';
+import { ShowNotification, useForm } from '@fch/fch-shop-web';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { message, Modal } from 'antd';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
 import { PagedListReqType, PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { BAG_STATE_ENUM } from '~/solution/shared/constant/currency.const';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -55,8 +56,8 @@ export function useFundAccountSettingStore() {
 
     const req = Object.assign({}, formValues, {
       size,
-      index,
-      state
+      index
+      // state
     });
     getFSettingList(req);
   }
@@ -66,8 +67,8 @@ export function useFundAccountSettingStore() {
   function saveEdit() {
     console.log('保存了编辑信息');
     form2.validateFields().then(values => {
-      console.log(values);
       const req = {
+        ...values,
         bagId: values.bagId,
         name: values.name,
         type: values.type
@@ -77,10 +78,11 @@ export function useFundAccountSettingStore() {
       });
       fundsOrganizitonOtherService.set(req).subscribe(
         () => {
-          message.info('操作成功');
+          message.success('操作成功');
           form2.resetFields();
           // 重绘页面
           handleSearch();
+          toggleModalEdit();
         },
         () => {
           setStateWrap({
@@ -88,7 +90,6 @@ export function useFundAccountSettingStore() {
           });
         }
       );
-      toggleModalEdit();
     });
   }
 
@@ -97,17 +98,19 @@ export function useFundAccountSettingStore() {
     form3.validateFields().then(values => {
       console.log('form3', values);
       const req = {
-        name: values.name,
-        state: values.state,
-        remark: values.remark
+        name: values?.name,
+        state: values?.state,
+        remark: values?.remark,
+        businessIds: values?.businessIds
       };
       setStateWrap({
         isLoadingModal3: true
       });
       fundsOrganizitonOtherService.bag(req).subscribe(
         () => {
-          message.info('操作成功');
+          message.success('操作成功');
           form3.resetFields();
+          toggleModalCreat();
           // 重绘页面
           handleSearch();
         },
@@ -119,8 +122,6 @@ export function useFundAccountSettingStore() {
       );
 
       console.log('创建资金账户');
-      // todo 验证后关闭modal
-      toggleModalCreat();
     });
   }
 
@@ -149,49 +150,56 @@ export function useFundAccountSettingStore() {
     ); */
   }
 
-  // 冻结账户
-  function frozenAccount(row: any) {
-    console.log('冻结了账户');
-
-    // todo 网络请求
-  }
-  // 解冻账户
-  function thawAccount(row: any) {
-    console.log('解冻账户');
-
-    // todo 网络请求
+  function setBagState(row: PagedListResType) {
+    const state = row.state === BAG_STATE_ENUM.normal ? BAG_STATE_ENUM.frozen : BAG_STATE_ENUM.normal;
+    fundsOrganizitonOtherService.setBagState({ bagId: row.bagId, state }).subscribe(_ => {
+      ShowNotification.success('设置成功');
+      handleSearch();
+    });
   }
 
   // 表单体按钮操作函数
-  function tableAction(row: PagedListResType, actionName: string) {
-    console.log(row, '表单体按钮操作函数');
-    if (actionName == '编辑') {
-      // 显示模态框
-      toggleModalEdit();
-      // 回显数据到框内
-      handleEditContext(row);
-    } else if (actionName == '交易明细') {
-      // todo 携参跳转 id乱码
-      history.push('fundAccountSetting/fundDetail?id=' + row.id);
-      // history.push('fundDetail?id=' + row.id);
-      console.log('交易明细');
-    } else if (actionName == '冻结') {
-      Modal.confirm({
-        title: '提示',
-        type: 'warning',
-        content: '确定要冻结这个账户吗?',
-        onOk: () => frozenAccount(row)
-      });
-    } else if (actionName == '解冻') {
-      Modal.confirm({
-        title: '提示',
-        type: 'warning',
-        content: '确定要解冻这个账户吗?',
-        onOk: () => thawAccount(row)
-      });
-    } else if (actionName == '卡券管理') {
-      setStateWrap({ rowData: row });
-      closeCard();
+  function tableAction(actionName: ACTION_TYPE, row?: PagedListResType) {
+    // 表单初始化
+    setStateWrap({ isLoadingModal2: false, isLoadingModal3: false });
+    form2.resetFields();
+    form3.resetFields();
+    switch (actionName) {
+      case ACTION_TYPE.ADD:
+        toggleModalCreat();
+        break;
+      case ACTION_TYPE.DETAIL:
+        // 显示模态框
+        toggleModalEdit();
+        // 回显数据到框内
+        handleEditContext(row);
+        break;
+      case ACTION_TYPE.INFO:
+        // todo 携参跳转 id乱码
+        history.push('fundAccountSetting/fundDetail?id=' + row.id);
+        // history.push('fundDetail?id=' + row.id);
+        // console.log('交易明细');
+        break;
+      case ACTION_TYPE.frozen:
+        Modal.confirm({
+          title: '提示',
+          type: 'warning',
+          content: '确定要冻结这个账户吗?',
+          onOk: () => setBagState(row)
+        });
+        break;
+      case ACTION_TYPE.thaw:
+        Modal.confirm({
+          title: '提示',
+          type: 'warning',
+          content: '确定要解冻这个账户吗?',
+          onOk: () => setBagState(row)
+        });
+        break;
+      case ACTION_TYPE.card:
+        setStateWrap({ rowData: row });
+        closeCard();
+        break;
     }
   }
 
@@ -222,7 +230,10 @@ export function useFundAccountSettingStore() {
 
   // 回显函数 edit
   function handleEditContext(row: any) {
-    form2.setFieldsValue({ ...row });
+    // 获取卡券相关详情
+    fundsOrganizitonOtherService.bagDetail({ bagId: row?.bagId }).subscribe(res => {
+      form2.setFieldsValue({ ...row, businessIds: res?.bagRelations?.map?.(m => m.businessId) });
+    });
   }
 
   return {

@@ -3,6 +3,9 @@ import { ColumnsType } from 'antd/lib/table';
 import { Divider } from 'antd';
 import { DISCOUNT_METHOD, PAY_METHOD } from '~/solution/shared/enums/home.enum';
 import { RechargePagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { ColumnTools } from '~/framework/util/widget';
+import { ACTION_TYPE } from './recharge-funds.interface';
+import { ASSETS_AUDIT_STATE } from '~/solution/shared/constant/currency.const';
 
 export function demoColumns(action: Function): any {
   const render = (text: any) => text ?? '-';
@@ -10,7 +13,7 @@ export function demoColumns(action: Function): any {
   const columnTemplate = [
     {
       title: '账户名',
-      dataIndex: 'bagNumber',
+      dataIndex: 'bagName',
       render,
       show: true
     },
@@ -18,28 +21,34 @@ export function demoColumns(action: Function): any {
       title: '账户号',
       render,
       show: true,
-      dataIndex: 'bagName'
+      dataIndex: 'bagNumber'
     },
     {
       title: '支付类型',
       render,
       show: true,
-      dataIndex: 'bagTypeText'
+      dataIndex: 'payTypeText'
     },
     {
       title: '当前账户累计充值总额',
       render,
       show: true,
-      dataIndex: 'totalInCome'
+      dataIndex: 'bagTotalInCome'
     },
     {
       title: '当前账户资金余额',
       render,
       show: true,
-      dataIndex: 'balance'
+      dataIndex: 'bagBalance'
     },
     {
-      title: '充值金额',
+      title: '充值卡券',
+      render,
+      show: true,
+      dataIndex: 'businessName'
+    },
+    {
+      title: '卡券充值金额',
       render,
       show: true,
       dataIndex: 'number'
@@ -60,35 +69,33 @@ export function demoColumns(action: Function): any {
       title: '备注',
       dataIndex: 'remark',
       show: true,
-      // 当审核状态为 -1 待审核时，显示充值的备注。其他情况为审核备注
+      // 当审核状态为 待审核时，显示充值的备注。其他情况为审核备注
       render: (text: string, row: RechargePagedListResType) => {
-        return row.auditState == -1 ? text : row.auditRemark;
+        return row.auditState === ASSETS_AUDIT_STATE.wait ? text : row.auditRemark;
       }
     },
     {
       title: '操作',
       dataIndex: 'action',
       fixed: 'right',
-      width: 200,
       show: true,
-      render: (text: any, row: { auditState: number }) => {
-        return (
-          <React.Fragment>
-            <a onClick={() => action(row, '详情')}>详情</a>
-            <Divider type="vertical" />
-            {/* 状态为 通过 不通过 */}
-            {row?.auditState == 0 ? (
-              // 未通过
-              <a onClick={() => action(row, '修改充值')}>修改充值</a>
-            ) : // 已通过
-            row?.auditState == 1 ? (
-              <></>
-            ) : (
-              // 未审核
-              <a onClick={() => action(row, '充值审核')}>充值审核</a>
-            )}
-          </React.Fragment>
-        );
+      render: (text: any, row: RechargePagedListResType) => {
+        return ColumnTools.renderTableColumnAction([
+          {
+            text: '详情',
+            click: () => action(ACTION_TYPE.DETAIL, row)
+          },
+          {
+            text: '修改充值',
+            click: () => action(ACTION_TYPE.UPDATE, row),
+            show: row?.auditState === ASSETS_AUDIT_STATE.refuse
+          },
+          {
+            text: '充值审核',
+            click: () => action(ACTION_TYPE.EXAMINE, row),
+            show: row?.auditState === ASSETS_AUDIT_STATE.wait
+          }
+        ]);
       }
     }
   ];

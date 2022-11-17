@@ -5,7 +5,7 @@ import { demoColumns } from './demo-columns';
 import style from './recharge-funds.component.less';
 import { useRechargeFundsStore } from './recharge-funds.component.store';
 
-import { schema } from './recharge-funds.interface';
+import { ACTION_TYPE, schema } from './recharge-funds.interface';
 import AddEquityModalComponent from './widget/addEquityModal';
 import AddPackageModalComponent from './widget/addPackageModal';
 import AddPackageModalComponent2 from './widget/addPackageModal2';
@@ -48,10 +48,10 @@ export default function RechargeFundsComponent() {
         <Button type="primary" className="ml20" onClick={() => handleSearch()}>
           查询
         </Button>
-        <Button type="primary" className="ml20" onClick={() => toggleModalRecharge()}>
+        <Button type="primary" className="ml20" onClick={() => tableAction(ACTION_TYPE.Recharge)}>
           账户充值
         </Button>
-        <Button type="primary" className="ml20" onClick={() => exportExcel()}>
+        <Button type="primary" className="ml20" onClick={() => tableAction(ACTION_TYPE.Export)}>
           导出
         </Button>
       </>
@@ -96,14 +96,6 @@ export default function RechargeFundsComponent() {
         handleOk={saveEditCharge}
         form={form3}
       />
-      {/* action 详情 */}
-      <AddPackageModalComponent3
-        stateParent={state}
-        title={'详情'}
-        visible={state.visibleDetail}
-        handleCancel={toggleModalDetail}
-        form={form5}
-      />
 
       {/* 账户充值 */}
       <AddEquityModalComponent
@@ -114,7 +106,15 @@ export default function RechargeFundsComponent() {
         handleOk={recharge}
         form={form2}
       />
-      {/* 充值审核信息 */}
+      {/* 废弃 action 详情 */}
+      <AddPackageModalComponent3
+        stateParent={state}
+        title={'详情'}
+        visible={state.visibleDetail}
+        handleCancel={toggleModalDetail}
+        form={form5}
+      />
+      {/* 废弃 充值审核信息 */}
       <AddPackageModalComponent
         stateParent={state}
         title={'充值审核信息'}

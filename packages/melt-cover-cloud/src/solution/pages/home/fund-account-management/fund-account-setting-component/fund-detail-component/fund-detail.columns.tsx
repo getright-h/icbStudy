@@ -9,7 +9,7 @@ export function inComeColumns(): ColumnsType<any> {
     },
     {
       title: '卡券',
-      dataIndex: 'number'
+      dataIndex: 'businessName'
     },
     {
       title: '支付类型',
@@ -47,7 +47,7 @@ export function spendingColumns(): ColumnsType<any> {
     },
     {
       title: '卡券',
-      dataIndex: 'subjectName'
+      dataIndex: 'businessName'
     },
     {
       title: '操作值时间',

@@ -394,7 +394,7 @@ export function useEquityPackageManageStore() {
       });
       equityPackageManageService.handleEquity(req).subscribe(
         (res: IAddEquityResult) => {
-          message.info('操作成功');
+          message.success('操作成功');
           form1.resetFields();
           handleGetEquity();
           handleSearchEquity();
@@ -462,7 +462,7 @@ export function useEquityPackageManageStore() {
 
       equityPackageManageService.handleEquityPackage(req).subscribe(
         () => {
-          message.info('操作成功');
+          message.success('操作成功');
           form1.resetFields();
           handleSearch();
           toggleModal2();

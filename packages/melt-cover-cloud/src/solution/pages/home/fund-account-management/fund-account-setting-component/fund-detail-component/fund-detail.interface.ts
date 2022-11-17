@@ -1,3 +1,4 @@
+import { Bag } from '~/solution/model/dto/funds-organiziton-other.dto';
 import { DataDetail } from '~/solution/model/dto/order-manage.dto';
 
 /**
@@ -5,7 +6,7 @@ import { DataDetail } from '~/solution/model/dto/order-manage.dto';
  * @class IOrderDetailState
  */
 export class IFundDetailState {
-  info: DataDetail;
+  info: Bag;
   radio: 1;
   chargeSearchForm = {
     index: 1,

@@ -1,13 +1,14 @@
 import { ArrowLeftOutlined } from '@ant-design/icons';
-import { Col, Form, Radio, Row } from 'antd';
+import { Col, Form, Radio, Row, Button } from 'antd';
 import * as React from 'react';
 import { ITableComponent, ITablePageComponent } from '@fch/fch-shop-web';
 import style from './fund-detail.module.less';
 import { useOrderDetailStore } from './fund-detail.component.store';
 import { inComeColumns, spendingColumns } from './fund-detail.columns';
 import { TableType } from './fund-detail.interface';
+import { ITablePlus } from '~/framework/components/component.module';
 export default function FundDetailComponent() {
-  const { state, goback, changeRaido, changeTablePageIndex } = useOrderDetailStore();
+  const { state, goback, table, changeRaido, changeTablePageIndex } = useOrderDetailStore();
   const { info } = state;
 
   function renderUserInfo(props: { span: number }) {
@@ -15,15 +16,9 @@ export default function FundDetailComponent() {
     return (
       <div>
         <h3>
-          <strong onClick={goback}>
-            <ArrowLeftOutlined />
+          <Button onClick={goback} icon={<ArrowLeftOutlined />}>
             返回
-          </strong>
-        </h3>
-        <h3>
-          <strong>
-            <strong></strong>
-          </strong>
+          </Button>
         </h3>
         <hr />
         <div>
@@ -33,37 +28,37 @@ export default function FundDetailComponent() {
           <Row>
             <Col className="" span={span}>
               <Form.Item label={'账户名'}>
-                <span>{info?.distributorName || '-'}</span>
+                <span>{info?.name || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'账户号'}>
-                <span>{info?.equityGroupName || '-'}</span>
+                <span>{info?.id || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'累计充值总额'}>
-                <span>{(info?.ownerType == 1 ? '个人' : '企业') || '-'}</span>
+                <span>{info?.totalInCome || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'资金余额'}>
-                <span>{(info?.certificateType == 1 ? '身份证' : '营业执照') || '-'}</span>
+                <span>{info?.balance || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'账户状态'}>
-                <span>{info?.certificateNumber || '-'}</span>
+                <span>{info?.state == 0 ? '正常' : '冻结'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'*配置是否开启额度限制'}>
-                <span>{info?.ownerName || '-'}</span>
+                <span>是</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'创建时间'}>
-                <span>{info?.ownerMobile || '-'}</span>
+                <span>{info?.createTime || '-'}</span>
               </Form.Item>
             </Col>
           </Row>
@@ -94,7 +89,8 @@ export default function FundDetailComponent() {
         </div>
         <hr />
         <div>
-          {radio == 1 ? (
+          <ITablePlus table={table} columns={radio == 1 ? inComeColumns() : spendingColumns()} />
+          {/* {radio == 1 ? (
             <ITableComponent
               columns={inComeColumns()}
               isLoading={isLoading}
@@ -120,7 +116,7 @@ export default function FundDetailComponent() {
                 changeTablePageIndex(index, pageSize, TableType.SPENDING)
               }
             ></ITableComponent>
-          )}
+          )} */}
         </div>
       </div>
     );
@@ -139,11 +135,12 @@ export default function FundDetailComponent() {
   }
 
   function renderLeft() {
-    const span = 8;
+    const span6 = 6;
+    const span8 = 8;
     return (
       <Form className={style.imgBox}>
-        {renderUserInfo({ span })}
-        {renderDetailInfo({ span })}
+        {renderUserInfo({ span: span6 })}
+        {renderDetailInfo({ span: span8 })}
       </Form>
     );
   }
