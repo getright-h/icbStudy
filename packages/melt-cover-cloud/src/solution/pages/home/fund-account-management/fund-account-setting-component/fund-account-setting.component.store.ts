@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { message, Modal } from 'antd';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { PagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { PagedListReqType, PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -163,7 +163,7 @@ export function useFundAccountSettingStore() {
   }
 
   // 表单体按钮操作函数
-  function tableAction(row: any, actionName: string) {
+  function tableAction(row: PagedListResType, actionName: string) {
     console.log(row, '表单体按钮操作函数');
     if (actionName == '编辑') {
       // 显示模态框
@@ -190,7 +190,8 @@ export function useFundAccountSettingStore() {
         onOk: () => thawAccount(row)
       });
     } else if (actionName == '卡券管理') {
-      history.push('');
+      setStateWrap({ rowData: row });
+      closeCard();
     }
   }
 
@@ -202,6 +203,9 @@ export function useFundAccountSettingStore() {
     setStateWrap({
       visibleEdit: !state.visibleEdit
     });
+  }
+  function closeCard() {
+    setStateWrap({ visibaleCard: !state.visibaleCard });
   }
 
   // 改变分页函数
@@ -227,6 +231,7 @@ export function useFundAccountSettingStore() {
     form2,
     form3,
     saveEdit,
+    closeCard,
     handleSearch,
     toggleModalCreat,
     exportExcel,

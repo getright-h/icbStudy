@@ -1,4 +1,5 @@
 import { IFormBaseComponentsUnion } from '@fch/fch-shop-web';
+import { PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 /**
  * @export state变量定义和初始化
@@ -22,12 +23,14 @@ export class IFundAccountSettingState {
     index: 1,
     size: 10
   };
+  rowData: PagedListResType;
   disableFooter = false;
   total: number;
-  tableData: any = [];
+  tableData: PagedListResType[];
   isLoading = false;
   visibleCreat = false;
   visibleEdit = false;
+  visibaleCard = false;
   isLoadingModal2: boolean;
   isLoadingModal3: boolean;
 }
