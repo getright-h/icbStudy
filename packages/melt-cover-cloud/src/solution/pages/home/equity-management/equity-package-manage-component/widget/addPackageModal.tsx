@@ -6,6 +6,7 @@ import { IResponseEquityResult } from '~/solution/model/dto/equity-package-manag
 import { IEquityPackageManageState } from '../equity-package-manage.interface';
 import style from '../equity-package-manage.module.less';
 import { EQYITY_USE_TYPE, PAY_METHOD_TYPES } from '~/solution/shared/enums/home.enum';
+import { ISelectCard } from '~/framework/components/component.module';
 
 interface IAddEquityProps {
   title: string;
@@ -179,6 +180,9 @@ export default function AddPackageModalComponent(props: IAddEquityProps) {
         form={form}
         watch={watch2}
         schema={schema}
+        widget={{
+          ISelectCard: ISelectCard
+        }}
         slot={renderContent}
         props={{
           labelCol: { span: 8 },
@@ -341,7 +345,7 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       // todo
       {
-        key: 'checkAccount',
+        key: 'isCheckAccount',
         type: 'RadioGroup',
         formItemProps: {
           label: '是否录单需检测资金账户',
@@ -354,6 +358,17 @@ export const schema: IFormBaseComponentsUnion[] = [
             { label: '是', value: 1 },
             { label: '否', value: 0 }
           ]
+        }
+      },
+      {
+        key: 'associatedCardAndCoupon',
+        type: 'ISelectCard',
+        formItemProps: {
+          label: '选择关联卡券',
+          required: true
+        },
+        props: {
+          isPreload: true
         }
       }
     ],
