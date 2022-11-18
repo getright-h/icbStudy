@@ -15,7 +15,6 @@ export function useIUploadImgStore(props: IIUploadImgProps) {
   const refImg = useRef<any>();
   const refChange = useRef<boolean>(false);
   useEffect(() => {
-    console.log('[props.defaultFileList]===>🚀', props.defaultFileList);
     if (props.defaultFileList?.length > 0 && !refChange.current) {
       setStateWrap({
         fileList: props.defaultFileList

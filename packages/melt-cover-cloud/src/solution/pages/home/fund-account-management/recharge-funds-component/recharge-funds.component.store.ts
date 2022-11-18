@@ -145,11 +145,14 @@ export function useRechargeFundsStore() {
       form3.setFieldsValue({
         ...row,
         receiptImage: res?.buyInfo?.receiptImage ? [res?.buyInfo?.receiptImage] : undefined
+        // receiptImage: res?.buyInfo?.receiptImage
+        //   ? [{ uid: uuid(9, 10), name: '附件凭证Img', url: res?.buyInfo?.receiptImage }]
+        //   : undefined
       });
       // if (res?.buyInfo?.receiptImage) {
-      //   form3.setSchema('receiptImage', (schema: any) => {
-      //     schema.props.defaultFileList = [{ uid: uuid(9, 10), name: '附件凭证Img', url: res?.buyInfo?.receiptImage }];
-      //   });
+      // form3.setSchema('receiptImage', (schema: any) => {
+      //   schema.props.fileList = [{ uid: uuid(9, 10), name: '附件凭证Img', url: res?.buyInfo?.receiptImage }];
+      // });
       // }
     });
   }

@@ -7,7 +7,6 @@ import {
   BagReqType,
   EditReqType,
   FiltListReqType,
-  FiltListResType,
   FundsOrganizitonOtherDTO,
   GetSubOrganizationResType,
   LimitPagedListReqType,
@@ -32,7 +31,10 @@ import {
   SimpleListResType,
   BagDetailResType,
   AssetsDetailResType,
-  BagAssetsPagedListResType
+  BagAssetsPagedListResType,
+  OrganizationConfigDetailResType,
+  LimitDetailResType,
+  BagFilterListResType
 } from '../dto/funds-organiziton-other.dto';
 
 //
@@ -67,6 +69,8 @@ const LIMIT_PAGED_LIST = 'currency/manage/currency/organizationOrderLimit/pagedL
 
 const SET_LIMIT = 'currency/manage/currency/organizationOrderLimit/Set'; //[出单额度设置-设置额度]配置机构订单限制
 
+const DETAIL_LIMIT = 'currency/manage/currency/organizationOrderLimit/detail'; //[出单额度设置-详情]详情
+
 const LOG_PAGE_LIST = 'currency/manage/currency/organizationOrderLimit/logPageList'; //[出单额度设置-日志]配置机构订单限制日志分页列表
 
 const SET_ORGANIZATION_CONF = 'currency/manage/currency/organizationSet/Set'; //[机构配置-配置]配置机构设置
@@ -81,6 +85,8 @@ const BAG_DETAIL = 'currency/manage/currency/bag/bagDetail'; //[资金账户设�
 
 const BAG_ASSETS_PAGED_LIST = 'currency/manage/currency/bag/bagAssetsPagedList'; //[资金账户设置-交易明细]资产明细记录分页列表
 
+const JG_CONFIG_DETAIL = 'currency/manage/currency/organizationSet/detail'; //[机构配置-配置详情]配置详情
+
 @DepUtil.Injectable()
 export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   @DepUtil.Inject(RequestService)
@@ -94,9 +100,9 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   };
 
   // 账户钱包筛选列表
-  filtList(params: FiltListReqType): Observable<{ total: number; dataList: FiltListResType[] }> {
+  filtList = (params: FiltListReqType): Observable<{ total: number; dataList: BagFilterListResType[] }> => {
     return this.requestService.post(FILT_LIST, params);
-  }
+  };
 
   // 充值
   assetsRecord(params: AssetsRecordReqType): Observable<{}> {
@@ -211,4 +217,14 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   }): Observable<{ total: number; dataList: BagAssetsPagedListResType[] }> => {
     return this.requestService.post(BAG_ASSETS_PAGED_LIST, params);
   };
+
+  // [机构配置-配置详情]配置详情
+  organizationConfigDetail(params: { id: string }): Observable<OrganizationConfigDetailResType> {
+    return this.requestService.post(JG_CONFIG_DETAIL, params);
+  }
+
+  // [出单额度设置-详情]详情
+  limitDetail(params: { id: string }): Observable<LimitDetailResType> {
+    return this.requestService.post(DETAIL_LIMIT, params);
+  }
 }

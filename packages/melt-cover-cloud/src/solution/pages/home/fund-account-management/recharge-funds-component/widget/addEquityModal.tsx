@@ -24,7 +24,7 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
         form={form}
         schema={schema}
         widget={{
-          IUploadImgComponent: IUploadImgComponent,
+          IUploadImgComponent,
           ISelectAccount: ISelectAccount,
           ISelectCard: ISelectCard
         }}
@@ -127,12 +127,13 @@ export const schema: IFormBaseComponentsUnion[] = [
         key: 'receiptImage',
         formItemProps: {
           label: '附件凭证'
+          // valuePropName: 'fileList'
         },
         props: {
           defaultFileList: `{{formData.receiptImage?.[0]&&[{uid: ${uuid(
             9,
             10
-          )},name: '权益图标',url: formData.receiptImage?.[0]}]}}`
+          )},name: '车主证件照(正面)',url: formData.receiptImage?.[0]}]}}`
         }
       }
     ],

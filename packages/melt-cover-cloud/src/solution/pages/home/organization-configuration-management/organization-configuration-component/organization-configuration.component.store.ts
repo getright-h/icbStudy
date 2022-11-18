@@ -31,6 +31,9 @@ export function useOrganizationConfigStore() {
       case ACTION_TYPE.SETTING:
         visibleChange('settingVisible', true, data);
         break;
+      case ACTION_TYPE.DETAIL:
+        visibleChange('detailVisible', true, data);
+        break;
     }
   }
 
