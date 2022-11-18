@@ -1,5 +1,5 @@
 import { IFormBaseComponentsUnion } from '@fch/fch-shop-web';
-import { LimitPagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { LimitDetailResType, LimitPagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export interface ISetOrderLimitProps {
   visible: boolean;
@@ -9,6 +9,7 @@ export interface ISetOrderLimitProps {
 
 export class ISetOrderLimitState {
   loading = false;
+  detailData: LimitDetailResType;
 }
 
 export const schema: IFormBaseComponentsUnion[] = [

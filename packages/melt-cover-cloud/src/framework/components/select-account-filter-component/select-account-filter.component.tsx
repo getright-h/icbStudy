@@ -3,7 +3,7 @@ import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-or
 import { ISearchSelectComponent } from '../component.module';
 
 export class ISelectProps {
-  onChange?: (value: unknown) => void;
+  onChange?: (value: unknown, obj?: unknown) => void;
   /**是否预加载下拉框数据 */
   isPreload?: boolean;
   searchKey?: string;
@@ -13,15 +13,15 @@ export class ISelectProps {
   disabled?: boolean;
 }
 
-/** 账户钱包-下拉列表 */
+/** 账户钱包筛选列表 -(机构配置中)下拉列表 */
 export default React.memo((props: ISelectProps) => {
   const { onChange, isPreload, isSendObj = false, disabled = false, placeholder = '请选择账号', ...rest } = props;
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
-  const requestFn = fundsOrganizitonOtherService.pagedList;
+  const requestFn = fundsOrganizitonOtherService.filtList;
   const params = {
     placeholder,
     requestFn,
-    onChange: (v: any, obj: any) => onChange(isSendObj ? obj : v),
+    onChange: (v: any, obj: any) => onChange(v, obj),
     isPreload: isPreload,
     disabled: disabled,
     value: props.value,
@@ -29,7 +29,7 @@ export default React.memo((props: ISelectProps) => {
     searchKeyName: 'bagSearch',
     responseDataStructure: ['dataList'],
     labelDataStructure: ['name'],
-    valueDataStructure: ['bagId'],
+    valueDataStructure: ['id'],
     ...rest
   };
   const search = <ISearchSelectComponent {...params} />;

@@ -9,11 +9,12 @@ import { SelectOrganizationList } from '../select-organization-list/select-organ
 import { ITablePlus } from '~/framework/components/component.module';
 import { Columns } from './organization-configuration.columns';
 import { schema } from './organization-configuration.interface';
+import ConfigDetailComponent from './widget/config-detail/config-detail.component';
 
 const OrganizationConfigurationComponent = React.memo(() => {
   const { modalState, modalClose, action, table, form, getRightList } = useOrganizationConfigStore();
   const { tableActions, getTableData } = table;
-  const { settingVisible, modalData } = modalState;
+  const { settingVisible, detailVisible, modalData } = modalState;
   const renderSelectItems = () => {
     return (
       <>
@@ -58,6 +59,8 @@ const OrganizationConfigurationComponent = React.memo(() => {
         visible={settingVisible}
         close={modalClose('settingVisible', getTableData)}
       />
+      {/* 详情 */}
+      <ConfigDetailComponent initData={modalData} visible={detailVisible} close={modalClose('detailVisible')} />
     </div>
   );
 });

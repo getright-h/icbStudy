@@ -1,7 +1,11 @@
-import { OrganizationPagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { LimitDetailResType, LimitPagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 
 export interface IConfigDetailProps {
   visible: boolean;
   close: (isSuccess?: boolean) => void;
-  initData?: OrganizationPagedListResType;
+  initData?: LimitPagedListResType;
+}
+
+export class IConfigDetailState {
+  detailData: LimitDetailResType;
 }

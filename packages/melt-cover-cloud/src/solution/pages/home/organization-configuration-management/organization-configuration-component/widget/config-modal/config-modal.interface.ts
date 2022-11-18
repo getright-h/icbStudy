@@ -10,6 +10,7 @@ export interface IConfigProps {
 
 export class IConfigState {
   loading = false;
+  formState: any;
 }
 
 export const LevelOptions = [

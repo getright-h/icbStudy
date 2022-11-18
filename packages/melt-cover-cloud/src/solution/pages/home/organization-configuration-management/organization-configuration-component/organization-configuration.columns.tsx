@@ -32,7 +32,10 @@ export function Columns(action: Function): ColumnsType<any> {
       fixed: 'right',
       width: 200,
       render: (text, row) =>
-        ColumnTools.renderTableColumnAction([{ text: '配置', click: () => action(ACTION_TYPE.SETTING, row) }])
+        ColumnTools.renderTableColumnAction([
+          { text: '详情', click: () => action(ACTION_TYPE.DETAIL, row) },
+          { text: '配置', click: () => action(ACTION_TYPE.SETTING, row) }
+        ])
     }
   ];
 }

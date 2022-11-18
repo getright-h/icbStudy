@@ -29,5 +29,6 @@ export { default as ISelectEquityGroup } from '~/framework/components/select-equ
 export { default as ISelectOtherOrderEquityGroup } from '~/framework/components/select-other-order-equity-group-component/select-other-order-equity-group.component';
 export { default as ISelectCard } from '~/framework/components/select-card-component/select-card.component';
 export { default as ISelectCardMultiple } from '~/framework/components/select-card-multiple-component/select-card-multiple.component';
+export { default as ISelectAccountFilter } from '~/framework/components/select-account-filter-component/select-account-filter.component';
 // 全新
 export { default as ITablePlus } from '~/framework/components/i-table-plus/i-table.component';

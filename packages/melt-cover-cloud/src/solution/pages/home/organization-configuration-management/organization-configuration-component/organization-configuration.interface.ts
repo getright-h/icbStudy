@@ -9,10 +9,12 @@ import { IStatusEquity } from '~/solution/shared/constant/select.const';
 export class IOrganizationConfigState {}
 
 export const visibleList = {
+  detailVisible: false,
   settingVisible: false
 };
 
 export enum ACTION_TYPE {
+  DETAIL,
   SETTING
 }
 

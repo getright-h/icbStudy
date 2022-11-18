@@ -6,10 +6,12 @@ import { ITablePlus } from '~/framework/components/component.module';
 import { useTable } from '~/framework/hooks/useTable';
 import style from './config-detail.module.less';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { IConfigDetailProps } from './config-detail';
+import { IConfigDetailProps, IConfigDetailState } from './config-detail';
+import { useStateStore } from '~/framework/aop/hooks/use-base-store';
 
 export default function ConfigDetailComponent(props: IConfigDetailProps) {
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
+  const { state, setStateWrap } = useStateStore(new IConfigDetailState());
   const { initData, close, visible } = props;
   const form = useForm();
 
@@ -19,78 +21,91 @@ export default function ConfigDetailComponent(props: IConfigDetailProps) {
     }
   }, [visible]);
 
-  function getDetail() {}
+  function getDetail() {
+    fundsOrganizitonOtherService.limitDetail({ id: initData?.id }).subscribe(res => {
+      setStateWrap({ detailData: res });
+    });
+  }
 
   function renderDetail() {
+    const detailData = state?.detailData;
     return (
       <div>
         <h2>机构信息</h2>
         <Row>
           <Col span={6}>
             <Form.Item label={'机构名称'}>
-              <span>{initData?.bagName || '-'}</span>
+              <span>{detailData?.distributorName || '-'}</span>
             </Form.Item>
           </Col>
           <Col span={6}>
             <Form.Item label={'社会信用代码'}>
-              <span>{initData?.bagName || '-'}</span>
+              <span>{detailData?.unitCode || '-'}</span>
             </Form.Item>
           </Col>
           <Col span={6}>
             <Form.Item label={'联系电话'}>
-              <span>{initData?.bagName || '-'}</span>
+              <span>{detailData?.unitMobile || '-'}</span>
             </Form.Item>
           </Col>
           <Col span={6}>
             <Form.Item label={'联系人'}>
-              <span>{initData?.bagName || '-'}</span>
+              <span>{detailData?.contactName || '-'}</span>
             </Form.Item>
           </Col>
           <Col span={6}>
             <Form.Item label={'创建人'}>
-              <span>{initData?.bagName || '-'}</span>
+              <span>{detailData?.createUserName || '-'}</span>
             </Form.Item>
           </Col>
           <Col span={6}>
             <Form.Item label={'创建时间'}>
-              <span>{initData?.bagName || '-'}</span>
+              <span>{detailData?.createTime || '-'}</span>
             </Form.Item>
           </Col>
           <Col span={6}>
-            <Form.Item label={'预计状态'}>
-              <span>{initData?.bagName || '-'}</span>
+            <Form.Item label={'预警状态'}>
+              <span>{initData?.orderResidueWarnStateTxt || '-'}</span>
             </Form.Item>
           </Col>
         </Row>
         <Divider />
-        <h2>卡券信息</h2>
-        <Row gutter={[20, 20]}>
-          <Col span={8}>
-            <div className={style.box}>
-              <Form.Item label={'关联卡券'} style={{ marginBottom: 0 }}>
-                <span>{initData?.bagName || '-'}</span>
-              </Form.Item>
-              <Form.Item label={'可用额度'} style={{ marginBottom: 0 }}>
-                <span>{initData?.bagName || '-'}</span>
-              </Form.Item>
-              <Form.Item label={'剩余可用额度'} style={{ marginBottom: 0 }}>
-                <span>{initData?.bagName || '-'}</span>
-              </Form.Item>
-              <Form.Item label={'录单卡卷剩余额度告警值'} style={{ marginBottom: 0 }}>
-                <span>{initData?.bagName || '-'}</span>
-              </Form.Item>
-              <Form.Item label={'预警状态'} style={{ marginBottom: 0 }}>
-                <span>{initData?.bagName || '-'}</span>
-              </Form.Item>
-            </div>
-          </Col>
-        </Row>
+        {!!detailData?.cardOrderLimits?.length && (
+          <>
+            <h2>卡券信息</h2>
+            <Row gutter={[20, 20]}>
+              {detailData?.cardOrderLimits?.map((card, index) => {
+                return (
+                  <Col span={8} key={index}>
+                    <div className={style.box}>
+                      <Form.Item label={'关联卡券'} style={{ marginBottom: 0 }}>
+                        <span>{card?.businessName || '-'}</span>
+                      </Form.Item>
+                      <Form.Item label={'可用额度'} style={{ marginBottom: 0 }}>
+                        <span>{card?.orderLimit || '-'}</span>
+                      </Form.Item>
+                      <Form.Item label={'剩余可用额度'} style={{ marginBottom: 0 }}>
+                        <span>{card?.balance || '-'}</span>
+                      </Form.Item>
+                      <Form.Item label={'录单卡卷剩余额度告警值'} style={{ marginBottom: 0 }}>
+                        <span>{card?.orderResidueWarnMoney || '-'}</span>
+                      </Form.Item>
+                      <Form.Item label={'预警状态'} style={{ marginBottom: 0 }}>
+                        <span>{card?.orderResidueWarnStateText || '-'}</span>
+                      </Form.Item>
+                    </div>
+                  </Col>
+                );
+              })}
+            </Row>
+          </>
+        )}
       </div>
     );
   }
   return (
     <div>
-      <Modal width={1200} title={'详情'} visible={visible} onCancel={() => close()} footer={null}>
+      <Modal width={1400} title={'详情'} visible={visible} onCancel={() => close()} footer={null}>
         {renderDetail()}
       </Modal>
     </div>
