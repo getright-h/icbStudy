@@ -77,7 +77,6 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        // 目前用的是其他的请求，需要替换
         type: 'ISelectCard',
         key: 'businessId',
         formItemProps: {

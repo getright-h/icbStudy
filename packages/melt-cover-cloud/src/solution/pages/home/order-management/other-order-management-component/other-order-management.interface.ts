@@ -46,7 +46,7 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         // 目前用的是其他的请求，需要替换
-        type: 'ISelectDistributor',
+        type: 'ISelectOtherOrderDistributor',
         key: 'distributorId',
         formItemProps: {
           label: '所属机构'
@@ -54,7 +54,7 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         // 目前用的是其他的请求，需要替换
-        type: 'ISelectEquityGroup',
+        type: 'ISelectOtherOrderEquityGroup',
         key: 'equityGroupId',
         formItemProps: {
           label: '购买套餐包'

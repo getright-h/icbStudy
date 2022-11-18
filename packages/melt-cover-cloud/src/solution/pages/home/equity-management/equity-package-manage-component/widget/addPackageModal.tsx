@@ -343,7 +343,6 @@ export const schema: IFormBaseComponentsUnion[] = [
           options: PAY_METHOD_TYPES
         }
       },
-      // todo
       {
         key: 'isCheckAccount',
         type: 'RadioGroup',

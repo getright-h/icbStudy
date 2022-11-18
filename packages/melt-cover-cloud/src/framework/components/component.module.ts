@@ -24,7 +24,9 @@ export { default as ISearchSelectComponent } from '~/framework/components/i-sear
 // select
 export { default as ISelectAccount } from '~/framework/components/select-account-component/select-account.component';
 export { default as ISelectDistributor } from '~/framework/components/select-distributor-component/select-distributor.component';
+export { default as ISelectOtherOrderDistributor } from '~/framework/components/select-other-order-distributor-component/select-other-order-distributor.component';
 export { default as ISelectEquityGroup } from '~/framework/components/select-equity-group-component/select-equity-group.component';
+export { default as ISelectOtherOrderEquityGroup } from '~/framework/components/select-other-order-equity-group-component/select-other-order-equity-group.component';
 export { default as ISelectCard } from '~/framework/components/select-card-component/select-card.component';
 export { default as ISelectCardMultiple } from '~/framework/components/select-card-multiple-component/select-card-multiple.component';
 // 全新
