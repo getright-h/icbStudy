@@ -418,3 +418,8 @@ export interface CardOrderLimit {
   orderResidueWarnState: number;
   orderResidueWarnStateText: string;
 }
+
+// [其他订单管理-手动扣款]手动扣款
+export interface ManualDeductApplyOrderReqType {
+  orderId: string;
+}

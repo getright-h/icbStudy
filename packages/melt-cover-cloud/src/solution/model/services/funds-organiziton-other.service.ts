@@ -34,7 +34,8 @@ import {
   BagAssetsPagedListResType,
   OrganizationConfigDetailResType,
   LimitDetailResType,
-  BagFilterListResType
+  BagFilterListResType,
+  ManualDeductApplyOrderReqType
 } from '../dto/funds-organiziton-other.dto';
 
 //
@@ -87,6 +88,7 @@ const BAG_ASSETS_PAGED_LIST = 'currency/manage/currency/bag/bagAssetsPagedList';
 
 const JG_CONFIG_DETAIL = 'currency/manage/currency/organizationSet/detail'; //[机构配置-配置详情]配置详情
 
+const MANUAL_DEDUCT_APPLY_ORDER = 'currency/manage/currency/order/manualDeductApplyOrder'; //[其他订单管理-手动扣款]手动扣款
 @DepUtil.Injectable()
 export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   @DepUtil.Inject(RequestService)
@@ -226,5 +228,10 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   // [出单额度设置-详情]详情
   limitDetail(params: { id: string }): Observable<LimitDetailResType> {
     return this.requestService.post(DETAIL_LIMIT, params);
+  }
+
+  // [其他订单管理-手动扣款]手动扣款
+  manualDeductApplyOrder(params: ManualDeductApplyOrderReqType): Observable<{}> {
+    return this.requestService.post(MANUAL_DEDUCT_APPLY_ORDER, params);
   }
 }

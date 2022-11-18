@@ -6,7 +6,8 @@ import moment from 'moment';
 import { useEffect } from 'react';
 import { Modal } from 'antd';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
-import { OrderPagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { ManualDeductApplyOrderReqType, OrderPagedListReqType } from '~/solution/model/dto/funds-organiziton-other.dto';
+import { ShowNotification } from '~/framework/util/common';
 
 export function useOtherOrderManagementStore() {
   const { state, setStateWrap } = useStateStore(new IOtherOrderManagement());
@@ -65,29 +66,27 @@ export function useOtherOrderManagementStore() {
     }
   }
   // 发起扣款
-  function initiateDeductions(row) {
+  function initiateDeductions(row: any) {
     // todo req
     console.log('发起扣款');
 
     setStateWrap({
       isLoading: true
     });
-    /* fundsOrganizitonOtherService.orderPagedList(params).subscribe(
-      res => {
-        setStateWrap({
-          tableData: res.dataList,
-          total: res.total
-        });
+    fundsOrganizitonOtherService.manualDeductApplyOrder({ orderId: row.orderId }).subscribe(
+      _ => {
         setStateWrap({
           isLoading: false
         });
+        ShowNotification.success('扣款成功');
+        handleSearch();
       },
       () => {
         setStateWrap({
           isLoading: false
         });
       }
-    ); */
+    );
 
     handleSearch();
   }

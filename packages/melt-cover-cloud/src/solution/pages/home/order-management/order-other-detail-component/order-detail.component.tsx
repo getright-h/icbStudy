@@ -174,7 +174,7 @@ export default function OrderDetailComponent() {
           <div className={style.scrollContent}>
             <Form className={style.imgBox}>
               <Form.Item>
-                {images?.map((item, index) => {
+                {images?.map?.((item, index) => {
                   return (
                     <div key={index}>
                       <p>{item.Title}</p>
