@@ -12,8 +12,15 @@ export function useOrderDetailStore() {
 
   const history = useHistory();
   useEffect(() => {
-    fundsOrganizitonOtherService.detail({ id }).subscribe(res => setStateWrap({ info: res }));
+    fundsOrganizitonOtherService.detail({ id }).subscribe(res =>
+      //
+      {
+        const foo: [] = JSON.parse(res?.images);
+        setStateWrap({ info: res, images: foo });
+      }
+    );
   }, []);
+
   function goback() {
     history.goBack();
   }

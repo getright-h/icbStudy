@@ -274,11 +274,7 @@ export interface DetailResType {
   equityGroupPrice: number;
   additionalImages: string;
   currentImageTemplt: string;
-  images: {
-    type: number;
-    title: string;
-    Url: string[];
-  }[];
+  images: string;
   createTime: string;
   orderState: number;
   orderStateTxt: string;
@@ -421,4 +417,9 @@ export interface CardOrderLimit {
   orderResidueWarnMoney: number;
   orderResidueWarnState: number;
   orderResidueWarnStateText: string;
+}
+
+// [其他订单管理-手动扣款]手动扣款
+export interface ManualDeductApplyOrderReqType {
+  orderId: string;
 }

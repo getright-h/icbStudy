@@ -5,11 +5,11 @@ import { IPreviewImgComponent } from '@fch/fch-shop-web';
 import { TEMPLATESUBTYPE } from '~/solution/shared/enums/home.enum';
 import style from './order-detail.module.less';
 import { useOrderDetailStore } from './order-detail.component.store';
+import { useEffect } from 'react';
 export default function OrderDetailComponent() {
   const { state, goback } = useOrderDetailStore();
-  const { info } = state;
-  // 车辆图片标题
-  const vehicleTitle = ['车辆正前方', '车辆正后方', '车辆左侧', '车辆右侧', '挡风玻璃处车架号图'];
+  const { info, images } = state;
+  console.log('images', images);
 
   function renderUserInfo(props: { span: number }) {
     const { span } = props;
@@ -172,15 +172,14 @@ export default function OrderDetailComponent() {
       <>
         {info?.images && (
           <div className={style.scrollContent}>
-            {/* todo 返回图片 */}
             <Form className={style.imgBox}>
               <Form.Item>
-                {info?.images?.map((item, index) => {
+                {images?.map?.((item, index) => {
                   return (
                     <div key={index}>
-                      <p>{item.title}</p>
+                      <p>{item.Title}</p>
                       <div className={style.img}>
-                        <IPreviewImgComponent src={item.Url[0]} alt="车身图" />
+                        <IPreviewImgComponent src={JSON.parse(item.Url)?.[0]} alt="车身图" />
                       </div>
                     </div>
                   );
@@ -202,35 +201,4 @@ export default function OrderDetailComponent() {
       </React.Fragment>
     </div>
   );
-}
-
-{
-  /* {info?.certificateFront && (
-              <>
-                <p>{info?.ownerType === 1 ? '车主证件照正面' : '营业执照'}</p>
-                <Form.Item>
-                  <div className={style.img}>
-                    <IPreviewImgComponent
-                      key={info?.certificateFront}
-                      src={info?.certificateFront}
-                      alt={info?.ownerType === 1 ? '车主证件照正面' : '营业执照'}
-                    />
-                  </div>
-                </Form.Item>
-              </>
-            )}
-            {info?.reverseSideOfCertificate && info?.ownerType == 1 && (
-              <>
-                <p>车主证件照反面</p>
-                <Form.Item>
-                  <div className={style.img}>
-                    <IPreviewImgComponent
-                      key={info?.reverseSideOfCertificate}
-                      src={info?.reverseSideOfCertificate}
-                      alt="车主证件照反面"
-                    />
-                  </div>
-                </Form.Item>
-              </>
-            )} */
 }

@@ -29,10 +29,9 @@ export function demoColumns(action: Function): ColumnsType<any> {
       title: '账户号',
       dataIndex: 'bagNumber'
     },
-    // todo 缺少这个字段
     {
       title: '卡券号',
-      dataIndex: 'wuhu'
+      dataIndex: 'businessName'
     },
     {
       title: '车牌号',

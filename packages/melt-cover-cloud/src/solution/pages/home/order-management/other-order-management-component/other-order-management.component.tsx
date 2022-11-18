@@ -5,7 +5,7 @@ import { demoColumns } from './demo-columns';
 import style from './other-order-management.module.less';
 import { useOtherOrderManagementStore } from './other-order-management.component.store';
 import { schema } from './other-order-management.interface';
-import { ISelectEquityGroup, ISelectDistributor } from '~/framework/components/component.module';
+import { ISelectOtherOrderDistributor, ISelectOtherOrderEquityGroup } from '~/framework/components/component.module';
 
 export default function OtherOrderManagementComponent() {
   const { state, handleSearch, formRef, tableAction, changeTablePageIndex, addOrder } = useOtherOrderManagementStore();
@@ -13,7 +13,7 @@ export default function OtherOrderManagementComponent() {
   function renderSelectItems() {
     return (
       <IFormComponent
-        widget={{ ISelectDistributor: ISelectDistributor, ISelectEquityGroup: ISelectEquityGroup }}
+        widget={{ ISelectOtherOrderDistributor, ISelectOtherOrderEquityGroup }}
         form={formRef}
         schema={schema}
         props={{ labelCol: { span: 6 }, wrapperCol: { span: 18 } }}

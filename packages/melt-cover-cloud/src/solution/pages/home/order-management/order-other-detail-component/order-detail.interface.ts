@@ -6,4 +6,9 @@ import { DetailResType } from '~/solution/model/dto/funds-organiziton-other.dto'
  */
 export class IOrderDetailState {
   info: DetailResType;
+  images: {
+    type: number;
+    Title: string;
+    Url: string;
+  }[];
 }
