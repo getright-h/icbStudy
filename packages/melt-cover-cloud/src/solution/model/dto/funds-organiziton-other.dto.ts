@@ -85,13 +85,21 @@ export interface LogPageListReqType {
 export interface SetOrganizationConfReqType {
   bagId: string;
   distributorId: string;
-  isLimit: number;
-  isRelationDeductMoney: number;
-  isAllowSubDeductMoney: number;
+  cardSets: {
+    businessId: string;
+    isLimit: number;
+    isAllowSubDeductMoney: number;
+    organizationDeductMoneyLevel: number;
+  }[];
 }
 
 export interface SetLimitReqType {
+  cardSetLimits: CardSetLimit[];
   id: string;
+}
+export interface CardSetLimit {
+  businessId: string;
+  businessName: string;
   orderLimit: number;
   orderResidueWarnMoney: number;
 }
@@ -124,10 +132,14 @@ export interface FiltListReqType {
   bagSearch: string;
 }
 
-export interface FiltListResType {
+export interface BagFilterListResType {
   id: string;
   name: string;
   number: string;
+  bagRelations: {
+    businessId: string;
+    businessName: string;
+  }[];
 }
 
 // 充值
@@ -369,4 +381,44 @@ export interface BagAssetsPagedListResType {
   remark: string;
   createTime: string;
   createUserName: string;
+}
+
+export interface OrganizationConfigDetailResType {
+  bagId: string;
+  bagName: string;
+  distributorName: string;
+  modifyTime: string;
+  isLimit: number;
+  isLimitTxt: string;
+  businessIds: string[];
+  businessNames: string[];
+  cardSets: CardSet[];
+}
+
+export interface CardSet {
+  businessId: string;
+  businessName: string;
+  isLimit: number;
+  isAllowSubDeductMoney: number;
+  organizationDeductMoneyLevel: number;
+}
+
+export interface LimitDetailResType {
+  id: string;
+  distributorName: string;
+  createTime: string;
+  createUserName: string;
+  unitCode: string;
+  unitMobile: string;
+  contactName: string;
+  cardOrderLimits: CardOrderLimit[];
+}
+export interface CardOrderLimit {
+  businessId: string;
+  businessName: string;
+  balance: number;
+  orderLimit: number;
+  orderResidueWarnMoney: number;
+  orderResidueWarnState: number;
+  orderResidueWarnStateText: string;
 }

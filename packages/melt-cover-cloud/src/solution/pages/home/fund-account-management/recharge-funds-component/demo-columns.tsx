@@ -105,8 +105,6 @@ export function demoColumns(action: Function): any {
     .filter(f => f.show)
     .map(m => {
       const { show, ...payload } = m;
-      console.log('{ ...payload }', m);
-
       return { ...payload };
     });
 }
