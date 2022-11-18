@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Button, Modal } from 'antd';
 import { IFormBaseComponentsUnion, IFormComponent, TypeUseForm } from '@fch/fch-shop-web';
-import { ISelectAccount, ISelectCard, IUploadImgComponent } from '~/framework/components/component.module';
+import { ISelectAccount, ISelectCard, IUploadStableComponent } from '~/framework/components/component.module';
 import { uuid } from '~/framework/util/common/tool';
 import { PayOptions, PAY_ENUM } from '~/solution/shared/constant/currency.const';
 import { options } from '~/framework/components/i-home-header-component/i-home-header.module.less';
+import IUploadComponent from '~/framework/components/i-upload-component/i-upload.component';
 
 interface IAddEquityProps {
   title: string;
@@ -24,7 +25,7 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
         form={form}
         schema={schema}
         widget={{
-          IUploadImgComponent,
+          IUploadStableComponent,
           ISelectAccount: ISelectAccount,
           ISelectCard: ISelectCard
         }}
@@ -122,17 +123,14 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        type: 'IUploadImgComponent',
+        type: 'IUploadStableComponent',
         key: 'receiptImage',
         formItemProps: {
-          label: '附件凭证'
-          // valuePropName: 'fileList'
+          label: '附件凭证',
+          valuePropName: 'fileList'
         },
         props: {
-          defaultFileList: `{{formData.receiptImage?.[0]&&[{uid: ${uuid(
-            9,
-            10
-          )},name: '车主证件照(正面)',url: formData.receiptImage?.[0]}]}}`
+          listType: 'picture-card'
         }
       }
     ],

@@ -32,3 +32,4 @@ export { default as ISelectCardMultiple } from '~/framework/components/select-ca
 export { default as ISelectAccountFilter } from '~/framework/components/select-account-filter-component/select-account-filter.component';
 // 全新
 export { default as ITablePlus } from '~/framework/components/i-table-plus/i-table.component';
+export { default as IUploadStableComponent } from '~/framework/components/i-upload-component/i-upload.component';
