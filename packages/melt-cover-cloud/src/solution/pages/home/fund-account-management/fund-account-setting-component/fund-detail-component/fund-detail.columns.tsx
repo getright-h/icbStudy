@@ -37,8 +37,9 @@ export function spendingColumns(): ColumnsType<any> {
       dataIndex: 'number',
       // todo 后端给的一个状态值，在金额这一栏前面加个 + -
       render: (value, row) => {
-        console.log('row', row);
-        return row.isInCome == true ? `+ ${value}` : `- ${value}`;
+        console.log('row', row.mark);
+
+        return row?.mark ? `${row?.mark}` + `${value}` : ` ${value}`;
       }
     },
     {

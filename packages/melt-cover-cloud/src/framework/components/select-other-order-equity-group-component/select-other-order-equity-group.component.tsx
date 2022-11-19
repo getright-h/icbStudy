@@ -13,11 +13,11 @@ export class ISelectProps {
   disabled?: boolean;
 }
 
-/** 线下-后台账户-下拉列表 */
+/** 线下-套餐包-下拉列表 */
 export default React.memo((props: ISelectProps) => {
-  const { onChange, isPreload, isSendObj = false, disabled = false, placeholder = '请选择账号', ...rest } = props;
+  const { onChange, isPreload, isSendObj = false, disabled = false, placeholder = '请选套餐包', ...rest } = props;
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
-  const requestFn = fundsOrganizitonOtherService.pagedList;
+  const requestFn = fundsOrganizitonOtherService.getEquityGroupList;
   const params = {
     placeholder,
     requestFn,
@@ -26,10 +26,11 @@ export default React.memo((props: ISelectProps) => {
     disabled: disabled,
     value: props.value,
     searchKey: props.searchKey,
-    searchKeyName: 'bagSearch',
-    responseDataStructure: ['dataList'],
-    labelDataStructure: ['name'],
-    valueDataStructure: ['bagId'],
+    // 这里没有传递值
+    // searchKeyName: '',
+    responseDataStructure: [],
+    labelDataStructure: ['equityGroupName'],
+    valueDataStructure: ['equityGroupId'],
     ...rest
   };
   const search = <ISearchSelectComponent {...params} />;

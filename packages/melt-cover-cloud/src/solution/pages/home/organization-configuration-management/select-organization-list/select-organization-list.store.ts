@@ -44,6 +44,7 @@ export function useOrganizationListStore(props: SelectOrganizationListProps) {
       })
       .subscribe(
         (res: any) => {
+          // 点击下级图标 查询的下级列表 找到之前创建的空的父级数组，并插入进去
           const tableData = state.tableData.map((item: any) => {
             if (item.id === record['id']) {
               // item.children = res.map((o: any) => ({ ...o, isLeaf: true }));

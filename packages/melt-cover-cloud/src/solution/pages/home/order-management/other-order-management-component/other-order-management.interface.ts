@@ -46,10 +46,13 @@ export const schema: IFormBaseComponentsUnion[] = [
       },
       {
         // 后端要求 暂时改成 input
-        type: 'Input',
-        key: 'distributorId',
+        type: 'ISelectOtherOrderDistributor',
+        key: 'distributorName',
         formItemProps: {
           label: '所属机构'
+        },
+        props: {
+          isPreload: true
         }
       },
       {
@@ -58,6 +61,9 @@ export const schema: IFormBaseComponentsUnion[] = [
         key: 'equityGroupId',
         formItemProps: {
           label: '购买套餐包'
+        },
+        props: {
+          isPreload: true
         }
       },
       {
