@@ -35,7 +35,11 @@ import {
   OrganizationConfigDetailResType,
   LimitDetailResType,
   BagFilterListResType,
-  ManualDeductApplyOrderReqType
+  ManualDeductApplyOrderReqType,
+  GetOrderOfOrgListReqType,
+  GetOrderOfOrgListResType,
+  GetEquityGroupListReqType,
+  GetEquityGroupListResType
 } from '../dto/funds-organiziton-other.dto';
 
 //
@@ -89,6 +93,10 @@ const BAG_ASSETS_PAGED_LIST = 'currency/manage/currency/bag/bagAssetsPagedList';
 const JG_CONFIG_DETAIL = 'currency/manage/currency/organizationSet/detail'; //[机构配置-配置详情]配置详情
 
 const MANUAL_DEDUCT_APPLY_ORDER = 'currency/manage/currency/order/manualDeductApplyOrder'; //[其他订单管理-手动扣款]手动扣款
+
+const GET_ORDER_OF_ORG_LIST = 'currency/manage/currency/order/getOrderOfOrgList'; //[其他订单管理-订单查询条件-机构]订单查询条件-机构
+
+const GET_EQUITY_GROUP_LIST = 'currency/manage/currency/order/getEquityGroupList'; //[其他订单管理-订单查询条件-套餐包]订单查询条件-套餐包
 @DepUtil.Injectable()
 export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   @DepUtil.Inject(RequestService)
@@ -234,4 +242,13 @@ export class FundsOrganizitonOtherService extends FundsOrganizitonOtherDTO {
   manualDeductApplyOrder(params: ManualDeductApplyOrderReqType): Observable<{}> {
     return this.requestService.post(MANUAL_DEDUCT_APPLY_ORDER, params);
   }
+
+  // [其他订单管理-订单查询条件-机构]订单查询条件-机构
+  getOrderOfOrgList = (params: GetOrderOfOrgListReqType): Observable<GetOrderOfOrgListResType> => {
+    return this.requestService.post(GET_ORDER_OF_ORG_LIST, params);
+  };
+  // [其他订单管理-订单查询条件-套餐包]订单查询条件-套餐包
+  getEquityGroupList = (params: GetEquityGroupListReqType): Observable<GetEquityGroupListResType> => {
+    return this.requestService.post(GET_EQUITY_GROUP_LIST, params);
+  };
 }

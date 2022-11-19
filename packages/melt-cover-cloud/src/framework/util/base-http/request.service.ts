@@ -8,6 +8,8 @@ function getRootUrl(url: string) {
   let returnInfo = process.env.MAIN;
   if (!!~url.indexOf('/VerifyCode') || !!~url.indexOf('/Login')) {
     returnInfo = process.env.LOGIN;
+  } else if (url.includes('currency/manage/currency/order')) {
+    returnInfo = process.env.BARS;
   } else if (url.includes('currency/manage/currency')) {
     returnInfo = process.env.FOOS;
   } else if (!!~url.indexOf('Appointment')) {

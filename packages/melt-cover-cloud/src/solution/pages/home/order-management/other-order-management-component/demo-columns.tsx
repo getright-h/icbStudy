@@ -67,8 +67,7 @@ export function demoColumns(action: Function): ColumnsType<any> {
     },
     {
       title: '支付方式',
-      dataIndex: 'payTypeText',
-      render: (v: number) => PAY_METHOD[v] || '-'
+      dataIndex: 'payTypeText'
     },
     {
       title: '操作',
@@ -80,7 +79,7 @@ export function demoColumns(action: Function): ColumnsType<any> {
           <React.Fragment>
             <a onClick={() => action(row, '详情')}>详情</a>
             <Divider type="vertical" />
-            <a onClick={() => action(row, '发起扣款')}>发起扣款</a>
+            {row?.orderState == -1 ? <a onClick={() => action(row, '发起扣款')}>发起扣款</a> : ''}
           </React.Fragment>
         );
       }

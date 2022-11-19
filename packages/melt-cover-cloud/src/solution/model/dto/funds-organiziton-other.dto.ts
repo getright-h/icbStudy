@@ -423,3 +423,21 @@ export interface CardOrderLimit {
 export interface ManualDeductApplyOrderReqType {
   orderId: string;
 }
+
+// [其他订单管理-订单查询条件-机构]订单查询条件-机构
+export interface GetOrderOfOrgListReqType {
+  distributorName: string;
+}
+
+export interface GetOrderOfOrgListResType {
+  distributorId: string;
+  distributorName: string;
+}
+
+// [其他订单管理-订单查询条件-套餐包]订单查询条件-套餐包
+export interface GetEquityGroupListReqType {}
+
+export interface GetEquityGroupListResType {
+  equityGroupId: string;
+  equityGroupName: string;
+}
