@@ -360,7 +360,7 @@ export const schema: IFormBaseComponentsUnion[] = [
         }
       },
       {
-        key: 'associatedCardAndCoupon',
+        key: 'equityId',
         type: 'ISelectCard',
         formItemProps: {
           label: '选择关联卡券',

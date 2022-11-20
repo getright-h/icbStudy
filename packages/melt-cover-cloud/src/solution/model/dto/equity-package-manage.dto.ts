@@ -135,7 +135,6 @@ export interface IAddEquityResult {
 }
 
 export interface InsertEquityGroupParams {
-  associatedCardAndCoupon: string;
   isCheckAccount: boolean;
   id?: string;
   distributorId: string;
@@ -145,6 +144,7 @@ export interface InsertEquityGroupParams {
   status: number;
   equityList: EquityListPackage[];
   FEE_TYPE_PACKAGE?: boolean;
+  equityId: string;
 }
 
 export interface EquityListPackage {

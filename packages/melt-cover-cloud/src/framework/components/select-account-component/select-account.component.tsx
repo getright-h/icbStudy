@@ -17,7 +17,7 @@ export class ISelectProps {
 export default React.memo((props: ISelectProps) => {
   const { onChange, isPreload, isSendObj = false, disabled = false, placeholder = '请选择账号', ...rest } = props;
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
-  const requestFn = fundsOrganizitonOtherService.pagedList;
+  const requestFn = fundsOrganizitonOtherService.filtList;
   const params = {
     placeholder,
     requestFn,
@@ -29,7 +29,7 @@ export default React.memo((props: ISelectProps) => {
     searchKeyName: 'bagSearch',
     responseDataStructure: ['dataList'],
     labelDataStructure: ['name'],
-    valueDataStructure: ['bagId'],
+    valueDataStructure: ['id'],
     ...rest
   };
   const search = <ISearchSelectComponent {...params} />;

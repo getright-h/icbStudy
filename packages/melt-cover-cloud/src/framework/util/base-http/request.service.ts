@@ -11,9 +11,9 @@ function getRootUrl(url: string) {
   } else if (url.includes('currency/manage/currency/order')) {
     returnInfo = process.env.BARS;
   } else if (url.includes('currency/manage/currency')) {
-    returnInfo = process.env.BARS;
+    // returnInfo = process.env.BARS;
     // 推的时候改回去
-    // returnInfo = process.env.FOOS;
+    returnInfo = process.env.FOOS;
   } else if (!!~url.indexOf('Appointment')) {
     returnInfo = process.env.APPOINT;
   } else if (!!~url.indexOf('order/') || !!~url.indexOf('OcrScan/')) {

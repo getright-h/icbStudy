@@ -10,8 +10,9 @@ import {
 import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-render.interface';
 import { IRechargeFundsState } from '../recharge-funds.interface';
 import { uuid } from '~/framework/util/common/tool';
-import { schema } from './addEquityModal';
+// import { schema } from './addEquityModal';
 import { ISelectAccount, ISelectCard } from '~/framework/components/component.module';
+import { PayOptions, PAY_ENUM } from '~/solution/shared/constant/currency.const';
 
 interface IAddEquityProps {
   title: string;
@@ -27,6 +28,100 @@ interface IAddEquityProps {
 export default function AddPackageModalComponent2(props: IAddEquityProps) {
   const { title, form, handleOk, handleCancel, visible, stateParent, watch2 } = props;
   const { disableFooter } = stateParent;
+
+  function bagChange(value: string, data: any) {
+    form.setSchema('businessId', (schema: any) => {
+      schema.props.options = data?.info?.bagRelations?.map((m: any) => {
+        return {
+          value: m?.businessId,
+          label: m?.businessName
+        };
+      });
+    });
+    console.log('cardSets data', data);
+    console.log('cardSets foo.current', foo);
+  }
+  const schema: IFormBaseComponentsUnion[] = [
+    {
+      key: 'container',
+      type: 'Layout',
+      children: [
+        {
+          key: 'id',
+          type: 'ISelectAccountFilter',
+          formItemProps: {
+            label: '充值账户',
+            required: true
+          },
+          props: {
+            isPreload: true,
+            isSendObj: true,
+            onChange: bagChange
+          }
+        },
+        {
+          type: 'Select',
+          key: 'businessId',
+          formItemProps: {
+            label: '充值卡券',
+            required: true
+          },
+          props: {
+            options: [],
+            placeholder: '请选择卡券'
+          }
+        },
+        {
+          key: 'type',
+          type: 'Select',
+          formItemProps: {
+            label: '支付类型',
+            required: true,
+            initialValue: PAY_ENUM.other,
+            wrapperCol: { span: 10 }
+          },
+          props: {
+            options: PayOptions
+          }
+        },
+        {
+          key: 'number',
+          type: 'Input',
+          formItemProps: {
+            label: '充值金额',
+            required: true
+          },
+          props: {
+            placeholder: '填写充值金额'
+          }
+        },
+        {
+          key: 'remark',
+          type: 'Input',
+          formItemProps: {
+            label: '备注'
+          },
+          props: {
+            placeholder: '填写备注'
+          }
+        },
+        {
+          type: 'IUploadStableComponent',
+          key: 'receiptImage',
+          formItemProps: {
+            label: '附件凭证',
+            valuePropName: 'fileList'
+          },
+          props: {
+            listType: 'picture-card'
+          }
+        }
+      ],
+      props: {
+        cols: 1
+      }
+    }
+  ];
   const footer: any = disableFooter ? null : (
     <>
       <Button type="primary" onClick={handleCancel}>
