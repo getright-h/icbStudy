@@ -26,8 +26,9 @@ export function useOrganizationListStore(props: SelectOrganizationListProps) {
           })
         );
         setStateWrap({ tableData, total: res?.length, isLoading: false });
-        // 首次渲染的时候 默认把一级机构的id传递给右侧的查询表单函数
-        selectFn(tableData?.[0]);
+        selectFn(tableData);
+        // 首次渲染的时候 不能默认把一级机构的id传递给右侧的查询表单函数 因为需要一个空的parentid来查询全部一级机构
+        // selectFn(tableData?.[0]);
       },
       () => {
         setStateWrap({ isLoading: false });

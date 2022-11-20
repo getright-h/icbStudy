@@ -98,6 +98,7 @@ export function useFundAccountSettingStore() {
     form3.validateFields().then(values => {
       console.log('form3', values);
       const req = {
+        type: values?.type,
         name: values?.name,
         state: values?.state,
         remark: values?.remark,

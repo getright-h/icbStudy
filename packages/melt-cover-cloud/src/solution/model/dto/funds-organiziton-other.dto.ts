@@ -193,6 +193,7 @@ export interface EditReqType {
 // 新增账户钱包
 export interface BagReqType {
   name: string;
+  type: number;
   remark: string;
   state: number;
   businessIds: string[];

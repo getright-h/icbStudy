@@ -16,7 +16,7 @@ export function useOrganizationConfigStore() {
     isPreload: false,
     /** 获取表单数据时，若传递了该函数，就把上级机构的id带上 */
     customParamsFn(formValues) {
-      return { ...formValues, parentId: paramsRef.current?.id };
+      return { ...formValues, parentId: paramsRef.current?.id ? paramsRef.current?.id : '' };
     }
   });
   const { getTableData } = table;

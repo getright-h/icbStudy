@@ -21,7 +21,7 @@ export function useOrderDetailStore() {
     isPreload: false,
     customParamsFn: () => {
       const { radio } = getState();
-      return { isInCome: radio === 1 ? true : false };
+      return { isInCome: radio === 1 ? true : false, bagId: id };
     }
   });
 
