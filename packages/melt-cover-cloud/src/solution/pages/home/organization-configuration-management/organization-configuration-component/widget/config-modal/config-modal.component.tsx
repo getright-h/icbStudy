@@ -66,7 +66,8 @@ export default function ConfigModalComponent(props: IConfigProps) {
       const params: SetOrganizationConfReqType = {
         distributorId: initData?.distributorId,
         bagId: values?.bagId,
-        cardSets: values?.cardSets
+        cardSets: values?.cardSets,
+        id: initData?.id
       };
       fundsOrganizitonOtherService.setOrganizationConf(params).subscribe(
         _ => {

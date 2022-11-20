@@ -14,6 +14,7 @@ export function useOrganizationConfigStore() {
     form,
     require: fundsOrganizitonOtherService.organizationPagedList,
     isPreload: false,
+    /** 获取表单数据时，若传递了该函数，就把上级机构的id带上 */
     customParamsFn(formValues) {
       return { ...formValues, parentId: paramsRef.current?.id };
     }
@@ -22,6 +23,7 @@ export function useOrganizationConfigStore() {
   const { modalState, modalClose, visibleChange } = useModalPlus(visibleList);
 
   function getRightList(row: GetSubOrganizationResType) {
+    /** 当前列的信息，若有下级机构，此信息中的id可以作为上级机构的id */
     paramsRef.current = row;
     getTableData();
   }

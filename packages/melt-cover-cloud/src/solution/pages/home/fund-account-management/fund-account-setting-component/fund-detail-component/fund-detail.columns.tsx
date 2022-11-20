@@ -35,7 +35,6 @@ export function spendingColumns(): ColumnsType<any> {
     {
       title: '支出金额',
       dataIndex: 'number',
-      // todo 后端给的一个状态值，在金额这一栏前面加个 + -
       render: (value, row) => {
         console.log('row', row.mark);
 

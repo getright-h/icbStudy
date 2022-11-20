@@ -18,6 +18,7 @@ export function useOrganizationListStore(props: SelectOrganizationListProps) {
     setStateWrap({ isLoading: true });
     fundsOrganizitonOtherService.getSubOrganization({ parentId: '' }).subscribe(
       (res: any) => {
+        // 预先给每个一级机构加个空数组 方便后续如果有下属的二级机构 就直接加进来
         const tableData = cloneDeep(
           res.map((item: any) => {
             item.children = [];
@@ -25,6 +26,7 @@ export function useOrganizationListStore(props: SelectOrganizationListProps) {
           })
         );
         setStateWrap({ tableData, total: res?.length, isLoading: false });
+        // 首次渲染的时候 默认把一级机构的id传递给右侧的查询表单函数
         selectFn(tableData?.[0]);
       },
       () => {
@@ -33,6 +35,7 @@ export function useOrganizationListStore(props: SelectOrganizationListProps) {
     );
   }
 
+  /** 点击展开后 查询下级列表 并加入到children中 */
   function onExpand(expanded: any, record: any) {
     if (!expanded) {
       return;
@@ -65,6 +68,7 @@ export function useOrganizationListStore(props: SelectOrganizationListProps) {
   //   getTableData();
   // }
 
+  /** 获取左侧当前行的信息 并传递给右侧获取表单的函数(主要时当前点击行的id) */
   function selectFn(record: GetSubOrganizationResType) {
     setStateWrap({ currentData: record });
     props?.selectEvent?.(record);

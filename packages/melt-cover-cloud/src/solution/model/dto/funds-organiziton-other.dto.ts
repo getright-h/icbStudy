@@ -83,6 +83,7 @@ export interface LogPageListReqType {
 }
 
 export interface SetOrganizationConfReqType {
+  id: string;
   bagId: string;
   distributorId: string;
   cardSets: {
@@ -199,6 +200,7 @@ export interface BagReqType {
 
 // 编辑账户钱包
 export interface SetReqType {
+  id: string;
   bagId: string;
   name: string;
 }
