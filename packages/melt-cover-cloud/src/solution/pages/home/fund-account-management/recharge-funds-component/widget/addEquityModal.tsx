@@ -32,7 +32,7 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
       type: 'Layout',
       children: [
         {
-          key: 'id',
+          key: 'bagId',
           type: 'ISelectAccountFilter',
           formItemProps: {
             label: '充值账户',

@@ -66,11 +66,13 @@ export function useRechargeFundsStore() {
   /** req 创建资金账户 */
   function recharge() {
     form2.validateFields().then(value => {
+      console.log('--value', value);
+
       const req = {
         ...value,
         receiptImage: value?.receiptImage?.[0],
         bagId: value.bagId,
-        type: value.type,
+        payType: value.type,
         number: value.number,
         remark: value.remark
       };

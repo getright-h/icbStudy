@@ -144,11 +144,14 @@ export interface BagFilterListResType {
 }
 
 // 充值
+
 export interface AssetsRecordReqType {
   bagId: string;
-  type: number;
+  businessId: string;
   number: number;
   remark: string;
+  receiptImage: string;
+  payType: number;
 }
 
 //充值记录管理分页列表

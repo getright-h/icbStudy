@@ -196,6 +196,7 @@ export function useEquityPackageManageStore() {
     if (changedValues['distributor']?.key) {
       handleGetDropEquity(changedValues['distributor'].key, (res: IResponseEquityResult[]) => {
         const defaultEquityList: string[] = res.filter(item => item.disable).map(item => item.id);
+
         form2.setFieldsValue({
           equityList: defaultEquityList
         });
@@ -432,6 +433,7 @@ export function useEquityPackageManageStore() {
     const formValues = form2.getFieldsValue();
     const { equityDropList } = state;
     form2.validateFields().then(() => {
+      console.log('--edit--', formValues);
       const selectEquityList: IResponseEquityResult[] = formValues.equityList?.map((item: string) => {
         const _item = equityDropList.filter(it => item == it.id);
         return _item?.[0];
@@ -440,6 +442,7 @@ export function useEquityPackageManageStore() {
       const req: InsertEquityGroupParams = Object.assign({}, formValues, {
         FEE_TYPE_PACKAGE: state.equityPackageTitle == '添加权益包',
         id: state.equityPackageTitle !== '添加权益包' ? currentEquityPackage?.id : undefined,
+        associatedCardAndCoupon: formValues.associatedCardAndCoupon,
         distributorId: formValues.distributor.value,
         distributorName: formValues.distributor.label,
         price: formValues.price || 0,
@@ -456,6 +459,8 @@ export function useEquityPackageManageStore() {
           return _item;
         })
       });
+      console.log('---req', req);
+
       setStateWrap({
         isLoadingModal2: true
       });
