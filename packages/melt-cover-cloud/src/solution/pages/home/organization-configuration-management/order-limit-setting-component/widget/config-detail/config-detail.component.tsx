@@ -90,9 +90,9 @@ export default function ConfigDetailComponent(props: IConfigDetailProps) {
                       <Form.Item label={'录单卡卷剩余额度告警值'} style={{ marginBottom: 0 }}>
                         <span>{card?.orderResidueWarnMoney || '-'}</span>
                       </Form.Item>
-                      <Form.Item label={'预警状态'} style={{ marginBottom: 0 }}>
+                      {/* <Form.Item label={'预警状态'} style={{ marginBottom: 0 }}>
                         <span>{card?.orderResidueWarnStateText || '-'}</span>
-                      </Form.Item>
+                      </Form.Item> */}
                     </div>
                   </Col>
                 );
