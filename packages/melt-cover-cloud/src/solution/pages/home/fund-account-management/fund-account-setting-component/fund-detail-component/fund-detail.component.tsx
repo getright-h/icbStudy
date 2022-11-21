@@ -33,7 +33,7 @@ export default function FundDetailComponent() {
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'账户号'}>
-                <span>{info?.id || '-'}</span>
+                <span>{info?.number || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
@@ -52,8 +52,8 @@ export default function FundDetailComponent() {
               </Form.Item>
             </Col>
             <Col className="" span={span}>
-              <Form.Item label={'*配置是否开启额度限制'}>
-                <span>是</span>
+              <Form.Item label={'配置是否开启额度限制'}>
+                <span>{info?.undetermined || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>

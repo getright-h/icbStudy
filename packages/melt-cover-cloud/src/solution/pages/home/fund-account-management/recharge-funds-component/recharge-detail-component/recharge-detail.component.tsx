@@ -72,7 +72,7 @@ export default function RechargeDetailComponent() {
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'支付类型'}>
-                <span>{info?.buyInfo?.payType || '-'}</span>
+                <span>{info?.buyInfo?.payTypeText || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
