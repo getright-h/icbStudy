@@ -41,11 +41,11 @@ export function Columns(action: Function): ColumnsType<any> {
     //   dataIndex: 'orderResidueMoney',
     //   render: (text: number) => `${text}元`
     // },
-    {
+    /* {
       title: '预警状态',
       dataIndex: 'orderResidueWarnState',
       render: (state: number) => ColumnTools.renderTag(WarnOptions, state)
-    },
+    }, */
     {
       title: '操作',
       dataIndex: 'action',

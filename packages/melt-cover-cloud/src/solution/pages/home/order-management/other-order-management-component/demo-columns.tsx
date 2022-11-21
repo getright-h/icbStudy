@@ -57,10 +57,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
       title: '状态',
       dataIndex: 'orderStateTxt'
     },
-    {
+    /* {
       title: '记录',
       dataIndex: 'OrderWorkFlowLog'
-    },
+    }, */
     {
       title: '原因',
       dataIndex: 'orderErrorMsg'

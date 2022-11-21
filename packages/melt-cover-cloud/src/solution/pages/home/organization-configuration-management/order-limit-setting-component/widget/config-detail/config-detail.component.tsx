@@ -63,11 +63,11 @@ export default function ConfigDetailComponent(props: IConfigDetailProps) {
               <span>{detailData?.createTime || '-'}</span>
             </Form.Item>
           </Col>
-          <Col span={6}>
+          {/* <Col span={6}>
             <Form.Item label={'预警状态'}>
               <span>{initData?.orderResidueWarnStateTxt || '-'}</span>
             </Form.Item>
-          </Col>
+          </Col> */}
         </Row>
         <Divider />
         {!!detailData?.cardOrderLimits?.length && (
