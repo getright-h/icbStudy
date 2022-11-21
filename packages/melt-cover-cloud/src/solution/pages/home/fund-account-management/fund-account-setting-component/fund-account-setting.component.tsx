@@ -47,9 +47,9 @@ export default function FundAccountSettingComponent() {
         <Button type="primary" className="ml20" onClick={() => tableAction(ACTION_TYPE.ADD)}>
           创建账户
         </Button>
-        <Button type="primary" className="ml20" onClick={() => exportExcel()}>
+        {/* <Button type="primary" className="ml20" onClick={() => exportExcel()}>
           导出
-        </Button>
+        </Button> */}
       </>
     );
   }

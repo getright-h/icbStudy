@@ -220,6 +220,7 @@ export interface OrderPagedListReqType {
 }
 
 export interface OrderPagedListResType {
+  OrderWorkFlowLog: string;
   id: string;
   orderNumber: string;
   bagId: string;

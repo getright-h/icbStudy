@@ -51,9 +51,9 @@ export default function RechargeFundsComponent() {
         <Button type="primary" className="ml20" onClick={() => tableAction(ACTION_TYPE.Recharge)}>
           账户充值
         </Button>
-        <Button type="primary" className="ml20" onClick={() => tableAction(ACTION_TYPE.Export)}>
+        {/*  <Button type="primary" className="ml20" onClick={() => tableAction(ACTION_TYPE.Export)}>
           导出
-        </Button>
+        </Button> */}
       </>
     );
   }

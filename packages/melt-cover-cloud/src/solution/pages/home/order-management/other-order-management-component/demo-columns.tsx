@@ -58,6 +58,10 @@ export function demoColumns(action: Function): ColumnsType<any> {
       dataIndex: 'orderStateTxt'
     },
     {
+      title: '记录',
+      dataIndex: 'OrderWorkFlowLog'
+    },
+    {
       title: '原因',
       dataIndex: 'orderErrorMsg'
     },

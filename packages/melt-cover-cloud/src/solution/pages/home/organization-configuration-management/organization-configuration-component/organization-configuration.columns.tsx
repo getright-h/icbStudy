@@ -21,11 +21,11 @@ export function Columns(action: Function): ColumnsType<any> {
       dataIndex: 'modifyTime',
       render
     },
-    {
+    /* {
       title: '配置是否开启额度限制',
       dataIndex: 'isLimitTxt',
       render
-    },
+    }, */
     {
       title: '操作',
       dataIndex: 'action',

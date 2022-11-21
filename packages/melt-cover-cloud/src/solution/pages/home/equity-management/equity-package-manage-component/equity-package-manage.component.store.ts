@@ -366,7 +366,6 @@ export function useEquityPackageManageStore() {
    * 新增权益
    */
   function handleOk() {
-    console.log('🚀 ~ formValues', form1.getFieldsValue());
     const formValues = form1.getFieldsValue();
     form1.validateFields().then(res => {
       if (Array.isArray(formValues?.selectionOrgs)) {
@@ -397,7 +396,8 @@ export function useEquityPackageManageStore() {
           message.success('操作成功');
           form1.resetFields();
           handleGetEquity();
-          handleSearchEquity();
+          changeTablePageIndexEquity(1, 10);
+          // handleSearchEquity();
           toggleModal();
         },
         () => {
@@ -464,7 +464,8 @@ export function useEquityPackageManageStore() {
         () => {
           message.success('操作成功');
           form1.resetFields();
-          handleSearch();
+          changeTablePageIndex(1, 10);
+          // handleSearch();
           toggleModal2();
         },
         () => {
