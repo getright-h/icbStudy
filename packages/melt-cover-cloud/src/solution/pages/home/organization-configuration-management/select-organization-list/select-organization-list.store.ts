@@ -71,6 +71,9 @@ export function useOrganizationListStore(props: SelectOrganizationListProps) {
 
   /** 获取左侧当前行的信息 并传递给右侧获取表单的函数(主要时当前点击行的id) */
   function selectFn(record: GetSubOrganizationResType) {
+    console.log('selectFn', record);
+
+    // record = { ...record, index: 1, size: 10 };
     setStateWrap({ currentData: record });
     props?.selectEvent?.(record);
   }

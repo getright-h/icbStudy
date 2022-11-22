@@ -8,6 +8,7 @@ import { EQYITY_USE_TYPE } from '~/solution/shared/enums/home.enum';
 import { IFundAccountSettingState } from '../fund-account-setting.interface';
 import { ISelectCardMultiple } from '~/framework/components/component.module';
 import { PayOptions, PAY_ENUM } from '~/solution/shared/constant/currency.const';
+import { useEffect } from 'react';
 
 interface IAddEquityProps {
   title: string;
@@ -23,6 +24,7 @@ interface IAddEquityProps {
 export default function AddPackageModalComponent(props: IAddEquityProps) {
   const { title, form, handleOk, handleCancel, visible, stateParent, watch2 } = props;
   const { disableFooter } = stateParent;
+
   const footer: any = disableFooter ? null : (
     <>
       <Button type="primary" onClick={handleCancel}>

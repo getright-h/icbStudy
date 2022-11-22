@@ -38,12 +38,12 @@ export default function FundDetailComponent() {
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'累计充值总额'}>
-                <span>{info?.totalInCome || '-'}</span>
+                <span>{info?.totalInCome + '虚拟币' || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'资金余额'}>
-                <span>{info?.balance || '-'}</span>
+                <span>{info?.balance + '虚拟币' || '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>

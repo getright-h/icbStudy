@@ -84,14 +84,14 @@ export default function SetOrderLimitComponent(props: ISetOrderLimitProps) {
                       <Text type="warning" />
                     </Form.Item>
                     <Form.Item name={[field.name, 'orderLimit']} label="可用额度" rules={[BaseRegExpRule.amount]}>
-                      <Input placeholder="请输入限额值" addonAfter="元" />
+                      <Input placeholder="请输入限额值" addonAfter="虚拟货币" />
                     </Form.Item>
                     <Form.Item
                       name={[field.name, 'orderResidueWarnMoney']}
                       label="录单卡券剩余额度告警值"
                       rules={[{ required: true }, BaseRegExpRule.amount]}
                     >
-                      <Input placeholder="请输入限额值" addonAfter="元" />
+                      <Input placeholder="请输入限额值" addonAfter="虚拟货币" />
                     </Form.Item>
                   </div>
                 );

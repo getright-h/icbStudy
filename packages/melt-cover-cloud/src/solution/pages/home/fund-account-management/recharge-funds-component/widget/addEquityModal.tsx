@@ -84,11 +84,12 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
           key: 'number',
           type: 'Input',
           formItemProps: {
-            label: '充值金额',
+            label: '充值金额(虚拟货币)',
             required: true
           },
           props: {
-            placeholder: '填写充值金额'
+            placeholder: '填写充值金额(虚拟货币)',
+            addonAfter: '虚拟货币'
           }
         },
         {
@@ -121,12 +122,14 @@ export default function AddEquityModalComponent(props: IAddEquityProps) {
   function bagChange(value: string, data: any) {
     form.setSchema('businessId', (schema: any) => {
       schema.props.options = data?.info?.bagRelations?.map((m: any) => {
+        console.log('wuhu', m);
         return {
           value: m?.businessId,
           label: m?.businessName
         };
       });
     });
+    form.setFieldsValue({ businessId: undefined });
     console.log('cardSets data', data);
     // console.log('cardSets foo.current', foo);
   }

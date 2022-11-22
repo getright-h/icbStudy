@@ -30,13 +30,13 @@ export function demoColumns(action: Function): any {
       dataIndex: 'payTypeText'
     },
     {
-      title: '当前账户累计充值总额',
+      title: '当前账户累计充值总额(虚拟币)',
       render,
       show: true,
       dataIndex: 'bagTotalInCome'
     },
     {
-      title: '当前账户资金余额',
+      title: '当前账户资金余额(虚拟币)',
       render,
       show: true,
       dataIndex: 'bagBalance'
@@ -48,7 +48,7 @@ export function demoColumns(action: Function): any {
       dataIndex: 'businessName'
     },
     {
-      title: '卡券充值金额',
+      title: '卡券充值金额(虚拟币)',
       render,
       show: true,
       dataIndex: 'number'

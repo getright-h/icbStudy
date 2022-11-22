@@ -57,17 +57,17 @@ export default function RechargeDetailComponent() {
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'充值金额'}>
-                <span>{info?.buyInfo?.number ?? '-'}</span>
+                <span>{info?.buyInfo?.number + '虚拟货币' ?? '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'卡券积累充值金额'}>
-                <span>{info?.buyInfo?.totalInCome ?? '-'}</span>
+                <span>{info?.buyInfo?.totalInCome + '虚拟货币' ?? '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>
               <Form.Item label={'卡券金额'}>
-                <span>{info?.buyInfo?.balance ?? '-'}</span>
+                <span>{info?.buyInfo?.balance + '虚拟货币' ?? '-'}</span>
               </Form.Item>
             </Col>
             <Col className="" span={span}>

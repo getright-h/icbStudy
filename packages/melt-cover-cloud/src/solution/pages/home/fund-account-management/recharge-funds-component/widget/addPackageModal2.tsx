@@ -11,7 +11,7 @@ import { IWidget } from '@fch/fch-shop-web/dist/src/IFormRenderComponent/form-re
 import { IRechargeFundsState } from '../recharge-funds.interface';
 import { uuid } from '~/framework/util/common/tool';
 // import { schema } from './addEquityModal';
-import { ISelectAccount, ISelectCard } from '~/framework/components/component.module';
+import { ISelectAccountFilter, ISelectCard, IUploadStableComponent } from '~/framework/components/component.module';
 import { PayOptions, PAY_ENUM } from '~/solution/shared/constant/currency.const';
 
 interface IAddEquityProps {
@@ -38,8 +38,7 @@ export default function AddPackageModalComponent2(props: IAddEquityProps) {
         };
       });
     });
-    console.log('cardSets data', data);
-    console.log('cardSets foo.current', foo);
+    form.setFieldsValue({ businessId: undefined });
   }
   const schema: IFormBaseComponentsUnion[] = [
     {
@@ -47,7 +46,7 @@ export default function AddPackageModalComponent2(props: IAddEquityProps) {
       type: 'Layout',
       children: [
         {
-          key: 'id',
+          key: 'bagId',
           type: 'ISelectAccountFilter',
           formItemProps: {
             label: '充值账户',
@@ -67,8 +66,7 @@ export default function AddPackageModalComponent2(props: IAddEquityProps) {
             required: true
           },
           props: {
-            options: [],
-            placeholder: '请选择卡券'
+            options: []
           }
         },
         {
@@ -92,7 +90,8 @@ export default function AddPackageModalComponent2(props: IAddEquityProps) {
             required: true
           },
           props: {
-            placeholder: '填写充值金额'
+            placeholder: '填写充值金额',
+            addonAfter: '虚拟货币'
           }
         },
         {
@@ -158,9 +157,8 @@ export default function AddPackageModalComponent2(props: IAddEquityProps) {
     return (
       <IFormComponent
         form={form}
-        watch={watch2}
         schema={schema}
-        widget={{ IUploadImgComponent: IUploadImgComponent, ISelectAccount, ISelectCard }}
+        widget={{ IUploadStableComponent: IUploadStableComponent, ISelectCard, ISelectAccountFilter }}
         props={{
           labelCol: { span: 8 },
           wrapperCol: { span: 16 },

@@ -76,12 +76,12 @@ export default function CardManageComponent(props: ICardManageProps) {
           </Col>
           <Col span={6}>
             <Form.Item label={'积累充值总额'}>
-              <span>{initData?.totalInCome ?? '-'}</span>
+              <span>{initData?.totalInCome + '虚拟币' ?? '-'}</span>
             </Form.Item>
           </Col>
           <Col span={6}>
             <Form.Item label={'资金余额'}>
-              <span>{initData?.balance ?? '-'}</span>
+              <span>{initData?.balance + '虚拟币' ?? '-'}</span>
             </Form.Item>
           </Col>
           {/* <Col span={6}>
@@ -99,10 +99,10 @@ export default function CardManageComponent(props: ICardManageProps) {
                 <div className={style.box}>
                   <Form.Item label={<b>{b.businessName}</b>} style={{ marginBottom: 0 }} colon={false}></Form.Item>
                   <Form.Item label={'卡券金额'} style={{ marginBottom: 0 }}>
-                    <span>{b.balance ?? '-'}</span>
+                    <span>{b.balance + '虚拟币' ?? '-'}</span>
                   </Form.Item>
                   <Form.Item label={'卡券累积金额'} style={{ marginBottom: 0 }}>
-                    <span>{b?.totalInCome ?? '-'}</span>
+                    <span>{b?.totalInCome + '虚拟币' ?? '-'}</span>
                   </Form.Item>
                   <Form.Item
                     label={' '}

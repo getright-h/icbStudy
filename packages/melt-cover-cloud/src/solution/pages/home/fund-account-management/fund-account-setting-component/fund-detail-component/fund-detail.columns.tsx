@@ -4,7 +4,7 @@ import { ColumnsType } from 'antd/lib/table';
 export function inComeColumns(): ColumnsType<any> {
   return [
     {
-      title: '充值金额',
+      title: '充值金额(虚拟币)',
       dataIndex: 'number'
     },
     {
@@ -33,7 +33,7 @@ export function inComeColumns(): ColumnsType<any> {
 export function spendingColumns(): ColumnsType<any> {
   return [
     {
-      title: '支出金额',
+      title: '支出金额(虚拟币)',
       dataIndex: 'number',
       render: (value, row) => {
         console.log('row', row.mark);

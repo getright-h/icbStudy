@@ -7,6 +7,7 @@ import { message, Modal } from 'antd';
 import { FundsOrganizitonOtherService } from '~/solution/model/services/funds-organiziton-other.service';
 import { PagedListReqType, PagedListResType } from '~/solution/model/dto/funds-organiziton-other.dto';
 import { BAG_STATE_ENUM } from '~/solution/shared/constant/currency.const';
+import { schema } from './widget/addPackageModal';
 
 export function useFundAccountSettingStore() {
   const { state, setStateWrap } = useStateStore(new IFundAccountSettingState());
@@ -23,6 +24,15 @@ export function useFundAccountSettingStore() {
     // 初始化获取表单信息
     handleSearch();
   }, []);
+
+  // 对表单字段做处理
+  function handleString() {
+    const foo = form2.getFieldValue('totalInCome');
+    const bar = form2.getFieldValue('balance');
+    // 保存原来的值 用于之后发送查询列表时携带
+    setStateWrap({ totalInCome: foo, balance: bar });
+    form2.setFieldsValue({ totalInCome: foo + '虚拟货币', balance: bar + '虚拟货币' });
+  }
 
   // todo 根据ezmoke 创建的网络请求
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
@@ -71,7 +81,10 @@ export function useFundAccountSettingStore() {
         ...values,
         bagId: values.bagId,
         name: values.name,
-        type: values.type
+        type: values.type,
+        totalInCome: state.totalInCome,
+        balance: state.balance
+        // totalInCome:values
       };
       setStateWrap({
         isLoadingModal2: true
@@ -234,6 +247,7 @@ export function useFundAccountSettingStore() {
     // 获取卡券相关详情
     fundsOrganizitonOtherService.bagDetail({ bagId: row?.bagId }).subscribe(res => {
       form2.setFieldsValue({ ...row, businessIds: res?.bagRelations?.map?.(m => m.businessId) });
+      handleString();
     });
   }
 

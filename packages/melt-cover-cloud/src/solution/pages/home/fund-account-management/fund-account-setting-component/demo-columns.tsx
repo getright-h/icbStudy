@@ -30,12 +30,12 @@ export function demoColumns(action: Function): ColumnsType<any> {
       render
     },
     {
-      title: '账户累计充值总额',
+      title: '账户累计充值总额(虚拟货币)',
       dataIndex: 'totalInCome',
       render
     },
     {
-      title: '账户资金余额',
+      title: '账户资金余额(虚拟货币)',
       dataIndex: 'balance',
       render
     },

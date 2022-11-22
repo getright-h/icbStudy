@@ -1,5 +1,6 @@
 import { useForm } from '@fch/fch-shop-web';
 import { useRef } from 'react';
+import { useStateStore } from '~/framework/aop/hooks/use-base-store';
 import { useModalPlus } from '~/framework/hooks/useModalPlus';
 import { useTable } from '~/framework/hooks/useTable';
 import { GetSubOrganizationResType } from '~/solution/model/dto/funds-organiziton-other.dto';
@@ -10,13 +11,20 @@ export function useOrganizationConfigStore() {
   const fundsOrganizitonOtherService: FundsOrganizitonOtherService = new FundsOrganizitonOtherService();
   const form = useForm();
   const paramsRef = useRef<GetSubOrganizationResType>();
+
+  const { setStateWrap } = useStateStore();
   const table = useTable({
     form,
     require: fundsOrganizitonOtherService.organizationPagedList,
     isPreload: false,
     /** 获取表单数据时，若传递了该函数，就把上级机构的id带上 */
     customParamsFn(formValues) {
-      return { ...formValues, parentId: paramsRef.current?.id ? paramsRef.current?.id : '' };
+      return {
+        ...formValues,
+        parentId: paramsRef.current?.id ? paramsRef.current?.id : ''
+        // index: paramsRef?.current?.index,
+        // size: paramsRef?.current?.size
+      };
     }
   });
   const { getTableData } = table;
@@ -25,7 +33,8 @@ export function useOrganizationConfigStore() {
   function getRightList(row: GetSubOrganizationResType) {
     /** 当前列的信息，若有下级机构，此信息中的id可以作为上级机构的id */
     paramsRef.current = row;
-    getTableData();
+    table.tableActions.resetClick();
+    // setStateWrap({ pageIndex: 1, pageSize: 10 });
   }
 
   function action(type: ACTION_TYPE, data: any) {
